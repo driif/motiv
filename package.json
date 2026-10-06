@@ -1,0 +1,66 @@
+{
+  "name": "@driif/motiv",
+  "version": "0.0.0",
+  "description": "React UI components with plain, themeable CSS",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./base.css": "./dist/base.css",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "check": "biome check .",
+    "format": "biome check --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build": "tsdown && node scripts/build-css.mjs",
+    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css tokens.css base.css && node scripts/check-treeshake.mjs",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "changeset": "changeset",
+    "release": "pnpm build && changeset publish"
+  },
+  "peerDependencies": {
+    "react": ">=19",
+    "react-dom": ">=19"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@biomejs/biome": "^2.5.15",
+    "@changesets/cli": "^3.0.3",
+    "@storybook/addon-docs": "^10.6.1",
+    "@storybook/react-vite": "^10.6.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "jsdom": "^30.1.2",
+    "lightningcss": "^1.33.0",
+    "publint": "^0.3.25",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "rolldown": "^1.2.12",
+    "storybook": "^10.6.1",
+    "tsdown": "^0.23.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.2",
+    "vitest": "^5.0.3"
+  }
+}

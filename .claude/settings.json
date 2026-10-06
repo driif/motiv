@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/driif/Documents/dev/openbao-dough/**)",
+      "Read(//Users/driif/Documents/dev/komura/duva/**)",
+      "Read(//Users/driif/Documents/dev/my/fedorosya/crochet-ui/**)"
+    ],
+    "deny": [
+      "Edit(//Users/driif/Documents/dev/openbao-dough/**)",
+      "Edit(//Users/driif/Documents/dev/komura/**)",
+      "Edit(//Users/driif/Documents/dev/my/fedorosya/**)"
+    ]
+  },
+  "enabledPlugins": {
+    "revdiff@revdiff": true,
+    "code-simplifier@claude-plugins-official": true
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/duo-no-commit.sh"
+          },
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/no-ai-attribution.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

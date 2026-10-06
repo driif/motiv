@@ -1,0 +1,140 @@
+@layer motiv.components {
+  .motiv-btn {
+    --_bg: var(--motiv-btn-bg, var(--motiv-color-primary));
+    --_color: var(--motiv-btn-color, var(--motiv-color-on-primary));
+    --_border: var(--motiv-btn-border-color, var(--_bg));
+    /* Hover moves the fill away from its label color, so contrast never drops in either theme:
+       dark labels (primary, secondary) lighten, light labels (danger) darken. */
+    --_hover-mix: white;
+    --_bg-hover: color-mix(in oklch, var(--_bg), var(--_hover-mix) 15%);
+
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--motiv-space) * 2);
+    min-height: var(--motiv-btn-height, var(--_height));
+    padding: 0 var(--motiv-btn-px, var(--_px));
+    font-family: var(--motiv-btn-font, var(--motiv-font-body));
+    font-size: var(--_font-size);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--_color);
+    background: var(--_bg);
+    border: var(--motiv-btn-border-width, 2px) solid var(--_border);
+    border-radius: var(--motiv-btn-radius, var(--motiv-radius-full));
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background-color var(--motiv-duration) var(--motiv-ease),
+      border-color var(--motiv-duration) var(--motiv-ease),
+      color var(--motiv-duration) var(--motiv-ease),
+      box-shadow var(--motiv-duration) var(--motiv-ease),
+      transform var(--motiv-duration) var(--motiv-ease);
+
+    &:hover:not(:disabled, [aria-disabled="true"]) {
+      background: var(--motiv-btn-bg-hover, var(--_bg-hover));
+      border-color: var(--motiv-btn-border-color-hover, var(--_border-hover, var(--_bg-hover)));
+    }
+
+    &:active:not(:disabled, [aria-disabled="true"]) {
+      transform: translateY(1px);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &[aria-busy="true"] {
+      cursor: progress;
+    }
+  }
+
+  .motiv-btn--sm {
+    --_height: 2rem;
+    --_px: calc(var(--motiv-space) * 3);
+    --_font-size: 0.875rem;
+  }
+  .motiv-btn--md {
+    --_height: 2.5rem;
+    --_px: calc(var(--motiv-space) * 5);
+    --_font-size: 0.9375rem;
+  }
+  .motiv-btn--lg {
+    --_height: 3rem;
+    --_px: calc(var(--motiv-space) * 6);
+    --_font-size: 1rem;
+  }
+
+  .motiv-btn--secondary {
+    --_bg: var(--motiv-btn-bg, var(--motiv-color-secondary));
+    --_color: var(--motiv-btn-color, var(--motiv-color-on-secondary));
+  }
+
+  .motiv-btn--danger {
+    --_bg: var(--motiv-btn-bg, var(--motiv-color-danger));
+    --_color: var(--motiv-btn-color, var(--motiv-color-on-danger));
+    --_hover-mix: black;
+  }
+
+  .motiv-btn--outline {
+    --_bg: var(--motiv-btn-bg, transparent);
+    --_color: var(--motiv-btn-color, var(--motiv-color-text));
+    --_border: var(--motiv-btn-border-color, var(--motiv-color-primary));
+    --_bg-hover: color-mix(in oklch, var(--motiv-color-primary) 14%, transparent);
+    --_border-hover: var(--_border);
+  }
+
+  .motiv-btn--ghost {
+    --_bg: var(--motiv-btn-bg, transparent);
+    --_color: var(--motiv-btn-color, var(--motiv-color-text));
+    --_border: var(--motiv-btn-border-color, transparent);
+    --_bg-hover: color-mix(in oklch, var(--motiv-color-text) 8%, transparent);
+    --_border-hover: transparent;
+  }
+
+  .motiv-btn__icon {
+    display: inline-flex;
+
+    & > svg {
+      width: 1.15em;
+      height: 1.15em;
+    }
+  }
+
+  .motiv-btn__spinner {
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: motiv-spin 0.7s linear infinite;
+  }
+
+  @keyframes motiv-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-btn {
+      transition: none;
+    }
+    .motiv-btn:active:not(:disabled) {
+      transform: none;
+    }
+    .motiv-btn__spinner {
+      animation-duration: 1.6s;
+    }
+  }
+}

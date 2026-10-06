@@ -1,0 +1,74 @@
+@layer motiv.tokens {
+  :root {
+    --motiv-color-primary: #22c55e;
+    --motiv-color-on-primary: #052e16;
+    --motiv-color-secondary: #f97316;
+    --motiv-color-on-secondary: #431407;
+    --motiv-color-danger: #dc2626;
+    --motiv-color-on-danger: #ffffff;
+    --motiv-color-success: #16a34a;
+    --motiv-color-warning: #f59e0b;
+
+    --motiv-radius: 0.75rem;
+    --motiv-space: 0.25rem;
+    --motiv-font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --motiv-font-title: var(--motiv-font-body);
+    --motiv-font-size: 1rem;
+    --motiv-duration: 200ms;
+    --motiv-ease: cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  :root,
+  [data-theme="light"] {
+    color-scheme: light;
+    --motiv-color-bg: #ffffff;
+    --motiv-color-surface: #f8fafc;
+    --motiv-color-text: #0f172a;
+    --motiv-color-border: #e2e8f0;
+    --motiv-shadow-color: rgb(15 23 42);
+  }
+
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --motiv-color-bg: #0b1120;
+    --motiv-color-surface: #111827;
+    --motiv-color-text: #e5e7eb;
+    --motiv-color-border: #1f2937;
+    --motiv-shadow-color: rgb(0 0 0);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      color-scheme: dark;
+      --motiv-color-bg: #0b1120;
+      --motiv-color-surface: #111827;
+      --motiv-color-text: #e5e7eb;
+      --motiv-color-border: #1f2937;
+      --motiv-shadow-color: rgb(0 0 0);
+    }
+  }
+
+  /* Derived tokens resolve where they are declared, so they are re-declared on every
+     [data-theme] element: a subtree with its own data-theme gets its own derivations. */
+  :where(:root, [data-theme]) {
+    --motiv-color-primary-subtle: color-mix(in oklch, var(--motiv-color-primary) 14%, transparent);
+    --motiv-color-text-muted: color-mix(
+      in oklch,
+      var(--motiv-color-text) 65%,
+      var(--motiv-color-bg)
+    );
+    --motiv-color-surface-hover: color-mix(
+      in oklch,
+      var(--motiv-color-surface),
+      var(--motiv-color-text) 6%
+    );
+    --motiv-radius-sm: calc(var(--motiv-radius) * 0.5);
+    --motiv-radius-md: var(--motiv-radius);
+    --motiv-radius-lg: calc(var(--motiv-radius) * 1.5);
+    --motiv-radius-full: 9999px;
+    --motiv-shadow-sm: 0 1px 2px color-mix(in oklch, var(--motiv-shadow-color) 8%, transparent);
+    --motiv-shadow-md: 0 4px 14px color-mix(in oklch, var(--motiv-shadow-color) 12%, transparent);
+    --motiv-shadow-lg: 0 10px 30px color-mix(in oklch, var(--motiv-shadow-color) 16%, transparent);
+    --motiv-focus-ring: 0 0 0 2px var(--motiv-color-bg), 0 0 0 4px var(--motiv-color-primary);
+  }
+}

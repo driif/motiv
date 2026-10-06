@@ -1,0 +1,107 @@
+@layer motiv.components {
+  .motiv-card {
+    --_bg: var(--motiv-color-surface);
+    --_border: color-mix(in oklch, var(--motiv-color-border) 60%, transparent);
+    --_shadow: var(--motiv-shadow-md);
+
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: var(--motiv-card-gap, calc(var(--motiv-space) * 4));
+    padding: var(--motiv-card-padding, var(--_pad));
+    color: var(--motiv-color-text);
+    background: var(--motiv-card-bg, var(--_bg));
+    border: 1px solid var(--motiv-card-border-color, var(--_border));
+    border-radius: var(--motiv-card-radius, var(--motiv-radius-lg));
+    box-shadow: var(--motiv-card-shadow, var(--_shadow));
+    transition:
+      box-shadow var(--motiv-duration) var(--motiv-ease),
+      transform var(--motiv-duration) var(--motiv-ease),
+      border-color var(--motiv-duration) var(--motiv-ease);
+  }
+
+  .motiv-card--outlined {
+    --_bg: var(--motiv-color-bg);
+    --_border: var(--motiv-color-border);
+    --_shadow: none;
+  }
+
+  .motiv-card--subtle {
+    --_bg: var(--motiv-color-primary-subtle);
+    --_border: transparent;
+    --_shadow: none;
+  }
+
+  .motiv-card--p-none {
+    --_pad: 0;
+  }
+  .motiv-card--p-sm {
+    --_pad: calc(var(--motiv-space) * 3);
+  }
+  .motiv-card--p-md {
+    --_pad: calc(var(--motiv-space) * 5);
+  }
+  .motiv-card--p-lg {
+    --_pad: calc(var(--motiv-space) * 8);
+  }
+
+  .motiv-card--interactive {
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--motiv-card-shadow-hover, var(--motiv-shadow-lg));
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+  }
+
+  .motiv-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: calc(var(--motiv-space) * 4);
+  }
+
+  .motiv-card__title {
+    margin: 0;
+    font-family: var(--motiv-font-title);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .motiv-card__description {
+    margin: var(--motiv-space) 0 0;
+    font-size: 0.875rem;
+    color: var(--motiv-color-text-muted);
+  }
+
+  .motiv-card__actions {
+    display: flex;
+    flex-shrink: 0;
+    gap: calc(var(--motiv-space) * 2);
+  }
+
+  .motiv-card__body {
+    flex: 1;
+  }
+
+  .motiv-card__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(var(--motiv-space) * 2);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-card {
+      transition: none;
+    }
+    .motiv-card--interactive:hover {
+      transform: none;
+    }
+  }
+}
