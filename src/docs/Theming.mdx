@@ -1,0 +1,112 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Docs/Theming" />
+
+# Theming
+
+All motiv CSS lives in `@layer motiv.tokens`, `motiv.base` and `motiv.components`. Any rule an app
+writes outside a layer wins over them, without `!important`.
+
+Theming works on three levels: base tokens, derived tokens and component tokens.
+
+## 1. Base tokens
+
+Base tokens are the only inputs. Override them on `:root` to rebrand every component:
+
+```css
+:root {
+  --motiv-color-primary: #2563eb;
+  --motiv-color-on-primary: #ffffff;
+  --motiv-radius: 0.5rem;
+  --motiv-font-body: 'Inter', sans-serif;
+}
+```
+
+| Token | Default (light) | Dark |
+|---|---|---|
+| `--motiv-color-primary` | `#22c55e` | — |
+| `--motiv-color-on-primary` | `#052e16` | — |
+| `--motiv-color-secondary` | `#f97316` | — |
+| `--motiv-color-on-secondary` | `#431407` | — |
+| `--motiv-color-danger` | `#dc2626` | — |
+| `--motiv-color-on-danger` | `#ffffff` | — |
+| `--motiv-color-success` | `#16a34a` | — |
+| `--motiv-color-warning` | `#f59e0b` | — |
+| `--motiv-color-bg` | `#ffffff` | `#0b1120` |
+| `--motiv-color-surface` | `#f8fafc` | `#111827` |
+| `--motiv-color-text` | `#0f172a` | `#e5e7eb` |
+| `--motiv-color-border` | `#e2e8f0` | `#1f2937` |
+| `--motiv-shadow-color` | `rgb(15 23 42)` | `rgb(0 0 0)` |
+| `--motiv-radius` | `0.75rem` | — |
+| `--motiv-space` | `0.25rem` | — |
+| `--motiv-font-body` | `system-ui, …, sans-serif` | — |
+| `--motiv-font-title` | `var(--motiv-font-body)` | — |
+| `--motiv-font-size` | `1rem` | — |
+| `--motiv-duration` | `200ms` | — |
+| `--motiv-ease` | `cubic-bezier(0.2, 0, 0, 1)` | — |
+
+## 2. Derived tokens
+
+`--motiv-color-primary-subtle`, `--motiv-color-text-muted`, `--motiv-color-surface-hover`,
+`--motiv-radius-{sm,md,lg,full}`, `--motiv-shadow-{sm,md,lg}` and `--motiv-focus-ring` are computed
+from the base tokens with `color-mix()` and `calc()`. Override a base token and they follow.
+
+They are computed on `:root` and on every element with a `data-theme` attribute. Overriding a base
+token on any other element does **not** re-derive them there: a `--motiv-color-primary` set on a
+plain `<div>` changes button colors and hover shades inside it (those are derived on the button
+itself), but `--motiv-color-primary-subtle` and `--motiv-focus-ring` keep the root's primary.
+Add `data-theme` to the wrapper, or set the derived tokens too.
+
+## Dark mode
+
+Set `data-theme` on `<html>`:
+
+```html
+<html data-theme="dark">
+```
+
+Without a `data-theme` attribute, motiv follows `prefers-color-scheme`. `data-theme="light"`
+forces light.
+
+A subtree can use its own theme:
+
+```html
+<section data-theme="dark">…</section>
+```
+
+## 3. Component tokens
+
+Components read their own tokens with a fallback to the base tokens. Set them on `:root` for every
+instance or on any ancestor for one subtree:
+
+```css
+.settings-page {
+  --motiv-btn-radius: var(--motiv-radius-sm);
+  --motiv-card-padding: 2rem;
+}
+```
+
+| Button | Card |
+|---|---|
+| `--motiv-btn-bg`, `--motiv-btn-bg-hover` | `--motiv-card-bg` |
+| `--motiv-btn-color` | `--motiv-card-border-color` |
+| `--motiv-btn-border-color`, `--motiv-btn-border-color-hover` | `--motiv-card-radius` |
+| `--motiv-btn-border-width` | `--motiv-card-padding`, `--motiv-card-gap` |
+| `--motiv-btn-radius`, `--motiv-btn-height`, `--motiv-btn-px` | `--motiv-card-shadow`, `--motiv-card-shadow-hover` |
+| `--motiv-btn-font` | |
+
+## Plain CSS overrides
+
+Because motiv's rules are layered, a normal app rule wins:
+
+```css
+.motiv-btn {
+  text-transform: uppercase;
+}
+```
+
+## Interactive cards
+
+`<Card interactive>` only adds hover and focus styles. A card rendered as `div`, `section`,
+`article` or `li` is not focusable or clickable on its own: give it `tabIndex={0}` plus a role and
+keyboard handling, or put a real link or button inside it.

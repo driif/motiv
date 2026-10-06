@@ -26,7 +26,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "build": "tsdown && node scripts/build-css.mjs",
-    "check:package": "publint && attw --pack . --profile esm-only && node scripts/check-treeshake.mjs",
+    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css tokens.css base.css && node scripts/check-treeshake.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "changeset": "changeset",
