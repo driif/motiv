@@ -9,7 +9,7 @@ set -uo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd -P)"
 SKILL="$ROOT/.claude/skills/duo"
 PROMPTS="$SKILL/prompts"
-RULES="$ROOT/CLAUDE.md"
+RULES="$ROOT/AGENTS.md"
 
 IDLE_TIMEOUT=${DUO_IDLE_TIMEOUT:-600}
 HARD_TIMEOUT=${DUO_HARD_TIMEOUT:-1800}

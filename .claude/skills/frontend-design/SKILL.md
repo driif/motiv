@@ -10,13 +10,8 @@ different radius, dark mode and an ancestor that overrides component tokens.
 
 ## Use the Foundations — Do Not Re-Invent
 
-| Foundation | Location |
-|---|---|
-| Base + derived tokens, light/dark | `src/styles/tokens.css` |
-| Layer order, component imports | `src/styles/index.css` |
-| Opt-in reset / typography | `src/styles/base.css` |
-| Theming docs (what apps may override) | `src/docs/Theming.mdx` |
-| Sibling components to match | `src/components/<Name>/<Name>.css` |
+Read first: `src/styles/tokens.css` (tokens, light/dark), `src/styles/index.css` (layer order),
+`src/docs/Theming.mdx` (what apps may override), and sibling `src/components/<Name>/<Name>.css`.
 
 **Rules:**
 - **Token-only values.** Colors, radii, spacing, shadows, fonts, durations and easings come from
@@ -151,21 +146,6 @@ Each component's `.stories.tsx` is where the design is checked:
 - long-content and empty-content stories where they apply.
 
 Review in Storybook before calling a visual change done (`pnpm build-storybook` must pass).
-
----
-
-## Review Checklist
-
-- [ ] Every color/size/radius/shadow/duration is a `--motiv-*` token or a derivation of one
-- [ ] Themable properties read component tokens with base-token fallbacks
-- [ ] Hover/subtle shades derive via `color-mix` from the resolved value, not a fixed color
-- [ ] All applicable states: hover, active, focus-visible, disabled (+ aria-disabled), loading, empty, error
-- [ ] Light and dark both checked; on-* contrast ≥ 4.5:1, including hover/active shades
-- [ ] `sm`/`md`/`lg` align with sibling components; hit area ≥ 24px
-- [ ] Transitions name properties; `prefers-reduced-motion` honored
-- [ ] Rules inside `@layer motiv.*`, single-class specificity
-- [ ] Stories cover variants, sizes, states, dark, re-theme
-- [ ] No new public class or token that no app needs (ask before adding one)
 
 ---
 

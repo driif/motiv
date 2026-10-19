@@ -1,6 +1,6 @@
 # Shared skills in Codex
 
-`CLAUDE.md` and `.claude/skills/` remain authoritative shared content. The Codex entrypoints
+`AGENTS.md` and `.claude/skills/` remain authoritative shared content. The Codex entrypoints
 under `.agents/skills/` load those files rather than copying their workflows. Resolve supporting
 links relative to the original Claude skill directory. The adaptations below apply in Codex;
 they do not change Claude's configuration.
@@ -25,11 +25,11 @@ they do not change Claude's configuration.
 
 ## Decisions and tool approvals
 
-The working agreement is in `AGENTS.md` and `CLAUDE.md`; it applies without invoking a skill.
+The working agreement is in `AGENTS.md`; it applies without invoking a skill.
 Skills guide task-specific execution. A coding-style skill does not settle a public-API question,
 and a grilling session is not required to ask one consequential design question.
 
-Reading `CLAUDE.md` does not import `.claude/settings.json`, its permission rules or its plugins.
+Reading `AGENTS.md` does not import `.claude/settings.json`, its permission rules or its plugins.
 Codex's actual session permissions govern tool access. Distinguish a required tool escalation
 from a request for a product decision, and give the concrete sandbox reason in an escalation.
 If even read-only commands fail during sandbox construction, identify the configuration defect
