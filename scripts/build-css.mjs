@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, writeFileSync } from 'node:fs';
 import { bundle } from 'lightningcss';
 
 const targets = {
@@ -12,6 +12,7 @@ const files = [
   ['src/styles/index.css', 'dist/styles.css'],
   ['src/styles/tokens.css', 'dist/tokens.css'],
   ['src/styles/base.css', 'dist/base.css'],
+  ['src/styles/drawn.css', 'dist/drawn.css'],
 ];
 
 mkdirSync('dist', { recursive: true });
@@ -19,3 +20,4 @@ for (const [filename, out] of files) {
   const { code } = bundle({ filename, minify: true, targets });
   writeFileSync(out, code);
 }
+cpSync('src/styles/fonts', 'dist/fonts', { recursive: true });

@@ -1,15 +1,24 @@
 import { rolldown } from 'rolldown';
 
-const bundle = await rolldown({
-  input: 'test/fixtures/treeshake-button.js',
-  external: [/^react/],
-});
-const { output } = await bundle.generate({ format: 'esm' });
-const code = output.map((chunk) => chunk.code ?? '').join('\n');
+const checks = [
+  { input: 'test/fixtures/treeshake-button.js', kept: 'motiv-btn', dropped: ['motiv-card'] },
+  {
+    input: 'test/fixtures/treeshake-drawn-link.js',
+    kept: 'motiv-link',
+    dropped: ['motiv-checkbox', 'motiv-text-field'],
+  },
+];
 
 const problems = [];
-if (!code.includes('motiv-btn')) problems.push('Button code missing from bundle');
-if (code.includes('motiv-card')) problems.push('Card code leaked into a Button-only bundle');
+for (const { input, kept, dropped } of checks) {
+  const bundle = await rolldown({ input, external: [/^react/] });
+  const { output } = await bundle.generate({ format: 'esm' });
+  const code = output.map((chunk) => chunk.code ?? '').join('\n');
+  if (!code.includes(kept)) problems.push(`${input}: ${kept} missing from bundle`);
+  for (const name of dropped) {
+    if (code.includes(name)) problems.push(`${input}: ${name} leaked into the bundle`);
+  }
+}
 
 if (problems.length) {
   console.error(problems.join('\n'));

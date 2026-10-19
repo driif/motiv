@@ -1,0 +1,95 @@
+@layer motiv.components {
+  .motiv-text-field {
+    --_pen: cubic-bezier(0.6, 0.05, 0.3, 1);
+    --_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --_hand-font: "Caveat", "Segoe Print", cursive;
+
+    display: grid;
+    gap: calc(var(--motiv-space) * 1.5);
+
+    &:has(.motiv-text-field__input:disabled) {
+      opacity: 0.5;
+    }
+  }
+
+  .motiv-text-field__control {
+    position: relative;
+    padding-top: calc(var(--motiv-space) * 7);
+  }
+
+  .motiv-text-field__input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: calc(var(--motiv-space) * 2) 0;
+    font: inherit;
+    line-height: 1.5;
+    color: var(--motiv-color-text);
+    background: transparent;
+    border: 0;
+    border-bottom: 1.5px solid var(--motiv-color-text-muted);
+    border-radius: 0;
+    outline: none;
+
+    &:focus-visible {
+      box-shadow: var(--motiv-focus-ring);
+    }
+  }
+
+  .motiv-text-field__label {
+    position: absolute;
+    left: 0;
+    bottom: calc(var(--motiv-space) * 2);
+    line-height: 1.5;
+    color: var(--motiv-color-text-muted);
+    pointer-events: none;
+    transform-origin: left bottom;
+    transition:
+      transform 0.5s var(--_spring),
+      color var(--motiv-duration) var(--motiv-ease);
+  }
+
+  .motiv-text-field__input:is(:focus, :not(:placeholder-shown), :autofill)
+    + .motiv-text-field__label {
+    font-family: var(--_hand-font);
+    font-size: 1.5em;
+    color: var(--motiv-color-primary);
+    transform: translateY(-36px) rotate(-2deg);
+  }
+
+  .motiv-text-field__line {
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 12px;
+    overflow: visible;
+    pointer-events: none;
+
+    & path {
+      fill: none;
+      stroke: var(--motiv-color-primary);
+      stroke-width: 3.5;
+      stroke-linecap: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      transition: stroke-dashoffset 0.8s var(--_pen);
+    }
+  }
+
+  .motiv-text-field__input:focus ~ .motiv-text-field__line path {
+    stroke-dashoffset: 0;
+  }
+
+  .motiv-text-field__hint {
+    margin: 0;
+    font-size: 0.875em;
+    color: var(--motiv-color-text-muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-text-field__label,
+    .motiv-text-field__line path {
+      transition: none;
+    }
+  }
+}

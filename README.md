@@ -52,6 +52,27 @@ import { Link } from 'react-router';
 </Link>;
 ```
 
+## Drawn style
+
+`@driif/motiv/drawn` is a hand-drawn style: `Link`, `TextField`, `Checkbox`, `Radio` and
+`RadioGroup`. Its stylesheet is self-contained (tokens, base, drawn components and the bundled
+Caveat font), so a drawn app imports it **instead of** `styles.css`, never alongside it:
+
+```tsx
+import '@driif/motiv/drawn.css';
+import { Checkbox, Link, TextField } from '@driif/motiv/drawn';
+
+<TextField label="Email" type="email" hint="We only use it to reply." />;
+<Checkbox label="Send me the newsletter" />;
+<Link href="https://example.com" external>
+  Read the guide
+</Link>;
+```
+
+`Link` takes `arrow` (default `true`), `external` (adds `target="_blank"` and
+`rel="noopener noreferrer"`) and `externalLabel` (screen-reader text, default
+`'(opens in a new tab)'`). `RadioGroup` takes `name`, `legend`, `options`, `value` and `onChange`.
+
 ## Theming
 
 Everything is driven by `--motiv-*` custom properties, and all library CSS sits in
