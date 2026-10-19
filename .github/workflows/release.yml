@@ -1,4 +1,4 @@
-# Requires an NPM_TOKEN repository secret, or npm trusted publishing configured for this repo.
+# Publishes via npm trusted publishing (OIDC) configured for this repo and workflow.
 name: Release
 
 on:
@@ -22,7 +22,6 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
-          registry-url: https://registry.npmjs.org
       - run: pnpm install --frozen-lockfile
       - uses: changesets/action@v1
         with:
@@ -30,5 +29,3 @@ jobs:
           publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
