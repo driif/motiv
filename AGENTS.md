@@ -8,10 +8,13 @@ this repo cannot see. Current spec: `docs/specs/2026-10-05-motiv-foundation-desi
 
 - Done = every gate the task can affect is green: `pnpm check`, `typecheck`, `test`, `build`,
   `check:package`, `build-storybook`.
-- Investigate and verify autonomously. **Public API** (component, prop, `motiv-*` class,
-  `--motiv-*` token, default, `exports` entry, runtime dep) → present options + recommendation,
-  wait for the decision. Continue an accepted approach without re-asking. Tool approval ≠ design
-  agreement.
+- **Work autonomously.** Decide routine and API details yourself (props, classes, tokens,
+  defaults of components the user asked for), commit, push, open and merge PRs once gates and
+  reviews are green, run as many review rounds (duo, revmux) as needed. Report outcomes; don't ask
+  for confirmation.
+- **Ask only for critical decisions:** breaking changes to released API, new runtime dependencies,
+  publishing a release (merging the "Version Packages" PR), destructive git ops (force push,
+  history rewrite), or a change of direction/scope the user did not ask for.
 - Record corrections narrowly; keep the user's distinctions and exceptions.
 - Reports: extremely concise, grammar optional.
 - English everywhere: code, comments, docs, commits, UI default strings.

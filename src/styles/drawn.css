@@ -1,0 +1,72 @@
+@layer motiv.tokens, motiv.base, motiv.components;
+
+@import "./tokens.css";
+@import "./base.css";
+@import "../drawn/Link/Link.css";
+@import "../drawn/TextField/TextField.css";
+@import "../drawn/Checkbox/Checkbox.css";
+@import "../drawn/Radio/Radio.css";
+
+@layer motiv.tokens {
+  :root,
+  [data-theme="light"] {
+    color-scheme: light;
+    --motiv-color-primary: #1f6230;
+    --motiv-color-on-primary: #ffffff;
+    --motiv-color-secondary: #d9480f;
+    --motiv-color-on-secondary: #1c0700;
+    --motiv-color-bg: #fbfaf6;
+    --motiv-color-surface: #f3f1ea;
+    --motiv-color-text: #1f2328;
+    --motiv-color-border: #d6d2c4;
+  }
+
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --motiv-color-primary: #7bd88f;
+    --motiv-color-on-primary: #0b2a13;
+    --motiv-color-secondary: #f6bf8e;
+    --motiv-color-on-secondary: #3a1a05;
+    --motiv-color-bg: #16181d;
+    --motiv-color-surface: #1f2228;
+    --motiv-color-text: #ece8df;
+    --motiv-color-border: #363a44;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      color-scheme: dark;
+      --motiv-color-primary: #7bd88f;
+      --motiv-color-on-primary: #0b2a13;
+      --motiv-color-secondary: #f6bf8e;
+      --motiv-color-on-secondary: #3a1a05;
+      --motiv-color-bg: #16181d;
+      --motiv-color-surface: #1f2228;
+      --motiv-color-text: #ece8df;
+      --motiv-color-border: #363a44;
+    }
+  }
+}
+
+@layer motiv.base {
+  /* The url is relative to this file, which build-css publishes as dist/drawn.css next to dist/fonts. */
+  @font-face {
+    font-family: "Caveat";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("./fonts/caveat-latin-400.woff2") format("woff2");
+  }
+
+  .motiv-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}

@@ -1,0 +1,63 @@
+@layer motiv.components {
+  .motiv-link {
+    --_pen: cubic-bezier(0.7, 0, 0.2, 1);
+
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 1.5);
+    padding: calc(var(--motiv-space) * 0.5) var(--motiv-space);
+    color: var(--motiv-color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--motiv-radius-sm);
+
+    /* Highlighter swipe behind the label. */
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: auto calc(var(--motiv-space) * -1) 1px;
+      height: 48%;
+      background: color-mix(in oklch, var(--motiv-color-secondary) 24%, transparent);
+      border-radius: 3px 12px 4px 10px;
+      transform: scaleX(0) skewX(-12deg);
+      transform-origin: left;
+      transition: transform 0.45s var(--_pen);
+    }
+
+    &:hover::before,
+    &:focus-visible::before {
+      transform: scaleX(1) skewX(-12deg);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+  }
+
+  .motiv-link__arrow {
+    width: 1.25em;
+    height: 1.25em;
+    flex-shrink: 0;
+
+    & path {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      transition: stroke-dashoffset 0.5s 0.2s ease;
+    }
+  }
+
+  .motiv-link:is(:hover, :focus-visible) .motiv-link__arrow path {
+    stroke-dashoffset: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-link::before,
+    .motiv-link__arrow path {
+      transition: none;
+    }
+  }
+}

@@ -95,6 +95,25 @@ instance or on any ancestor for one subtree:
 | `--motiv-btn-radius`, `--motiv-btn-height`, `--motiv-btn-px` | `--motiv-card-shadow`, `--motiv-card-shadow-hover` |
 | `--motiv-btn-font` | |
 
+## Drawn style
+
+`@driif/motiv/drawn.css` is the whole stylesheet for apps using `@driif/motiv/drawn`: the tokens
+above, `base.css`, the drawn components and the Caveat font. Import it instead of `styles.css`,
+never alongside it — both style the same `motiv-*` class names.
+
+It sets its own values for the same base tokens, so every override above works unchanged:
+
+| Token | Drawn light | Drawn dark |
+|---|---|---|
+| `--motiv-color-primary` | `#1f6230` | `#7bd88f` |
+| `--motiv-color-on-primary` | `#ffffff` | `#0b2a13` |
+| `--motiv-color-secondary` | `#d9480f` | `#f6bf8e` |
+| `--motiv-color-on-secondary` | `#1c0700` | `#3a1a05` |
+| `--motiv-color-bg` | `#fbfaf6` | `#16181d` |
+| `--motiv-color-surface` | `#f3f1ea` | `#1f2228` |
+| `--motiv-color-text` | `#1f2328` | `#ece8df` |
+| `--motiv-color-border` | `#d6d2c4` | `#363a44` |
+
 ## Plain CSS overrides
 
 Because motiv's rules are layered, a normal app rule wins:

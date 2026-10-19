@@ -1,0 +1,99 @@
+@layer motiv.components {
+  .motiv-radio {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 3);
+    min-height: 44px;
+    color: var(--motiv-color-text);
+    cursor: pointer;
+
+    &:has(.motiv-radio__input:disabled) {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-radio__dot {
+    position: relative;
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border: 2px solid var(--motiv-color-text);
+    border-radius: 50%;
+
+    /* ::before is the ink drop, ::after its splash ring. */
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border-radius: 50% 45% 55% 48%;
+    }
+
+    &::before {
+      background: var(--motiv-color-secondary);
+      opacity: 0;
+      transform: translateY(-24px);
+      transition:
+        transform 0.5s cubic-bezier(0.34, 1.8, 0.64, 1),
+        opacity 0.15s;
+    }
+
+    &::after {
+      border: 2px solid var(--motiv-color-secondary);
+      opacity: 0;
+    }
+  }
+
+  .motiv-radio__input:checked + .motiv-radio__dot {
+    &::before {
+      opacity: 1;
+      transform: none;
+    }
+
+    &::after {
+      animation: motiv-radio-splash 0.6s 0.25s ease-out;
+    }
+  }
+
+  .motiv-radio__input:focus-visible + .motiv-radio__dot {
+    box-shadow: var(--motiv-focus-ring);
+  }
+
+  .motiv-radio-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .motiv-radio-group__legend {
+    padding: 0;
+    margin-bottom: calc(var(--motiv-space) * 2);
+    font-weight: 600;
+    color: var(--motiv-color-text);
+  }
+
+  @keyframes motiv-radio-splash {
+    from {
+      opacity: 0.8;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(2.1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-radio__dot::before {
+      transition: none;
+    }
+    .motiv-radio__input:checked + .motiv-radio__dot::after {
+      animation: none;
+    }
+  }
+}
