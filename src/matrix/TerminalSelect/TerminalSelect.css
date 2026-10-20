@@ -145,45 +145,32 @@
     left: 0;
   }
 
-  /* The CRT line sits mid-panel and blooms vertically as the panel opens. */
-  .motiv-matrix-term__beam {
-    position: absolute;
-    z-index: 1;
-    top: 50%;
-    right: 0;
-    left: 0;
-    height: 2px;
-    background: var(--motiv-color-primary);
-    box-shadow: 0 0 14px var(--motiv-color-primary);
-    opacity: 0;
-    pointer-events: none;
-  }
-
   .motiv-matrix-term__list {
     max-height: 320px;
     margin: 0;
     padding: 6px 0;
     overflow-y: auto;
     list-style: none;
-    background-color: var(--motiv-color-surface);
-    background-image: linear-gradient(
-      color-mix(in oklch, var(--motiv-color-primary) 9%, transparent) 1px,
-      transparent 1px
-    );
-    background-size: 100% 6px;
+    background: var(--motiv-color-surface);
     border: 1px solid color-mix(in oklch, var(--motiv-color-primary) 55%, transparent);
-    clip-path: inset(50% 0 50% 0);
+    box-shadow: var(--motiv-shadow-md);
+    opacity: 0;
+    transform: scaleY(0.92);
+    transform-origin: top;
     visibility: hidden;
     transition:
-      clip-path 0.45s 0.12s var(--motiv-ease),
-      visibility 0s 0.57s;
+      opacity 0.12s var(--motiv-ease),
+      transform 0.12s var(--motiv-ease),
+      visibility 0s 0.12s;
   }
 
   .motiv-matrix-term--open .motiv-matrix-term__list {
-    clip-path: inset(0);
+    opacity: 1;
+    transform: none;
     visibility: visible;
     transition:
-      clip-path 0.45s 0.12s var(--motiv-ease),
+      opacity 0.12s var(--motiv-ease),
+      transform 0.12s var(--motiv-ease),
       visibility 0s;
   }
 
@@ -203,7 +190,7 @@
 
   .motiv-matrix-term__option--active {
     color: var(--motiv-color-primary);
-    background: color-mix(in oklch, var(--motiv-color-primary) 15%, transparent);
+    background: var(--motiv-color-primary-subtle);
 
     &::before {
       content: "";
@@ -213,7 +200,6 @@
       left: 0;
       width: 3px;
       background: var(--motiv-color-primary);
-      box-shadow: 0 0 10px var(--motiv-color-primary);
     }
   }
 
@@ -239,37 +225,11 @@
     .motiv-matrix-term__trigger:is(:hover, :focus-visible) .motiv-matrix-term__caret {
       animation: motiv-matrix-term-blink 1s steps(1) infinite;
     }
-
-    .motiv-matrix-term--open .motiv-matrix-term__option {
-      animation: motiv-matrix-term-flick 0.45s backwards;
-      animation-delay: calc(0.4s + var(--_i) * 60ms);
-    }
   }
 
   @keyframes motiv-matrix-term-blink {
     50% {
       opacity: 0;
-    }
-  }
-
-  @keyframes motiv-matrix-term-flick {
-    0% {
-      opacity: 0;
-    }
-    30% {
-      opacity: 1;
-    }
-    45% {
-      opacity: 0.2;
-    }
-    60% {
-      opacity: 1;
-    }
-    75% {
-      opacity: 0.5;
-    }
-    100% {
-      opacity: 1;
     }
   }
 

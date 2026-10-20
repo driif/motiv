@@ -10,7 +10,6 @@ import {
 } from 'react';
 import type { MotivOption } from '../../types';
 import { cx } from '../../utils/cx';
-import { playOnce } from '../../utils/motion';
 
 export interface TerminalSelectOption extends MotivOption {
   code?: string;
@@ -27,12 +26,6 @@ export interface TerminalSelectProps
   disabled?: boolean;
   name?: string;
 }
-
-const CRT: Keyframe[] = [
-  { opacity: 1, transform: 'scaleX(0)' },
-  { opacity: 1, transform: 'scaleX(1)', offset: 0.35 },
-  { opacity: 0, transform: 'scaleX(1) scaleY(30)' },
-];
 
 export function TerminalSelect({
   label,
@@ -51,7 +44,6 @@ export function TerminalSelect({
   const [active, setActive] = useState(0);
   const anchorRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
-  const beamRef = useRef<HTMLSpanElement>(null);
   const selectedIndex = options.findIndex((option) => option.value === value);
   const selected = options[selectedIndex];
   const isOpen = open && !disabled && options.length > 0;
@@ -60,7 +52,6 @@ export function TerminalSelect({
 
   useEffect(() => {
     if (!isOpen) return;
-    playOnce(beamRef.current, CRT, { duration: 600 });
     const onPointerDown = (event: PointerEvent) => {
       if (!anchorRef.current?.contains(event.target as Node)) setOpen(false);
     };
@@ -175,7 +166,6 @@ export function TerminalSelect({
           </svg>
         </button>
         <div className="motiv-matrix-term__pop">
-          <span ref={beamRef} className="motiv-matrix-term__beam" />
           <ul
             ref={listRef}
             id={`${id}-list`}

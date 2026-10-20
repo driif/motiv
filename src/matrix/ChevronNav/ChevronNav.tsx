@@ -53,13 +53,11 @@ export function ChevronNav({
                   <span className="motiv-matrix-chevnav__label">{item.label}</span>
                   {item.expandable && (
                     <svg
-                      className="motiv-matrix-chevnav__chevs"
-                      viewBox="0 0 30 16"
+                      className="motiv-matrix-chevnav__chev"
+                      viewBox="0 0 24 24"
                       aria-hidden="true"
                     >
-                      <path d="M4 3l5 5-5 5" />
-                      <path d="M13 3l5 5-5 5" />
-                      <path d="M22 3l5 5-5 5" />
+                      <path d="M9 6l6 6-6 6" />
                     </svg>
                   )}
                 </>

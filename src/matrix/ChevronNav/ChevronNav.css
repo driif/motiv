@@ -84,62 +84,18 @@
     white-space: nowrap;
   }
 
-  .motiv-matrix-chevnav__chevs {
+  .motiv-matrix-chevnav__chev {
     flex-shrink: 0;
-    width: 30px;
+    width: 16px;
     height: 16px;
-    overflow: visible;
-
-    & path {
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.8;
-      stroke-linecap: square;
-      stroke-linejoin: miter;
-      transition: opacity 0.3s;
-    }
-
-    & path:nth-child(-n + 2) {
-      opacity: 0;
-    }
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: square;
+    opacity: 0.6;
   }
 
-  .motiv-matrix-chevnav__item:hover .motiv-matrix-chevnav__chevs path:nth-child(-n + 2) {
-    opacity: 0.5;
-  }
-
-  .motiv-matrix-chevnav__item--active .motiv-matrix-chevnav__chevs path {
+  .motiv-matrix-chevnav__item--active .motiv-matrix-chevnav__chev {
     opacity: 1;
-  }
-
-  /* The stream: each chevron brightens in turn, like data flowing in. */
-  @media (prefers-reduced-motion: no-preference) {
-    .motiv-matrix-chevnav__item--active .motiv-matrix-chevnav__chevs path {
-      animation: motiv-matrix-chevnav-stream 1.2s ease-in-out infinite;
-
-      &:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-
-      &:nth-child(3) {
-        animation-delay: 0.4s;
-      }
-    }
-  }
-
-  @keyframes motiv-matrix-chevnav-stream {
-    0%,
-    100% {
-      opacity: 0.2;
-    }
-    40% {
-      opacity: 1;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .motiv-matrix-chevnav__chevs path {
-      transition: none;
-    }
   }
 }

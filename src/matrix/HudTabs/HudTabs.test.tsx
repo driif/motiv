@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { useState } from 'react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { HudTabs } from './HudTabs';
 
 const tabs = [
@@ -8,18 +8,6 @@ const tabs = [
   { value: 'pki', label: 'PKI' },
   { value: 'ssh', label: 'SSH' },
 ];
-
-let reduce = false;
-const animate = vi.fn();
-
-beforeEach(() => {
-  reduce = false;
-  animate.mockClear();
-  vi.stubGlobal('matchMedia', () => ({ matches: reduce }));
-  Element.prototype.animate = animate;
-});
-
-afterEach(() => vi.unstubAllGlobals());
 
 function Controlled() {
   const [value, setValue] = useState('kv');
@@ -62,21 +50,12 @@ describe('HudTabs', () => {
     expect(screen.getByRole('tab', { name: 'KV' })).toHaveFocus();
   });
 
-  it('selects on click, shows the status readout and scans on change', () => {
+  it('selects on click and shows the status readout', () => {
     render(<Controlled />);
     expect(screen.getByText('TARGET 01 / 03 · KV LOCKED')).toHaveAttribute('aria-hidden', 'true');
-    expect(animate).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole('tab', { name: 'PKI' }));
     expect(screen.getByRole('tabpanel', { name: 'PKI' })).toHaveTextContent('Certificates');
     expect(screen.getByText('TARGET 02 / 03 · PKI LOCKED')).toBeInTheDocument();
-    expect(animate).toHaveBeenCalledTimes(1);
-  });
-
-  it('skips the scan under reduced motion', () => {
-    reduce = true;
-    render(<Controlled />);
-    fireEvent.click(screen.getByRole('tab', { name: 'SSH' }));
-    expect(animate).not.toHaveBeenCalled();
   });
 
   it('renders without panels or status and takes custom readout words', () => {

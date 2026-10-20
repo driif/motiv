@@ -30,7 +30,7 @@ describe('ChevronNav', () => {
     const current = screen.getByRole('button', { name: 'Secrets' });
     expect(current).toHaveAttribute('aria-current', 'page');
     expect(current).toHaveClass('motiv-matrix-chevnav__item--active');
-    expect(current.querySelector('.motiv-matrix-chevnav__chevs')).toHaveAttribute(
+    expect(current.querySelector('.motiv-matrix-chevnav__chev')).toHaveAttribute(
       'aria-hidden',
       'true',
     );

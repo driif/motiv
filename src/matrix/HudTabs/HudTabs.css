@@ -23,7 +23,7 @@
     width: calc((100% - 8px) / var(--_count));
     background: var(--motiv-color-primary-subtle);
     pointer-events: none;
-    transition: transform 0.4s steps(5);
+    transition: transform 0.18s var(--motiv-ease);
   }
 
   .motiv-matrix-hudtabs__corner {
@@ -56,24 +56,6 @@
     bottom: -3px;
     border-top: 0;
     border-left: 0;
-  }
-
-  /* Full-height layer whose top edge is the scan line; moving it by 100% sweeps the line down. */
-  .motiv-matrix-hudtabs__scan {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      height: 2px;
-      background: var(--motiv-color-primary);
-      box-shadow: 0 0 8px var(--motiv-color-primary);
-    }
   }
 
   .motiv-matrix-hudtabs__tab {
