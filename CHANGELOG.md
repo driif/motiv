@@ -1,5 +1,15 @@
 # @driif/motiv
 
+## 0.2.0
+
+### Minor Changes
+
+- f507de0: Drawn style: new `OrbitalThemeToggle` in `@driif/motiv/drawn`, an illustrated sun/moon toggle with orbits, an ink wash and optional `figure`, `note` and `hint` captions.
+- cc6fdee: Drawn style: new `Tabs`, `SegmentedControl` and `Select` components in `@driif/motiv/drawn`.
+- 58c6894: Drawn style: new `NavItem`, `IconButton`, `IconButtonGroup`, `MenuButton`, `ThemeToggle` and `Progress` components in `@driif/motiv/drawn`.
+- 894779c: Drawn style: new `Button`, `buttonClassName`, `Card`, `CardHeader`, `CardBody` and `CardFooter` in `@driif/motiv/drawn` with the same props as the default entry; drawn light `secondary` is darker (`#b83c0c`, white text), which also deepens the Link swipe and IconButton ring, and drawn sets its own `danger`/`on-danger`.
+- f3f53ab: New hand-drawn style: import `Link`, `TextField`, `Checkbox`, `Radio` and `RadioGroup` from `@driif/motiv/drawn` and its self-contained stylesheet `@driif/motiv/drawn.css` (bundled Caveat font) instead of `styles.css`.
+
 ## 0.1.0
 
 ### Minor Changes
