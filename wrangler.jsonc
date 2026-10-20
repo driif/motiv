@@ -1,0 +1,9 @@
+{
+  "$schema": "https://unpkg.com/wrangler@4.151.2/config-schema.json",
+  "name": "motiv",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./site/dist",
+    "html_handling": "auto-trailing-slash"
+  }
+}

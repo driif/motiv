@@ -27,15 +27,16 @@ The header shows `version` from `@driif/motiv/package.json`, i.e. the last versi
 released. Unreleased changes on `main` appear on the site under that number until the next
 release.
 
-## Cloudflare Pages
+## Cloudflare
 
-Git integration, no secrets in the repo:
+Workers Builds (Git integration, no secrets in the repo). `wrangler.jsonc` at the repo root serves
+`site/dist` as static assets, so `wrangler deploy` skips framework auto-detection.
 
-| Setting                | Value                                                         |
-| ---------------------- | ------------------------------------------------------------- |
-| Root directory         | `/`                                                           |
-| Build command          | `pnpm install --frozen-lockfile && pnpm build && pnpm build:site` |
-| Build output directory | `site/dist`                                                   |
-| Environment variable   | `NODE_VERSION=24`                                             |
+| Setting              | Value                                    |
+| -------------------- | ---------------------------------------- |
+| Root directory       | `/`                                      |
+| Build command        | `pnpm build && pnpm build:site`          |
+| Deploy command       | `npx wrangler deploy`                    |
+| Environment variable | `NODE_VERSION=24`                        |
 
 Custom domain: `motiv.fedorchuk.me`.
