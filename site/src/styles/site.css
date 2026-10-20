@@ -1,5 +1,5 @@
-/* Site layout only. Unlayered, so it would beat @layer motiv.* — keep every selector on a site-* class
-   and leave components' fonts, radii and colors alone. */
+/* Site layout only. Unlayered, so it would beat @layer motiv.* — keep selectors on site-* classes;
+   the only component overrides are the home cards' title fonts and the per-style page tokens. */
 
 @font-face {
   font-family: "Caveat";
@@ -36,6 +36,18 @@
   color: var(--motiv-color-text);
 }
 
+/* Derived tokens resolve at :root, so pages that swap the palette re-derive them. */
+.site-page[data-style] {
+  --motiv-color-text-muted: color-mix(in oklch, var(--motiv-color-text) 75%, var(--motiv-color-bg));
+  --motiv-color-primary-subtle: color-mix(in oklch, var(--motiv-color-primary) 14%, transparent);
+  --motiv-color-surface-hover: color-mix(
+    in oklch,
+    var(--motiv-color-surface),
+    var(--motiv-color-primary) 10%
+  );
+  --motiv-focus-ring: 0 0 0 2px var(--motiv-color-bg), 0 0 0 4px var(--motiv-color-primary);
+}
+
 .site-page[data-style="drawn"] {
   --site-title-font: "Caveat", "Segoe Print", cursive;
   --site-title-weight: 400;
@@ -44,7 +56,6 @@
   --motiv-color-surface: #f3f1ea;
   --motiv-color-text: #1f2328;
   --motiv-color-border: #d6d2c4;
-  --motiv-color-text-muted: color-mix(in oklch, var(--motiv-color-text) 75%, var(--motiv-color-bg));
 }
 
 [data-theme="dark"] .site-page[data-style="drawn"] {
@@ -63,7 +74,6 @@
   --motiv-color-surface: #f8fbf8;
   --motiv-color-text: #0f2414;
   --motiv-color-border: #6c8f74;
-  --motiv-color-text-muted: color-mix(in oklch, var(--motiv-color-text) 75%, var(--motiv-color-bg));
   --motiv-radius-sm: 0;
   --motiv-radius-md: 0;
   --motiv-radius-lg: 0;

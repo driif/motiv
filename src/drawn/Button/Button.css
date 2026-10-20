@@ -5,6 +5,7 @@
     --_shape: 18px 7px 20px 6px / 7px 16px 6px 20px;
 
     position: relative;
+    isolation: isolate;
     box-sizing: border-box;
     display: inline-flex;
     align-items: center;
@@ -32,6 +33,7 @@
       content: "";
       position: absolute;
       inset: 0;
+      z-index: -1;
       border: 2px solid var(--_ink);
       border-radius: var(--_shape);
       pointer-events: none;

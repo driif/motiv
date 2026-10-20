@@ -39,7 +39,7 @@
         scale 0.45s var(--motiv-ease-spring);
     }
 
-    /* The ripple, replayed each time the option becomes checked. */
+    /* The ripple. Gated on :focus so a preselected option stays still on mount. */
     &::after {
       content: "";
       position: absolute;
@@ -68,12 +68,15 @@
 
   .motiv-radio__input:checked + .motiv-radio__dot {
     border-color: var(--motiv-color-primary);
-    animation: motiv-radio-pop 0.45s var(--motiv-ease-spring);
 
     &::before {
       opacity: 1;
       scale: 1;
     }
+  }
+
+  .motiv-radio__input:checked:focus + .motiv-radio__dot {
+    animation: motiv-radio-pop 0.45s var(--motiv-ease-spring);
 
     &::after {
       animation: motiv-radio-ripple 0.6s var(--motiv-ease) forwards;
@@ -132,8 +135,8 @@
     .motiv-radio__label {
       transition: none;
     }
-    .motiv-radio__input:checked + .motiv-radio__dot,
-    .motiv-radio__input:checked + .motiv-radio__dot::after {
+    .motiv-radio__input:checked:focus + .motiv-radio__dot,
+    .motiv-radio__input:checked:focus + .motiv-radio__dot::after {
       animation: none;
     }
   }

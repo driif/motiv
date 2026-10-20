@@ -14,7 +14,7 @@ for (const [style, entry] of Object.entries(entries)) {
   const claimed = sections.flatMap((section) => section.symbols);
   for (const name of exported) {
     // cx is a helper, shown in the kinetic getting-started steps instead of a demo.
-    if (!claimed.includes(name) && name !== 'cx')
+    if (!claimed.includes(name) && !(style === 'kinetic' && name === 'cx'))
       problems.push(`${style}: ${name} is exported but not on the site`);
   }
   for (const name of claimed) {
@@ -22,6 +22,9 @@ for (const [style, entry] of Object.entries(entries)) {
       problems.push(`${style}: ${name} is on the site but not exported`);
   }
   const page = readFileSync(new URL(`../site/src/pages/${style}/index.astro`, import.meta.url));
+  if (style === 'kinetic' && !String(page).includes('cx(')) {
+    problems.push('kinetic: cx is neither on the site nor in the getting-started snippet');
+  }
   for (const { id, demo } of sections) {
     if (!existsSync(new URL(`../site/src/demos/${style}/${demo}.tsx`, import.meta.url))) {
       problems.push(`${style}: demo site/src/demos/${style}/${demo}.tsx is missing`);

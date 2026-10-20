@@ -9,5 +9,9 @@ const options = [
 
 export function SelectDemo() {
   const [language, setLanguage] = useState('');
-  return <Select label="Language" options={options} value={language} onChange={setLanguage} />;
+  return (
+    <div style={{ display: 'grid', alignContent: 'start', width: '18rem', minHeight: '17rem' }}>
+      <Select label="Language" options={options} value={language} onChange={setLanguage} />
+    </div>
+  );
 }

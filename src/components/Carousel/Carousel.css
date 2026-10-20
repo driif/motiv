@@ -29,7 +29,7 @@
     flex-direction: column;
     justify-content: flex-end;
     gap: 2px;
-    min-height: 120px;
+    min-height: 152px;
     padding: calc(var(--motiv-space) * 4) calc(var(--motiv-space) * 5);
     visibility: hidden;
     user-select: none;
