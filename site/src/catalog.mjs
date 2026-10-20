@@ -478,7 +478,7 @@ export const catalog = {
       symbols: ['TerminalSelect'],
       demo: 'TerminalSelect',
       blurb:
-        'A select-only combobox that opens like an old CRT: one bright line, then the options flicker on. Arrows, Home, End and letters work.',
+        'A select-only combobox in a bracketed terminal field. The list snaps open on a solid panel; arrows, Home, End and letters work.',
     },
     {
       id: 'checkbox',
@@ -501,7 +501,7 @@ export const catalog = {
       symbols: ['HudTabs'],
       demo: 'HudTabs',
       blurb:
-        'A tablist whose bracketed target jumps between tabs in steps; a scan line confirms the lock.',
+        'A tablist whose bracketed target slides to the selected tab, with a target readout underneath.',
     },
     {
       id: 'chevron-nav',
@@ -509,7 +509,7 @@ export const catalog = {
       symbols: ['ChevronNav'],
       demo: 'ChevronNav',
       blurb:
-        'Sidebar navigation in sections. The current item streams its chevrons like data flowing in.',
+        'Sidebar navigation in sections. The current item is outlined; items that open a subtree carry a chevron.',
     },
     {
       id: 'progress',

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { useState } from 'react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { TerminalSelect } from './TerminalSelect';
 
 const options = [
@@ -9,18 +9,6 @@ const options = [
   { value: 'okta', label: 'Okta' },
   { value: 'token', label: 'Token' },
 ];
-
-let reduce = false;
-const animate = vi.fn();
-
-beforeEach(() => {
-  reduce = false;
-  animate.mockClear();
-  vi.stubGlobal('matchMedia', () => ({ matches: reduce }));
-  Element.prototype.animate = animate;
-});
-
-afterEach(() => vi.unstubAllGlobals());
 
 function Controlled({ initial = 'ldap' }: { initial?: string }) {
   const [value, setValue] = useState(initial);
@@ -53,23 +41,15 @@ describe('TerminalSelect', () => {
     expect(list).toHaveAttribute('inert');
   });
 
-  it('opens on click, plays the CRT beam and picks a clicked option', () => {
+  it('opens on click and picks a clicked option', () => {
     render(<Controlled />);
     fireEvent.click(combobox());
     expect(combobox()).toHaveAttribute('aria-expanded', 'true');
-    expect(animate).toHaveBeenCalledTimes(1);
     expect(screen.getByRole('option', { name: 'LDAP' })).toHaveAttribute('aria-selected', 'true');
     fireEvent.click(screen.getByRole('option', { name: 'Okta' }));
     expect(combobox()).toHaveAttribute('aria-expanded', 'false');
     expect(combobox()).toHaveTextContent('Okta');
     expect(document.querySelector('input[type="hidden"]')).toHaveValue('okta');
-  });
-
-  it('skips the beam under reduced motion', () => {
-    reduce = true;
-    render(<Controlled />);
-    fireEvent.click(combobox());
-    expect(animate).not.toHaveBeenCalled();
   });
 
   it('moves with arrows, Home and End and commits with Enter and Space', () => {

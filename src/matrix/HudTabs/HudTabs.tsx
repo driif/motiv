@@ -3,13 +3,10 @@ import {
   type CSSProperties,
   type KeyboardEvent,
   type ReactNode,
-  useEffect,
   useId,
-  useRef,
 } from 'react';
 import type { MotivOption } from '../../types';
 import { cx } from '../../utils/cx';
-import { playOnce } from '../../utils/motion';
 
 export interface HudTabsProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   tabs: MotivOption[];
@@ -21,11 +18,6 @@ export interface HudTabsProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   targetLabel?: string;
   lockedLabel?: string;
 }
-
-const SCAN: Keyframe[] = [
-  { opacity: 1, transform: 'translateY(0)' },
-  { opacity: 0, transform: 'translateY(100%)' },
-];
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -42,19 +34,10 @@ export function HudTabs({
   ...props
 }: HudTabsProps) {
   const id = useId();
-  const scanRef = useRef<HTMLSpanElement>(null);
   const index = Math.max(
     0,
     tabs.findIndex((tab) => tab.value === value),
   );
-  const prevIndex = useRef(index);
-
-  useEffect(() => {
-    if (prevIndex.current === index) return;
-    prevIndex.current = index;
-    // Scan once the stepped jump (0.4s) has landed.
-    playOnce(scanRef.current, SCAN, { duration: 500, delay: 300, easing: 'ease-out' });
-  }, [index]);
 
   function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     const last = tabs.length - 1;
@@ -98,7 +81,6 @@ export function HudTabs({
           <span className="motiv-matrix-hudtabs__corner motiv-matrix-hudtabs__corner--tr" />
           <span className="motiv-matrix-hudtabs__corner motiv-matrix-hudtabs__corner--bl" />
           <span className="motiv-matrix-hudtabs__corner motiv-matrix-hudtabs__corner--br" />
-          <span ref={scanRef} className="motiv-matrix-hudtabs__scan" />
         </span>
         {tabs.map((tab, i) => (
           <button
