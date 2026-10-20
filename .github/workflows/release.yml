@@ -30,12 +30,6 @@ jobs:
           publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # The site deploys only with a release, so it always matches the published package.
+      # Cloudflare Workers Builds deploys the `site` branch, which moves only when a release publishes.
       - if: steps.changesets.outputs.published == 'true'
-        run: pnpm build:site
-      - if: steps.changesets.outputs.published == 'true'
-        uses: cloudflare/wrangler-action@v4
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
+        run: git push origin HEAD:refs/heads/site
