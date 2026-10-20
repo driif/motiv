@@ -1,12 +1,25 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
-  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
   "files": {
     "ignoreUnknown": true,
     "includes": ["**", "!.claude", "!.agents", "!.codex", "!docs", "!storybook-static"]
   },
-  "formatter": { "enabled": true, "indentStyle": "space", "lineWidth": 100 },
-  "linter": { "enabled": true, "rules": { "preset": "recommended" } },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "lineWidth": 100
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended"
+    }
+  },
   "overrides": [
     {
       "includes": ["src/drawn/Select/Select.tsx"],
@@ -22,13 +35,39 @@
     },
     {
       "includes": ["src/drawn/Tabs/Tabs.tsx"],
-      "linter": { "rules": { "a11y": { "noNoninteractiveTabindex": "off" } } }
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noNoninteractiveTabindex": "off"
+          }
+        }
+      }
     },
     {
-      "includes": ["src/drawn/SegmentedControl/SegmentedControl.tsx"],
-      "linter": { "rules": { "a11y": { "useSemanticElements": "off" } } }
+      "includes": [
+        "src/drawn/SegmentedControl/SegmentedControl.tsx",
+        "src/drawn/IconButton/IconButton.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useSemanticElements": "off"
+          }
+        }
+      }
     }
   ],
-  "javascript": { "formatter": { "quoteStyle": "single" } },
-  "assist": { "enabled": true, "actions": { "source": { "organizeImports": "on" } } }
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  }
 }

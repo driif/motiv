@@ -1,0 +1,85 @@
+@layer motiv.components {
+  .motiv-menu-button {
+    --_bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    --_size: 44px;
+    /* Geometry is drawn on a 72px grid and scaled to --_size. */
+    --_u: calc(var(--_size) / 72);
+
+    position: relative;
+    width: var(--_size);
+    height: var(--_size);
+    padding: 0;
+    color: var(--motiv-color-text);
+    background: transparent;
+    border: 0;
+    border-radius: var(--motiv-radius-sm);
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-menu-button__line {
+    position: absolute;
+    top: 0;
+    left: calc(var(--_u) * 17);
+    width: calc(var(--_u) * 38);
+    height: calc(var(--_u) * 5);
+    background: currentColor;
+    border-radius: 4px 2px 3px 6px / 2px 4px 2px 3px;
+    transition:
+      transform 0.55s var(--_bounce),
+      opacity 0.55s var(--_bounce);
+
+    &:nth-child(1) {
+      transform: translate(0, calc(var(--_u) * 23)) rotate(-2deg) scaleX(1);
+    }
+
+    &:nth-child(2) {
+      transform: translate(calc(var(--_u) * -5), calc(var(--_u) * 34)) rotate(1.5deg) scaleX(0.737);
+    }
+
+    &:nth-child(3) {
+      transform: translate(calc(var(--_u) * -2.5), calc(var(--_u) * 45)) rotate(-1deg) scaleX(0.868);
+      transition-delay: 0.05s;
+    }
+  }
+
+  .motiv-menu-button[aria-expanded="true"] .motiv-menu-button__line {
+    &:nth-child(1) {
+      transform: translate(0, calc(var(--_u) * 33.5)) rotate(45deg) scaleX(1.05);
+    }
+
+    &:nth-child(2) {
+      opacity: 0;
+      transform: translate(calc(var(--_u) * 14), calc(var(--_u) * 33.5)) rotate(0) scaleX(0);
+    }
+
+    &:nth-child(3) {
+      transform: translate(0, calc(var(--_u) * 33.5)) rotate(-45deg) scaleX(1.05);
+    }
+  }
+
+  .motiv-menu-button[aria-expanded="false"]:hover:not(:disabled) .motiv-menu-button__line {
+    &:nth-child(2) {
+      transform: translate(0, calc(var(--_u) * 34)) rotate(1.5deg) scaleX(1);
+    }
+
+    &:nth-child(3) {
+      transform: translate(0, calc(var(--_u) * 45)) rotate(-1deg) scaleX(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-menu-button__line {
+      transition: none;
+    }
+  }
+}
