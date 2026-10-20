@@ -1,7 +1,9 @@
 export * from './Button';
 export * from './Card';
 export * from './Checkbox';
+export * from './HoldToConfirmButton';
 export * from './IconButton';
+export * from './InkSplatterButton';
 export * from './Link';
 export * from './MenuButton';
 export * from './NavItem';
@@ -13,3 +15,4 @@ export * from './Select';
 export * from './Tabs';
 export * from './TextField';
 export * from './ThemeToggle';
+export * from './Tooltip';

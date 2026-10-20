@@ -5,7 +5,9 @@ import Section from '../../components/Section.astro';
 import { ButtonDemo } from '../../demos/drawn/Button';
 import { CardDemo } from '../../demos/drawn/Card';
 import { CheckboxDemo } from '../../demos/drawn/Checkbox';
+import { HoldToConfirmButtonDemo } from '../../demos/drawn/HoldToConfirmButton';
 import { IconButtonDemo } from '../../demos/drawn/IconButton';
+import { InkSplatterButtonDemo } from '../../demos/drawn/InkSplatterButton';
 import { LinkDemo } from '../../demos/drawn/Link';
 import { MenuButtonDemo } from '../../demos/drawn/MenuButton';
 import { NavItemDemo } from '../../demos/drawn/NavItem';
@@ -17,6 +19,7 @@ import { SelectDemo } from '../../demos/drawn/Select';
 import { TabsDemo } from '../../demos/drawn/Tabs';
 import { TextFieldDemo } from '../../demos/drawn/TextField';
 import { ThemeToggleDemo } from '../../demos/drawn/ThemeToggle';
+import { TooltipDemo } from '../../demos/drawn/Tooltip';
 import Shell from '../../layouts/Shell.astro';
 import { DrawnSettings } from '../../showcase/DrawnSettings';
 import settingsSource from '../../showcase/DrawnSettings.tsx?raw';
@@ -98,6 +101,10 @@ export function Subscribe() {
 
   <div class="site-sections">
     <Section style="drawn" id="button"><ButtonDemo client:visible /></Section>
+    <Section style="drawn" id="ink-splatter-button"><InkSplatterButtonDemo client:visible /></Section>
+    <Section style="drawn" id="hold-to-confirm-button">
+      <HoldToConfirmButtonDemo client:visible />
+    </Section>
     <Section style="drawn" id="card"><CardDemo client:visible /></Section>
     <Section style="drawn" id="text-field"><TextFieldDemo client:visible /></Section>
     <Section style="drawn" id="checkbox"><CheckboxDemo client:visible /></Section>
@@ -109,6 +116,7 @@ export function Subscribe() {
     <Section style="drawn" id="nav-item"><NavItemDemo client:visible /></Section>
     <Section style="drawn" id="icon-button"><IconButtonDemo client:visible /></Section>
     <Section style="drawn" id="menu-button"><MenuButtonDemo client:visible /></Section>
+    <Section style="drawn" id="tooltip"><TooltipDemo client:visible /></Section>
     <Section style="drawn" id="progress"><ProgressDemo client:visible /></Section>
     <Section style="drawn" id="theme-toggle"><ThemeToggleDemo client:visible /></Section>
     <Section style="drawn" id="orbital-theme-toggle">

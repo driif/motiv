@@ -17,6 +17,9 @@
 @import "../drawn/Progress/Progress.css";
 @import "../drawn/Button/Button.css";
 @import "../drawn/Card/Card.css";
+@import "../drawn/Tooltip/Tooltip.css";
+@import "../drawn/InkSplatterButton/InkSplatterButton.css";
+@import "../drawn/HoldToConfirmButton/HoldToConfirmButton.css";
 
 @layer motiv.tokens {
   :root,
