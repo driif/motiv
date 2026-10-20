@@ -102,6 +102,7 @@ Check locally what is pending: `pnpm changeset status --verbose`.
 | change shipped without a changeset | forgot it | add a changeset in a follow-up PR describing the already-merged change; it goes out with the next release |
 | publish step failed `401`/`403`/`ENEEDAUTH` | `NPM_TOKEN` missing, expired, or lacks publish rights for `@driif`; or trusted publishing not configured for this workflow | fix the secret or the npm trusted-publisher config, then re-run the failed job — `changeset publish` skips versions already on npm |
 | publish failed `E402` | scoped package published without public access | confirm `access: public` in `.changeset/config.json` |
+| publish failed `E422` "repository.url" is "" (sigstore provenance) | trusted publishing requires `package.json#repository.url` to match the GitHub repo | keep `repository.url` set to `git+https://github.com/driif/motiv.git`; re-run after the fix lands on `main` |
 | version on npm but no tag/GitHub release | publish succeeded, tag push failed (`contents: write` missing) | fix permissions; re-run — already-published versions are skipped and tags are pushed |
 | bumped to `1.0.0` unexpectedly | a `major` changeset pre-1.0 | if the Version Packages PR is not merged, change the changeset on `main` to `minor` — the action regenerates the PR; if published, it is out — npm versions cannot be reused; deprecate and continue from there |
 | a bad version was published | — | publish a fix (`patch`) or `npm deprecate @driif/motiv@<version> "<reason>"`; never unpublish a version apps may have installed |

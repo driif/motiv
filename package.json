@@ -3,6 +3,10 @@
   "version": "0.2.0",
   "description": "React UI components with plain, themeable CSS",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/driif/motiv.git"
+  },
   "type": "module",
   "sideEffects": [
     "**/*.css"
