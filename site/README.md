@@ -28,11 +28,17 @@ publishes, so it always matches the package on npm.
 
 ## Cloudflare
 
-Deployed by `.github/workflows/release.yml` after changesets publishes: `pnpm build:site`, then
-`wrangler deploy`. `wrangler.jsonc` at the repo root serves `site/dist` as static assets.
-Workers Builds (the Cloudflare Git integration) stays disconnected, or it would deploy every push.
+Workers Builds (Git integration). After changesets publishes, `.github/workflows/release.yml`
+pushes the released commit to the `site` branch; Cloudflare builds and deploys only that branch.
+`wrangler.jsonc` at the repo root serves `site/dist` as static assets.
 
-Repository secrets: `CLOUDFLARE_API_TOKEN` (template "Edit Cloudflare Workers"),
-`CLOUDFLARE_ACCOUNT_ID`.
+| Setting                      | Value                           |
+| ---------------------------- | ------------------------------- |
+| Production branch            | `site`                          |
+| Non-production branch builds | off                             |
+| Root directory               | `/`                             |
+| Build command                | `pnpm build && pnpm build:site` |
+| Deploy command               | `npx wrangler deploy`           |
+| Environment variable         | `NODE_VERSION=24`               |
 
 Custom domain: `motiv.fedorchuk.me`.
