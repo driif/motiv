@@ -8,7 +8,7 @@ export const catalog = {
       symbols: ['Button', 'buttonClassName'],
       demo: 'Button',
       blurb:
-        'The one thing on the page that should be pressed, cut by hand. Ghost buttons get a wavy stroke; links borrow the look.',
+        'Pencil outlines that boil and hatch on hover. Ghost draws a line under the label; links borrow the look.',
     },
     {
       id: 'ink-splatter-button',
@@ -242,7 +242,7 @@ export const catalog = {
       symbols: ['Radio', 'RadioGroup'],
       demo: 'Radio',
       blurb:
-        'One choice out of a few, with a dot that springs in. RadioGroup wraps the fieldset and legend for you.',
+        'One choice out of a few. The dot pops in with a ripple. RadioGroup wraps the fieldset and legend.',
     },
     {
       id: 'stepper',
@@ -400,13 +400,6 @@ export const catalog = {
       demo: 'Odometer',
       blurb:
         'Rolling digits for any number that changes. It is decorative, so label whatever holds it.',
-    },
-    {
-      id: 'cx',
-      title: 'cx',
-      symbols: ['cx'],
-      demo: 'Cx',
-      blurb: 'The class-name joiner the components use, exported for yours.',
     },
   ],
   matrix: [

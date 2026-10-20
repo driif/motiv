@@ -13,7 +13,9 @@ for (const [style, entry] of Object.entries(entries)) {
   const sections = catalog[style];
   const claimed = sections.flatMap((section) => section.symbols);
   for (const name of exported) {
-    if (!claimed.includes(name)) problems.push(`${style}: ${name} is exported but not on the site`);
+    // cx is a helper, shown in the kinetic getting-started steps instead of a demo.
+    if (!claimed.includes(name) && name !== 'cx')
+      problems.push(`${style}: ${name} is exported but not on the site`);
   }
   for (const name of claimed) {
     if (!exported.includes(name))
@@ -24,11 +26,8 @@ for (const [style, entry] of Object.entries(entries)) {
     if (!existsSync(new URL(`../site/src/demos/${style}/${demo}.tsx`, import.meta.url))) {
       problems.push(`${style}: demo site/src/demos/${style}/${demo}.tsx is missing`);
     }
-    // drawn renders inline; the other styles override :root tokens, so they render in iframes.
-    if (
-      style !== 'drawn' &&
-      !existsSync(new URL(`../site/src/pages/preview/${style}/${id}.astro`, import.meta.url))
-    ) {
+    // Each style overrides :root tokens and shares class names, so demos render in iframes.
+    if (!existsSync(new URL(`../site/src/pages/preview/${style}/${id}.astro`, import.meta.url))) {
       problems.push(`${style}: preview site/src/pages/preview/${style}/${id}.astro is missing`);
     }
     if (!page.includes(`id="${id}"`)) problems.push(`${style}: section #${id} is not on the page`);

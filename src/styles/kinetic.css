@@ -1,4 +1,11 @@
 @layer motiv.base {
+  /* Scoped to motiv-* elements so components size predictably without a global reset. */
+  :where([class^="motiv-"], [class*=" motiv-"]),
+  :where([class^="motiv-"], [class*=" motiv-"])::before,
+  :where([class^="motiv-"], [class*=" motiv-"])::after {
+    box-sizing: border-box;
+  }
+
   .motiv-visually-hidden {
     position: absolute;
     width: 1px;

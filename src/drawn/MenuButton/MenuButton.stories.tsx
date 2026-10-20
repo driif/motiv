@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { ThemePair } from '../../../.storybook/ThemePair';
 import { withDrawn } from '../../../.storybook/withDrawn';
-import { MenuButton } from './MenuButton';
+import { MenuButton } from '.';
 
 function Demo({ initial = false }: { initial?: boolean }) {
   const [open, setOpen] = useState(initial);

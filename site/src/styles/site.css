@@ -1,12 +1,82 @@
 /* Site layout only. Unlayered, so it would beat @layer motiv.* — keep every selector on a site-* class
    and leave components' fonts, radii and colors alone. */
 
+@font-face {
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/caveat-latin-400.woff2") format("woff2");
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/* The chrome (top bar, footer) is kinetic. Each style page restyles its own content with that
+   style's palette and type; the demos themselves render in iframes with the real stylesheet. */
 .site-body {
-  --motiv-font-title: "Caveat", "Segoe Print", cursive;
+  --site-title-font: var(--motiv-font-body);
+  --site-title-weight: 650;
 
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  margin: 0;
+  background: var(--motiv-color-bg);
+  color: var(--motiv-color-text);
+  font-family: var(--motiv-font-body);
+}
+
+.site-page {
+  flex: 1;
+  background: var(--motiv-color-bg);
+  color: var(--motiv-color-text);
+}
+
+.site-page[data-style="drawn"] {
+  --site-title-font: "Caveat", "Segoe Print", cursive;
+  --site-title-weight: 400;
+  --motiv-color-primary: #1f6230;
+  --motiv-color-bg: #fbfaf6;
+  --motiv-color-surface: #f3f1ea;
+  --motiv-color-text: #1f2328;
+  --motiv-color-border: #d6d2c4;
+  --motiv-color-text-muted: color-mix(in oklch, var(--motiv-color-text) 75%, var(--motiv-color-bg));
+}
+
+[data-theme="dark"] .site-page[data-style="drawn"] {
+  --motiv-color-primary: #7bd88f;
+  --motiv-color-bg: #16181d;
+  --motiv-color-surface: #1f2228;
+  --motiv-color-text: #ece8df;
+  --motiv-color-border: #363a44;
+}
+
+.site-page[data-style="matrix"] {
+  --site-title-font: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --site-title-weight: 600;
+  --motiv-color-primary: #0d5a1f;
+  --motiv-color-bg: #eef3ee;
+  --motiv-color-surface: #f8fbf8;
+  --motiv-color-text: #0f2414;
+  --motiv-color-border: #6c8f74;
+  --motiv-color-text-muted: color-mix(in oklch, var(--motiv-color-text) 75%, var(--motiv-color-bg));
+  --motiv-radius-sm: 0;
+  --motiv-radius-md: 0;
+  --motiv-radius-lg: 0;
+
+  font-family: var(--site-title-font);
+}
+
+[data-theme="dark"] .site-page[data-style="matrix"] {
+  --motiv-color-primary: #3dff7a;
+  --motiv-color-bg: #050c07;
+  --motiv-color-surface: #0b170e;
+  --motiv-color-text: #c9f7d3;
+  --motiv-color-border: #3d7d4c;
 }
 
 .site-top__mark:focus-visible,
@@ -32,9 +102,11 @@
 
 .site-top__mark {
   margin-right: auto;
+  padding: 1rem 0;
   color: inherit;
-  font-family: var(--motiv-font-title);
-  font-size: 2rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   line-height: 1;
   text-decoration: none;
   border-radius: var(--motiv-radius-sm);
@@ -92,16 +164,51 @@
 }
 
 .site-hero__title {
-  max-width: 18ch;
+  max-width: 22ch;
   margin: 0;
-  font-size: clamp(3rem, 8vw, 5.75rem);
-  font-weight: 400;
+  font-family: var(--site-title-font);
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  font-weight: var(--site-title-weight);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+[data-style="drawn"] .site-hero__title {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  letter-spacing: 0;
   line-height: 0.95;
+}
+
+[data-style="drawn"] .site-start__title {
+  font-size: clamp(2.5rem, 5vw, 3.25rem);
+}
+
+[data-style="drawn"] .site-steps__title {
+  font-size: 1.75rem;
+}
+
+[data-style="drawn"] .site-section__title {
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+[data-style="drawn"] .site-kicker,
+[data-style="matrix"] .site-kicker {
+  color: var(--motiv-color-primary);
+}
+
+[data-style="matrix"] .site-kicker::before {
+  content: "> ";
+}
+
+[data-style="matrix"] .site-hero__title {
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
 }
 
 .site-hero__lede {
   max-width: 38rem;
-  margin: 1.75rem 0 0;
+  margin: 1.25rem 0 0;
   color: var(--motiv-color-text-muted);
   font-size: 1.15rem;
 }
@@ -140,81 +247,6 @@
   border-radius: var(--motiv-radius-sm);
 }
 
-.site-app {
-  display: grid;
-  grid-template-columns: 13rem minmax(0, 1fr);
-  grid-template-areas:
-    "bar bar"
-    "nav main";
-  gap: 1.25rem 2rem;
-  padding: clamp(1rem, 3vw, 2rem);
-  border: 1px solid var(--motiv-color-border);
-  border-radius: var(--motiv-radius-lg);
-  background: var(--motiv-color-surface);
-}
-
-.site-app__bar {
-  grid-area: bar;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.site-app__brand {
-  margin-right: auto;
-  font-family: var(--motiv-font-title);
-  font-size: 1.9rem;
-  font-weight: 400;
-  line-height: 1;
-}
-
-.site-app__nav {
-  grid-area: nav;
-  display: grid;
-  align-content: start;
-  gap: 0.25rem;
-}
-
-.site-app__main {
-  grid-area: main;
-  min-width: 0;
-}
-
-.site-app__progress {
-  margin-bottom: 1.5rem;
-}
-
-.site-app__panel {
-  display: grid;
-  gap: 1.25rem;
-  max-width: 28rem;
-  padding-top: 1.25rem;
-}
-
-.site-app__note {
-  margin: 0;
-}
-
-@media (min-width: 48rem) {
-  .site-app__menu {
-    display: none;
-  }
-}
-
-@media (max-width: 47.99rem) {
-  .site-app {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      "bar"
-      "nav"
-      "main";
-  }
-
-  .site-app[data-menu="false"] .site-app__nav {
-    display: none;
-  }
-}
-
 .site-preview {
   display: block;
   width: 100%;
@@ -230,10 +262,11 @@
 }
 
 .site-start__title {
+  font-family: var(--site-title-font);
   max-width: 24ch;
   margin: 0 0 2.5rem;
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  font-weight: 400;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: var(--site-title-weight);
   line-height: 1;
 }
 
@@ -251,9 +284,10 @@
 }
 
 .site-steps__title {
+  font-family: var(--site-title-font);
   margin: 0 0 0.25rem;
-  font-size: 1.75rem;
-  font-weight: 400;
+  font-size: 1.15rem;
+  font-weight: var(--site-title-weight);
 }
 
 .site-steps__text {
@@ -284,10 +318,11 @@
 }
 
 .site-section__title {
+  font-family: var(--site-title-font);
   margin: 0 0 0.5rem;
-  font-size: 2.1rem;
-  font-weight: 400;
-  line-height: 1;
+  font-size: 1.35rem;
+  font-weight: var(--site-title-weight);
+  line-height: 1.15;
 }
 
 .site-section__anchor {
@@ -303,13 +338,14 @@
 
 .site-section__stage {
   min-width: 0;
+  overflow: hidden;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem 1.25rem;
   min-height: 7rem;
-  padding: clamp(1.25rem, 3vw, 2.25rem);
-  border: 1px dashed var(--motiv-color-border);
+  padding: 0;
+  border: 1px solid var(--motiv-color-border);
   border-radius: var(--motiv-radius-lg);
 }
 
@@ -336,7 +372,39 @@
   list-style: none;
 }
 
+[data-style="drawn"] .site-section__stage,
+[data-style="matrix"] .site-section__stage {
+  border-style: dashed;
+}
+
+.site-choose__card[data-style="drawn"] .motiv-card__title {
+  font-family: "Caveat", "Segoe Print", cursive;
+  font-size: 1.9rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.site-choose__card[data-style="matrix"] .motiv-card__title {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  text-transform: uppercase;
+}
+
 /* Footer */
+
+.site-foot__link {
+  color: inherit;
+  border-radius: var(--motiv-radius-sm);
+  text-underline-offset: 0.2em;
+}
+
+.site-foot__link:hover {
+  color: var(--motiv-color-text);
+}
+
+.site-foot__link:focus-visible {
+  outline: none;
+  box-shadow: var(--motiv-focus-ring);
+}
 
 .site-foot {
   display: flex;

@@ -16,7 +16,8 @@
     cursor: pointer;
     isolation: isolate;
 
-    & > * {
+    /* The absolute bg stays out of the grid so it covers the padding box, not the cell. */
+    & > :not(.motiv-morph__bg) {
       grid-area: 1 / 1;
     }
 

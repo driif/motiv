@@ -5,11 +5,11 @@ import Shell from '../../layouts/Shell.astro';
 import releaseSource from '../../showcase/MotivRelease.tsx?raw';
 
 const first = `import '@driif/motiv/styles.css';
-import { Button, Card, CardBody, CardHeader } from '@driif/motiv';
+import { Button, Card, CardBody, CardHeader, cx } from '@driif/motiv';
 
-export function Welcome() {
+export function Welcome({ compact = false }) {
   return (
-    <Card>
+    <Card className={cx('welcome', compact && 'welcome--compact')}>
       <CardHeader title="Welcome back" />
       <CardBody>
         <Button>Continue</Button>
@@ -31,13 +31,9 @@ const retheme = `:root {
   description="kinetic, the default style of @driif/motiv: lilac surfaces, fine outlines and soft springs that only move transform and opacity."
 >
   <section class="site-hero">
-    <p class="site-kicker">Style 03 · kinetic</p>
-    <h1 class="site-hero__title">Quiet surfaces for the screens people use all day.</h1>
-    <p class="site-hero__lede">
-      kinetic is the default style: the root exports and <code class="site-inline">styles.css</code>.
-      Lilac surfaces, fine outlines and soft springs; every animation moves only transform and
-      opacity, and reduced motion stills them. The release screen below is server-rendered HTML in its own preview, with no hydration.
-    </p>
+    <p class="site-kicker">kinetic · default</p>
+    <h1 class="site-hero__title">Quiet, minimal components.</h1>
+    <p class="site-hero__lede">Fine outlines and soft springs. Motion only moves transform and opacity.</p>
   </section>
 
   <section class="site-usecase" id="release" aria-label="Use case: a release screen">
@@ -47,25 +43,22 @@ const retheme = `:root {
       title="Release screen preview"
     />
     <details class="site-source">
-      <summary class="site-source__summary">Read the whole screen, every line</summary>
+      <summary class="site-source__summary">Source</summary>
       <Code class="site-code" code={releaseSource} lang="tsx" theme="github-dark-dimmed" />
     </details>
   </section>
 
   <section class="site-start" id="getting-started">
-    <p class="site-kicker">Getting started</p>
-    <h2 class="site-start__title">Four steps, then make it yours.</h2>
+    <h2 class="site-start__title">Getting started</h2>
     <ol class="site-steps">
       <li class="site-steps__item">
         <h3 class="site-steps__title">Install</h3>
-        <p class="site-steps__text">React 19 and react-dom are the only peers.</p>
+        <p class="site-steps__text">Peers: React 19, react-dom.</p>
         <Code class="site-code" code="pnpm add @driif/motiv" lang="sh" theme="github-dark-dimmed" />
       </li>
       <li class="site-steps__item">
-        <h3 class="site-steps__title">Import the stylesheet once</h3>
-        <p class="site-steps__text">
-          Add <code class="site-inline">base.css</code> too if you want a minimal reset.
-        </p>
+        <h3 class="site-steps__title">Import the stylesheet</h3>
+        <p class="site-steps__text">Add <code class="site-inline">base.css</code> for a minimal reset.</p>
         <Code
           class="site-code"
           code="import '@driif/motiv/styles.css';"
@@ -74,16 +67,13 @@ const retheme = `:root {
         />
       </li>
       <li class="site-steps__item">
-        <h3 class="site-steps__title">Render something</h3>
-        <p class="site-steps__text">Named exports, no provider. Works in an Astro page as is.</p>
+        <h3 class="site-steps__title">Use</h3>
+        <p class="site-steps__text">Named exports, no provider. <code class="site-inline">cx</code> joins class names.</p>
         <Code class="site-code" code={first} lang="tsx" theme="github-dark-dimmed" />
       </li>
       <li class="site-steps__item">
-        <h3 class="site-steps__title">Re-theme with tokens</h3>
-        <p class="site-steps__text">
-          All library CSS sits in <code class="site-inline">@layer motiv.*</code>, so your
-          unlayered rules win without <code class="site-inline">!important</code>.
-        </p>
+        <h3 class="site-steps__title">Re-theme</h3>
+        <p class="site-steps__text">Everything is in <code class="site-inline">@layer motiv.*</code>; your rules win.</p>
         <Code class="site-code" code={retheme} lang="css" theme="github-dark-dimmed" />
       </li>
     </ol>
@@ -124,6 +114,5 @@ const retheme = `:root {
     <Section style="kinetic" id="drill-stack" />
     <Section style="kinetic" id="progress-ring" />
     <Section style="kinetic" id="odometer" />
-    <Section style="kinetic" id="cx" />
   </div>
 </Shell>

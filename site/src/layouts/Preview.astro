@@ -1,14 +1,16 @@
 ---
+import drawnCss from '@driif/motiv/drawn.css?url';
 import matrixCss from '@driif/motiv/matrix.css?url';
 import kineticCss from '@driif/motiv/styles.css?url';
 
 interface Props {
   title: string;
-  style?: 'kinetic' | 'matrix';
+  style?: 'kinetic' | 'matrix' | 'drawn';
   showcase?: boolean;
 }
 
 const { title, style = 'kinetic', showcase = false } = Astro.props;
+const css = { kinetic: kineticCss, matrix: matrixCss, drawn: drawnCss }[style];
 ---
 
 <!doctype html>
@@ -17,7 +19,7 @@ const { title, style = 'kinetic', showcase = false } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="stylesheet" href={style === 'matrix' ? matrixCss : kineticCss} />
+    <link rel="stylesheet" href={css} />
     <base href={`/${style}/`} target="_parent" />
     <title>{title} preview · motiv</title>
     <script is:inline>
@@ -62,6 +64,81 @@ const { title, style = 'kinetic', showcase = false } = Astro.props;
       @media (max-width: 32rem) {
         .site-release .motiv-card__footer {
           flex-wrap: wrap;
+        }
+      }
+
+      .site-app {
+        display: grid;
+        grid-template-columns: 13rem minmax(0, 1fr);
+        grid-template-areas:
+          "bar bar"
+          "nav main";
+        gap: 1.25rem 2rem;
+        padding: clamp(1rem, 3vw, 2rem);
+        border: 1px solid var(--motiv-color-border);
+        border-radius: var(--motiv-radius-lg);
+        background: var(--motiv-color-surface);
+      }
+
+      .site-app__bar {
+        grid-area: bar;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .site-app__brand {
+        margin-right: auto;
+        font-family: "Caveat", "Segoe Print", cursive;
+        font-size: 1.9rem;
+        font-weight: 400;
+        line-height: 1;
+      }
+
+      .site-app__nav {
+        grid-area: nav;
+        display: grid;
+        align-content: start;
+        gap: 0.25rem;
+      }
+
+      .site-app__main {
+        grid-area: main;
+        min-width: 0;
+      }
+
+      .site-app__progress {
+        margin-bottom: 1.5rem;
+      }
+
+      .site-app__panel {
+        display: grid;
+        gap: 1.25rem;
+        max-width: 28rem;
+        padding-top: 1.25rem;
+      }
+
+      .site-app__note {
+        margin: 0;
+      }
+
+      @media (min-width: 48rem) {
+        .site-app__menu {
+          display: none;
+        }
+      }
+
+      @media (max-width: 47.99rem) {
+        .site-app {
+          grid-template-columns: minmax(0, 1fr);
+          grid-template-areas:
+            "bar"
+            "nav"
+            "main";
+        }
+
+        .site-app[data-menu="false"] .site-app__nav {
+          display: none;
         }
       }
 
