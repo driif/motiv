@@ -24,12 +24,11 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - uses: changesets/action@v1
-        id: changesets
         with:
           version: pnpm changeset version
           publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # Cloudflare Workers Builds deploys the `site` branch, which moves only when a release publishes.
-      - if: steps.changesets.outputs.published == 'true'
-        run: git push origin HEAD:refs/heads/site
+      # changesets v3 output no longer sets `published`, so the release tag at HEAD is the signal.
+      - run: if git tag --points-at HEAD | grep -q .; then git push origin HEAD:refs/heads/site; fi
