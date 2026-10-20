@@ -22,7 +22,9 @@
     background: var(--motiv-color-surface);
     border: 1px solid var(--motiv-color-border);
     border-radius: 50%;
-    transition: scale 0.3s var(--motiv-ease-spring);
+    transition:
+      scale 0.3s var(--motiv-ease-spring),
+      border-color var(--motiv-duration) var(--motiv-ease);
 
     &::before {
       content: "";
@@ -37,8 +39,30 @@
         scale 0.45s var(--motiv-ease-spring);
     }
 
+    /* The ripple. Gated on :focus so a preselected option stays still on mount. */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border: 2px solid var(--motiv-color-primary);
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+    }
+
     .motiv-radio:active & {
       scale: 0.9;
+    }
+  }
+
+  @media (hover: hover) {
+    .motiv-radio:hover .motiv-radio__input:not(:checked, :disabled) + .motiv-radio__dot {
+      border-color: color-mix(in oklch, var(--motiv-color-primary) 55%, var(--motiv-color-border));
+
+      &::before {
+        opacity: 0.3;
+        scale: 0.45;
+      }
     }
   }
 
@@ -48,6 +72,39 @@
     &::before {
       opacity: 1;
       scale: 1;
+    }
+  }
+
+  .motiv-radio__input:checked:focus + .motiv-radio__dot {
+    animation: motiv-radio-pop 0.45s var(--motiv-ease-spring);
+
+    &::after {
+      animation: motiv-radio-ripple 0.6s var(--motiv-ease) forwards;
+    }
+  }
+
+  .motiv-radio__label {
+    transition: translate 0.35s var(--motiv-ease-spring);
+
+    .motiv-radio__input:checked ~ & {
+      translate: 2px 0;
+    }
+  }
+
+  @keyframes motiv-radio-pop {
+    40% {
+      scale: 1.18;
+    }
+  }
+
+  @keyframes motiv-radio-ripple {
+    from {
+      opacity: 0.6;
+      scale: 1;
+    }
+    to {
+      opacity: 0;
+      scale: 2;
     }
   }
 
@@ -74,8 +131,13 @@
 
   @media (prefers-reduced-motion: reduce) {
     .motiv-radio__dot,
-    .motiv-radio__dot::before {
+    .motiv-radio__dot::before,
+    .motiv-radio__label {
       transition: none;
+    }
+    .motiv-radio__input:checked:focus + .motiv-radio__dot,
+    .motiv-radio__input:checked:focus + .motiv-radio__dot::after {
+      animation: none;
     }
   }
 }

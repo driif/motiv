@@ -14,7 +14,15 @@ export function CommandMenuDemo() {
     { id: 'settings', label: 'Settings', onSelect: () => setLast('Settings') },
   ];
   return (
-    <div style={{ display: 'grid', gap: '0.75rem', width: '20rem', minHeight: '15rem' }}>
+    <div
+      style={{
+        display: 'grid',
+        alignContent: 'start',
+        gap: '0.75rem',
+        width: '20rem',
+        minHeight: '15rem',
+      }}
+    >
       <CommandMenu commands={commands} hotkey />
       <span>Last command: {last}</span>
     </div>

@@ -26,39 +26,30 @@ export function Unseal() {
   description="The matrix style of @driif/motiv: React components for consoles and dashboards, in phosphor green on a terminal grid."
 >
   <section class="site-hero">
-    <p class="site-kicker">Style 02 · matrix</p>
-    <h1 class="site-hero__title">A terminal for the screens that guard the keys.</h1>
-    <p class="site-hero__lede">
-      Phosphor green, monospace and square corners. HUD brackets lock onto what you point at,
-      menus snap open in a bracketed field and secrets decode one character at a time. Every effect moves
-      only transform and opacity, and reduced motion stills it. Below is a vault console built
-      from nothing but matrix components, in its own preview.
-    </p>
+    <p class="site-kicker">matrix</p>
+    <h1 class="site-hero__title">Terminal components for consoles.</h1>
+    <p class="site-hero__lede">Phosphor green, monospace, square corners.</p>
   </section>
 
   <section class="site-usecase" id="console" aria-label="Use case: a vault console">
     <iframe class="site-preview" src="/preview/matrix/console/" title="Vault console preview" />
     <details class="site-source">
-      <summary class="site-source__summary">Read the whole screen, every line</summary>
+      <summary class="site-source__summary">Source</summary>
       <Code class="site-code" code={consoleSource} lang="tsx" theme="github-dark-dimmed" />
     </details>
   </section>
 
   <section class="site-start" id="getting-started">
-    <p class="site-kicker">Getting started</p>
-    <h2 class="site-start__title">Four steps from empty folder to console.</h2>
+    <h2 class="site-start__title">Getting started</h2>
     <ol class="site-steps">
       <li class="site-steps__item">
         <h3 class="site-steps__title">Install</h3>
-        <p class="site-steps__text">React 19 and react-dom are the only peers.</p>
+        <p class="site-steps__text">Peers: React 19, react-dom.</p>
         <Code class="site-code" code="pnpm add @driif/motiv" lang="sh" theme="github-dark-dimmed" />
       </li>
       <li class="site-steps__item">
-        <h3 class="site-steps__title">Import the stylesheet once</h3>
-        <p class="site-steps__text">
-          It carries the tokens, a small base and the system monospace stack. Use it instead of
-          <code class="site-inline">styles.css</code>, never next to it.
-        </p>
+        <h3 class="site-steps__title">Import the stylesheet</h3>
+        <p class="site-steps__text">Tokens, base and the monospace stack. Replaces <code class="site-inline">styles.css</code>.</p>
         <Code
           class="site-code"
           code="import '@driif/motiv/matrix.css';"
@@ -67,19 +58,13 @@ export function Unseal() {
         />
       </li>
       <li class="site-steps__item">
-        <h3 class="site-steps__title">Wire your first form</h3>
-        <p class="site-steps__text">
-          Every component is a named export. No provider, no setup. Button, Card and the form
-          controls take the same props as their drawn twins.
-        </p>
+        <h3 class="site-steps__title">Use</h3>
+        <p class="site-steps__text">Named exports, no provider. Same props as the drawn twins.</p>
         <Code class="site-code" code={first} lang="tsx" theme="github-dark-dimmed" />
       </li>
       <li class="site-steps__item">
-        <h3 class="site-steps__title">Own the theme</h3>
-        <p class="site-steps__text">
-          The toggles only report clicks. Your app sets <code class="site-inline">data-theme</code>
-          on <code class="site-inline">&lt;html&gt;</code>; this is the hook this site uses.
-        </p>
+        <h3 class="site-steps__title">Theme</h3>
+        <p class="site-steps__text">Your app sets <code class="site-inline">data-theme</code> on <code class="site-inline">&lt;html&gt;</code>.</p>
         <Code class="site-code" code={themeSource} lang="ts" theme="github-dark-dimmed" />
       </li>
     </ol>

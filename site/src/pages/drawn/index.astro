@@ -1,26 +1,7 @@
 ---
 import { Code } from 'astro:components';
 import Section from '../../components/Section.astro';
-import { ButtonDemo } from '../../demos/drawn/Button';
-import { CardDemo } from '../../demos/drawn/Card';
-import { CheckboxDemo } from '../../demos/drawn/Checkbox';
-import { HoldToConfirmButtonDemo } from '../../demos/drawn/HoldToConfirmButton';
-import { IconButtonDemo } from '../../demos/drawn/IconButton';
-import { InkSplatterButtonDemo } from '../../demos/drawn/InkSplatterButton';
-import { LinkDemo } from '../../demos/drawn/Link';
-import { MenuButtonDemo } from '../../demos/drawn/MenuButton';
-import { NavItemDemo } from '../../demos/drawn/NavItem';
-import { OrbitalThemeToggleDemo } from '../../demos/drawn/OrbitalThemeToggle';
-import { ProgressDemo } from '../../demos/drawn/Progress';
-import { RadioDemo } from '../../demos/drawn/Radio';
-import { SegmentedControlDemo } from '../../demos/drawn/SegmentedControl';
-import { SelectDemo } from '../../demos/drawn/Select';
-import { TabsDemo } from '../../demos/drawn/Tabs';
-import { TextFieldDemo } from '../../demos/drawn/TextField';
-import { ThemeToggleDemo } from '../../demos/drawn/ThemeToggle';
-import { TooltipDemo } from '../../demos/drawn/Tooltip';
 import Shell from '../../layouts/Shell.astro';
-import { DrawnSettings } from '../../showcase/DrawnSettings';
 import settingsSource from '../../showcase/DrawnSettings.tsx?raw';
 import themeSource from '../../useTheme.ts?raw';
 
@@ -43,38 +24,30 @@ export function Subscribe() {
   description="The drawn style of @driif/motiv: React components that look sketched by hand."
 >
   <section class="site-hero">
-    <p class="site-kicker">Style 01 · drawn</p>
-    <h1 class="site-hero__title">Software that still looks like it was thought through on paper.</h1>
-    <p class="site-hero__lede">
-      Pencil lines, ink ticks and a little wobble, on top of native inputs that behave exactly
-      like the ones your users already know. Below is a whole settings screen made of nothing but
-      drawn components. Click around, switch the theme, then take it apart.
-    </p>
+    <p class="site-kicker">drawn</p>
+    <h1 class="site-hero__title">Lightweight components, drawn style.</h1>
+    <p class="site-hero__lede">Pencil lines and ink ticks over native inputs.</p>
   </section>
 
   <section class="site-usecase" id="settings" aria-label="Use case: a settings screen">
-    <DrawnSettings client:load />
+    <iframe class="site-preview" src="/preview/drawn/settings/" title="Settings screen preview" />
     <details class="site-source">
-      <summary class="site-source__summary">Read the whole screen, every line</summary>
+      <summary class="site-source__summary">Source</summary>
       <Code class="site-code" code={settingsSource} lang="tsx" theme="github-dark-dimmed" />
     </details>
   </section>
 
   <section class="site-start" id="getting-started">
-    <p class="site-kicker">Getting started</p>
-    <h2 class="site-start__title">Four steps from empty folder to sketchbook.</h2>
+    <h2 class="site-start__title">Getting started</h2>
     <ol class="site-steps">
       <li class="site-steps__item">
         <h3 class="site-steps__title">Install</h3>
-        <p class="site-steps__text">React 19 and react-dom are the only peers.</p>
+        <p class="site-steps__text">Peers: React 19, react-dom.</p>
         <Code class="site-code" code="pnpm add @driif/motiv" lang="sh" theme="github-dark-dimmed" />
       </li>
       <li class="site-steps__item">
-        <h3 class="site-steps__title">Import the stylesheet once</h3>
-        <p class="site-steps__text">
-          It carries the tokens, a small base and the Caveat font. Use it instead of
-          <code class="site-inline">styles.css</code>, never next to it.
-        </p>
+        <h3 class="site-steps__title">Import the stylesheet</h3>
+        <p class="site-steps__text">Tokens, base and the Caveat font. Replaces <code class="site-inline">styles.css</code>.</p>
         <Code
           class="site-code"
           code="import '@driif/motiv/drawn.css';"
@@ -83,43 +56,36 @@ export function Subscribe() {
         />
       </li>
       <li class="site-steps__item">
-        <h3 class="site-steps__title">Draw your first form</h3>
-        <p class="site-steps__text">Every component is a named export. No provider, no setup.</p>
+        <h3 class="site-steps__title">Use</h3>
+        <p class="site-steps__text">Named exports, no provider.</p>
         <Code class="site-code" code={first} lang="tsx" theme="github-dark-dimmed" />
       </li>
       <li class="site-steps__item">
-        <h3 class="site-steps__title">Own the theme</h3>
-        <p class="site-steps__text">
-          The toggles only report clicks. Your app sets <code class="site-inline">data-theme</code>
-          on <code class="site-inline">&lt;html&gt;</code>; this is the hook this site uses.
-        </p>
+        <h3 class="site-steps__title">Theme</h3>
+        <p class="site-steps__text">Your app sets <code class="site-inline">data-theme</code> on <code class="site-inline">&lt;html&gt;</code>.</p>
         <Code class="site-code" code={themeSource} lang="ts" theme="github-dark-dimmed" />
       </li>
     </ol>
   </section>
 
   <div class="site-sections">
-    <Section style="drawn" id="button"><ButtonDemo client:visible /></Section>
-    <Section style="drawn" id="ink-splatter-button"><InkSplatterButtonDemo client:visible /></Section>
-    <Section style="drawn" id="hold-to-confirm-button">
-      <HoldToConfirmButtonDemo client:visible />
-    </Section>
-    <Section style="drawn" id="card"><CardDemo client:visible /></Section>
-    <Section style="drawn" id="text-field"><TextFieldDemo client:visible /></Section>
-    <Section style="drawn" id="checkbox"><CheckboxDemo client:visible /></Section>
-    <Section style="drawn" id="radio"><RadioDemo client:visible /></Section>
-    <Section style="drawn" id="select"><SelectDemo client:visible /></Section>
-    <Section style="drawn" id="segmented-control"><SegmentedControlDemo client:visible /></Section>
-    <Section style="drawn" id="tabs"><TabsDemo client:visible /></Section>
-    <Section style="drawn" id="link"><LinkDemo client:visible /></Section>
-    <Section style="drawn" id="nav-item"><NavItemDemo client:visible /></Section>
-    <Section style="drawn" id="icon-button"><IconButtonDemo client:visible /></Section>
-    <Section style="drawn" id="menu-button"><MenuButtonDemo client:visible /></Section>
-    <Section style="drawn" id="tooltip"><TooltipDemo client:visible /></Section>
-    <Section style="drawn" id="progress"><ProgressDemo client:visible /></Section>
-    <Section style="drawn" id="theme-toggle"><ThemeToggleDemo client:visible /></Section>
-    <Section style="drawn" id="orbital-theme-toggle">
-      <OrbitalThemeToggleDemo client:visible />
-    </Section>
+    <Section style="drawn" id="button" />
+    <Section style="drawn" id="ink-splatter-button" />
+    <Section style="drawn" id="hold-to-confirm-button" />
+    <Section style="drawn" id="card" />
+    <Section style="drawn" id="text-field" />
+    <Section style="drawn" id="checkbox" />
+    <Section style="drawn" id="radio" />
+    <Section style="drawn" id="select" />
+    <Section style="drawn" id="segmented-control" />
+    <Section style="drawn" id="tabs" />
+    <Section style="drawn" id="link" />
+    <Section style="drawn" id="nav-item" />
+    <Section style="drawn" id="icon-button" />
+    <Section style="drawn" id="menu-button" />
+    <Section style="drawn" id="tooltip" />
+    <Section style="drawn" id="progress" />
+    <Section style="drawn" id="theme-toggle" />
+    <Section style="drawn" id="orbital-theme-toggle" />
   </div>
 </Shell>

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { ThemePair } from '../../../.storybook/ThemePair';
 import { withDrawn } from '../../../.storybook/withDrawn';
-import { Radio, RadioGroup } from './Radio';
+import { Radio, RadioGroup } from '.';
 
 const meta = {
   title: 'Drawn/Radio',

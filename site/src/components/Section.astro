@@ -27,18 +27,12 @@ const source = sources[`../demos/${style}/${section.demo}.tsx`];
     <p class="site-section__blurb">{section.blurb}</p>
   </div>
   <div class="site-section__stage">
-    {
-      style === 'drawn' ? (
-        <slot />
-      ) : (
-        <iframe
-          class="site-preview"
-          src={`/preview/${style}/${id}/`}
-          title={`${section.title} preview`}
-          loading="lazy"
-        />
-      )
-    }
+    <iframe
+      class="site-preview"
+      src={`/preview/${style}/${id}/`}
+      title={`${section.title} preview`}
+      loading="lazy"
+    />
   </div>
   <Code class="site-code" code={source} lang="tsx" theme="github-dark-dimmed" />
 </section>

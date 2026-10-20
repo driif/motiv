@@ -1,47 +1,35 @@
 ---
-import { Card, CardFooter, CardHeader, Link } from '@driif/motiv/drawn';
+import { buttonClassName, Card, CardFooter, CardHeader } from '@driif/motiv';
 import { catalog } from '../catalog.mjs';
 import Shell from '../layouts/Shell.astro';
 
 const styles = [
-  {
-    id: 'drawn',
-    pitch:
-      'Pencil lines and ink ticks over native inputs. For tools that should feel made by hand.',
-  },
-  {
-    id: 'matrix',
-    pitch:
-      'Phosphor green on a terminal grid. HUD brackets, terminal menus and decoding secrets, for consoles and dashboards.',
-  },
-  {
-    id: 'kinetic',
-    pitch:
-      'The default style. Lilac surfaces, fine outlines and soft springs, for screens people use all day.',
-  },
+  { id: 'kinetic', pitch: 'The default. Quiet, minimal, soft springs.' },
+  { id: 'drawn', pitch: 'Lightweight components, drawn by hand.' },
+  { id: 'matrix', pitch: 'Phosphor terminal for consoles and dashboards.' },
 ] as const;
 ---
 
 <Shell
-  title="motiv · open-source React components in three styles"
-  description="@driif/motiv: React components with plain, themeable CSS, in three styles: drawn, matrix and kinetic."
+  title="motiv · UI/UX components"
+  description="@driif/motiv: React components with plain, themeable CSS, in three styles: kinetic, drawn and matrix."
 >
   <section class="site-hero">
-    <p class="site-kicker">@driif/motiv</p>
-    <h1 class="site-hero__title">One set of React components. Three ways for your app to look.</h1>
+    <h1 class="site-hero__title">motiv — UI/UX components</h1>
     <p class="site-hero__lede">
-      Plain CSS, server-render safe, no provider. Pick a style to see real screens built from it,
-      then copy the code under every demo. The switcher at the top stays with you, so you can
-      compare the same component across styles.
+      Plain CSS, server-render safe, no provider. Components grouped by style for a quick
+      bootstrap.
     </p>
   </section>
   <ul class="site-choose">
     {
       styles.map((style) => (
-        <Card as="li" variant="outlined">
+        <Card as="li" className="site-choose__card" data-style={style.id}>
           <CardHeader titleAs="h2" title={style.id} description={style.pitch} />
           <CardFooter>
-            <Link href={`/${style.id}/`}>{catalog[style.id].length} sections</Link>
+            <a class={buttonClassName({ variant: 'outline', size: 'sm' })} href={`/${style.id}/`}>
+              {catalog[style.id].length} components
+            </a>
           </CardFooter>
         </Card>
       ))
