@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { catalog } from '../site/src/catalog.mjs';
 
-const entries = { motiv: '../dist/index.js', drawn: '../dist/drawn/index.js' };
+const entries = { kinetic: '../dist/index.js', drawn: '../dist/drawn/index.js' };
 
 const problems = [];
 for (const [style, entry] of Object.entries(entries)) {
@@ -19,6 +19,12 @@ for (const [style, entry] of Object.entries(entries)) {
   for (const { id, demo } of sections) {
     if (!existsSync(new URL(`../site/src/demos/${style}/${demo}.tsx`, import.meta.url))) {
       problems.push(`${style}: demo site/src/demos/${style}/${demo}.tsx is missing`);
+    }
+    if (
+      style === 'kinetic' &&
+      !existsSync(new URL(`../site/src/pages/preview/kinetic/${id}.astro`, import.meta.url))
+    ) {
+      problems.push(`${style}: preview site/src/pages/preview/kinetic/${id}.astro is missing`);
     }
     if (!page.includes(`id="${id}"`)) problems.push(`${style}: section #${id} is not on the page`);
   }

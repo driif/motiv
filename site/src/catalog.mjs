@@ -133,7 +133,7 @@ export const catalog = {
       blurb: 'The theme switch as a small illustration, for a hero or a settings page.',
     },
   ],
-  motiv: [
+  kinetic: [
     {
       id: 'button',
       title: 'Button',

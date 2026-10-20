@@ -1,0 +1,97 @@
+---
+import { Code } from 'astro:components';
+import Section from '../../components/Section.astro';
+import Shell from '../../layouts/Shell.astro';
+import releaseSource from '../../showcase/MotivRelease.tsx?raw';
+
+const first = `import '@driif/motiv/styles.css';
+import { Button, Card, CardBody, CardHeader } from '@driif/motiv';
+
+export function Welcome() {
+  return (
+    <Card>
+      <CardHeader title="Welcome back" />
+      <CardBody>
+        <Button>Continue</Button>
+      </CardBody>
+    </Card>
+  );
+}`;
+
+const retheme = `:root {
+  --motiv-color-primary: #2563eb;
+  --motiv-color-on-primary: #ffffff;
+  --motiv-radius: 0.25rem;
+}`;
+---
+
+<Shell
+  current="kinetic"
+  title="kinetic · motiv"
+  description="kinetic, the default style of @driif/motiv: plain and re-themeable today, its motion-led look in progress."
+>
+  <section class="site-hero">
+    <p class="site-kicker">Style 03 · kinetic</p>
+    <h1 class="site-hero__title">Quiet surfaces for the screens people use all day.</h1>
+    <p class="site-hero__lede">
+      kinetic is the default style: the root exports and <code class="site-inline">styles.css</code>.
+      Today it is the plain base, re-themed with a few tokens; its motion-led look is in progress.
+      The release screen below is server-rendered HTML in its own preview, with no hydration.
+    </p>
+  </section>
+
+  <section class="site-usecase" id="release" aria-label="Use case: a release screen">
+    <iframe
+      class="site-preview"
+      src="/preview/kinetic/release/"
+      title="Release screen preview"
+    />
+    <details class="site-source">
+      <summary class="site-source__summary">Read the whole screen, every line</summary>
+      <Code class="site-code" code={releaseSource} lang="tsx" theme="github-dark-dimmed" />
+    </details>
+  </section>
+
+  <section class="site-start" id="getting-started">
+    <p class="site-kicker">Getting started</p>
+    <h2 class="site-start__title">Four steps, then make it yours.</h2>
+    <ol class="site-steps">
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Install</h3>
+        <p class="site-steps__text">React 19 and react-dom are the only peers.</p>
+        <Code class="site-code" code="pnpm add @driif/motiv" lang="sh" theme="github-dark-dimmed" />
+      </li>
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Import the stylesheet once</h3>
+        <p class="site-steps__text">
+          Add <code class="site-inline">base.css</code> too if you want a minimal reset.
+        </p>
+        <Code
+          class="site-code"
+          code="import '@driif/motiv/styles.css';"
+          lang="ts"
+          theme="github-dark-dimmed"
+        />
+      </li>
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Render something</h3>
+        <p class="site-steps__text">Named exports, no provider. Works in an Astro page as is.</p>
+        <Code class="site-code" code={first} lang="tsx" theme="github-dark-dimmed" />
+      </li>
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Re-theme with tokens</h3>
+        <p class="site-steps__text">
+          All library CSS sits in <code class="site-inline">@layer motiv.*</code>, so your
+          unlayered rules win without <code class="site-inline">!important</code>.
+        </p>
+        <Code class="site-code" code={retheme} lang="css" theme="github-dark-dimmed" />
+      </li>
+    </ol>
+  </section>
+
+  <div class="site-sections">
+    <Section style="kinetic" id="button" />
+    <Section style="kinetic" id="card" />
+    <Section style="kinetic" id="cx" />
+  </div>
+</Shell>
