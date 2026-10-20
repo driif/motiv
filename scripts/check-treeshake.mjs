@@ -5,7 +5,7 @@ const checks = [
   {
     input: 'test/fixtures/treeshake-drawn-link.js',
     kept: 'motiv-link',
-    dropped: ['motiv-checkbox', 'motiv-text-field'],
+    dropped: ['motiv-checkbox', 'motiv-text-field', 'motiv-btn', 'motiv-card'],
   },
 ];
 

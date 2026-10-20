@@ -14,6 +14,8 @@
 @import "../drawn/MenuButton/MenuButton.css";
 @import "../drawn/ThemeToggle/ThemeToggle.css";
 @import "../drawn/Progress/Progress.css";
+@import "../drawn/Button/Button.css";
+@import "../drawn/Card/Card.css";
 
 @layer motiv.tokens {
   :root,
@@ -21,8 +23,10 @@
     color-scheme: light;
     --motiv-color-primary: #1f6230;
     --motiv-color-on-primary: #ffffff;
-    --motiv-color-secondary: #d9480f;
-    --motiv-color-on-secondary: #1c0700;
+    --motiv-color-secondary: #b83c0c;
+    --motiv-color-on-secondary: #ffffff;
+    --motiv-color-danger: #c11f1f;
+    --motiv-color-on-danger: #ffffff;
     --motiv-color-bg: #fbfaf6;
     --motiv-color-surface: #f3f1ea;
     --motiv-color-text: #1f2328;
@@ -35,6 +39,8 @@
     --motiv-color-on-primary: #0b2a13;
     --motiv-color-secondary: #f6bf8e;
     --motiv-color-on-secondary: #3a1a05;
+    --motiv-color-danger: #ff8f85;
+    --motiv-color-on-danger: #3b0906;
     --motiv-color-bg: #16181d;
     --motiv-color-surface: #1f2228;
     --motiv-color-text: #ece8df;
@@ -48,6 +54,8 @@
       --motiv-color-on-primary: #0b2a13;
       --motiv-color-secondary: #f6bf8e;
       --motiv-color-on-secondary: #3a1a05;
+      --motiv-color-danger: #ff8f85;
+      --motiv-color-on-danger: #3b0906;
       --motiv-color-bg: #16181d;
       --motiv-color-surface: #1f2228;
       --motiv-color-text: #ece8df;

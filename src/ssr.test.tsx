@@ -3,6 +3,9 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import {
   Checkbox,
+  Button as DrawnButton,
+  Card as DrawnCard,
+  CardHeader as DrawnCardHeader,
   IconButton,
   IconButtonGroup,
   Link,
@@ -92,5 +95,19 @@ describe('server rendering', () => {
     expect(html).toContain('aria-expanded="true"');
     expect(html).toContain('aria-pressed="true"');
     expect(html).toContain('aria-valuenow="40"');
+  });
+
+  it('renders the drawn Button and Card without a DOM', () => {
+    const html = renderToStaticMarkup(
+      <DrawnCard interactive>
+        <DrawnCardHeader title="T" />
+        <DrawnButton loading>Go</DrawnButton>
+      </DrawnCard>,
+    );
+    expect(html).toContain(
+      'class="motiv-card motiv-card--elevated motiv-card--p-md motiv-card--interactive"',
+    );
+    expect(html).toContain('aria-busy="true"');
+    expect(html).toContain('motiv-btn__spinner');
   });
 });

@@ -107,12 +107,19 @@ It sets its own values for the same base tokens, so every override above works u
 |---|---|---|
 | `--motiv-color-primary` | `#1f6230` | `#7bd88f` |
 | `--motiv-color-on-primary` | `#ffffff` | `#0b2a13` |
-| `--motiv-color-secondary` | `#d9480f` | `#f6bf8e` |
-| `--motiv-color-on-secondary` | `#1c0700` | `#3a1a05` |
+| `--motiv-color-secondary` | `#b83c0c` | `#f6bf8e` |
+| `--motiv-color-on-secondary` | `#ffffff` | `#3a1a05` |
+| `--motiv-color-danger` | `#c11f1f` | `#ff8f85` |
+| `--motiv-color-on-danger` | `#ffffff` | `#3b0906` |
 | `--motiv-color-bg` | `#fbfaf6` | `#16181d` |
 | `--motiv-color-surface` | `#f3f1ea` | `#1f2228` |
 | `--motiv-color-text` | `#1f2328` | `#ece8df` |
 | `--motiv-color-border` | `#d6d2c4` | `#363a44` |
+
+`Button`, `buttonClassName`, `Card`, `CardHeader`, `CardBody` and `CardFooter` take the same props
+and render the same `motiv-btn*` / `motiv-card*` classes as the default entry, so switching the
+import does not change app code. The component tokens (`--motiv-btn-*`, `--motiv-card-*`) are
+default-style only.
 
 ## Plain CSS overrides
 
