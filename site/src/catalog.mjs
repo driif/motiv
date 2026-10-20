@@ -7,21 +7,39 @@ export const catalog = {
       title: 'Button',
       symbols: ['Button', 'buttonClassName'],
       demo: 'Button',
-      blurb: 'The one thing on the page that should be pressed. Links borrow its look.',
+      blurb:
+        'The one thing on the page that should be pressed, cut by hand. Ghost buttons get a wavy stroke; links borrow the look.',
+    },
+    {
+      id: 'ink-splatter-button',
+      title: 'InkSplatterButton',
+      symbols: ['InkSplatterButton'],
+      demo: 'InkSplatterButton',
+      blurb:
+        'A button that splashes ink when pressed, with an optional success label for a moment.',
+    },
+    {
+      id: 'hold-to-confirm-button',
+      title: 'HoldToConfirmButton',
+      symbols: ['HoldToConfirmButton'],
+      demo: 'HoldToConfirmButton',
+      blurb:
+        'For things that are hard to undo: hold with pointer, Space or Enter until the ink fills; a screen-reader click confirms directly.',
     },
     {
       id: 'card',
       title: 'Card',
       symbols: ['Card', 'CardHeader', 'CardBody', 'CardFooter'],
       demo: 'Card',
-      blurb: 'A sheet of paper with a heading, some words and a place for actions.',
+      blurb: 'A hand-cut sheet of paper with a heading, some words and a place for actions.',
     },
     {
       id: 'text-field',
       title: 'TextField',
       symbols: ['TextField'],
       demo: 'TextField',
-      blurb: 'A pencil line to write on. The label floats, the hint stays put.',
+      blurb:
+        'A pencil line to write on. Focus draws it in ink, the label floats, the hint stays put.',
     },
     {
       id: 'checkbox',
@@ -85,6 +103,13 @@ export const catalog = {
       symbols: ['MenuButton'],
       demo: 'MenuButton',
       blurb: 'The hamburger that turns into a cross. You own the menu it opens.',
+    },
+    {
+      id: 'tooltip',
+      title: 'Tooltip',
+      symbols: ['Tooltip'],
+      demo: 'Tooltip',
+      blurb: 'A margin note behind an i. Hover, focus or click to read it, Escape to put it away.',
     },
     {
       id: 'progress',

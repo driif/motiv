@@ -1,0 +1,108 @@
+@layer motiv.components {
+  .motiv-splatter-button {
+    --_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    position: relative;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--motiv-space) * 2.5);
+    min-height: 2.75rem;
+    padding: 0 calc(var(--motiv-space) * 6);
+    font-family: var(--motiv-font-body);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--motiv-color-on-primary);
+    background: var(--motiv-color-primary);
+    border: 0;
+    border-radius: 16px 22px 14px 20px / 20px 14px 22px 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: filter var(--motiv-duration) var(--motiv-ease);
+
+    &:hover:not(:disabled) {
+      filter: brightness(1.08);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-splatter-button__icon {
+    display: inline-flex;
+
+    & > svg {
+      width: 1.15em;
+      height: 1.15em;
+    }
+  }
+
+  /* Both labels share one grid cell, so the width never jumps. */
+  .motiv-splatter-button__labels {
+    display: grid;
+    justify-items: center;
+  }
+
+  .motiv-splatter-button__label {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.2s,
+      transform 0.3s var(--_spring);
+
+    &[data-active] {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .motiv-splatter-button__drops {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .motiv-splatter-button__drop {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--_s);
+    height: var(--_s);
+    margin: calc(var(--_s) / -2) 0 0 calc(var(--_s) / -2);
+    background: var(--motiv-color-secondary);
+    border-radius: 50% 40% 60% 45%;
+    opacity: 0;
+    animation: motiv-splatter 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+  }
+
+  @keyframes motiv-splatter {
+    from {
+      opacity: 1;
+      transform: rotate(var(--_a)) translateY(0) scale(0.3);
+    }
+    to {
+      opacity: 0;
+      transform: rotate(var(--_a)) translateY(calc(var(--_d) * -1)) scale(1.15);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-splatter-button__drops {
+      display: none;
+    }
+    .motiv-splatter-button,
+    .motiv-splatter-button__label {
+      transition: none;
+    }
+  }
+}

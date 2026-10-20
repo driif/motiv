@@ -28,11 +28,8 @@
     border: 0;
     border-bottom: 1.5px solid var(--motiv-color-text-muted);
     border-radius: 0;
+    /* The primary line drawn in on focus below is the focus indicator. */
     outline: none;
-
-    &:focus-visible {
-      box-shadow: var(--motiv-focus-ring);
-    }
   }
 
   .motiv-text-field__label {

@@ -6,8 +6,10 @@ import {
   Button as DrawnButton,
   Card as DrawnCard,
   CardHeader as DrawnCardHeader,
+  HoldToConfirmButton,
   IconButton,
   IconButtonGroup,
+  InkSplatterButton,
   Link,
   MenuButton,
   NavItem,
@@ -19,6 +21,7 @@ import {
   Tabs,
   TextField,
   ThemeToggle,
+  Tooltip,
 } from './drawn';
 import { Button, Card, CardBody, CardHeader } from './index';
 
@@ -117,5 +120,18 @@ describe('server rendering', () => {
     expect(html).toContain('class="motiv-orbital-toggle motiv-orbital-toggle--dark"');
     expect(html).toContain('aria-pressed="true"');
     expect(html).toMatch(/<filter id="(motiv-ink-[^"]+)".*filter:url\(#\1\)/);
+  });
+
+  it('renders the drawn Tooltip and effect buttons without a DOM', () => {
+    const html = renderToStaticMarkup(
+      <>
+        <Tooltip content="Note" />
+        <InkSplatterButton successLabel="Sent">Send</InkSplatterButton>
+        <HoldToConfirmButton onConfirm={() => {}} />
+      </>,
+    );
+    expect(html).toMatch(/aria-describedby="([^"]+)".*role="tooltip" id="\1"/);
+    expect(html).toContain('aria-live="polite"');
+    expect(html).toContain('aria-live="assertive"');
   });
 });
