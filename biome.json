@@ -7,6 +7,28 @@
   },
   "formatter": { "enabled": true, "indentStyle": "space", "lineWidth": 100 },
   "linter": { "enabled": true, "rules": { "preset": "recommended" } },
+  "overrides": [
+    {
+      "includes": ["src/drawn/Select/Select.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noNoninteractiveElementToInteractiveRole": "off",
+            "useFocusableInteractive": "off",
+            "useKeyWithClickEvents": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/drawn/Tabs/Tabs.tsx"],
+      "linter": { "rules": { "a11y": { "noNoninteractiveTabindex": "off" } } }
+    },
+    {
+      "includes": ["src/drawn/SegmentedControl/SegmentedControl.tsx"],
+      "linter": { "rules": { "a11y": { "useSemanticElements": "off" } } }
+    }
+  ],
   "javascript": { "formatter": { "quoteStyle": "single" } },
   "assist": { "enabled": true, "actions": { "source": { "organizeImports": "on" } } }
 }
