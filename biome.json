@@ -57,12 +57,36 @@
     {
       "includes": [
         "src/drawn/SegmentedControl/SegmentedControl.tsx",
-        "src/drawn/IconButton/IconButton.tsx"
+        "src/drawn/IconButton/IconButton.tsx",
+        "src/components/SegmentedControl/SegmentedControl.tsx",
+        "src/components/FilterChips/FilterChips.tsx",
+        "src/components/Carousel/Carousel.tsx",
+        "src/components/IconButton/IconButton.tsx"
       ],
       "linter": {
         "rules": {
           "a11y": {
             "useSemanticElements": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/components/CommandMenu/CommandMenu.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noStaticElementInteractions": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/styles/kinetic.css"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "noImportantStyles": "off"
           }
         }
       }

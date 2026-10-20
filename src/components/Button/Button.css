@@ -21,18 +21,13 @@
     line-height: 1;
     color: var(--_color);
     background: var(--_bg);
-    border: var(--motiv-btn-border-width, 2px) solid var(--_border);
+    border: var(--motiv-btn-border-width, 1px) solid var(--_border);
     border-radius: var(--motiv-btn-radius, var(--motiv-radius-full));
     cursor: pointer;
     text-decoration: none;
     white-space: nowrap;
     user-select: none;
-    transition:
-      background-color var(--motiv-duration) var(--motiv-ease),
-      border-color var(--motiv-duration) var(--motiv-ease),
-      color var(--motiv-duration) var(--motiv-ease),
-      box-shadow var(--motiv-duration) var(--motiv-ease),
-      transform var(--motiv-duration) var(--motiv-ease);
+    transition: scale 0.35s var(--motiv-ease-spring);
 
     &:hover:not(:disabled, [aria-disabled="true"]) {
       background: var(--motiv-btn-bg-hover, var(--_bg-hover));
@@ -40,7 +35,7 @@
     }
 
     &:active:not(:disabled, [aria-disabled="true"]) {
-      transform: translateY(1px);
+      scale: 0.97;
     }
 
     &:focus-visible {
@@ -131,7 +126,7 @@
       transition: none;
     }
     .motiv-btn:active:not(:disabled) {
-      transform: none;
+      scale: none;
     }
     .motiv-btn__spinner {
       animation-duration: 1.6s;

@@ -1,0 +1,154 @@
+@layer motiv.components {
+  .motiv-carousel {
+    --_step: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 3);
+    width: 100%;
+    max-width: 360px;
+    color: var(--motiv-color-text);
+    touch-action: pan-y;
+  }
+
+  .motiv-carousel__view {
+    overflow: hidden;
+    border: 1px solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius-md);
+  }
+
+  .motiv-carousel__track {
+    display: flex;
+    translate: calc(var(--_index) * -100%) 0;
+    transition: translate 0.6s var(--motiv-ease);
+  }
+
+  .motiv-carousel__slide {
+    display: flex;
+    flex: 0 0 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 2px;
+    min-height: 120px;
+    padding: calc(var(--motiv-space) * 4) calc(var(--motiv-space) * 5);
+    visibility: hidden;
+    user-select: none;
+    transition: visibility 0s 0.6s;
+
+    &:nth-child(3n + 1) {
+      background: color-mix(in oklch, var(--motiv-color-primary) 18%, var(--motiv-color-surface));
+    }
+
+    &:nth-child(3n + 2) {
+      background: color-mix(in oklch, var(--motiv-color-secondary) 30%, var(--motiv-color-surface));
+    }
+
+    &:nth-child(3n + 3) {
+      background: var(--motiv-color-surface-hover);
+    }
+
+    &[data-current="true"] {
+      visibility: visible;
+      transition: visibility 0s;
+    }
+  }
+
+  .motiv-carousel__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .motiv-carousel__arrow {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    color: var(--motiv-color-text);
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition:
+      scale 0.35s var(--motiv-ease-spring),
+      opacity 0.2s var(--motiv-ease);
+
+    &:hover:not(:disabled) {
+      background: var(--motiv-color-surface-hover);
+    }
+
+    &:active:not(:disabled) {
+      scale: 0.88;
+    }
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    & > svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .motiv-carousel__arrow:focus-visible,
+  .motiv-carousel__dot:focus-visible {
+    outline: 2px solid var(--motiv-color-primary);
+    outline-offset: 2px;
+  }
+
+  .motiv-carousel__dots {
+    position: relative;
+    display: flex;
+  }
+
+  /* A 24×44 hit area around an 8px dot. */
+  .motiv-carousel__dot {
+    display: grid;
+    place-items: center;
+    width: var(--_step);
+    height: 44px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: var(--motiv-radius-sm);
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: color-mix(in oklch, var(--motiv-color-text) 20%, transparent);
+      border-radius: 50%;
+    }
+  }
+
+  .motiv-carousel__worm-track {
+    position: absolute;
+    top: calc(50% - 4px);
+    left: calc((var(--_step) - 8px) / 2);
+    translate: calc(var(--_index) * var(--_step)) 0;
+    transition: translate 0.45s var(--motiv-ease-spring);
+    pointer-events: none;
+  }
+
+  .motiv-carousel__worm {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: var(--motiv-color-primary);
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-carousel__track,
+    .motiv-carousel__slide,
+    .motiv-carousel__slide[data-current="true"],
+    .motiv-carousel__arrow,
+    .motiv-carousel__worm-track {
+      transition: none;
+    }
+  }
+}

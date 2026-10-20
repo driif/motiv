@@ -1,0 +1,88 @@
+@layer motiv.components {
+  .motiv-menu-button {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    color: var(--motiv-color-text);
+    background: transparent;
+    border: 0;
+    border-radius: var(--motiv-radius-full);
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: color-mix(in oklch, var(--motiv-color-primary) 18%, var(--motiv-color-surface));
+      border-radius: inherit;
+      opacity: 0;
+      scale: 0.85;
+      transition:
+        opacity 0.25s var(--motiv-ease),
+        scale 0.45s var(--motiv-ease-spring);
+    }
+
+    &:hover:not(:disabled)::before {
+      opacity: 1;
+      scale: 1;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-menu-button__line {
+    position: absolute;
+    top: calc(50% - 1px);
+    left: 12px;
+    width: 20px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transition:
+      translate 0.5s var(--motiv-ease-spring),
+      rotate 0.5s var(--motiv-ease-spring),
+      scale 0.4s var(--motiv-ease-spring),
+      opacity 0.2s var(--motiv-ease);
+
+    &:nth-child(1) {
+      translate: 0 -6px;
+    }
+
+    &:nth-child(3) {
+      translate: 0 6px;
+    }
+  }
+
+  .motiv-menu-button[aria-expanded="true"] .motiv-menu-button__line {
+    &:nth-child(1) {
+      translate: 0;
+      rotate: 45deg;
+    }
+
+    &:nth-child(2) {
+      opacity: 0;
+      scale: 0 1;
+    }
+
+    &:nth-child(3) {
+      translate: 0;
+      rotate: -45deg;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-menu-button::before,
+    .motiv-menu-button__line {
+      transition: none;
+    }
+  }
+}

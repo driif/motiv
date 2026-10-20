@@ -56,6 +56,25 @@ import { Link } from 'react-router';
 </Link>;
 ```
 
+## Kinetic components
+
+Besides `Button` and `Card`, the root entry ships the kinetic set: `MagneticButton`,
+`MorphSubmitButton`, `BellButton`, `BadgeButton`, `CopyField`, `RadialMenu`, `IconButton`,
+`IconButtonGroup`, `MenuButton`, `ThemeToggle`, `SegmentedControl`, `ElasticTabs`, `FilterChips`,
+`Radio`, `RadioGroup`, `Stepper`, `CommandMenu`, `FloatingField`, `OtpInput`, `ExpandingSearch`,
+`FrequencySlider`, `MomentumSlider`, `LiquidSwitch`, `SpringCheckbox`, `LikeButton`, `MuteToggle`,
+`SlipCard`, `Accordion`, `Carousel`, `GlideNav`, `StepProgress`, `DrillStack`, `ProgressRing` and
+`Odometer`. Every animation moves only `transform` and `opacity`; `prefers-reduced-motion` stills
+them. `IconButton`, `MenuButton`, `ThemeToggle`, `Radio`, `RadioGroup` and `SegmentedControl` take
+the same props as their drawn namesakes, so switching styles only changes the import.
+
+```tsx
+import { LiquidSwitch, SegmentedControl } from '@driif/motiv';
+
+<SegmentedControl label="Range" options={ranges} value={range} onChange={setRange} />;
+<LiquidSwitch label="Wi-Fi" checked={wifi} onChange={setWifi} />;
+```
+
 ## Drawn style
 
 `@driif/motiv/drawn` is a hand-drawn style: `Link`, `TextField`, `Checkbox`, `Radio`,

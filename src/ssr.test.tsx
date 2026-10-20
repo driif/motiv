@@ -23,6 +23,7 @@ import {
   ThemeToggle,
   Tooltip,
 } from './drawn';
+import * as K from './index';
 import { Button, Card, CardBody, CardHeader } from './index';
 
 describe('server rendering', () => {
@@ -133,5 +134,74 @@ describe('server rendering', () => {
     expect(html).toMatch(/aria-describedby="([^"]+)".*role="tooltip" id="\1"/);
     expect(html).toContain('aria-live="polite"');
     expect(html).toContain('aria-live="assertive"');
+  });
+  it('renders the kinetic components without a DOM', () => {
+    const noop = () => {};
+    const options = [
+      { value: 'tea', label: 'Tea', hint: 'Hot' },
+      { value: 'coffee', label: 'Coffee' },
+    ];
+    const html = renderToStaticMarkup(
+      <>
+        <K.MagneticButton>Go</K.MagneticButton>
+        <K.MorphSubmitButton onAction={noop} />
+        <K.BellButton count={3} />
+        <K.BadgeButton count={120} label="Inbox" />
+        <K.CopyField value="token" />
+        <K.RadialMenu actions={[{ id: 'a', label: 'Add', icon: '+', onSelect: noop }]} />
+        <K.IconButtonGroup label="Tools">
+          <K.IconButton icon="✎" label="Edit" />
+        </K.IconButtonGroup>
+        <K.MenuButton open onToggle={noop} />
+        <K.ThemeToggle dark onToggle={noop} />
+        <K.SegmentedControl label="Drink" options={options} value="tea" onChange={noop} />
+        <K.ElasticTabs
+          label="Drinks"
+          tabs={options}
+          value="tea"
+          onChange={noop}
+          panels={{ tea: 'Hot', coffee: 'Strong' }}
+        />
+        <K.FilterChips label="Drinks" options={options} value={['tea']} onChange={noop} />
+        <K.RadioGroup name="d" legend="Drink" options={options} value="tea" onChange={noop} />
+        <K.Stepper label="Guests" value={2} onChange={noop} />
+        <K.CommandMenu commands={[{ id: 'n', label: 'New', onSelect: noop }]} hotkey />
+        <K.FloatingField label="Email" hint="Hint" />
+        <K.OtpInput label="Code" value="12" onChange={noop} />
+        <K.ExpandingSearch value="" onChange={noop} suggestions={['Billing']} />
+        <K.FrequencySlider label="Volume" value={40} onChange={noop} />
+        <K.MomentumSlider label="Budget" value={40} onChange={noop} marks={[0, 100]} />
+        <K.LiquidSwitch label="Wi-Fi" checked onChange={noop} />
+        <K.SpringCheckbox label="Subscribe" defaultChecked />
+        <K.LikeButton liked count={12} onToggle={noop} />
+        <K.MuteToggle muted onChange={noop} />
+        <K.SlipCard title="T" description="D" note="N" />
+        <K.Accordion items={[{ id: 'a', title: 'Q', content: 'A' }]} defaultOpen={['a']} />
+        <K.Carousel label="Plans" slides={[{ id: 'a', label: 'A', content: 'Slide' }]} />
+        <K.GlideNav label="Main" items={[{ id: 'a', label: 'Home' }]} value="a" onChange={noop} />
+        <K.StepProgress
+          steps={[
+            { id: 'a', label: 'One' },
+            { id: 'b', label: 'Two' },
+          ]}
+          current={1}
+        />
+        <K.DrillStack
+          path={[
+            { id: 'r', name: 'root' },
+            { id: 'c', name: 'child' },
+          ]}
+          onNavigate={noop}
+        />
+        <K.ProgressRing label="Upload" value={40} />
+        <K.Odometer value={42} />
+      </>,
+    );
+    expect(html).toContain('role="switch"');
+    expect(html).toContain('role="tablist"');
+    expect(html).toContain('role="spinbutton"');
+    expect(html).toContain('aria-valuenow="40"');
+    expect(html).toContain('Ctrl K');
+    expect(html).toContain('aria-current="step"');
   });
 });

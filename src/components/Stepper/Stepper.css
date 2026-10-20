@@ -1,0 +1,62 @@
+@layer motiv.components {
+  .motiv-stepper {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 3);
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-stepper__button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    color: var(--motiv-color-text);
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: scale 0.35s var(--motiv-ease-spring);
+
+    &:hover {
+      background: var(--motiv-color-surface-hover);
+    }
+
+    &:active {
+      scale: 0.88;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+
+    & > svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .motiv-stepper__value {
+    padding: 2px calc(var(--motiv-space) * 3);
+    font-size: 2rem;
+    font-weight: 450;
+    font-variant-numeric: tabular-nums;
+    color: var(--motiv-color-text);
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius-md);
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-stepper__button {
+      transition: none;
+    }
+  }
+}

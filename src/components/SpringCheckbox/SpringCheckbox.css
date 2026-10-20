@@ -1,0 +1,85 @@
+@layer motiv.components {
+  .motiv-check {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 3);
+    min-height: 44px;
+    color: var(--motiv-color-text);
+    cursor: pointer;
+
+    &:has(:disabled) {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-check__tick {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    color: var(--motiv-color-on-primary);
+    stroke-width: 2.6;
+    opacity: 0;
+    scale: 0.3;
+    rotate: -30deg;
+    transition:
+      opacity 0.2s,
+      scale 0.4s var(--motiv-ease-spring),
+      rotate 0.4s var(--motiv-ease-spring);
+
+    :checked + .motiv-check__box & {
+      opacity: 1;
+      scale: 1;
+      rotate: 0deg;
+      transition-delay: 0.1s;
+    }
+  }
+
+  .motiv-check__box {
+    position: relative;
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--motiv-color-border);
+    border-radius: 7px;
+    transition: scale 0.35s var(--motiv-ease-spring);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: var(--motiv-color-primary);
+      border-radius: inherit;
+      scale: 0;
+      transition: scale 0.35s var(--motiv-ease-spring);
+    }
+
+    :checked + & {
+      border-color: var(--motiv-color-primary);
+
+      &::before {
+        scale: 1;
+      }
+    }
+
+    :focus-visible + & {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+
+    .motiv-check:active:not(:has(:disabled)) & {
+      scale: 0.82;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-check__tick,
+    .motiv-check__box,
+    .motiv-check__box::before {
+      transition: none;
+    }
+  }
+}

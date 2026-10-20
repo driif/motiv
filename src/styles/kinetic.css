@@ -1,0 +1,78 @@
+@layer motiv.base {
+  .motiv-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+@layer motiv.components {
+  /* Shared native range look for FrequencySlider and MomentumSlider. --_p is the fill, 0–100. */
+  .motiv-range {
+    appearance: none;
+    display: block;
+    width: 100%;
+    height: 4px;
+    margin: 0;
+    background: linear-gradient(
+      to right,
+      var(--motiv-color-primary) calc(var(--_p) * 1%),
+      var(--motiv-color-border) calc(var(--_p) * 1%)
+    );
+    border-radius: 4px;
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: var(--motiv-color-surface);
+      border: 1px solid var(--motiv-color-primary);
+      border-radius: 50%;
+      transition: scale 0.3s var(--motiv-ease-spring);
+    }
+
+    &::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      background: var(--motiv-color-surface);
+      border: 1px solid var(--motiv-color-primary);
+      border-radius: 50%;
+      transition: scale 0.3s var(--motiv-ease-spring);
+    }
+
+    &:active::-webkit-slider-thumb {
+      scale: 1.2;
+    }
+
+    &:active::-moz-range-thumb {
+      scale: 1.2;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 8px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-range::-webkit-slider-thumb {
+      transition: none;
+    }
+
+    .motiv-range::-moz-range-thumb {
+      transition: none;
+    }
+  }
+}

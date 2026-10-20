@@ -1,0 +1,93 @@
+@layer motiv.components {
+  .motiv-ring {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: var(--_size);
+    height: var(--_size);
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-ring__dial {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: 100%;
+    rotate: -90deg;
+
+    & circle {
+      fill: none;
+      stroke-width: 7;
+      stroke-linecap: round;
+    }
+  }
+
+  .motiv-ring__track {
+    stroke: var(--motiv-color-surface-hover);
+  }
+
+  /* The one dashoffset transition in kinetic: an arc has no transform equivalent. */
+  .motiv-ring__arc {
+    stroke: color-mix(in oklch, var(--motiv-color-primary) 60%, var(--motiv-color-surface));
+    stroke-dasharray: 1;
+    transition: stroke-dashoffset 1s var(--motiv-ease);
+
+    [data-done] & {
+      stroke: var(--motiv-color-primary);
+    }
+  }
+
+  .motiv-ring__num {
+    grid-area: 1 / 1;
+    display: flex;
+    align-items: baseline;
+    font-variant-numeric: tabular-nums;
+    transition:
+      opacity 0.25s,
+      scale 0.35s var(--motiv-ease-spring);
+
+    & b {
+      font-size: calc(var(--_size) * 0.233);
+      font-weight: 500;
+    }
+
+    & small {
+      color: var(--motiv-color-text-muted);
+      font-size: calc(var(--_size) * 0.117);
+    }
+
+    [data-done] & {
+      opacity: 0;
+      scale: 0.6;
+    }
+  }
+
+  .motiv-ring__check {
+    grid-area: 1 / 1;
+    width: calc(var(--_size) / 3);
+    height: calc(var(--_size) / 3);
+    color: var(--motiv-color-primary);
+    stroke-width: 2.2;
+    opacity: 0;
+    scale: 0.3;
+    rotate: -30deg;
+    transition:
+      opacity 0.25s,
+      scale 0.45s var(--motiv-ease-spring),
+      rotate 0.45s var(--motiv-ease-spring);
+
+    [data-done] & {
+      opacity: 1;
+      scale: 1;
+      rotate: 0deg;
+      transition-delay: 0.15s;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-ring__arc,
+    .motiv-ring__num,
+    .motiv-ring__check {
+      transition: none;
+    }
+  }
+}

@@ -1,0 +1,255 @@
+@layer motiv.components {
+  /* Closed it is a 52px circle; open, the field overlays whatever sits to its right,
+     so nothing around it reflows. */
+  .motiv-xsearch {
+    --_size: 52px;
+    --_travel: calc(var(--_w) - var(--_size));
+
+    position: relative;
+    display: inline-block;
+    width: var(--_size);
+    height: var(--_size);
+    color: var(--motiv-color-text);
+    vertical-align: middle;
+  }
+
+  .motiv-xsearch__bar {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    width: var(--_w);
+    height: var(--_size);
+    margin: 0;
+    pointer-events: none;
+  }
+
+  /* The pill is two circles and a strip between them: the strip scales, the end cap travels,
+     so opening animates transform only. The strip sits above the caps and hides their inner arcs. */
+  .motiv-xsearch__cap,
+  .motiv-xsearch__body {
+    position: absolute;
+    top: 0;
+    height: var(--_size);
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    transition:
+      translate 0.5s var(--motiv-ease),
+      scale 0.5s var(--motiv-ease);
+
+    [data-open] & {
+      border-color: var(--motiv-color-primary);
+    }
+  }
+
+  .motiv-xsearch__cap {
+    left: 0;
+    width: var(--_size);
+    border-radius: 50%;
+  }
+
+  .motiv-xsearch__cap--end {
+    [data-open] & {
+      translate: var(--_travel) 0;
+    }
+  }
+
+  .motiv-xsearch__body {
+    z-index: 1;
+    left: calc(var(--_size) / 2);
+    width: var(--_travel);
+    border-inline: 0;
+    scale: 0 1;
+    transform-origin: left;
+
+    [data-open] & {
+      scale: 1 1;
+    }
+  }
+
+  .motiv-xsearch__toggle,
+  .motiv-xsearch__close {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: -4px;
+    }
+
+    & > svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .motiv-xsearch__toggle {
+    width: var(--_size);
+    height: var(--_size);
+    color: var(--motiv-color-text);
+    pointer-events: auto;
+    transition: scale 0.4s var(--motiv-ease-spring);
+
+    [data-open] & {
+      color: var(--motiv-color-primary);
+      scale: 0.9;
+    }
+  }
+
+  .motiv-xsearch__input {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    color: var(--motiv-color-text);
+    font: inherit;
+    font-size: 1rem;
+    background: transparent;
+    border: 0;
+    outline: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    &::placeholder {
+      color: var(--motiv-color-text-muted);
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+
+  .motiv-xsearch__close {
+    width: 44px;
+    height: 44px;
+    margin-right: 4px;
+    color: var(--motiv-color-text-muted);
+    opacity: 0;
+    scale: 0.5;
+    rotate: -90deg;
+    transition:
+      opacity 0.2s,
+      scale 0.45s var(--motiv-ease-spring),
+      rotate 0.45s var(--motiv-ease-spring);
+
+    &:hover {
+      color: var(--motiv-color-text);
+    }
+  }
+
+  [data-open] .motiv-xsearch__bar {
+    pointer-events: auto;
+
+    & .motiv-xsearch__input,
+    & .motiv-xsearch__close {
+      opacity: 1;
+      transition-delay: 0.2s;
+    }
+
+    & .motiv-xsearch__close {
+      scale: 1;
+      rotate: 0deg;
+    }
+  }
+
+  .motiv-xsearch__list {
+    position: absolute;
+    z-index: 10;
+    top: calc(100% + 8px);
+    left: 0;
+    width: var(--_w);
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius);
+    box-shadow: var(--motiv-shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    translate: 0 -6px;
+    transition:
+      opacity 0.2s,
+      translate 0.4s var(--motiv-ease-spring),
+      visibility 0s 0.4s;
+
+    [data-open] & {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      translate: 0 0;
+      transition:
+        opacity 0.2s 0.2s,
+        translate 0.4s 0.2s var(--motiv-ease-spring),
+        visibility 0s;
+    }
+  }
+
+  .motiv-xsearch__item {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2.5);
+    width: 100%;
+    min-height: 44px;
+    padding: 0 12px;
+    color: var(--motiv-color-text);
+    font: inherit;
+    font-size: 0.875rem;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    border-radius: var(--motiv-radius-sm);
+    cursor: pointer;
+    opacity: 0;
+    translate: 0 -6px;
+    transition:
+      opacity 0.2s,
+      translate 0.35s var(--motiv-ease-spring);
+
+    [data-open] & {
+      opacity: 1;
+      translate: 0 0;
+      transition-delay: calc(0.25s + var(--_i) * 50ms), calc(0.25s + var(--_i) * 50ms), 0s;
+    }
+
+    &:hover {
+      background: var(--motiv-color-surface-hover);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: -2px;
+    }
+
+    & > svg {
+      width: 14px;
+      height: 14px;
+      color: var(--motiv-color-text-muted);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-xsearch__cap,
+    .motiv-xsearch__body,
+    .motiv-xsearch__toggle,
+    .motiv-xsearch__input,
+    .motiv-xsearch__close,
+    .motiv-xsearch__list,
+    [data-open] .motiv-xsearch__list,
+    .motiv-xsearch__item {
+      transition: none;
+    }
+  }
+}

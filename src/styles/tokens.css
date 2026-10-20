@@ -1,13 +1,7 @@
 @layer motiv.tokens {
   :root {
-    --motiv-color-primary: #22c55e;
-    --motiv-color-on-primary: #052e16;
-    --motiv-color-secondary: #f97316;
-    --motiv-color-on-secondary: #431407;
-    --motiv-color-danger: #dc2626;
-    --motiv-color-on-danger: #ffffff;
-    --motiv-color-success: #16a34a;
-    --motiv-color-warning: #f59e0b;
+    --motiv-color-success: #4f8a69;
+    --motiv-color-warning: #b9793f;
 
     --motiv-radius: 0.75rem;
     --motiv-space: 0.25rem;
@@ -15,35 +9,54 @@
     --motiv-font-title: var(--motiv-font-body);
     --motiv-font-size: 1rem;
     --motiv-duration: 200ms;
-    --motiv-ease: cubic-bezier(0.2, 0, 0, 1);
+    --motiv-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --motiv-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   :root,
   [data-theme="light"] {
     color-scheme: light;
-    --motiv-color-bg: #ffffff;
-    --motiv-color-surface: #f8fafc;
-    --motiv-color-text: #0f172a;
-    --motiv-color-border: #e2e8f0;
-    --motiv-shadow-color: rgb(15 23 42);
+    --motiv-color-primary: #756383;
+    --motiv-color-on-primary: #ffffff;
+    --motiv-color-secondary: #d4ae96;
+    --motiv-color-on-secondary: #3a2618;
+    --motiv-color-danger: #a54c5c;
+    --motiv-color-on-danger: #ffffff;
+    --motiv-color-bg: #f2f1f5;
+    --motiv-color-surface: #ffffff;
+    --motiv-color-text: #4d4258;
+    --motiv-color-border: #c0b3cc;
+    --motiv-shadow-color: rgb(76 54 85);
   }
 
   [data-theme="dark"] {
     color-scheme: dark;
-    --motiv-color-bg: #0b1120;
-    --motiv-color-surface: #111827;
-    --motiv-color-text: #e5e7eb;
-    --motiv-color-border: #1f2937;
+    --motiv-color-primary: #d1bddf;
+    --motiv-color-on-primary: #2a2231;
+    --motiv-color-secondary: #d6af92;
+    --motiv-color-on-secondary: #2e1f14;
+    --motiv-color-danger: #efadb7;
+    --motiv-color-on-danger: #3a1219;
+    --motiv-color-bg: #28232f;
+    --motiv-color-surface: #302938;
+    --motiv-color-text: #e9e0ef;
+    --motiv-color-border: #756183;
     --motiv-shadow-color: rgb(0 0 0);
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
       color-scheme: dark;
-      --motiv-color-bg: #0b1120;
-      --motiv-color-surface: #111827;
-      --motiv-color-text: #e5e7eb;
-      --motiv-color-border: #1f2937;
+      --motiv-color-primary: #d1bddf;
+      --motiv-color-on-primary: #2a2231;
+      --motiv-color-secondary: #d6af92;
+      --motiv-color-on-secondary: #2e1f14;
+      --motiv-color-danger: #efadb7;
+      --motiv-color-on-danger: #3a1219;
+      --motiv-color-bg: #28232f;
+      --motiv-color-surface: #302938;
+      --motiv-color-text: #e9e0ef;
+      --motiv-color-border: #756183;
       --motiv-shadow-color: rgb(0 0 0);
     }
   }
@@ -54,21 +67,21 @@
     --motiv-color-primary-subtle: color-mix(in oklch, var(--motiv-color-primary) 14%, transparent);
     --motiv-color-text-muted: color-mix(
       in oklch,
-      var(--motiv-color-text) 65%,
+      var(--motiv-color-text) 75%,
       var(--motiv-color-bg)
     );
     --motiv-color-surface-hover: color-mix(
       in oklch,
       var(--motiv-color-surface),
-      var(--motiv-color-text) 6%
+      var(--motiv-color-primary) 10%
     );
     --motiv-radius-sm: calc(var(--motiv-radius) * 0.5);
     --motiv-radius-md: var(--motiv-radius);
     --motiv-radius-lg: calc(var(--motiv-radius) * 1.5);
     --motiv-radius-full: 9999px;
     --motiv-shadow-sm: 0 1px 2px color-mix(in oklch, var(--motiv-shadow-color) 8%, transparent);
-    --motiv-shadow-md: 0 4px 14px color-mix(in oklch, var(--motiv-shadow-color) 12%, transparent);
-    --motiv-shadow-lg: 0 10px 30px color-mix(in oklch, var(--motiv-shadow-color) 16%, transparent);
+    --motiv-shadow-md: 0 4px 14px color-mix(in oklch, var(--motiv-shadow-color) 10%, transparent);
+    --motiv-shadow-lg: 0 10px 25px color-mix(in oklch, var(--motiv-shadow-color) 14%, transparent);
     --motiv-focus-ring: 0 0 0 2px var(--motiv-color-bg), 0 0 0 4px var(--motiv-color-primary);
   }
 }
