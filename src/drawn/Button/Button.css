@@ -1,0 +1,213 @@
+@layer motiv.components {
+  .motiv-btn {
+    --_pen: cubic-bezier(0.7, 0, 0.2, 1);
+    --_ink: var(--motiv-color-primary);
+    --_ink-text: var(--motiv-color-on-primary);
+    --_text: var(--_ink);
+    --_border: var(--_ink);
+
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--motiv-space) * 2);
+    min-height: var(--_height);
+    padding: 0 var(--_px);
+    font-family: var(--motiv-font-body);
+    font-size: var(--_font-size);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--_text);
+    background: transparent;
+    border: 2px solid var(--_border);
+    border-radius: var(--motiv-radius-full);
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    /* Swap the label color quickly as the stroke edge crosses the label's middle. */
+    transition:
+      color 0.15s 0.28s,
+      transform 0.15s;
+
+    /* The ragged brushstroke that paints the button. */
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -12px -40px;
+      z-index: -1;
+      background: var(--_ink);
+      transform: translateX(-110%) skewX(-20deg);
+      clip-path: polygon(
+        0 8%,
+        10% 0,
+        28% 9%,
+        50% 1%,
+        72% 10%,
+        90% 0,
+        100% 6%,
+        100% 94%,
+        88% 100%,
+        70% 90%,
+        48% 100%,
+        26% 91%,
+        10% 100%,
+        0 92%
+      );
+      transition: transform 0.65s var(--_pen);
+    }
+
+    &:is(:hover, :focus-visible):not(:disabled, [aria-disabled="true"]) {
+      color: var(--_ink-text);
+
+      &::before {
+        transform: translateX(0) skewX(-20deg);
+      }
+    }
+
+    &:active:not(:disabled, [aria-disabled="true"]) {
+      transform: scale(0.97);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &[aria-busy="true"] {
+      cursor: progress;
+    }
+  }
+
+  .motiv-btn--sm {
+    --_height: 2rem;
+    --_px: calc(var(--motiv-space) * 4);
+    --_font-size: 0.875rem;
+  }
+  .motiv-btn--md {
+    --_height: 2.75rem;
+    --_px: calc(var(--motiv-space) * 6);
+    --_font-size: 0.9375rem;
+  }
+  .motiv-btn--lg {
+    --_height: 3.5rem;
+    --_px: calc(var(--motiv-space) * 8);
+    --_font-size: 1rem;
+  }
+
+  .motiv-btn--secondary {
+    --_ink: var(--motiv-color-secondary);
+    --_ink-text: var(--motiv-color-on-secondary);
+  }
+
+  .motiv-btn--danger {
+    --_ink: var(--motiv-color-danger);
+    --_ink-text: var(--motiv-color-on-danger);
+  }
+
+  .motiv-btn--outline {
+    --_ink: color-mix(in oklch, var(--motiv-color-text) 10%, transparent);
+    --_ink-text: var(--motiv-color-text);
+    --_text: var(--motiv-color-text);
+    --_border: var(--motiv-color-text);
+  }
+
+  .motiv-btn--ghost {
+    --_ink: transparent;
+    --_ink-text: var(--motiv-color-text);
+    --_text: var(--motiv-color-text);
+
+    /* Hand-drawn underline swiped in under the label, like Link. */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: auto var(--_px) 22%;
+      height: 2px;
+      background: currentColor;
+      border-radius: 2px 6px 2px 4px;
+      transform: scaleX(0) skewX(-12deg);
+      transform-origin: left;
+      transition: transform 0.45s var(--_pen);
+    }
+
+    &:is(:hover, :focus-visible):not(:disabled, [aria-disabled="true"])::after {
+      transform: scaleX(1) skewX(-12deg);
+    }
+  }
+
+  .motiv-btn__icon {
+    display: inline-flex;
+
+    & > svg {
+      width: 1.15em;
+      height: 1.15em;
+    }
+  }
+
+  .motiv-btn__spinner {
+    width: 1.15em;
+    height: 1.15em;
+    flex-shrink: 0;
+    overflow: visible;
+    animation: motiv-btn-spin 1.1s linear infinite;
+
+    & path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-dasharray: 1;
+      animation: motiv-btn-draw 1.6s var(--_pen) infinite;
+    }
+  }
+
+  /* Without iconLeft there is no slot to take over, so the spinner overlays the label to keep width. */
+  .motiv-btn__spinner--overlay {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+
+    & + .motiv-btn__label {
+      opacity: 0;
+    }
+  }
+
+  @keyframes motiv-btn-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes motiv-btn-draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: -1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-btn,
+    .motiv-btn::before,
+    .motiv-btn::after {
+      transition: none;
+    }
+    .motiv-btn:active:not(:disabled) {
+      transform: none;
+    }
+    .motiv-btn__spinner,
+    .motiv-btn__spinner path {
+      animation: none;
+    }
+  }
+}
