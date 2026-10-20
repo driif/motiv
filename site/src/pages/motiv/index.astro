@@ -1,0 +1,97 @@
+---
+import '@driif/motiv/styles.css';
+import { Code } from 'astro:components';
+import Section from '../../components/Section.astro';
+import { ButtonDemo } from '../../demos/motiv/Button';
+import { CardDemo } from '../../demos/motiv/Card';
+import { CxDemo } from '../../demos/motiv/Cx';
+import Shell from '../../layouts/Shell.astro';
+import { MotivRelease } from '../../showcase/MotivRelease';
+import releaseSource from '../../showcase/MotivRelease.tsx?raw';
+
+const first = `import '@driif/motiv/styles.css';
+import { Button, Card, CardBody, CardHeader } from '@driif/motiv';
+
+export function Welcome() {
+  return (
+    <Card>
+      <CardHeader title="Welcome back" />
+      <CardBody>
+        <Button>Continue</Button>
+      </CardBody>
+    </Card>
+  );
+}`;
+
+const retheme = `:root {
+  --motiv-color-primary: #2563eb;
+  --motiv-color-on-primary: #ffffff;
+  --motiv-radius: 0.25rem;
+}`;
+---
+
+<Shell
+  current="motiv"
+  title="motiv · motiv"
+  description="The default motiv style of @driif/motiv: clean surfaces, pill buttons, subtle motion."
+>
+  <section class="site-hero">
+    <p class="site-kicker">Style 03 · motiv</p>
+    <h1 class="site-hero__title">Quiet surfaces for the screens people use all day.</h1>
+    <p class="site-hero__lede">
+      Clean cards, pill buttons, a green you can swap in one line. The release screen below is
+      plain server-rendered HTML: no client JavaScript at all, because nothing on it needs any.
+    </p>
+  </section>
+
+  <section class="site-usecase" id="release" aria-label="Use case: a release screen">
+    <MotivRelease />
+    <details class="site-source">
+      <summary class="site-source__summary">Read the whole screen, every line</summary>
+      <Code class="site-code" code={releaseSource} lang="tsx" theme="github-dark-dimmed" />
+    </details>
+  </section>
+
+  <section class="site-start" id="getting-started">
+    <p class="site-kicker">Getting started</p>
+    <h2 class="site-start__title">Three steps, then make it yours.</h2>
+    <ol class="site-steps">
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Install</h3>
+        <p class="site-steps__text">React 19 and react-dom are the only peers.</p>
+        <Code class="site-code" code="pnpm add @driif/motiv" lang="sh" theme="github-dark-dimmed" />
+      </li>
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Import the stylesheet once</h3>
+        <p class="site-steps__text">
+          Add <code class="site-inline">base.css</code> too if you want a minimal reset.
+        </p>
+        <Code
+          class="site-code"
+          code="import '@driif/motiv/styles.css';"
+          lang="ts"
+          theme="github-dark-dimmed"
+        />
+      </li>
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Render something</h3>
+        <p class="site-steps__text">Named exports, no provider. Works in an Astro page as is.</p>
+        <Code class="site-code" code={first} lang="tsx" theme="github-dark-dimmed" />
+      </li>
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Re-theme with tokens</h3>
+        <p class="site-steps__text">
+          All library CSS sits in <code class="site-inline">@layer motiv.*</code>, so your
+          unlayered rules win without <code class="site-inline">!important</code>.
+        </p>
+        <Code class="site-code" code={retheme} lang="css" theme="github-dark-dimmed" />
+      </li>
+    </ol>
+  </section>
+
+  <div class="site-sections">
+    <Section style="motiv" id="button"><ButtonDemo client:visible /></Section>
+    <Section style="motiv" id="card"><CardDemo client:visible /></Section>
+    <Section style="motiv" id="cx"><CxDemo client:visible /></Section>
+  </div>
+</Shell>

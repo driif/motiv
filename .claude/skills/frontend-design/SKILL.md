@@ -1,6 +1,6 @@
 ---
 name: frontend-design
-description: Visual and interaction design for motiv's components. Use when designing, styling or restyling a component (`.css`, variants, sizes, states), adding or deriving `--motiv-*` tokens, working on light/dark or re-theming, choosing motion, or reviewing a component or its Storybook stories for visual, state, contrast, motion, density or responsive issues.
+description: Visual and interaction design for motiv's components. Use when designing, styling or restyling a component (`.css`, variants, sizes, states), adding or deriving `--motiv-*` tokens, working on light/dark or re-theming, choosing motion, or reviewing a component, its Storybook stories or its demo on the site (`site/`) for visual, state, contrast, motion, density or responsive issues.
 ---
 
 motiv is a component library, not an app. Its default look is openbao-dough — clean surfaces,
@@ -146,6 +146,21 @@ Each component's `.stories.tsx` is where the design is checked:
 - long-content and empty-content stories where they apply.
 
 Review in Storybook before calling a visual change done (`pnpm build-storybook` must pass).
+
+---
+
+## The Site Shows It to Users
+
+`site/` (motiv.fedorchuk.me) demos every public export, one page per style. A new or changed
+component updates it in the same change:
+
+- `site/src/demos/<style>/<Name>.tsx` — a short, copyable demo; the page shows this file as the
+  snippet, so keep scaffolding out of it and use only props the component really has.
+- `site/src/catalog.mjs` — its section: `id`, `title`, every exported `symbols` it covers, `demo`,
+  a one-line `blurb` in consumer wording. `pnpm check:site` fails on an export without a section.
+- `site/src/pages/<style>/index.astro` — `<Section style id>` with the demo `client:visible`.
+- If the change alters what the style's use-case screen (`site/src/showcase/`) would use, update
+  it too. Check the page in light and dark (`pnpm build && pnpm build:site`).
 
 ---
 

@@ -20,5 +20,8 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm build
+      - run: pnpm check:site
+      - run: pnpm typecheck:site
+      - run: pnpm build:site
       - run: pnpm check:package
       - run: pnpm build-storybook

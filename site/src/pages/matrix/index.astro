@@ -1,0 +1,26 @@
+---
+import Shell from '../../layouts/Shell.astro';
+---
+
+<Shell
+  current="matrix"
+  title="matrix · motiv"
+  description="matrix, the third style of @driif/motiv, is still being drawn up."
+>
+  <section class="site-hero">
+    <p class="site-kicker">Style 02 · matrix</p>
+    <h1 class="site-hero__title">Still being drawn up.</h1>
+    <p class="site-hero__lede">
+      matrix is the third style of motiv. It has no released components yet, so there is nothing
+      here to copy. When the first one ships, it lands on this page with a live demo, the same day
+      it reaches npm.
+    </p>
+    <div class="site-grid" aria-hidden="true">
+      {Array.from({ length: 48 }, (_, index) => <span class="site-grid__cell" style={`--i: ${index}`} />)}
+    </div>
+    <p class="site-hero__lede">
+      Until then, the <a class="site-link" href="/drawn/">drawn</a> and
+      <a class="site-link" href="/motiv/">motiv</a> styles are ready to use.
+    </p>
+  </section>
+</Shell>

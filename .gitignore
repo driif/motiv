@@ -4,3 +4,4 @@ storybook-static
 *.tgz
 docs/tasks/
 .revmux/tasks/
+site/.astro

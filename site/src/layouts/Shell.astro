@@ -1,0 +1,102 @@
+---
+import pkg from '@driif/motiv/package.json';
+import { catalog } from '../catalog.mjs';
+import '../styles/site.css';
+
+interface Props {
+  title: string;
+  description: string;
+  current?: 'drawn' | 'matrix' | 'motiv';
+}
+
+const { title, description, current } = Astro.props;
+const styles = ['drawn', 'matrix', 'motiv'] as const;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <script is:inline>
+      (() => {
+        let theme;
+        try {
+          theme = localStorage.getItem('motiv-site-theme');
+        } catch {}
+        if (theme !== 'dark' && theme !== 'light') {
+          theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body class="site-body">
+    <header class="site-top">
+      <a class="site-top__mark" href="/">
+        motiv <span class="site-top__version">v{pkg.version}</span>
+      </a>
+      <nav class="site-switch" aria-label="Style">
+        {
+          styles.map((style) => (
+            <a
+              class="site-switch__link"
+              href={`/${style}/`}
+              aria-current={style === current ? 'page' : undefined}
+              data-anchors={catalog[style].map((section) => section.id).join(' ')}
+            >
+              {style}
+            </a>
+          ))
+        }
+      </nav>
+      <button class="site-theme" type="button" aria-label="Dark mode" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="8"></circle>
+          <path d="M12 4a8 8 0 0 1 0 16z"></path>
+        </svg>
+      </button>
+    </header>
+    <main class="site-main">
+      <slot />
+    </main>
+    <footer class="site-foot">
+      <span>@driif/motiv v{pkg.version} · MIT</span>
+      <a class="site-foot__link" href="https://github.com/driif/motiv">GitHub</a>
+      <a class="site-foot__link" href="https://www.npmjs.com/package/@driif/motiv">npm</a>
+    </footer>
+    <script>
+      const root = document.documentElement;
+      const themeButton = document.querySelector('.site-theme');
+      const syncTheme = () =>
+        themeButton?.setAttribute('aria-pressed', String(root.dataset.theme === 'dark'));
+      new MutationObserver(syncTheme).observe(root, { attributeFilter: ['data-theme'] });
+      syncTheme();
+      themeButton?.addEventListener('click', () => {
+        const theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = theme;
+        localStorage.setItem('motiv-site-theme', theme);
+      });
+
+      // Point each style link at the section in view when that style documents it too.
+      const links = document.querySelectorAll<HTMLAnchorElement>('.site-switch__link');
+      const follow = (id: string) => {
+        for (const link of links) {
+          link.hash = link.dataset.anchors?.split(' ').includes(id) ? id : '';
+        }
+      };
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) if (entry.isIntersecting) follow(entry.target.id);
+        },
+        { rootMargin: '-40% 0px -55% 0px' },
+      );
+      for (const section of document.querySelectorAll('.site-section')) observer.observe(section);
+      follow(location.hash.slice(1));
+    </script>
+  </body>
+</html>

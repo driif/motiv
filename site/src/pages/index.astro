@@ -1,0 +1,54 @@
+---
+import { catalog } from '../catalog.mjs';
+import Shell from '../layouts/Shell.astro';
+
+const styles = [
+  {
+    id: 'drawn',
+    number: '01',
+    pitch:
+      'Pencil lines and ink ticks over native inputs. For tools that should feel made by hand.',
+  },
+  {
+    id: 'matrix',
+    number: '02',
+    pitch: 'The third style, still on the drafting table. Nothing released yet.',
+  },
+  {
+    id: 'motiv',
+    number: '03',
+    pitch: 'Clean surfaces, pill buttons, subtle motion. The default, re-themed with a few tokens.',
+  },
+] as const;
+---
+
+<Shell
+  title="motiv · open-source React components in three styles"
+  description="@driif/motiv: React components with plain, themeable CSS, in three styles: drawn, matrix and motiv."
+>
+  <section class="site-hero">
+    <p class="site-kicker">@driif/motiv</p>
+    <h1 class="site-hero__title">One set of React components. Three ways for your app to look.</h1>
+    <p class="site-hero__lede">
+      Plain CSS, server-render safe, no provider. Pick a style to see real screens built from it,
+      then copy the code under every demo. The switcher at the top stays with you, so you can
+      compare the same component across styles.
+    </p>
+  </section>
+  <ul class="site-choose">
+    {
+      styles.map((style) => (
+        <li class={`site-choose__item site-choose__item--${style.id}`}>
+          <a class="site-choose__link" href={`/${style.id}/`}>
+            <span class="site-kicker">Style {style.number}</span>
+            <span class="site-choose__name">{style.id}</span>
+            <span class="site-choose__pitch">{style.pitch}</span>
+            <span class="site-choose__count">
+              {catalog[style.id].length ? `${catalog[style.id].length} sections →` : 'coming later'}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Shell>

@@ -7,7 +7,8 @@ this repo cannot see. Current spec: `docs/specs/2026-10-05-motiv-foundation-desi
 ## Working agreement
 
 - Done = every gate the task can affect is green: `pnpm check`, `typecheck`, `test`, `build`,
-  `check:package`, `build-storybook`.
+  `check:package`, `build-storybook`, and for component or export changes `check:site`,
+  `typecheck:site`, `build:site`.
 - **Work autonomously.** Decide routine and API details yourself (props, classes, tokens,
   defaults of components the user asked for), commit, push, open and merge PRs once gates and
   reviews are green, run as many review rounds (duo, revmux) as needed. Report outcomes; don't ask
@@ -38,8 +39,10 @@ this repo cannot see. Current spec: `docs/specs/2026-10-05-motiv-foundation-desi
 - Minimal code, no speculative props/variants — see `writing-simple-code` skill. Comments only
   for subtle mechanisms or external constraints, ≤2 lines inline
   (`.claude/skills/writing-simple-code/references/comments.md`).
-- Every component ships `.css`, tests, stories, and entries in `src/index.ts` (or subpath entry)
-  and `src/styles/index.css`.
+- Every component ships `.css`, tests, stories, entries in `src/index.ts` (or subpath entry)
+  and `src/styles/index.css`, and a site demo: `site/src/demos/<style>/<Name>.tsx`, its section in
+  `site/src/catalog.mjs` and on `site/src/pages/<style>/index.astro`. Changed props or behaviour
+  update that demo and its blurb; removed exports leave the site.
 - Never credit any AI agent (Claude, Anthropic, Codex, OpenAI) in commits, PRs, reviews or
   comments — no co-author trailers, no "generated with".
 
