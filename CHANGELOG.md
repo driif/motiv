@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.5.0
+
+### Minor Changes
+
+- 64f8c9d: Add the matrix style: `@driif/motiv/matrix` and `matrix.css`, a phosphor-green terminal look with GlitchThemeToggle, ScanButton, TerminalSelect, DecodeSecretField, SignalBurger, HudTabs, ChevronNav, and Button, IconButton, Card, TextField, Checkbox, Radio, Progress and Link with the same props as their drawn counterparts.
+
 ## 0.4.0
 
 ### Minor Changes
