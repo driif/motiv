@@ -11,6 +11,7 @@ import {
   Link,
   MenuButton,
   NavItem,
+  OrbitalThemeToggle,
   Progress,
   RadioGroup,
   SegmentedControl,
@@ -109,5 +110,12 @@ describe('server rendering', () => {
     );
     expect(html).toContain('aria-busy="true"');
     expect(html).toContain('motiv-btn__spinner');
+  });
+
+  it('renders the drawn OrbitalThemeToggle without a DOM', () => {
+    const html = renderToStaticMarkup(<OrbitalThemeToggle dark onToggle={() => {}} />);
+    expect(html).toContain('class="motiv-orbital-toggle motiv-orbital-toggle--dark"');
+    expect(html).toContain('aria-pressed="true"');
+    expect(html).toMatch(/<filter id="(motiv-ink-[^"]+)".*filter:url\(#\1\)/);
   });
 });
