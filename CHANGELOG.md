@@ -1,5 +1,17 @@
 # @driif/motiv
 
+## 0.3.0
+
+### Minor Changes
+
+- 1af03be: Add drawn `HoldToConfirmButton`: calls `onConfirm` only after a press-and-hold with pointer, Space or Enter.
+- 1af03be: Add drawn `InkSplatterButton`: a button that splashes ink on click, with an optional `successLabel` shown for a moment.
+- 1af03be: Add drawn `Tooltip`: an "i" button with a paper note shown on hover, focus or click and dismissed with Escape.
+
+### Patch Changes
+
+- 1af03be: Drawn: TextField drops the box focus ring for its drawn underline, Button gets hand-cut corners and a wavy ghost hover stroke, Card gets tighter hand-cut corners and a softer offset shadow.
+
 ## 0.2.0
 
 ### Minor Changes
