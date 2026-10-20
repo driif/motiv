@@ -12,6 +12,10 @@ pnpm add @driif/motiv
 
 ## Styles
 
+motiv comes in styles that share one component API. **kinetic** is the default: the root
+exports with `styles.css`. **drawn** is the hand-drawn style under `@driif/motiv/drawn` (see
+[Drawn style](#drawn-style)). **matrix** is planned.
+
 Import the stylesheet once, at the app's entry or base layout:
 
 ```ts

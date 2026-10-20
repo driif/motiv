@@ -1,0 +1,85 @@
+---
+import '@driif/motiv/styles.css';
+
+interface Props {
+  title: string;
+  showcase?: boolean;
+}
+
+const { title, showcase = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <base href="/kinetic/" target="_parent" />
+    <title>{title} preview · motiv</title>
+    <script is:inline>
+      (() => {
+        let theme;
+        try {
+          theme = localStorage.getItem('motiv-site-theme');
+        } catch {}
+        if (theme !== 'dark' && theme !== 'light') {
+          theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+    <style is:inline>
+      body {
+        margin: 0;
+        padding: 1rem;
+        box-sizing: border-box;
+        background: var(--motiv-color-bg);
+        color: var(--motiv-color-text);
+        font-family: var(--motiv-font-body);
+      }
+
+      .preview-demo {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem 1.25rem;
+      }
+
+      .site-release {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+        gap: 1.25rem;
+      }
+
+      .site-release__lead {
+        grid-column: 1 / -1;
+      }
+
+      @media (max-width: 32rem) {
+        .site-release .motiv-card__footer {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class:list={{ 'preview-demo': !showcase }}><slot /></main>
+    <script>
+      addEventListener('storage', (event) => {
+        if (event.key === 'motiv-site-theme' && (event.newValue === 'dark' || event.newValue === 'light')) {
+          document.documentElement.dataset.theme = event.newValue;
+        }
+      });
+
+      const reportHeight = () => {
+        parent.postMessage(
+          { type: 'motiv-preview-height', height: Math.ceil(document.body.getBoundingClientRect().height) },
+          location.origin,
+        );
+      };
+      new ResizeObserver(reportHeight).observe(document.body);
+      reportHeight();
+    </script>
+  </body>
+</html>

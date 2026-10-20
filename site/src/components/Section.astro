@@ -3,7 +3,7 @@ import { Code } from 'astro:components';
 import { catalog } from '../catalog.mjs';
 
 interface Props {
-  style: 'drawn' | 'motiv';
+  style: 'drawn' | 'kinetic';
   id: string;
 }
 
@@ -26,6 +26,19 @@ const source = sources[`../demos/${style}/${section.demo}.tsx`];
     </h2>
     <p class="site-section__blurb">{section.blurb}</p>
   </div>
-  <div class="site-section__stage"><slot /></div>
+  <div class="site-section__stage">
+    {
+      style === 'kinetic' ? (
+        <iframe
+          class="site-preview"
+          src={`/preview/kinetic/${id}/`}
+          title={`${section.title} preview`}
+          loading="lazy"
+        />
+      ) : (
+        <slot />
+      )
+    }
+  </div>
   <Code class="site-code" code={source} lang="tsx" theme="github-dark-dimmed" />
 </section>
