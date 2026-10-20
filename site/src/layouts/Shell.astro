@@ -1,6 +1,5 @@
 ---
 import '@driif/motiv/styles.css';
-import { buttonClassName } from '@driif/motiv';
 import pkg from '@driif/motiv/package.json';
 import { catalog } from '../catalog.mjs';
 import { ThemeToggleDemo } from '../demos/kinetic/ThemeToggle';
@@ -47,11 +46,7 @@ const styles = ['drawn', 'matrix', 'kinetic'] as const;
         {
           styles.map((style) => (
             <a
-              class={buttonClassName({
-                variant: style === current ? 'primary' : 'ghost',
-                size: 'sm',
-                className: 'site-switch__link',
-              })}
+              class="site-switch__link"
               href={`/${style}/`}
               aria-current={style === current ? 'page' : undefined}
               data-anchors={catalog[style].map((section) => section.id).join(' ')}
