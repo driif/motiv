@@ -5,6 +5,7 @@ export * from './IconButton';
 export * from './Link';
 export * from './MenuButton';
 export * from './NavItem';
+export * from './OrbitalThemeToggle';
 export * from './Progress';
 export * from './Radio';
 export * from './SegmentedControl';

@@ -56,7 +56,7 @@ import { Link } from 'react-router';
 
 `@driif/motiv/drawn` is a hand-drawn style: `Link`, `TextField`, `Checkbox`, `Radio`,
 `RadioGroup`, `Tabs`, `SegmentedControl`, `Select`, `NavItem`, `IconButton`, `IconButtonGroup`,
-`MenuButton`, `ThemeToggle` and `Progress`. Its stylesheet is self-contained (tokens, base, drawn components and the bundled
+`MenuButton`, `ThemeToggle`, `OrbitalThemeToggle` and `Progress`. Its stylesheet is self-contained (tokens, base, drawn components and the bundled
 Caveat font), so a drawn app imports it **instead of** `styles.css`, never alongside it:
 
 ```tsx

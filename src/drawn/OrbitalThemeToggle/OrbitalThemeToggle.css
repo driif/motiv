@@ -1,0 +1,210 @@
+@layer motiv.components {
+  .motiv-orbital-toggle {
+    --_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --_serif: Georgia, "Times New Roman", serif;
+
+    position: relative;
+    container-type: inline-size;
+    /* Inline-size containment drops the content width, so shrink-to-fit parents would collapse it. */
+    contain-intrinsic-inline-size: 445px;
+    width: 100%;
+    max-width: 445px;
+    aspect-ratio: 440 / 280;
+  }
+
+  :where(.motiv-orbital-toggle) svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* display:none would stop the ink filter from resolving. */
+  .motiv-orbital-toggle__defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .motiv-orbital-toggle__figure {
+    position: absolute;
+    top: 1.1cqi;
+    right: 1.1cqi;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--motiv-color-text-muted);
+  }
+
+  .motiv-orbital-toggle__orbits {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: color-mix(in oklch, var(--motiv-color-text) 24%, transparent);
+    stroke-width: 0.9;
+
+    & circle {
+      fill: var(--motiv-color-secondary);
+      stroke: none;
+    }
+  }
+
+  .motiv-orbital-toggle__dash {
+    stroke-dasharray: 3 6;
+  }
+
+  .motiv-orbital-toggle__stars {
+    stroke: var(--motiv-color-secondary);
+    stroke-width: 1.4;
+  }
+
+  .motiv-orbital-toggle__wash {
+    position: absolute;
+    inset: 0;
+    width: 39.1cqi;
+    height: 39.3cqi;
+    margin: auto;
+    background: radial-gradient(
+      ellipse at 38% 37%,
+      color-mix(in oklch, var(--motiv-color-secondary) 18%, var(--motiv-color-bg)) 0,
+      color-mix(in oklch, var(--motiv-color-secondary) 34%, var(--motiv-color-bg)) 45%,
+      color-mix(in oklch, var(--motiv-color-secondary) 30%, transparent) 60%,
+      transparent 72%
+    );
+    border-radius: 46% 54% 57% 43%;
+    opacity: 0.6;
+    transform: rotate(-24deg);
+    transition: opacity 0.5s;
+  }
+
+  .motiv-orbital-toggle__button {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    width: clamp(44px, 26.8cqi, 118px);
+    height: clamp(44px, 26.8cqi, 118px);
+    margin: auto;
+    padding: 0;
+    color: var(--motiv-color-secondary);
+    background: var(--motiv-color-surface);
+    border: 0;
+    border-radius: 50%;
+    box-shadow:
+      0 1.6cqi 4.5cqi color-mix(in oklch, var(--motiv-shadow-color) 13%, transparent),
+      0 0 0 2cqi color-mix(in oklch, var(--motiv-color-surface) 25%, transparent);
+    cursor: pointer;
+    transform: rotate(-12deg);
+    transition:
+      transform 0.65s var(--_spring),
+      box-shadow 0.4s;
+
+    &:hover {
+      box-shadow:
+        0 2.3cqi 6.8cqi color-mix(in oklch, var(--motiv-shadow-color) 16%, transparent),
+        0 0 0 3cqi color-mix(in oklch, var(--motiv-color-surface) 20%, transparent);
+      transform: rotate(6deg) scale(1.05);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    & svg {
+      position: absolute;
+      width: 66%;
+      height: 66%;
+      stroke-width: 1.7;
+      transition:
+        transform 0.8s var(--_spring),
+        opacity 0.5s;
+    }
+  }
+
+  .motiv-orbital-toggle__moon {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.3);
+  }
+
+  .motiv-orbital-toggle__note {
+    position: absolute;
+    right: 0;
+    bottom: 8.2%;
+    font-family: var(--_serif);
+    font-size: clamp(10px, 2.95cqi, 13px);
+    line-height: 1.4;
+    color: var(--motiv-color-text-muted);
+    transform: rotate(-7deg);
+
+    & em {
+      font-size: 0.92em;
+    }
+
+    & svg {
+      position: absolute;
+      top: -5.7cqi;
+      left: -12.5cqi;
+      width: 12cqi;
+      height: 8.6cqi;
+      stroke-width: 1.2;
+      transform: rotate(12deg);
+    }
+  }
+
+  .motiv-orbital-toggle__hint {
+    position: absolute;
+    bottom: 6%;
+    left: 9.5%;
+    font-family: var(--_serif);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: var(--motiv-color-text-muted);
+    transform: rotate(-6deg);
+
+    @container (width < 280px) {
+      display: none;
+    }
+  }
+
+  .motiv-orbital-toggle--dark {
+    & .motiv-orbital-toggle__orbits {
+      color: color-mix(in oklch, var(--motiv-color-text) 30%, transparent);
+    }
+
+    & .motiv-orbital-toggle__wash {
+      opacity: 0.3;
+    }
+
+    & .motiv-orbital-toggle__button:not(:focus-visible) {
+      box-shadow:
+        0 1.6cqi 5.7cqi color-mix(in oklch, var(--motiv-shadow-color) 27%, transparent),
+        0 0 0 2cqi color-mix(in oklch, var(--motiv-color-surface) 4%, transparent);
+    }
+
+    & .motiv-orbital-toggle__sun {
+      opacity: 0;
+      transform: rotate(180deg) scale(0.3);
+    }
+
+    & .motiv-orbital-toggle__moon {
+      opacity: 1;
+      transform: rotate(0) scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-orbital-toggle__wash,
+    .motiv-orbital-toggle__button,
+    .motiv-orbital-toggle__button svg {
+      transition: none;
+    }
+
+    .motiv-orbital-toggle__button:hover {
+      transform: rotate(-12deg);
+    }
+  }
+}
