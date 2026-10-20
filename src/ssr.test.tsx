@@ -1,7 +1,21 @@
 // @vitest-environment node
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { Checkbox, Link, RadioGroup, SegmentedControl, Select, Tabs, TextField } from './drawn';
+import {
+  Checkbox,
+  IconButton,
+  IconButtonGroup,
+  Link,
+  MenuButton,
+  NavItem,
+  Progress,
+  RadioGroup,
+  SegmentedControl,
+  Select,
+  Tabs,
+  TextField,
+  ThemeToggle,
+} from './drawn';
 import { Button, Card, CardBody, CardHeader } from './index';
 
 describe('server rendering', () => {
@@ -59,5 +73,24 @@ describe('server rendering', () => {
     expect(html).toContain('role="radiogroup"');
     expect(html).toContain('aria-expanded="false"');
     expect(html).toContain('<input type="hidden" name="drink" value="tea"/>');
+  });
+
+  it('renders the drawn round-3 components without a DOM', () => {
+    const html = renderToStaticMarkup(
+      <>
+        <NavItem href="/" icon="⌂" label="Home" active />
+        <IconButtonGroup label="Tools">
+          <IconButton icon="✎" label="Edit" />
+        </IconButtonGroup>
+        <MenuButton open onToggle={() => {}} />
+        <ThemeToggle dark onToggle={() => {}} />
+        <Progress value={40} label="Upload" />
+      </>,
+    );
+    expect(html).toContain('aria-current="page"');
+    expect(html).toContain('role="group"');
+    expect(html).toContain('aria-expanded="true"');
+    expect(html).toContain('aria-pressed="true"');
+    expect(html).toContain('aria-valuenow="40"');
   });
 });

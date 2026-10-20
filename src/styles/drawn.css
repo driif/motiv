@@ -9,6 +9,11 @@
 @import "../drawn/Tabs/Tabs.css";
 @import "../drawn/SegmentedControl/SegmentedControl.css";
 @import "../drawn/Select/Select.css";
+@import "../drawn/NavItem/NavItem.css";
+@import "../drawn/IconButton/IconButton.css";
+@import "../drawn/MenuButton/MenuButton.css";
+@import "../drawn/ThemeToggle/ThemeToggle.css";
+@import "../drawn/Progress/Progress.css";
 
 @layer motiv.tokens {
   :root,

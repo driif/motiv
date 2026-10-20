@@ -54,8 +54,9 @@ import { Link } from 'react-router';
 
 ## Drawn style
 
-`@driif/motiv/drawn` is a hand-drawn style: `Link`, `TextField`, `Checkbox`, `Radio` and
-`RadioGroup`. Its stylesheet is self-contained (tokens, base, drawn components and the bundled
+`@driif/motiv/drawn` is a hand-drawn style: `Link`, `TextField`, `Checkbox`, `Radio`,
+`RadioGroup`, `Tabs`, `SegmentedControl`, `Select`, `NavItem`, `IconButton`, `IconButtonGroup`,
+`MenuButton`, `ThemeToggle` and `Progress`. Its stylesheet is self-contained (tokens, base, drawn components and the bundled
 Caveat font), so a drawn app imports it **instead of** `styles.css`, never alongside it:
 
 ```tsx
@@ -72,6 +73,11 @@ import { Checkbox, Link, TextField } from '@driif/motiv/drawn';
 `Link` takes `arrow` (default `true`), `external` (adds `target="_blank"` and
 `rel="noopener noreferrer"`) and `externalLabel` (screen-reader text, default
 `'(opens in a new tab)'`). `RadioGroup` takes `name`, `legend`, `options`, `value` and `onChange`.
+
+`NavItem` renders an `<a>` when given `href` (pass a router's `onClick` alongside), otherwise a
+`<button>`; `active` sets `aria-current="page"`. `MenuButton` (`open`, `onToggle`) and
+`ThemeToggle` (`dark`, `onToggle`) are controlled; `ThemeToggle` never sets `data-theme` itself.
+Icons are app-supplied `ReactNode`s.
 
 ## Theming
 

@@ -1,0 +1,119 @@
+@layer motiv.components {
+  .motiv-nav-item {
+    --_pen: cubic-bezier(0.6, 0.05, 0.3, 1);
+    --_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 48px;
+    padding: 0 calc(var(--motiv-space) * 2);
+    color: var(--motiv-color-text);
+    font: inherit;
+    text-align: start;
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    border-radius: 12px;
+    cursor: pointer;
+
+    &[aria-current="page"] {
+      color: var(--motiv-color-primary);
+      font-weight: 600;
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-nav-item__icon {
+    position: relative;
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    transition: transform 0.4s var(--_spring);
+
+    & > :not(.motiv-nav-item__ring) {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  .motiv-nav-item__ring {
+    position: absolute;
+    inset: -5px;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    overflow: visible;
+    pointer-events: none;
+
+    & path {
+      fill: none;
+      stroke: var(--motiv-color-secondary);
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      transition: stroke-dashoffset 0.6s var(--_pen);
+    }
+  }
+
+  .motiv-nav-item[aria-current="page"] .motiv-nav-item__ring path {
+    stroke: var(--motiv-color-primary);
+  }
+
+  .motiv-nav-item__label {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .motiv-nav-item__chevron {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.4s var(--_spring);
+  }
+
+  .motiv-nav-item:is(:hover, :focus-visible):not(:disabled) {
+    & .motiv-nav-item__icon {
+      transform: rotate(-8deg);
+    }
+
+    & .motiv-nav-item__chevron {
+      transform: translateX(3px);
+    }
+  }
+
+  .motiv-nav-item:is(:hover, :focus-visible, [aria-current="page"]):not(:disabled)
+    .motiv-nav-item__ring
+    path {
+    stroke-dashoffset: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-nav-item__icon,
+    .motiv-nav-item__ring path,
+    .motiv-nav-item__chevron {
+      transition: none;
+    }
+  }
+}

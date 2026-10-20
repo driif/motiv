@@ -1,0 +1,76 @@
+@layer motiv.components {
+  .motiv-progress {
+    display: grid;
+    gap: calc(var(--motiv-space) * 2);
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-progress__head {
+    display: flex;
+    justify-content: space-between;
+    gap: calc(var(--motiv-space) * 2);
+  }
+
+  .motiv-progress__value {
+    color: var(--motiv-color-primary);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .motiv-progress__track {
+    position: relative;
+    height: 20px;
+    overflow: hidden;
+    border: 1.5px solid var(--motiv-color-text);
+    border-radius: 10px 4px 12px 5px / 5px 12px 4px 10px;
+  }
+
+  .motiv-progress__fill {
+    position: absolute;
+    inset: 0;
+    transform: translateX(calc(var(--_value) * 1% - 100%));
+    transition: transform 0.4s ease;
+  }
+
+  /* One stripe period along the x-axis is 7px * sqrt(2). */
+  .motiv-progress__hatch {
+    position: absolute;
+    inset: 0 0 0 -9.9px;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--motiv-color-primary) 0 3px,
+      transparent 3px 7px
+    );
+    animation: motiv-progress-hatch 0.5s linear infinite;
+  }
+
+  .motiv-progress[data-complete] .motiv-progress__hatch {
+    animation-play-state: paused;
+  }
+
+  .motiv-progress__tip {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--motiv-color-primary);
+    box-shadow: 0 0 10px 2px var(--motiv-color-primary);
+  }
+
+  @keyframes motiv-progress-hatch {
+    to {
+      transform: translateX(9.9px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-progress__fill {
+      transition: none;
+    }
+
+    .motiv-progress__hatch {
+      animation: none;
+    }
+  }
+}
