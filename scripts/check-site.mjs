@@ -1,7 +1,11 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { catalog } from '../site/src/catalog.mjs';
 
-const entries = { kinetic: '../dist/index.js', drawn: '../dist/drawn/index.js' };
+const entries = {
+  kinetic: '../dist/index.js',
+  drawn: '../dist/drawn/index.js',
+  matrix: '../dist/matrix/index.js',
+};
 
 const problems = [];
 for (const [style, entry] of Object.entries(entries)) {
@@ -20,11 +24,12 @@ for (const [style, entry] of Object.entries(entries)) {
     if (!existsSync(new URL(`../site/src/demos/${style}/${demo}.tsx`, import.meta.url))) {
       problems.push(`${style}: demo site/src/demos/${style}/${demo}.tsx is missing`);
     }
+    // drawn renders inline; the other styles override :root tokens, so they render in iframes.
     if (
-      style === 'kinetic' &&
-      !existsSync(new URL(`../site/src/pages/preview/kinetic/${id}.astro`, import.meta.url))
+      style !== 'drawn' &&
+      !existsSync(new URL(`../site/src/pages/preview/${style}/${id}.astro`, import.meta.url))
     ) {
-      problems.push(`${style}: preview site/src/pages/preview/kinetic/${id}.astro is missing`);
+      problems.push(`${style}: preview site/src/pages/preview/${style}/${id}.astro is missing`);
     }
     if (!page.includes(`id="${id}"`)) problems.push(`${style}: section #${id} is not on the page`);
   }

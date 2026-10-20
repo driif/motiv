@@ -1,0 +1,66 @@
+@layer motiv.components {
+  .motiv-matrix-link {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 1.5);
+    padding: 0 calc(var(--motiv-space) * 0.5);
+    color: var(--motiv-color-primary);
+    font-weight: 600;
+    text-decoration: underline dashed 1px;
+    text-underline-offset: 0.3em;
+
+    /* A highlight block wipes in behind the label in steps. */
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: var(--motiv-color-primary-subtle);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s steps(4);
+    }
+
+    /* Invisible 44px-tall hit area that keeps the link inline in prose. */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 50% 0 auto;
+      height: max(100%, 44px);
+      transform: translateY(-50%);
+    }
+
+    &:is(:hover, :focus-visible)::before {
+      transform: scaleX(1);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  .motiv-matrix-link__arrow {
+    width: 1.1em;
+    height: 1.1em;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: square;
+    transition: transform 0.2s steps(2);
+  }
+
+  .motiv-matrix-link:is(:hover, :focus-visible) .motiv-matrix-link__arrow {
+    transform: translateX(3px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-matrix-link::before,
+    .motiv-matrix-link__arrow {
+      transition: none;
+    }
+  }
+}

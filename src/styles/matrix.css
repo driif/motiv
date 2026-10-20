@@ -1,0 +1,90 @@
+@layer motiv.tokens, motiv.base, motiv.components;
+
+@import "./tokens.css";
+@import "./base.css";
+@import "../matrix/Button/Button.css";
+@import "../matrix/IconButton/IconButton.css";
+@import "../matrix/Card/Card.css";
+@import "../matrix/TextField/TextField.css";
+@import "../matrix/Checkbox/Checkbox.css";
+@import "../matrix/Radio/Radio.css";
+@import "../matrix/Progress/Progress.css";
+@import "../matrix/Link/Link.css";
+@import "../matrix/GlitchThemeToggle/GlitchThemeToggle.css";
+@import "../matrix/ScanButton/ScanButton.css";
+@import "../matrix/TerminalSelect/TerminalSelect.css";
+@import "../matrix/DecodeSecretField/DecodeSecretField.css";
+@import "../matrix/SignalBurger/SignalBurger.css";
+@import "../matrix/HudTabs/HudTabs.css";
+@import "../matrix/ChevronNav/ChevronNav.css";
+
+@layer motiv.tokens {
+  /* tokens.css carries the kinetic palette; matrix is a monospace phosphor terminal. */
+  :root {
+    --motiv-radius: 0;
+    --motiv-font-body: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    --motiv-ease: cubic-bezier(0.7, 0, 0.2, 1);
+  }
+
+  :root,
+  [data-theme="light"] {
+    color-scheme: light;
+    --motiv-shadow-color: rgb(6 30 12);
+    --motiv-color-primary: #0d5a1f;
+    --motiv-color-on-primary: #ffffff;
+    --motiv-color-secondary: #00616b;
+    --motiv-color-on-secondary: #ffffff;
+    --motiv-color-danger: #b3261e;
+    --motiv-color-on-danger: #ffffff;
+    --motiv-color-bg: #eef3ee;
+    --motiv-color-surface: #f8fbf8;
+    --motiv-color-text: #0f2414;
+    --motiv-color-border: #6c8f74;
+  }
+
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --motiv-shadow-color: rgb(0 0 0);
+    --motiv-color-primary: #3dff7a;
+    --motiv-color-on-primary: #02190a;
+    --motiv-color-secondary: #3fe0f0;
+    --motiv-color-on-secondary: #01282c;
+    --motiv-color-danger: #ff6b6b;
+    --motiv-color-on-danger: #2b0505;
+    --motiv-color-bg: #050c07;
+    --motiv-color-surface: #0b170e;
+    --motiv-color-text: #c9f7d3;
+    --motiv-color-border: #3d7d4c;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      color-scheme: dark;
+      --motiv-shadow-color: rgb(0 0 0);
+      --motiv-color-primary: #3dff7a;
+      --motiv-color-on-primary: #02190a;
+      --motiv-color-secondary: #3fe0f0;
+      --motiv-color-on-secondary: #01282c;
+      --motiv-color-danger: #ff6b6b;
+      --motiv-color-on-danger: #2b0505;
+      --motiv-color-bg: #050c07;
+      --motiv-color-surface: #0b170e;
+      --motiv-color-text: #c9f7d3;
+      --motiv-color-border: #3d7d4c;
+    }
+  }
+}
+
+@layer motiv.base {
+  .motiv-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}

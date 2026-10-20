@@ -13,6 +13,7 @@ const files = [
   ['src/styles/tokens.css', 'dist/tokens.css'],
   ['src/styles/base.css', 'dist/base.css'],
   ['src/styles/drawn.css', 'dist/drawn.css'],
+  ['src/styles/matrix.css', 'dist/matrix.css'],
 ];
 
 mkdirSync('dist', { recursive: true });

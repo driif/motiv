@@ -1,0 +1,148 @@
+@layer motiv.components {
+  .motiv-matrix-scan {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-width: 200px;
+    min-height: 56px;
+    padding: 0 28px;
+    font-family: var(--motiv-font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--motiv-color-primary);
+    background: color-mix(in oklch, var(--motiv-color-primary) 8%, transparent);
+    border: 1px solid color-mix(in oklch, var(--motiv-color-primary) 55%, transparent);
+    border-radius: var(--motiv-radius-sm);
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 14px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-matrix-scan__beam {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 40%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        color-mix(in oklch, var(--motiv-color-primary) 40%, transparent),
+        transparent
+      );
+      transform: translateX(-125%);
+    }
+  }
+
+  .motiv-matrix-scan__corner {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    border: 2px solid var(--motiv-color-primary);
+    transition: transform 0.35s var(--motiv-ease-spring);
+  }
+
+  .motiv-matrix-scan__corner--tl {
+    top: -4px;
+    left: -4px;
+    border-right: 0;
+    border-bottom: 0;
+  }
+  .motiv-matrix-scan__corner--tr {
+    top: -4px;
+    right: -4px;
+    border-bottom: 0;
+    border-left: 0;
+  }
+  .motiv-matrix-scan__corner--bl {
+    bottom: -4px;
+    left: -4px;
+    border-top: 0;
+    border-right: 0;
+  }
+  .motiv-matrix-scan__corner--br {
+    right: -4px;
+    bottom: -4px;
+    border-top: 0;
+    border-left: 0;
+  }
+
+  .motiv-matrix-scan:is(:hover, :focus-visible):not(:disabled) {
+    & .motiv-matrix-scan__corner--tl {
+      transform: translate(-6px, -6px);
+    }
+    & .motiv-matrix-scan__corner--tr {
+      transform: translate(6px, -6px);
+    }
+    & .motiv-matrix-scan__corner--bl {
+      transform: translate(-6px, 6px);
+    }
+    & .motiv-matrix-scan__corner--br {
+      transform: translate(6px, 6px);
+    }
+  }
+
+  .motiv-matrix-scan__label {
+    position: relative;
+  }
+
+  .motiv-matrix-scan__arrow {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: square;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .motiv-matrix-scan:is(:hover, :focus-visible):not(:disabled) .motiv-matrix-scan__beam::before {
+      animation: motiv-matrix-scan-sweep 1.1s linear infinite;
+    }
+
+    .motiv-matrix-scan:hover:not(:disabled) .motiv-matrix-scan__arrow {
+      animation: motiv-matrix-scan-nudge 0.5s ease-in-out infinite alternate;
+    }
+  }
+
+  @keyframes motiv-matrix-scan-sweep {
+    from {
+      transform: translateX(-125%);
+    }
+    to {
+      transform: translateX(275%);
+    }
+  }
+
+  @keyframes motiv-matrix-scan-nudge {
+    to {
+      transform: translateX(5px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-matrix-scan__corner {
+      transition: none;
+    }
+  }
+}

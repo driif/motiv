@@ -1,0 +1,284 @@
+@layer motiv.components {
+  .motiv-matrix-term {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 2);
+    width: 100%;
+    max-width: 380px;
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-matrix-term__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .motiv-matrix-term__field {
+    position: relative;
+  }
+
+  .motiv-matrix-term__trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    min-height: 56px;
+    padding: 0 16px;
+    font-family: var(--motiv-font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-align: left;
+    text-transform: uppercase;
+    color: var(--motiv-color-primary);
+    background: color-mix(in oklch, var(--motiv-color-primary) 7%, var(--motiv-color-surface));
+    border: 1px solid color-mix(in oklch, var(--motiv-color-primary) 55%, transparent);
+    border-radius: var(--motiv-radius-sm);
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 12px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-matrix-term__corner {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--motiv-color-primary);
+    transition: transform 0.3s var(--motiv-ease-spring);
+  }
+
+  .motiv-matrix-term__corner--tl {
+    top: -4px;
+    left: -4px;
+    border-right: 0;
+    border-bottom: 0;
+  }
+  .motiv-matrix-term__corner--tr {
+    top: -4px;
+    right: -4px;
+    border-bottom: 0;
+    border-left: 0;
+  }
+  .motiv-matrix-term__corner--bl {
+    bottom: -4px;
+    left: -4px;
+    border-top: 0;
+    border-right: 0;
+  }
+  .motiv-matrix-term__corner--br {
+    right: -4px;
+    bottom: -4px;
+    border-top: 0;
+    border-left: 0;
+  }
+
+  :is(
+    .motiv-matrix-term__trigger:hover:not(:disabled),
+    .motiv-matrix-term--open .motiv-matrix-term__trigger
+  ) {
+    & .motiv-matrix-term__corner--tl {
+      transform: translate(-4px, -4px);
+    }
+    & .motiv-matrix-term__corner--tr {
+      transform: translate(4px, -4px);
+    }
+    & .motiv-matrix-term__corner--bl {
+      transform: translate(-4px, 4px);
+    }
+    & .motiv-matrix-term__corner--br {
+      transform: translate(4px, 4px);
+    }
+  }
+
+  .motiv-matrix-term__prefix {
+    font-weight: 400;
+    text-transform: none;
+    color: var(--motiv-color-text-muted);
+  }
+
+  .motiv-matrix-term__value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .motiv-matrix-term__caret {
+    flex-shrink: 0;
+    width: 9px;
+    height: 17px;
+    margin-left: 2px;
+    background: var(--motiv-color-primary);
+  }
+
+  .motiv-matrix-term__arrow {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-left: auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: square;
+    transition: transform 0.3s steps(3);
+  }
+
+  .motiv-matrix-term--open .motiv-matrix-term__arrow {
+    transform: rotate(180deg);
+  }
+
+  .motiv-matrix-term__pop {
+    position: absolute;
+    z-index: 10;
+    top: calc(100% + 12px);
+    right: 0;
+    left: 0;
+  }
+
+  /* The CRT line sits mid-panel and blooms vertically as the panel opens. */
+  .motiv-matrix-term__beam {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 2px;
+    background: var(--motiv-color-primary);
+    box-shadow: 0 0 14px var(--motiv-color-primary);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .motiv-matrix-term__list {
+    max-height: 320px;
+    margin: 0;
+    padding: 6px 0;
+    overflow-y: auto;
+    list-style: none;
+    background-color: var(--motiv-color-surface);
+    background-image: linear-gradient(
+      color-mix(in oklch, var(--motiv-color-primary) 9%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 100% 6px;
+    border: 1px solid color-mix(in oklch, var(--motiv-color-primary) 55%, transparent);
+    clip-path: inset(50% 0 50% 0);
+    visibility: hidden;
+    transition:
+      clip-path 0.45s 0.12s var(--motiv-ease),
+      visibility 0s 0.57s;
+  }
+
+  .motiv-matrix-term--open .motiv-matrix-term__list {
+    clip-path: inset(0);
+    visibility: visible;
+    transition:
+      clip-path 0.45s 0.12s var(--motiv-ease),
+      visibility 0s;
+  }
+
+  .motiv-matrix-term__option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 44px;
+    padding: 0 16px;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--motiv-color-text);
+    cursor: pointer;
+  }
+
+  .motiv-matrix-term__option--active {
+    color: var(--motiv-color-primary);
+    background: color-mix(in oklch, var(--motiv-color-primary) 15%, transparent);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 3px;
+      background: var(--motiv-color-primary);
+      box-shadow: 0 0 10px var(--motiv-color-primary);
+    }
+  }
+
+  .motiv-matrix-term__index {
+    font-size: 0.6875rem;
+    color: var(--motiv-color-text-muted);
+  }
+
+  .motiv-matrix-term__badge {
+    margin-left: auto;
+    font-size: 0.6875rem;
+    color: var(--motiv-color-primary);
+  }
+
+  .motiv-matrix-term__hint {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--motiv-color-text-muted);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .motiv-matrix-term--open .motiv-matrix-term__caret,
+    .motiv-matrix-term__trigger:is(:hover, :focus-visible) .motiv-matrix-term__caret {
+      animation: motiv-matrix-term-blink 1s steps(1) infinite;
+    }
+
+    .motiv-matrix-term--open .motiv-matrix-term__option {
+      animation: motiv-matrix-term-flick 0.45s backwards;
+      animation-delay: calc(0.4s + var(--_i) * 60ms);
+    }
+  }
+
+  @keyframes motiv-matrix-term-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes motiv-matrix-term-flick {
+    0% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    45% {
+      opacity: 0.2;
+    }
+    60% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-matrix-term__corner,
+    .motiv-matrix-term__arrow,
+    .motiv-matrix-term__list,
+    .motiv-matrix-term--open .motiv-matrix-term__list {
+      transition: none;
+    }
+  }
+}

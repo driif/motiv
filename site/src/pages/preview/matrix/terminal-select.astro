@@ -1,0 +1,9 @@
+---
+import { TerminalSelectDemo } from '../../../demos/matrix/TerminalSelect';
+import Preview from '../../../layouts/Preview.astro';
+// The open list is absolutely positioned, so the preview reserves room for it.
+---
+
+<Preview title="TerminalSelect" style="matrix">
+  <div style="min-height: 22rem; width: 100%"><TerminalSelectDemo client:load /></div>
+</Preview>

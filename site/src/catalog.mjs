@@ -409,5 +409,121 @@ export const catalog = {
       blurb: 'The class-name joiner the components use, exported for yours.',
     },
   ],
-  matrix: [],
+  matrix: [
+    {
+      id: 'scan-button',
+      title: 'ScanButton',
+      symbols: ['ScanButton'],
+      demo: 'ScanButton',
+      blurb:
+        'The call to action: HUD brackets open up and a light bar sweeps across while it is hovered or focused.',
+    },
+    {
+      id: 'button',
+      title: 'Button',
+      symbols: ['Button', 'buttonClassName'],
+      demo: 'Button',
+      blurb:
+        'Five variants, three sizes, a loading state, square and bracketed. Same props as the drawn Button; links borrow the look.',
+    },
+    {
+      id: 'icon-button',
+      title: 'IconButton & IconButtonGroup',
+      symbols: ['IconButton', 'IconButtonGroup'],
+      demo: 'IconButton',
+      blurb:
+        'Icon-only buttons named by their label. Brackets lock onto the one under the pointer.',
+    },
+    {
+      id: 'glitch-theme-toggle',
+      title: 'GlitchThemeToggle',
+      symbols: ['GlitchThemeToggle'],
+      demo: 'GlitchThemeToggle',
+      blurb:
+        'Reports clicks, your app owns the theme. The icon swaps through an RGB-split glitch; reduced motion swaps it plainly.',
+    },
+    {
+      id: 'signal-burger',
+      title: 'SignalBurger',
+      symbols: ['SignalBurger'],
+      demo: 'SignalBurger',
+      blurb: 'A menu button whose bars pulse like an equalizer on hover and jump to an X in steps.',
+    },
+    {
+      id: 'card',
+      title: 'Card',
+      symbols: ['Card', 'CardHeader', 'CardBody', 'CardFooter'],
+      demo: 'Card',
+      blurb:
+        'A bracketed panel with a heading, some words and a place for actions. Same props as the drawn Card.',
+    },
+    {
+      id: 'text-field',
+      title: 'TextField',
+      symbols: ['TextField'],
+      demo: 'TextField',
+      blurb: 'A labelled input behind a > prompt, with a hint that stays put.',
+    },
+    {
+      id: 'decode-secret-field',
+      title: 'DecodeSecretField',
+      symbols: ['DecodeSecretField'],
+      demo: 'DecodeSecretField',
+      blurb:
+        'A secret input whose eye decodes the value character by character, painted over the still-masked field.',
+    },
+    {
+      id: 'terminal-select',
+      title: 'TerminalSelect',
+      symbols: ['TerminalSelect'],
+      demo: 'TerminalSelect',
+      blurb:
+        'A select-only combobox that opens like an old CRT: one bright line, then the options flicker on. Arrows, Home, End and letters work.',
+    },
+    {
+      id: 'checkbox',
+      title: 'Checkbox',
+      symbols: ['Checkbox'],
+      demo: 'Checkbox',
+      blurb: 'A native checkbox, drawn as [ ] and [x].',
+    },
+    {
+      id: 'radio',
+      title: 'Radio & RadioGroup',
+      symbols: ['Radio', 'RadioGroup'],
+      demo: 'Radio',
+      blurb:
+        'One choice out of a few, drawn as ( ) and (*). RadioGroup wraps the fieldset and legend.',
+    },
+    {
+      id: 'hud-tabs',
+      title: 'HudTabs',
+      symbols: ['HudTabs'],
+      demo: 'HudTabs',
+      blurb:
+        'A tablist whose bracketed target jumps between tabs in steps; a scan line confirms the lock.',
+    },
+    {
+      id: 'chevron-nav',
+      title: 'ChevronNav',
+      symbols: ['ChevronNav'],
+      demo: 'ChevronNav',
+      blurb:
+        'Sidebar navigation in sections. The current item streams its chevrons like data flowing in.',
+    },
+    {
+      id: 'progress',
+      title: 'Progress',
+      symbols: ['Progress'],
+      demo: 'Progress',
+      blurb: 'A labelled progress bar cut into blocks, filling in steps.',
+    },
+    {
+      id: 'link',
+      title: 'Link',
+      symbols: ['Link'],
+      demo: 'Link',
+      blurb: 'A dashed link with a block highlight. External links open in a new tab and say so.',
+    },
+  ],
 };
