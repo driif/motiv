@@ -11,7 +11,8 @@ const styles = [
   },
   {
     id: 'matrix',
-    pitch: 'Still on the drafting table. Nothing released yet.',
+    pitch:
+      'Phosphor green on a terminal grid. HUD brackets, CRT menus and decoding secrets, for consoles and dashboards.',
   },
   {
     id: 'kinetic',
@@ -40,9 +41,7 @@ const styles = [
         <Card as="li" variant="outlined">
           <CardHeader titleAs="h2" title={style.id} description={style.pitch} />
           <CardFooter>
-            <Link href={`/${style.id}/`}>
-              {catalog[style.id].length ? `${catalog[style.id].length} sections` : 'coming later'}
-            </Link>
+            <Link href={`/${style.id}/`}>{catalog[style.id].length} sections</Link>
           </CardFooter>
         </Card>
       ))

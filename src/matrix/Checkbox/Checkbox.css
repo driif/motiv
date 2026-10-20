@@ -1,0 +1,43 @@
+@layer motiv.components {
+  .motiv-matrix-checkbox {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2);
+    min-height: 44px;
+    color: var(--motiv-color-text);
+    cursor: pointer;
+
+    &:has(.motiv-matrix-checkbox__input:disabled) {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-matrix-checkbox__box {
+    font-weight: 700;
+    white-space: pre;
+    color: var(--motiv-color-text-muted);
+
+    &::before {
+      content: "[ ]";
+    }
+  }
+
+  .motiv-matrix-checkbox__input:checked + .motiv-matrix-checkbox__box {
+    color: var(--motiv-color-primary);
+
+    &::before {
+      content: "[x]";
+    }
+  }
+
+  .motiv-matrix-checkbox__input:focus-visible + .motiv-matrix-checkbox__box {
+    outline: 2px solid var(--motiv-color-primary);
+    outline-offset: 3px;
+  }
+
+  .motiv-matrix-checkbox:hover:not(:has(:disabled)) .motiv-matrix-checkbox__box {
+    color: var(--motiv-color-primary);
+  }
+}

@@ -33,7 +33,7 @@
       }
     },
     {
-      "includes": ["src/drawn/Select/Select.tsx"],
+      "includes": ["src/drawn/Select/Select.tsx", "src/matrix/TerminalSelect/TerminalSelect.tsx"],
       "linter": {
         "rules": {
           "a11y": {
@@ -45,7 +45,7 @@
       }
     },
     {
-      "includes": ["src/drawn/Tabs/Tabs.tsx"],
+      "includes": ["src/drawn/Tabs/Tabs.tsx", "src/matrix/HudTabs/HudTabs.tsx"],
       "linter": {
         "rules": {
           "a11y": {
@@ -58,6 +58,7 @@
       "includes": [
         "src/drawn/SegmentedControl/SegmentedControl.tsx",
         "src/drawn/IconButton/IconButton.tsx",
+        "src/matrix/IconButton/IconButton.tsx",
         "src/components/SegmentedControl/SegmentedControl.tsx",
         "src/components/FilterChips/FilterChips.tsx",
         "src/components/Carousel/Carousel.tsx",

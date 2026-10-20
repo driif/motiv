@@ -336,35 +336,6 @@
   list-style: none;
 }
 
-/* Matrix placeholder */
-
-.site-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 0.4rem;
-  max-width: 32rem;
-  margin-top: 3rem;
-}
-
-.site-grid__cell {
-  aspect-ratio: 1;
-  border: 1px solid var(--motiv-color-border);
-  border-radius: var(--motiv-radius-sm);
-  animation: site-blink 3.2s calc(var(--i) * 70ms) infinite;
-}
-
-@keyframes site-blink {
-  0%,
-  70%,
-  100% {
-    background: transparent;
-  }
-
-  80% {
-    background: var(--motiv-color-primary);
-  }
-}
-
 /* Footer */
 
 .site-foot {
@@ -376,10 +347,4 @@
   border-top: 1px solid var(--motiv-color-border);
   color: var(--motiv-color-text-muted);
   font-size: 0.875rem;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .site-grid__cell {
-    animation: none;
-  }
 }

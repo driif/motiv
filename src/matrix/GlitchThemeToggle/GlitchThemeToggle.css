@@ -1,0 +1,112 @@
+@layer motiv.components {
+  .motiv-matrix-glitch {
+    position: relative;
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    padding: 0;
+    color: var(--motiv-color-primary);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    /* HUD corner brackets that lock on under the pointer. */
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 2px solid currentColor;
+      transition: transform 0.35s var(--motiv-ease-spring);
+    }
+
+    &::before {
+      top: 0;
+      left: 0;
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    &::after {
+      right: 0;
+      bottom: 0;
+      border-top: 0;
+      border-left: 0;
+    }
+
+    &:is(:hover, :focus-visible) {
+      &::before {
+        transform: translate(-7px, -7px);
+      }
+
+      &::after {
+        transform: translate(7px, 7px);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 10px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  /* Scanlines are a mask, so they work on any background. */
+  .motiv-matrix-glitch__icon {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    mask-image: repeating-linear-gradient(0deg, #000 0 2px, rgb(0 0 0 / 0.45) 2px 3px);
+
+    & > * {
+      display: grid;
+      grid-area: 1 / 1;
+    }
+
+    & svg {
+      grid-area: 1 / 1;
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      stroke-linecap: square;
+    }
+  }
+
+  /* RGB-split copies: hidden until the glitch flashes them, offset by transform. */
+  .motiv-matrix-glitch__ghost {
+    opacity: 0;
+  }
+
+  .motiv-matrix-glitch__ghost--red {
+    color: var(--motiv-color-danger);
+  }
+
+  .motiv-matrix-glitch__ghost--cyan {
+    color: var(--motiv-color-secondary);
+  }
+
+  .motiv-matrix-glitch__moon,
+  .motiv-matrix-glitch--dark .motiv-matrix-glitch__sun {
+    opacity: 0;
+  }
+
+  .motiv-matrix-glitch--dark .motiv-matrix-glitch__moon {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-matrix-glitch::before,
+    .motiv-matrix-glitch::after {
+      transition: none;
+    }
+  }
+}

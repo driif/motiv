@@ -7,6 +7,11 @@ const checks = [
     kept: 'motiv-link',
     dropped: ['motiv-checkbox', 'motiv-text-field', 'motiv-btn', 'motiv-card'],
   },
+  {
+    input: 'test/fixtures/treeshake-matrix-scan-button.js',
+    kept: 'motiv-matrix-scan',
+    dropped: ['motiv-matrix-term', 'motiv-matrix-decode', 'motiv-matrix-btn', 'motiv-link'],
+  },
 ];
 
 const problems = [];

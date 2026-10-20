@@ -1,27 +1,105 @@
 ---
-import { Link } from '@driif/motiv/drawn';
+import { Code } from 'astro:components';
+import Section from '../../components/Section.astro';
 import Shell from '../../layouts/Shell.astro';
+import consoleSource from '../../showcase/MatrixConsole.tsx?raw';
+import themeSource from '../../useTheme.ts?raw';
+
+const first = `import '@driif/motiv/matrix.css';
+import { DecodeSecretField, ScanButton } from '@driif/motiv/matrix';
+import { useState } from 'react';
+
+export function Unseal() {
+  const [key, setKey] = useState('');
+  return (
+    <form>
+      <DecodeSecretField label="Unseal key" value={key} onChange={setKey} />
+      <ScanButton type="submit">Unseal</ScanButton>
+    </form>
+  );
+}`;
 ---
 
 <Shell
   current="matrix"
   title="matrix · motiv"
-  description="matrix, an upcoming style of @driif/motiv, is still being drawn up."
+  description="The matrix style of @driif/motiv: React components for consoles and dashboards, in phosphor green on a terminal grid."
 >
   <section class="site-hero">
     <p class="site-kicker">Style 02 · matrix</p>
-    <h1 class="site-hero__title">Still being drawn up.</h1>
+    <h1 class="site-hero__title">A terminal for the screens that guard the keys.</h1>
     <p class="site-hero__lede">
-      matrix is an upcoming style of motiv. It has no released components yet, so there is nothing
-      here to copy. When the first one ships, it lands on this page with a live demo, the same day
-      it reaches npm.
-    </p>
-    <div class="site-grid" aria-hidden="true">
-      {Array.from({ length: 48 }, (_, index) => <span class="site-grid__cell" style={`--i: ${index}`} />)}
-    </div>
-    <p class="site-hero__lede">
-      Until then, the <Link href="/drawn/" arrow={false}>drawn</Link> and
-      <Link href="/kinetic/" arrow={false}>kinetic</Link> styles are ready to use.
+      Phosphor green, monospace and square corners. HUD brackets lock onto what you point at,
+      menus open like an old CRT and secrets decode one character at a time. Every effect moves
+      only transform and opacity, and reduced motion stills it. Below is a vault console built
+      from nothing but matrix components, in its own preview.
     </p>
   </section>
+
+  <section class="site-usecase" id="console" aria-label="Use case: a vault console">
+    <iframe class="site-preview" src="/preview/matrix/console/" title="Vault console preview" />
+    <details class="site-source">
+      <summary class="site-source__summary">Read the whole screen, every line</summary>
+      <Code class="site-code" code={consoleSource} lang="tsx" theme="github-dark-dimmed" />
+    </details>
+  </section>
+
+  <section class="site-start" id="getting-started">
+    <p class="site-kicker">Getting started</p>
+    <h2 class="site-start__title">Four steps from empty folder to console.</h2>
+    <ol class="site-steps">
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Install</h3>
+        <p class="site-steps__text">React 19 and react-dom are the only peers.</p>
+        <Code class="site-code" code="pnpm add @driif/motiv" lang="sh" theme="github-dark-dimmed" />
+      </li>
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Import the stylesheet once</h3>
+        <p class="site-steps__text">
+          It carries the tokens, a small base and the system monospace stack. Use it instead of
+          <code class="site-inline">styles.css</code>, never next to it.
+        </p>
+        <Code
+          class="site-code"
+          code="import '@driif/motiv/matrix.css';"
+          lang="ts"
+          theme="github-dark-dimmed"
+        />
+      </li>
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Wire your first form</h3>
+        <p class="site-steps__text">
+          Every component is a named export. No provider, no setup. Button, Card and the form
+          controls take the same props as their drawn twins.
+        </p>
+        <Code class="site-code" code={first} lang="tsx" theme="github-dark-dimmed" />
+      </li>
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Own the theme</h3>
+        <p class="site-steps__text">
+          The toggles only report clicks. Your app sets <code class="site-inline">data-theme</code>
+          on <code class="site-inline">&lt;html&gt;</code>; this is the hook this site uses.
+        </p>
+        <Code class="site-code" code={themeSource} lang="ts" theme="github-dark-dimmed" />
+      </li>
+    </ol>
+  </section>
+
+  <div class="site-sections">
+    <Section style="matrix" id="scan-button" />
+    <Section style="matrix" id="button" />
+    <Section style="matrix" id="icon-button" />
+    <Section style="matrix" id="glitch-theme-toggle" />
+    <Section style="matrix" id="signal-burger" />
+    <Section style="matrix" id="card" />
+    <Section style="matrix" id="text-field" />
+    <Section style="matrix" id="decode-secret-field" />
+    <Section style="matrix" id="terminal-select" />
+    <Section style="matrix" id="checkbox" />
+    <Section style="matrix" id="radio" />
+    <Section style="matrix" id="hud-tabs" />
+    <Section style="matrix" id="chevron-nav" />
+    <Section style="matrix" id="progress" />
+    <Section style="matrix" id="link" />
+  </div>
 </Shell>

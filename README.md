@@ -14,7 +14,8 @@ pnpm add @driif/motiv
 
 motiv comes in styles that share one component API. **kinetic** is the default: the root
 exports with `styles.css`. **drawn** is the hand-drawn style under `@driif/motiv/drawn` (see
-[Drawn style](#drawn-style)). **matrix** is planned.
+[Drawn style](#drawn-style)). **matrix** is the phosphor-green terminal style under
+`@driif/motiv/matrix` (see [Matrix style](#matrix-style)).
 
 Import the stylesheet once, at the app's entry or base layout:
 
@@ -101,6 +102,30 @@ import { Checkbox, Link, TextField } from '@driif/motiv/drawn';
 `<button>`; `active` sets `aria-current="page"`. `MenuButton` (`open`, `onToggle`) and
 `ThemeToggle` (`dark`, `onToggle`) are controlled; `ThemeToggle` never sets `data-theme` itself.
 Icons are app-supplied `ReactNode`s.
+
+## Matrix style
+
+`@driif/motiv/matrix` is a monospace, phosphor-green terminal style: `GlitchThemeToggle`,
+`ScanButton`, `TerminalSelect`, `DecodeSecretField`, `SignalBurger`, `HudTabs` and `ChevronNav`,
+plus `Button`, `buttonClassName`, `IconButton`, `IconButtonGroup`, `Card`, `CardHeader`,
+`CardBody`, `CardFooter`, `TextField`, `Checkbox`, `Radio`, `RadioGroup`, `Progress` and `Link`
+with the same props as their drawn namesakes. Its stylesheet is self-contained, so a matrix app
+imports it **instead of** `styles.css`:
+
+```tsx
+import '@driif/motiv/matrix.css';
+import { DecodeSecretField, TerminalSelect } from '@driif/motiv/matrix';
+
+<TerminalSelect label="Auth method" prefix="auth://" options={methods} value={method} onChange={setMethod} />;
+<DecodeSecretField label="Root token" value={token} onChange={setToken} />;
+```
+
+`TerminalSelect` is a select-only combobox (arrows, Home, End, Enter, Space, Escape, letters);
+options take `value`, `label`, `hint` and an optional `code` shown in the trigger.
+`DecodeSecretField` and `TerminalSelect` report plain values through `onChange(value)`;
+`ChevronNav` reports `onChange(id, event)`, so a router can `preventDefault()` on `href` items.
+`GlitchThemeToggle` (`dark`, `onToggle`) and `SignalBurger` (`open`, `onToggle`) are controlled.
+Every visible string is a prop with an English default.
 
 ## Theming
 

@@ -1,0 +1,175 @@
+@layer motiv.components {
+  .motiv-matrix-btn {
+    --_accent: var(--motiv-color-primary);
+    --_bg: var(--_accent);
+    --_text: var(--motiv-color-on-primary);
+    --_border: var(--_accent);
+
+    position: relative;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--motiv-space) * 2);
+    min-height: var(--_height);
+    padding: 0 var(--_px);
+    font-family: var(--motiv-font-body);
+    font-size: var(--_font-size);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--_text);
+    background: var(--_bg);
+    border: 1px solid var(--_border);
+    border-radius: var(--motiv-radius-sm);
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+
+    /* HUD corner brackets that open outwards on hover and focus. */
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border: 2px solid var(--_accent);
+      opacity: var(--_corners, 1);
+      transition: transform 0.2s steps(3);
+      pointer-events: none;
+    }
+
+    &::before {
+      top: -4px;
+      left: -4px;
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    &::after {
+      right: -4px;
+      bottom: -4px;
+      border-top: 0;
+      border-left: 0;
+    }
+
+    &:is(:hover, :focus-visible):not(:disabled, [aria-disabled="true"]) {
+      box-shadow: 0 0 18px -4px color-mix(in oklch, var(--_accent) 60%, transparent);
+
+      &::before {
+        transform: translate(-3px, -3px);
+      }
+
+      &::after {
+        transform: translate(3px, 3px);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--_accent);
+      outline-offset: 6px;
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &[aria-busy="true"] {
+      cursor: progress;
+    }
+  }
+
+  .motiv-matrix-btn--sm {
+    --_height: 2.75rem;
+    --_px: calc(var(--motiv-space) * 4);
+    --_font-size: 0.75rem;
+  }
+  .motiv-matrix-btn--md {
+    --_height: 3rem;
+    --_px: calc(var(--motiv-space) * 5);
+    --_font-size: 0.8125rem;
+  }
+  .motiv-matrix-btn--lg {
+    --_height: 3.5rem;
+    --_px: calc(var(--motiv-space) * 7);
+    --_font-size: 0.9375rem;
+  }
+
+  .motiv-matrix-btn--secondary {
+    --_accent: var(--motiv-color-secondary);
+    --_text: var(--motiv-color-on-secondary);
+  }
+
+  .motiv-matrix-btn--danger {
+    --_accent: var(--motiv-color-danger);
+    --_text: var(--motiv-color-on-danger);
+  }
+
+  .motiv-matrix-btn--outline,
+  .motiv-matrix-btn--ghost {
+    --_bg: transparent;
+    --_text: var(--motiv-color-primary);
+
+    &:is(:hover, :focus-visible):not(:disabled, [aria-disabled="true"]) {
+      --_bg: var(--motiv-color-primary-subtle);
+    }
+  }
+
+  .motiv-matrix-btn--ghost {
+    --_border: transparent;
+    --_corners: 0;
+
+    &:is(:hover, :focus-visible):not(:disabled, [aria-disabled="true"]) {
+      --_corners: 1;
+    }
+  }
+
+  .motiv-matrix-btn__icon {
+    display: inline-flex;
+
+    & > svg {
+      width: 1.25em;
+      height: 1.25em;
+    }
+  }
+
+  .motiv-matrix-btn__spinner {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    animation: motiv-matrix-btn-spin 0.8s steps(8) infinite;
+  }
+
+  /* Without iconLeft there is no slot to take over, so the spinner overlays the label to keep width. */
+  .motiv-matrix-btn__spinner--overlay {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+
+    & + .motiv-matrix-btn__label {
+      opacity: 0;
+    }
+  }
+
+  @keyframes motiv-matrix-btn-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-matrix-btn::before,
+    .motiv-matrix-btn::after {
+      transition: none;
+    }
+    .motiv-matrix-btn__spinner {
+      animation: none;
+    }
+  }
+}

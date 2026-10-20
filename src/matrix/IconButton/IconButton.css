@@ -1,0 +1,94 @@
+@layer motiv.components {
+  .motiv-matrix-icon-button-group {
+    display: inline-flex;
+    padding: 3px;
+    border: 1px solid color-mix(in oklch, var(--motiv-color-primary) 45%, transparent);
+  }
+
+  .motiv-matrix-icon-button {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    color: var(--motiv-color-primary);
+    background: transparent;
+    border: 0;
+    border-radius: var(--motiv-radius-sm);
+    cursor: pointer;
+
+    /* Corner brackets lock onto the hovered button. */
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border: 2px solid currentColor;
+      opacity: 0;
+      transition:
+        opacity 0.15s,
+        transform 0.2s steps(3);
+    }
+
+    &::before {
+      top: 6px;
+      left: 6px;
+      border-right: 0;
+      border-bottom: 0;
+      transform: translate(4px, 4px);
+    }
+
+    &::after {
+      right: 6px;
+      bottom: 6px;
+      border-top: 0;
+      border-left: 0;
+      transform: translate(-4px, -4px);
+    }
+
+    &:is(:hover, :focus-visible):not(:disabled) {
+      background: var(--motiv-color-primary-subtle);
+
+      &::before,
+      &::after {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  /* Dotted divider between neighbours. */
+  .motiv-matrix-icon-button-group > .motiv-matrix-icon-button + .motiv-matrix-icon-button {
+    border-left: 1px dashed color-mix(in oklch, var(--motiv-color-primary) 45%, transparent);
+  }
+
+  .motiv-matrix-icon-button__icon {
+    display: inline-grid;
+    width: 24px;
+    height: 24px;
+
+    & > svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-matrix-icon-button::before,
+    .motiv-matrix-icon-button::after {
+      transition: none;
+    }
+  }
+}

@@ -122,6 +122,30 @@ and render the same `motiv-btn*` / `motiv-card*` classes as the default entry, s
 import does not change app code. The component tokens (`--motiv-btn-*`, `--motiv-card-*`) are
 default-style only.
 
+## Matrix style
+
+`@driif/motiv/matrix.css` is the whole stylesheet for apps using `@driif/motiv/matrix`: the tokens
+above, `base.css` and the matrix components. Import it instead of `styles.css`, never alongside it.
+Matrix components use their own `motiv-matrix-*` classes.
+
+It sets `--motiv-radius: 0`, a system monospace stack for `--motiv-font-body`, and its own values
+for the base color tokens, so every override above works unchanged:
+
+| Token | Matrix light | Matrix dark |
+|---|---|---|
+| `--motiv-color-primary` | `#0d5a1f` | `#3dff7a` |
+| `--motiv-color-on-primary` | `#ffffff` | `#02190a` |
+| `--motiv-color-secondary` | `#00616b` | `#3fe0f0` |
+| `--motiv-color-on-secondary` | `#ffffff` | `#01282c` |
+| `--motiv-color-danger` | `#b3261e` | `#ff6b6b` |
+| `--motiv-color-on-danger` | `#ffffff` | `#2b0505` |
+| `--motiv-color-bg` | `#eef3ee` | `#050c07` |
+| `--motiv-color-surface` | `#f8fbf8` | `#0b170e` |
+| `--motiv-color-text` | `#0f2414` | `#c9f7d3` |
+| `--motiv-color-border` | `#6c8f74` | `#3d7d4c` |
+
+The glitch effects split into `--motiv-color-danger` and `--motiv-color-secondary`.
+
 ## Plain CSS overrides
 
 Because motiv's rules are layered, a normal app rule wins:

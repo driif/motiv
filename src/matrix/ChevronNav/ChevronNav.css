@@ -1,0 +1,145 @@
+@layer motiv.components {
+  .motiv-matrix-chevnav {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-matrix-chevnav__title {
+    padding: 6px 8px 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--motiv-color-text-muted);
+  }
+
+  .motiv-matrix-chevnav__list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .motiv-matrix-chevnav__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 8px;
+    font: inherit;
+    text-align: left;
+    text-decoration: none;
+    color: var(--motiv-color-text);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--motiv-radius-sm);
+    cursor: pointer;
+
+    &:hover {
+      border-color: color-mix(in oklch, var(--motiv-color-primary) 45%, transparent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  .motiv-matrix-chevnav__item--active {
+    color: var(--motiv-color-primary);
+    background: var(--motiv-color-primary-subtle);
+    border-color: var(--motiv-color-primary);
+    box-shadow: 0 6px 18px -10px color-mix(in oklch, var(--motiv-color-primary) 45%, transparent);
+  }
+
+  .motiv-matrix-chevnav__icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid transparent;
+    border-radius: var(--motiv-radius-full);
+
+    & > svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  .motiv-matrix-chevnav__item--active .motiv-matrix-chevnav__icon {
+    border-color: currentColor;
+  }
+
+  .motiv-matrix-chevnav__label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .motiv-matrix-chevnav__chevs {
+    flex-shrink: 0;
+    width: 30px;
+    height: 16px;
+    overflow: visible;
+
+    & path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+      transition: opacity 0.3s;
+    }
+
+    & path:nth-child(-n + 2) {
+      opacity: 0;
+    }
+  }
+
+  .motiv-matrix-chevnav__item:hover .motiv-matrix-chevnav__chevs path:nth-child(-n + 2) {
+    opacity: 0.5;
+  }
+
+  .motiv-matrix-chevnav__item--active .motiv-matrix-chevnav__chevs path {
+    opacity: 1;
+  }
+
+  /* The stream: each chevron brightens in turn, like data flowing in. */
+  @media (prefers-reduced-motion: no-preference) {
+    .motiv-matrix-chevnav__item--active .motiv-matrix-chevnav__chevs path {
+      animation: motiv-matrix-chevnav-stream 1.2s ease-in-out infinite;
+
+      &:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+    }
+  }
+
+  @keyframes motiv-matrix-chevnav-stream {
+    0%,
+    100% {
+      opacity: 0.2;
+    }
+    40% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-matrix-chevnav__chevs path {
+      transition: none;
+    }
+  }
+}

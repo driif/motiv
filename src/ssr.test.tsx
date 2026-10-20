@@ -25,6 +25,7 @@ import {
 } from './drawn';
 import * as K from './index';
 import { Button, Card, CardBody, CardHeader } from './index';
+import * as M from './matrix';
 
 describe('server rendering', () => {
   it('renders Button and Card without a DOM', () => {
@@ -203,5 +204,60 @@ describe('server rendering', () => {
     expect(html).toContain('aria-valuenow="40"');
     expect(html).toContain('Ctrl K');
     expect(html).toContain('aria-current="step"');
+  });
+  it('renders the matrix components without a DOM', () => {
+    const noop = () => {};
+    const options = [
+      { value: 'oidc', label: 'OIDC', code: 'OIDC', hint: 'SSO' },
+      { value: 'ldap', label: 'LDAP' },
+    ];
+    const html = renderToStaticMarkup(
+      <>
+        <M.Card interactive>
+          <M.CardHeader title="T" />
+          <M.CardBody>
+            <M.Button loading>Go</M.Button>
+          </M.CardBody>
+          <M.CardFooter />
+        </M.Card>
+        <M.IconButtonGroup label="Tools">
+          <M.IconButton icon="✎" label="Edit" />
+        </M.IconButtonGroup>
+        <M.TextField label="Email" hint="Hint" />
+        <M.Checkbox label="Subscribe" defaultChecked />
+        <M.RadioGroup name="d" legend="Drink" options={options} value="oidc" onChange={noop} />
+        <M.Progress value={40} label="Upload" />
+        <M.Link href="https://example.com" external>
+          Example
+        </M.Link>
+        <M.GlitchThemeToggle dark onToggle={noop} />
+        <M.ScanButton>Scan</M.ScanButton>
+        <M.TerminalSelect label="Auth" options={options} value="oidc" onChange={noop} name="a" />
+        <M.DecodeSecretField label="Token" value="secret" onChange={noop} />
+        <M.SignalBurger open onToggle={noop} />
+        <M.HudTabs
+          label="Tabs"
+          tabs={options}
+          value="ldap"
+          onChange={noop}
+          panels={{ oidc: 'A' }}
+        />
+        <M.ChevronNav
+          label="Main"
+          sections={[{ title: 'S', items: [{ id: 'a', label: 'A', expandable: true }] }]}
+          value="a"
+          onChange={noop}
+        />
+      </>,
+    );
+    expect(html).toContain('motiv-matrix-btn__spinner');
+    expect(html).toContain('aria-valuenow="40"');
+    expect(html).toContain('aria-pressed="true"');
+    expect(html).toContain('role="combobox"');
+    expect(html).toContain('<input type="hidden" name="a" value="oidc"/>');
+    expect(html).toContain('type="password"');
+    expect(html).toContain('aria-expanded="true"');
+    expect(html).toContain('TARGET 02 / 02');
+    expect(html).toContain('aria-current="page"');
   });
 });
