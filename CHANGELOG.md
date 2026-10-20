@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.5.1
+
+### Patch Changes
+
+- 507c794: matrix: TerminalSelect opens fast on a solid, readable panel (no CRT beam or option flicker), HudTabs drops the scan line and slides its target smoothly, and ChevronNav shows one static chevron on expandable items instead of an animated triple.
+
 ## 0.5.0
 
 ### Minor Changes
