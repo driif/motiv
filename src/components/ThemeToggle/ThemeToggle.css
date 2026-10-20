@@ -1,0 +1,66 @@
+@layer motiv.components {
+  .motiv-theme-toggle {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    color: var(--motiv-color-text);
+    background: transparent;
+    border: 1px solid var(--motiv-color-border);
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  /* Both icons share one cell; the hidden one has rolled half a turn out to its side. */
+  .motiv-theme-toggle__sun,
+  .motiv-theme-toggle__moon {
+    grid-area: 1 / 1;
+    width: 22px;
+    height: 22px;
+    transition:
+      opacity 0.3s var(--motiv-ease),
+      translate 0.6s var(--motiv-ease-spring),
+      rotate 0.6s var(--motiv-ease-spring),
+      scale 0.6s var(--motiv-ease-spring);
+  }
+
+  .motiv-theme-toggle[aria-pressed="true"] .motiv-theme-toggle__sun {
+    opacity: 0;
+    translate: -40% 0;
+    rotate: -180deg;
+    scale: 0.5;
+  }
+
+  .motiv-theme-toggle[aria-pressed="false"] .motiv-theme-toggle__moon {
+    opacity: 0;
+    translate: 40% 0;
+    rotate: 180deg;
+    scale: 0.5;
+  }
+
+  .motiv-theme-toggle:hover:not(:disabled) {
+    &[aria-pressed="false"] .motiv-theme-toggle__sun,
+    &[aria-pressed="true"] .motiv-theme-toggle__moon {
+      scale: 1.15;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-theme-toggle__sun,
+    .motiv-theme-toggle__moon {
+      transition: none;
+    }
+  }
+}

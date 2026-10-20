@@ -1,0 +1,121 @@
+@layer motiv.components {
+  .motiv-float {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 2);
+    width: 100%;
+    max-width: 340px;
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-float__control {
+    position: relative;
+
+    /* The focus bloom: a ring that fades and scales in, instead of a box-shadow transition. */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border: 3px solid var(--motiv-color-primary-subtle);
+      border-radius: calc(var(--motiv-radius) + 4px);
+      opacity: 0;
+      scale: 0.97;
+      pointer-events: none;
+      transition:
+        opacity 0.25s var(--motiv-ease),
+        scale 0.3s var(--motiv-ease);
+    }
+
+    &:focus-within::after {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  .motiv-float__input {
+    width: 100%;
+    height: 58px;
+    padding: 22px 44px 6px 14px;
+    color: var(--motiv-color-text);
+    font: inherit;
+    font-size: 1rem;
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius);
+    outline: none;
+
+    &:focus {
+      border-color: var(--motiv-color-primary);
+    }
+
+    &:not(:focus, :placeholder-shown):invalid {
+      border-color: var(--motiv-color-danger);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-float__label {
+    position: absolute;
+    top: 18px;
+    left: 15px;
+    color: var(--motiv-color-text-muted);
+    font-size: 1rem;
+    line-height: 1.25;
+    pointer-events: none;
+    transform-origin: left top;
+    transition:
+      translate 0.4s var(--motiv-ease-spring),
+      scale 0.4s var(--motiv-ease-spring);
+
+    :is(:focus, :not(:placeholder-shown)) + & {
+      translate: 0 -10px;
+      scale: 0.78;
+    }
+
+    :focus + & {
+      color: var(--motiv-color-primary);
+    }
+  }
+
+  .motiv-float__ok {
+    position: absolute;
+    top: calc(50% - 10px);
+    right: 14px;
+    width: 20px;
+    height: 20px;
+    color: var(--motiv-color-primary);
+    stroke-width: 2;
+    opacity: 0;
+    scale: 0.3;
+    rotate: -30deg;
+    pointer-events: none;
+    transition:
+      opacity 0.2s,
+      scale 0.45s var(--motiv-ease-spring),
+      rotate 0.45s var(--motiv-ease-spring);
+
+    :not(:placeholder-shown):valid ~ & {
+      opacity: 1;
+      scale: 1;
+      rotate: 0deg;
+    }
+  }
+
+  .motiv-float__hint {
+    margin: 0;
+    color: var(--motiv-color-text-muted);
+    font-size: 0.8125rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-float__control::after,
+    .motiv-float__label,
+    .motiv-float__ok {
+      transition: none;
+    }
+  }
+}

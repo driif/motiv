@@ -14,10 +14,7 @@
     border: 1px solid var(--motiv-card-border-color, var(--_border));
     border-radius: var(--motiv-card-radius, var(--motiv-radius-lg));
     box-shadow: var(--motiv-card-shadow, var(--_shadow));
-    transition:
-      box-shadow var(--motiv-duration) var(--motiv-ease),
-      transform var(--motiv-duration) var(--motiv-ease),
-      border-color var(--motiv-duration) var(--motiv-ease);
+    transition: transform var(--motiv-duration) var(--motiv-ease);
   }
 
   .motiv-card--outlined {
@@ -45,12 +42,28 @@
     --_pad: calc(var(--motiv-space) * 8);
   }
 
+  /* The hover shadow is a layer that fades in, so only opacity and transform animate. */
   .motiv-card--interactive {
+    position: relative;
     cursor: pointer;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      box-shadow: var(--motiv-card-shadow-hover, var(--motiv-shadow-lg));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--motiv-duration) var(--motiv-ease);
+    }
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: var(--motiv-card-shadow-hover, var(--motiv-shadow-lg));
+
+      &::after {
+        opacity: 1;
+      }
     }
 
     &:focus-visible {

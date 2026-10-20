@@ -1,0 +1,91 @@
+@layer motiv.components {
+  .motiv-segmented {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 3);
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-segmented__track {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--_count), minmax(0, 1fr));
+    padding: 4px;
+    background: var(--motiv-color-surface-hover);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius-sm);
+    isolation: isolate;
+  }
+
+  .motiv-segmented__traveler {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    z-index: -1;
+    width: calc((100% - 8px) / var(--_count));
+    translate: calc(var(--_index) * 100%) 0;
+    transition: translate 0.55s var(--motiv-ease-spring);
+  }
+
+  .motiv-segmented__pill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: calc(var(--motiv-radius-sm) - 2px);
+    box-shadow: var(--motiv-shadow-sm);
+  }
+
+  .motiv-segmented__option {
+    min-width: 0;
+    min-height: 44px;
+    padding: 0 calc(var(--motiv-space) * 2);
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--motiv-color-text-muted);
+    background: transparent;
+    border: 0;
+    border-radius: calc(var(--motiv-radius-sm) - 2px);
+    cursor: pointer;
+
+    &:hover,
+    &[aria-checked="true"] {
+      color: var(--motiv-color-text);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+  }
+
+  .motiv-segmented__hints {
+    display: grid;
+    text-align: center;
+  }
+
+  .motiv-segmented__hint {
+    grid-area: 1 / 1;
+    font-size: 0.875rem;
+    color: var(--motiv-color-text-muted);
+    opacity: 0;
+    translate: 0 6px;
+    transition:
+      opacity 0.25s var(--motiv-ease),
+      translate 0.4s var(--motiv-ease-spring);
+
+    &[data-active="true"] {
+      opacity: 1;
+      translate: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-segmented__traveler,
+    .motiv-segmented__hint {
+      transition: none;
+    }
+  }
+}

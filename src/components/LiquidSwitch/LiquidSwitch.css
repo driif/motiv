@@ -1,0 +1,74 @@
+@layer motiv.components {
+  .motiv-liquid {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 3);
+    min-height: 44px;
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-liquid__track {
+    position: relative;
+    flex-shrink: 0;
+    width: 66px;
+    height: 34px;
+    padding: 4px;
+    background: var(--motiv-color-surface-hover);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: 40% 42% 43% 39% / 49% 50% 46% 52%;
+    cursor: pointer;
+
+    &[aria-checked="true"] {
+      background: color-mix(in oklch, var(--motiv-color-primary) 22%, var(--motiv-color-surface));
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  /* Travel and squash live on separate elements, so the spring and the stretch never fight. */
+  .motiv-liquid__traveler {
+    display: block;
+    width: 24px;
+    height: 24px;
+    transition: translate 0.65s var(--motiv-ease-spring);
+
+    [aria-checked="true"] > & {
+      translate: 32px 0;
+    }
+  }
+
+  .motiv-liquid__blob {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: color-mix(in oklch, var(--motiv-color-primary) 60%, var(--motiv-color-surface));
+    border-radius: 50%;
+
+    [aria-checked="true"] & {
+      background: var(--motiv-color-primary);
+    }
+  }
+
+  .motiv-liquid__label {
+    cursor: pointer;
+
+    :disabled + & {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-liquid__traveler {
+      transition: none;
+    }
+  }
+}

@@ -1,0 +1,139 @@
+@layer motiv.components {
+  .motiv-drill {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 3);
+    width: 100%;
+    padding-top: 12px;
+    padding-right: 12px;
+    color: var(--motiv-color-text);
+
+    & ol {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: calc(var(--motiv-space) * 1.5);
+      margin: 0;
+      padding: 0;
+      font-size: 0.8125rem;
+      list-style: none;
+    }
+
+    & li {
+      display: flex;
+      align-items: center;
+      gap: calc(var(--motiv-space) * 1.5);
+    }
+  }
+
+  .motiv-drill__crumb {
+    min-height: 44px;
+    padding: 0 2px;
+    font: inherit;
+    color: var(--motiv-color-text-muted);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--motiv-color-text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+  .motiv-drill__current {
+    font-weight: 600;
+  }
+
+  .motiv-drill__sep {
+    color: var(--motiv-color-border);
+  }
+
+  .motiv-drill__card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--motiv-space) * 3);
+    padding: calc(var(--motiv-space) * 4);
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius-md);
+  }
+
+  /* The cards behind the current one are drawn with static shadows, no extra DOM. */
+  .motiv-drill__card--stacked {
+    box-shadow:
+      6px -6px 0 -1px var(--motiv-color-surface-hover),
+      6px -6px 0 0 var(--motiv-color-border),
+      12px -12px 0 -1px var(--motiv-color-surface-hover),
+      12px -12px 0 0 var(--motiv-color-border);
+  }
+
+  .motiv-drill__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+
+    & b {
+      overflow: hidden;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    & span {
+      font-size: 0.8125rem;
+      color: var(--motiv-color-text-muted);
+    }
+  }
+
+  .motiv-drill__next {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    color: inherit;
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: scale 0.35s var(--motiv-ease-spring);
+
+    & svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover:not(:disabled) {
+      background: var(--motiv-color-surface-hover);
+    }
+
+    &:active:not(:disabled) {
+      scale: 0.88;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-drill__crumb,
+  .motiv-drill__next {
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-drill__next {
+      transition: none;
+    }
+  }
+}

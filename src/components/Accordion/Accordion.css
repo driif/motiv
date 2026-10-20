@@ -1,0 +1,83 @@
+@layer motiv.components {
+  .motiv-accordion {
+    width: 100%;
+    overflow: hidden;
+    color: var(--motiv-color-text);
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius-md);
+  }
+
+  .motiv-accordion__item + .motiv-accordion__item {
+    border-top: 1px solid var(--motiv-color-border);
+  }
+
+  .motiv-accordion__heading {
+    margin: 0;
+    font: inherit;
+  }
+
+  .motiv-accordion__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--motiv-space) * 3);
+    width: 100%;
+    min-height: 50px;
+    padding: 0 calc(var(--motiv-space) * 3.5);
+    font: inherit;
+    font-weight: 600;
+    color: inherit;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--motiv-color-surface-hover);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: -2px;
+    }
+  }
+
+  .motiv-accordion__icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    transition: rotate 0.45s var(--motiv-ease-spring);
+
+    [aria-expanded="true"] > & {
+      color: var(--motiv-color-primary);
+      rotate: 135deg;
+    }
+  }
+
+  /* Closed panels are hidden outright; only the reveal is animated, never the height. */
+  .motiv-accordion__panel {
+    padding: 0 calc(var(--motiv-space) * 3.5) calc(var(--motiv-space) * 3.5);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--motiv-color-text-muted);
+    animation: motiv-accordion-in 0.4s var(--motiv-ease-spring);
+  }
+
+  @keyframes motiv-accordion-in {
+    from {
+      opacity: 0;
+      translate: 0 -6px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-accordion__icon {
+      transition: none;
+    }
+
+    .motiv-accordion__panel {
+      animation: none;
+    }
+  }
+}

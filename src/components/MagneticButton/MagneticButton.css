@@ -1,0 +1,79 @@
+@layer motiv.components {
+  /* The padding is an invisible field that catches the pointer; the negative margin keeps
+     the layout as if it were not there. */
+  .motiv-magnet {
+    --_field: 28px;
+
+    display: inline-block;
+    padding: var(--_field);
+    margin: calc(var(--_field) * -1);
+  }
+
+  .motiv-magnet__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 178px;
+    min-height: 45px;
+    padding: 12px 18px;
+    font: inherit;
+    color: var(--motiv-color-text);
+    background: color-mix(in oklch, var(--motiv-color-primary) 22%, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius-full);
+    box-shadow: 0 5px 0 -2px var(--motiv-color-surface-hover);
+    cursor: pointer;
+    transition:
+      translate 0.6s var(--motiv-ease-spring),
+      scale 0.2s var(--motiv-ease);
+
+    .motiv-magnet:hover & {
+      transition:
+        translate 0.2s var(--motiv-ease),
+        scale 0.2s var(--motiv-ease);
+    }
+
+    &:active:not(:disabled) {
+      scale: 0.97;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-magnet__label {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 3);
+    transition: translate 0.6s var(--motiv-ease-spring);
+
+    .motiv-magnet:hover & {
+      transition: translate 0.2s var(--motiv-ease);
+    }
+  }
+
+  .motiv-magnet__dot {
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    background: var(--motiv-color-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px var(--motiv-color-primary-subtle);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-magnet__button,
+    .motiv-magnet:hover .motiv-magnet__button,
+    .motiv-magnet__label,
+    .motiv-magnet:hover .motiv-magnet__label {
+      transition: none;
+    }
+  }
+}

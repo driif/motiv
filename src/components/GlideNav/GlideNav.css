@@ -1,0 +1,98 @@
+@layer motiv.components {
+  .motiv-glide-nav {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    max-width: 280px;
+    padding: 6px;
+    color: var(--motiv-color-text);
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius-md);
+  }
+
+  .motiv-glide-nav__hover {
+    position: absolute;
+    top: 0;
+    right: 6px;
+    left: 6px;
+    height: 44px;
+    background: var(--motiv-color-surface-hover);
+    border-radius: var(--motiv-radius-sm);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.3s var(--motiv-ease-spring),
+      opacity 0.2s var(--motiv-ease);
+  }
+
+  .motiv-glide-nav__bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 24px;
+    background: var(--motiv-color-primary);
+    border-radius: 0 3px 3px 0;
+    opacity: 0;
+    transition:
+      transform 0.5s var(--motiv-ease-spring),
+      opacity 0.2s var(--motiv-ease);
+  }
+
+  .motiv-glide-nav__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2.5);
+    min-height: 44px;
+    padding: 0 calc(var(--motiv-space) * 3);
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--motiv-color-text-muted);
+    text-align: left;
+    background: transparent;
+    border: 0;
+    border-radius: var(--motiv-radius-sm);
+    cursor: pointer;
+
+    &:hover,
+    &[aria-current="page"] {
+      color: var(--motiv-color-text);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: -2px;
+    }
+
+    & > svg {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .motiv-glide-nav__label {
+    flex: 1;
+  }
+
+  .motiv-glide-nav__count {
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--motiv-color-text-muted);
+
+    [aria-current="page"] > & {
+      color: var(--motiv-color-primary);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-glide-nav__hover,
+    .motiv-glide-nav__bar {
+      transition: none;
+    }
+  }
+}

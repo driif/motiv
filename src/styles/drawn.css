@@ -22,9 +22,17 @@
 @import "../drawn/HoldToConfirmButton/HoldToConfirmButton.css";
 
 @layer motiv.tokens {
+  /* tokens.css carries the kinetic palette; keep drawn's own ease, shadow and muted mix. */
+  :root {
+    --motiv-color-success: #16a34a;
+    --motiv-color-warning: #f59e0b;
+    --motiv-ease: cubic-bezier(0.2, 0, 0, 1);
+  }
+
   :root,
   [data-theme="light"] {
     color-scheme: light;
+    --motiv-shadow-color: rgb(15 23 42);
     --motiv-color-primary: #1f6230;
     --motiv-color-on-primary: #ffffff;
     --motiv-color-secondary: #b83c0c;
@@ -65,6 +73,14 @@
       --motiv-color-text: #ece8df;
       --motiv-color-border: #363a44;
     }
+  }
+
+  :where(:root, [data-theme]) {
+    --motiv-color-text-muted: color-mix(
+      in oklch,
+      var(--motiv-color-text) 65%,
+      var(--motiv-color-bg)
+    );
   }
 }
 

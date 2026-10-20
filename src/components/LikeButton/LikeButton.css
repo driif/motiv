@@ -1,0 +1,72 @@
+@layer motiv.components {
+  .motiv-like {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2.5);
+    min-height: 44px;
+    padding: 0 18px 0 14px;
+    font: inherit;
+    color: var(--motiv-color-text);
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius-full);
+    cursor: pointer;
+
+    &[aria-pressed="true"] {
+      background: color-mix(in oklch, var(--motiv-color-secondary) 22%, var(--motiv-color-surface));
+      border-color: var(--motiv-color-secondary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-like__heart {
+    width: 22px;
+    height: 22px;
+    fill: transparent;
+    stroke: currentColor;
+    stroke-width: 1.65;
+    stroke-linejoin: round;
+
+    [aria-pressed="true"] > & {
+      fill: var(--motiv-color-secondary);
+      stroke: var(--motiv-color-secondary);
+    }
+  }
+
+  /* Each <b> is a spoke turned to its angle; its <i> spark flies outward along it. */
+  .motiv-like__burst {
+    position: absolute;
+    top: 50%;
+    left: 25px;
+    pointer-events: none;
+
+    & b {
+      position: absolute;
+    }
+
+    & i {
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      width: 6px;
+      height: 6px;
+      background: var(--motiv-color-secondary);
+      border-radius: 50%;
+      opacity: 0;
+    }
+  }
+
+  .motiv-like__count {
+    font-size: 0.9375rem;
+  }
+}

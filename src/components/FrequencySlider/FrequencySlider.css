@@ -1,0 +1,47 @@
+@layer motiv.components {
+  .motiv-freq {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 3.5);
+    width: 100%;
+    max-width: 320px;
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-freq__top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    font-weight: 600;
+
+    & output {
+      color: var(--motiv-color-primary);
+      font-size: 0.875rem;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  .motiv-freq__bars {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+  }
+
+  .motiv-freq__bar {
+    width: 4px;
+    background: var(--motiv-color-border);
+    border-radius: 4px;
+    transition: scale 0.35s var(--motiv-ease-spring);
+
+    &[data-on] {
+      background: var(--motiv-color-primary);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-freq__bar {
+      transition: none;
+    }
+  }
+}

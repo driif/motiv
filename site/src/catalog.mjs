@@ -139,14 +139,267 @@ export const catalog = {
       title: 'Button',
       symbols: ['Button', 'buttonClassName'],
       demo: 'Button',
-      blurb: 'Five variants, three sizes, a loading state. Links borrow its look.',
+      blurb:
+        'Five variants, three sizes, a loading state, in fine lilac outlines. Links borrow its look.',
+    },
+    {
+      id: 'magnetic-button',
+      title: 'MagneticButton',
+      symbols: ['MagneticButton'],
+      demo: 'MagneticButton',
+      blurb:
+        'A call to action that leans toward the cursor. Mouse only: touch and reduced motion get a still button.',
+    },
+    {
+      id: 'morph-submit-button',
+      title: 'MorphSubmitButton',
+      symbols: ['MorphSubmitButton'],
+      demo: 'MorphSubmitButton',
+      blurb:
+        'Runs your async action: the pill folds around a spinner, then confirms. A rejected promise shakes it back.',
+    },
+    {
+      id: 'bell-button',
+      title: 'BellButton',
+      symbols: ['BellButton'],
+      demo: 'BellButton',
+      blurb: 'A notification bell that rings and ripples whenever the count goes up.',
+    },
+    {
+      id: 'badge-button',
+      title: 'BadgeButton',
+      symbols: ['BadgeButton'],
+      demo: 'BadgeButton',
+      blurb:
+        'An icon button with an unread counter that bumps and rolls its digits, and shrinks away at zero.',
+    },
+    {
+      id: 'copy-field',
+      title: 'CopyField',
+      symbols: ['CopyField'],
+      demo: 'CopyField',
+      blurb:
+        'A value with a copy button whose label rolls to "Copied". Show a masked version if the value is secret.',
+    },
+    {
+      id: 'radial-menu',
+      title: 'RadialMenu',
+      symbols: ['RadialMenu'],
+      demo: 'RadialMenu',
+      blurb:
+        'A plus button that fans a few quick actions out on an arc. Escape or a click outside folds them away.',
+    },
+    {
+      id: 'icon-button',
+      title: 'IconButton & IconButtonGroup',
+      symbols: ['IconButton', 'IconButtonGroup'],
+      demo: 'IconButton',
+      blurb:
+        'A toolbar of line icons; hover blooms a soft lilac fill and tips the icon up. Each has a label for screen readers.',
+    },
+    {
+      id: 'menu-button',
+      title: 'MenuButton',
+      symbols: ['MenuButton'],
+      demo: 'MenuButton',
+      blurb: 'Three lines that spring into a cross. You own the menu it opens.',
+    },
+    {
+      id: 'theme-toggle',
+      title: 'ThemeToggle',
+      symbols: ['ThemeToggle'],
+      demo: 'ThemeToggle',
+      blurb:
+        'Sun and moon roll past each other in a half turn. It reports clicks; your app sets data-theme.',
+    },
+    {
+      id: 'segmented-control',
+      title: 'SegmentedControl',
+      symbols: ['SegmentedControl'],
+      demo: 'SegmentedControl',
+      blurb:
+        'Two to four views side by side. The pill glides over with a little squash, and a hint can slide in underneath.',
+    },
+    {
+      id: 'elastic-tabs',
+      title: 'ElasticTabs',
+      symbols: ['ElasticTabs'],
+      demo: 'ElasticTabs',
+      blurb:
+        'Tabs with an underline that stretches toward its next tab. Panels slide in from the side you moved toward.',
+    },
+    {
+      id: 'filter-chips',
+      title: 'FilterChips',
+      symbols: ['FilterChips'],
+      demo: 'FilterChips',
+      blurb:
+        'Toggle chips for filtering a list. A check pops in without the chip changing width, and a summary with a Clear button sits below.',
+    },
+    {
+      id: 'radio',
+      title: 'Radio & RadioGroup',
+      symbols: ['Radio', 'RadioGroup'],
+      demo: 'Radio',
+      blurb:
+        'One choice out of a few, with a dot that springs in. RadioGroup wraps the fieldset and legend for you.',
+    },
+    {
+      id: 'stepper',
+      title: 'Stepper',
+      symbols: ['Stepper'],
+      demo: 'Stepper',
+      blurb:
+        'A number you nudge up and down. The digits roll, and a limit answers with a small shake.',
+    },
+    {
+      id: 'command-menu',
+      title: 'CommandMenu',
+      symbols: ['CommandMenu'],
+      demo: 'CommandMenu',
+      blurb:
+        'A launcher that unfolds into commands. Arrow keys move through them, Escape closes, and ⌘K / Ctrl K works if you ask for it.',
+    },
+    {
+      id: 'floating-field',
+      title: 'FloatingField',
+      symbols: ['FloatingField'],
+      demo: 'FloatingField',
+      blurb:
+        'A text field whose label lifts on focus; a check pops in once the browser calls the value valid.',
+    },
+    {
+      id: 'otp-input',
+      title: 'OtpInput',
+      symbols: ['OtpInput'],
+      demo: 'OtpInput',
+      blurb:
+        'One box per digit. Focus hops forward, paste fills them all, and status waves or shakes after you check the code.',
+    },
+    {
+      id: 'expanding-search',
+      title: 'ExpandingSearch',
+      symbols: ['ExpandingSearch'],
+      demo: 'ExpandingSearch',
+      blurb:
+        'A search icon that stretches into a field over its neighbours, with suggestions dropping in one by one.',
+    },
+    {
+      id: 'frequency-slider',
+      title: 'FrequencySlider',
+      symbols: ['FrequencySlider'],
+      demo: 'FrequencySlider',
+      blurb:
+        'A native range with an equalizer that swells under the thumb and grows with the value.',
+    },
+    {
+      id: 'momentum-slider',
+      title: 'MomentumSlider',
+      symbols: ['MomentumSlider'],
+      demo: 'MomentumSlider',
+      blurb:
+        'A range whose value bubble swings with the drag and settles when you let go. Marks label the stops.',
+    },
+    {
+      id: 'liquid-switch',
+      title: 'LiquidSwitch',
+      symbols: ['LiquidSwitch'],
+      demo: 'LiquidSwitch',
+      blurb: 'An on/off switch whose thumb stretches mid-travel and wobbles to a stop.',
+    },
+    {
+      id: 'spring-checkbox',
+      title: 'SpringCheckbox',
+      symbols: ['SpringCheckbox'],
+      demo: 'SpringCheckbox',
+      blurb:
+        'A native checkbox that squashes under the press, fills from the centre and pops its tick.',
+    },
+    {
+      id: 'like-button',
+      title: 'LikeButton',
+      symbols: ['LikeButton'],
+      demo: 'LikeButton',
+      blurb: 'A heart that pops and throws sparks when liked, with a count that rolls along.',
+    },
+    {
+      id: 'mute-toggle',
+      title: 'MuteToggle',
+      symbols: ['MuteToggle'],
+      demo: 'MuteToggle',
+      blurb:
+        'Mute and unmute in one button: the bell is slashed or rings, and the label rolls with it.',
     },
     {
       id: 'card',
       title: 'Card',
       symbols: ['Card', 'CardHeader', 'CardBody', 'CardFooter'],
       demo: 'Card',
-      blurb: 'A surface with a header, a body and a footer for actions.',
+      blurb: 'A white sheet with a fine outline: a header, a body and a footer for actions.',
+    },
+    {
+      id: 'slip-card',
+      title: 'SlipCard',
+      symbols: ['SlipCard'],
+      demo: 'SlipCard',
+      blurb:
+        'A card with a note tucked underneath. Pull the tab and the note slides out from under its cover.',
+    },
+    {
+      id: 'accordion',
+      title: 'Accordion',
+      symbols: ['Accordion'],
+      demo: 'Accordion',
+      blurb:
+        'Questions with their answers folded away. One open at a time, or several with multiple.',
+    },
+    {
+      id: 'carousel',
+      title: 'Carousel',
+      symbols: ['Carousel'],
+      demo: 'Carousel',
+      blurb:
+        'A few slides, changed by swipe, arrow keys, buttons or dots. The indicator stretches like a worm on its way.',
+    },
+    {
+      id: 'glide-nav',
+      title: 'GlideNav',
+      symbols: ['GlideNav'],
+      demo: 'GlideNav',
+      blurb:
+        'Sidebar navigation where a soft highlight follows the pointer and the active bar springs to your choice.',
+    },
+    {
+      id: 'step-progress',
+      title: 'StepProgress',
+      symbols: ['StepProgress'],
+      demo: 'StepProgress',
+      blurb:
+        'Where a wizard is up to. Finished steps get a check, the current one pulses; your own Back and Next drive it.',
+    },
+    {
+      id: 'drill-stack',
+      title: 'DrillStack',
+      symbols: ['DrillStack'],
+      demo: 'DrillStack',
+      blurb:
+        'Drill into a hierarchy one level at a time; each level slides onto the stack and breadcrumbs pull you back out.',
+    },
+    {
+      id: 'progress-ring',
+      title: 'ProgressRing',
+      symbols: ['ProgressRing'],
+      demo: 'ProgressRing',
+      blurb:
+        'A ring that sweeps to the value while the number counts along; 100% turns into a check.',
+    },
+    {
+      id: 'odometer',
+      title: 'Odometer',
+      symbols: ['Odometer'],
+      demo: 'Odometer',
+      blurb:
+        'Rolling digits for any number that changes. It is decorative, so label whatever holds it.',
     },
     {
       id: 'cx',

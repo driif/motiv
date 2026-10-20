@@ -1,0 +1,37 @@
+@layer motiv.components {
+  .motiv-odometer {
+    display: inline-flex;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+  }
+
+  .motiv-odometer__col {
+    display: block;
+    height: 1.2em;
+    overflow: hidden;
+    transition: opacity 0.3s var(--motiv-ease);
+  }
+
+  .motiv-odometer__col--dim {
+    opacity: 0.3;
+  }
+
+  .motiv-odometer__strip {
+    display: flex;
+    flex-direction: column;
+    transition: translate 0.6s var(--motiv-ease-spring);
+
+    & > span {
+      display: block;
+      height: 1.2em;
+      text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-odometer__col,
+    .motiv-odometer__strip {
+      transition: none;
+    }
+  }
+}

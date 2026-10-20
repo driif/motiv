@@ -1,0 +1,100 @@
+@layer motiv.components {
+  .motiv-elastic-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 4);
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-elastic-tabs__list {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--_count), minmax(0, 1fr));
+    border-bottom: 1px solid var(--motiv-color-border);
+  }
+
+  .motiv-elastic-tabs__tab {
+    min-height: 44px;
+    padding: 0 calc(var(--motiv-space) * 2);
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--motiv-color-text-muted);
+    white-space: nowrap;
+    background: transparent;
+    border: 0;
+    border-radius: var(--motiv-radius-sm);
+    cursor: pointer;
+
+    &:hover,
+    &[aria-selected="true"] {
+      color: var(--motiv-color-text);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: -3px;
+    }
+  }
+
+  .motiv-elastic-tabs__indicator {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: calc(100% / var(--_count));
+    height: 2px;
+    padding: 0 14px;
+    translate: calc(var(--_index) * 100%) 0;
+    transition: translate 0.5s var(--motiv-ease-spring);
+    pointer-events: none;
+  }
+
+  .motiv-elastic-tabs__bar {
+    display: block;
+    height: 100%;
+    background: var(--motiv-color-primary);
+    border-radius: 2px;
+  }
+
+  .motiv-elastic-tabs__panels {
+    display: grid;
+  }
+
+  .motiv-elastic-tabs__panel {
+    grid-area: 1 / 1;
+    min-width: 0;
+    visibility: hidden;
+    opacity: 0;
+    translate: 18px 0;
+    transition:
+      opacity 0.25s var(--motiv-ease),
+      translate 0.45s var(--motiv-ease-spring),
+      visibility 0s 0.45s;
+
+    &[data-position="before"] {
+      translate: -18px 0;
+    }
+
+    &[data-position="current"] {
+      visibility: visible;
+      opacity: 1;
+      translate: 0;
+      transition:
+        opacity 0.25s var(--motiv-ease),
+        translate 0.45s var(--motiv-ease-spring),
+        visibility 0s;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-elastic-tabs__indicator,
+    .motiv-elastic-tabs__panel,
+    .motiv-elastic-tabs__panel[data-position="current"] {
+      transition: none;
+    }
+  }
+}

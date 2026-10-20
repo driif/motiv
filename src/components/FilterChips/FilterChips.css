@@ -1,0 +1,120 @@
+@layer motiv.components {
+  .motiv-filter-chips {
+    --_slot: 22px;
+
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 3);
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-filter-chips__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--motiv-space) * 2);
+  }
+
+  /* The check's slot is always reserved, so a chip never changes width; the label slides. */
+  .motiv-filter-chips__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--_slot) - 16px);
+    min-height: 44px;
+    padding: 0 15px;
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--motiv-color-text);
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius-full);
+    cursor: pointer;
+    transition: scale 0.15s var(--motiv-ease);
+
+    &:active {
+      scale: 0.95;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+
+    &[aria-pressed="true"] {
+      background: color-mix(in oklch, var(--motiv-color-primary) 22%, var(--motiv-color-surface));
+      border-color: var(--motiv-color-primary);
+    }
+  }
+
+  .motiv-filter-chips__check {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    opacity: 0;
+    scale: 0.3;
+    rotate: -40deg;
+    transition:
+      opacity 0.2s var(--motiv-ease),
+      scale 0.45s var(--motiv-ease-spring),
+      rotate 0.45s var(--motiv-ease-spring);
+
+    [aria-pressed="true"] > & {
+      opacity: 1;
+      scale: 1;
+      rotate: 0deg;
+    }
+  }
+
+  .motiv-filter-chips__label {
+    translate: calc(var(--_slot) / -2) 0;
+    transition: translate 0.4s var(--motiv-ease-spring);
+
+    [aria-pressed="true"] > & {
+      translate: 0;
+    }
+  }
+
+  .motiv-filter-chips__summary {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2);
+    min-height: 44px;
+    font-size: 0.875rem;
+    color: var(--motiv-color-text-muted);
+  }
+
+  .motiv-filter-chips__clear {
+    min-height: 44px;
+    padding: 0 calc(var(--motiv-space) * 2);
+    font: inherit;
+    color: var(--motiv-color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    background: transparent;
+    border: 0;
+    border-radius: var(--motiv-radius-sm);
+    cursor: pointer;
+    transition:
+      opacity 0.25s var(--motiv-ease),
+      translate 0.35s var(--motiv-ease-spring);
+
+    &:disabled {
+      opacity: 0;
+      translate: -6px 0;
+      cursor: default;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-filter-chips__chip,
+    .motiv-filter-chips__check,
+    .motiv-filter-chips__label,
+    .motiv-filter-chips__clear {
+      transition: none;
+    }
+  }
+}

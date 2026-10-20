@@ -1,0 +1,134 @@
+@layer motiv.components {
+  /* Label, spinner and confirmation share one grid cell, so the button keeps the widest
+     width and only the background layer morphs (scaled by --_shrink = height / width). */
+  .motiv-morph {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    min-height: 44px;
+    padding: 12px 22px;
+    font: inherit;
+    color: var(--motiv-color-on-primary);
+    white-space: nowrap;
+    background: transparent;
+    border: 0;
+    border-radius: var(--motiv-radius-full);
+    cursor: pointer;
+    isolation: isolate;
+
+    & > * {
+      grid-area: 1 / 1;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &[data-phase="loading"] {
+      cursor: progress;
+    }
+  }
+
+  .motiv-morph__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--motiv-color-primary);
+    border-radius: inherit;
+    transition: scale 0.5s var(--motiv-ease-spring);
+
+    [data-phase="loading"] > & {
+      scale: var(--_shrink) 1;
+    }
+  }
+
+  .motiv-morph__label {
+    transition:
+      opacity 0.2s,
+      translate 0.3s var(--motiv-ease);
+
+    [data-phase="loading"] > &,
+    [data-phase="done"] > & {
+      opacity: 0;
+      translate: 0 -10px;
+    }
+  }
+
+  .motiv-morph__spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid color-mix(in oklch, currentColor 25%, transparent);
+    border-top-color: currentColor;
+    border-radius: 50%;
+    opacity: 0;
+    scale: 0.4;
+    transition:
+      opacity 0.2s,
+      scale 0.35s var(--motiv-ease-spring);
+
+    [data-phase="loading"] > & {
+      opacity: 1;
+      scale: 1;
+      animation: motiv-morph-spin 0.7s linear infinite;
+    }
+  }
+
+  .motiv-morph__done {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2);
+    opacity: 0;
+    translate: 0 10px;
+    transition:
+      opacity 0.25s,
+      translate 0.45s var(--motiv-ease-spring);
+
+    [data-phase="done"] > & {
+      opacity: 1;
+      translate: 0;
+      transition-delay: 0.2s;
+    }
+  }
+
+  .motiv-morph__check {
+    width: 18px;
+    height: 18px;
+    scale: 0.3;
+    rotate: -30deg;
+    transition:
+      scale 0.45s var(--motiv-ease-spring),
+      rotate 0.45s var(--motiv-ease-spring);
+
+    [data-phase="done"] & {
+      scale: 1;
+      rotate: 0deg;
+      transition-delay: 0.3s;
+    }
+  }
+
+  @keyframes motiv-morph-spin {
+    to {
+      rotate: 360deg;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-morph__bg,
+    .motiv-morph__label,
+    .motiv-morph__spinner,
+    .motiv-morph__done,
+    .motiv-morph__check {
+      transition: none;
+    }
+
+    [data-phase="loading"] > .motiv-morph__spinner {
+      animation-duration: 1.6s;
+    }
+  }
+}
