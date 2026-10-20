@@ -1,0 +1,172 @@
+@layer motiv.components {
+  .motiv-select {
+    --_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --_mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+    /* Matches the longest reverse-stagger delay plus the card transition. */
+    --_close: calc(min(var(--_count), 10) * 30ms + 0.35s);
+
+    display: grid;
+    gap: calc(var(--motiv-space) * 2);
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-select__label {
+    font-weight: 600;
+  }
+
+  .motiv-select__anchor {
+    position: relative;
+  }
+
+  .motiv-select__trigger {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 3);
+    box-sizing: border-box;
+    width: 100%;
+    height: 56px;
+    padding: 0 calc(var(--motiv-space) * 4);
+    color: var(--motiv-color-text);
+    font: inherit;
+    font-size: 1.1875rem;
+    font-weight: 600;
+    text-align: start;
+    background: var(--motiv-color-surface);
+    border: 2px solid var(--motiv-color-text);
+    border-radius: 255px 14px 225px 14px / 14px 225px 14px 255px;
+    cursor: pointer;
+    transition: transform 0.3s var(--_spring);
+
+    &:hover:not(:disabled) {
+      transform: rotate(-1deg);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-select__value {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .motiv-select__value--empty {
+    color: var(--motiv-color-text-muted);
+  }
+
+  .motiv-select__code {
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 30px;
+    height: 22px;
+    /* Pure secondary is under 4.5:1 on the light surface at this size. */
+    color: color-mix(in oklch, var(--motiv-color-secondary), var(--motiv-color-text) 40%);
+    font-family: var(--_mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+  }
+
+  .motiv-select__fan {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    transition: transform 0.4s var(--_spring);
+  }
+
+  .motiv-select--open .motiv-select__fan {
+    transform: rotate(90deg);
+  }
+
+  .motiv-select__list {
+    position: absolute;
+    z-index: 10;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: grid;
+    gap: 6px;
+    max-height: 18rem;
+    margin: calc(var(--motiv-space) * 2) 0 0;
+    padding: 4px 8px 8px 4px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    list-style: none;
+    visibility: hidden;
+    transition: visibility 0s var(--_close);
+  }
+
+  .motiv-select--open .motiv-select__list {
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .motiv-select__option {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2.5);
+    height: 42px;
+    padding: 0 14px;
+    font-size: 1.0625rem;
+    background: var(--motiv-color-surface);
+    border: 1.5px solid var(--motiv-color-text);
+    border-radius: 12px 6px 14px 8px / 8px 14px 6px 12px;
+    box-shadow: 3px 3px 0 color-mix(in oklch, var(--motiv-color-text) 16%, transparent);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(-44px) rotate(calc(var(--_tilt) * 3deg)) scale(0.92);
+    transition:
+      transform 0.35s var(--_spring),
+      opacity 0.2s;
+    transition-delay: calc(min(var(--_count) - var(--_i), 10) * 30ms);
+
+    &:hover,
+    &.motiv-select__option--active {
+      background: color-mix(in oklch, var(--motiv-color-secondary) 16%, var(--motiv-color-surface));
+    }
+
+    &[aria-selected="true"] {
+      border: 2px solid var(--motiv-color-primary);
+      box-shadow: 3px 3px 0 color-mix(in oklch, var(--motiv-color-primary) 40%, transparent);
+    }
+  }
+
+  .motiv-select--open .motiv-select__option {
+    opacity: 1;
+    transform: rotate(calc(var(--_tilt) * 0.7deg));
+    transition-delay: calc(min(var(--_i), 10) * 50ms);
+  }
+
+  .motiv-select__hint {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--motiv-color-text-muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-select {
+      --_close: 0s;
+    }
+
+    .motiv-select__trigger,
+    .motiv-select__fan,
+    .motiv-select__option {
+      transition: none;
+    }
+  }
+}

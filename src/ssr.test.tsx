@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { Checkbox, Link, RadioGroup, TextField } from './drawn';
+import { Checkbox, Link, RadioGroup, SegmentedControl, Select, Tabs, TextField } from './drawn';
 import { Button, Card, CardBody, CardHeader } from './index';
 
 describe('server rendering', () => {
@@ -39,5 +39,25 @@ describe('server rendering', () => {
     expect(html).toMatch(/aria-describedby="[^"]+-hint"/);
     expect(html).toContain('class="motiv-checkbox"');
     expect(html).toContain('<legend class="motiv-radio-group__legend">Drink</legend>');
+  });
+
+  it('renders the drawn round-2 components without a DOM', () => {
+    const options = [{ value: 'tea', label: 'Tea' }];
+    const html = renderToStaticMarkup(
+      <>
+        <Tabs
+          label="Drinks"
+          items={[{ value: 'tea', label: 'Tea', panel: 'Hot' }]}
+          value="tea"
+          onChange={() => {}}
+        />
+        <SegmentedControl label="Drink" options={options} value="tea" onChange={() => {}} />
+        <Select label="Drink" options={options} value="tea" onChange={() => {}} name="drink" />
+      </>,
+    );
+    expect(html).toContain('role="tablist"');
+    expect(html).toContain('role="radiogroup"');
+    expect(html).toContain('aria-expanded="false"');
+    expect(html).toContain('<input type="hidden" name="drink" value="tea"/>');
   });
 });
