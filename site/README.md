@@ -23,20 +23,16 @@ pnpm --filter motiv-site dev
 
 ## Version
 
-The header shows `version` from `@driif/motiv/package.json`, i.e. the last version changesets
-released. Unreleased changes on `main` appear on the site under that number until the next
-release.
+The header shows `version` from `@driif/motiv/package.json`. The site deploys only when a release
+publishes, so it always matches the package on npm.
 
 ## Cloudflare
 
-Workers Builds (Git integration, no secrets in the repo). `wrangler.jsonc` at the repo root serves
-`site/dist` as static assets, so `wrangler deploy` skips framework auto-detection.
+Deployed by `.github/workflows/release.yml` after changesets publishes: `pnpm build:site`, then
+`wrangler deploy`. `wrangler.jsonc` at the repo root serves `site/dist` as static assets.
+Workers Builds (the Cloudflare Git integration) stays disconnected, or it would deploy every push.
 
-| Setting              | Value                                    |
-| -------------------- | ---------------------------------------- |
-| Root directory       | `/`                                      |
-| Build command        | `pnpm build && pnpm build:site`          |
-| Deploy command       | `npx wrangler deploy`                    |
-| Environment variable | `NODE_VERSION=24`                        |
+Repository secrets: `CLOUDFLARE_API_TOKEN` (template "Edit Cloudflare Workers"),
+`CLOUDFLARE_ACCOUNT_ID`.
 
 Custom domain: `motiv.fedorchuk.me`.

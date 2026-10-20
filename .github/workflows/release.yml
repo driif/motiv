@@ -24,8 +24,18 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - uses: changesets/action@v1
+        id: changesets
         with:
           version: pnpm changeset version
           publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # The site deploys only with a release, so it always matches the published package.
+      - if: steps.changesets.outputs.published == 'true'
+        run: pnpm build:site
+      - if: steps.changesets.outputs.published == 'true'
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
