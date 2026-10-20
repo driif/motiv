@@ -1,5 +1,16 @@
 # @driif/motiv
 
+## 0.6.0
+
+### Minor Changes
+
+- 9ade155: drawn Button: pencil outlines that boil and hatch on hover instead of the brush fill, ghost draws a pencil line under the label, and the loading spinner is a hand-drawn loop.
+
+### Patch Changes
+
+- 9ade155: kinetic: components size with border-box, fixing FloatingField's focus ring, CommandMenu's launcher and ElasticTabs' indicator; MorphSubmitButton keeps its background behind the label and spinner.
+- 9ade155: kinetic Radio previews the dot on hover and pops in with a ripple when checked; matrix Link highlights faster and smoothly.
+
 ## 0.5.1
 
 ### Patch Changes
