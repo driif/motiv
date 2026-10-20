@@ -1,0 +1,31 @@
+---
+import { Code } from 'astro:components';
+import { catalog } from '../catalog.mjs';
+
+interface Props {
+  style: 'drawn' | 'motiv';
+  id: string;
+}
+
+const { style, id } = Astro.props;
+const section = catalog[style].find((entry) => entry.id === id);
+if (!section) throw new Error(`site/src/catalog.mjs has no ${style} section "${id}"`);
+
+const sources = import.meta.glob<string>('../demos/*/*.tsx', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+const source = sources[`../demos/${style}/${section.demo}.tsx`];
+---
+
+<section class="site-section" id={id}>
+  <div class="site-section__head">
+    <h2 class="site-section__title">
+      <a class="site-section__anchor" href={`#${id}`}>{section.title}</a>
+    </h2>
+    <p class="site-section__blurb">{section.blurb}</p>
+  </div>
+  <div class="site-section__stage"><slot /></div>
+  <Code class="site-code" code={source} lang="tsx" theme="github-dark-dimmed" />
+</section>

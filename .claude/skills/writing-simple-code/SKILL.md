@@ -96,6 +96,7 @@ until an app needs a second one.
 - [ ] No single-use helpers, duplicate branches or impossible-state guards
 - [ ] Every comment passes the mechanism-or-external-constraint test (`references/comments.md`)
 - [ ] No TODOs
+- [ ] A new, changed or removed export has its site demo and `site/src/catalog.mjs` section updated (`pnpm check:site`, `typecheck:site`)
 
 If a box can't be checked, fix it or justify the exception in the commit body.
 
