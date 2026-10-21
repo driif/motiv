@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.8.0
+
+### Minor Changes
+
+- c192d95: BREAKING: `--motiv-btn-*` tokens are renamed to `--motiv-button-*`; component tokens (`--motiv-button-*`, `--motiv-card-*`, `--motiv-text-field-*`, `--motiv-checkbox-*`, …) now work the same in kinetic, drawn and matrix.
+
 ## 0.7.0
 
 ### Minor Changes
