@@ -1,28 +1,29 @@
 @layer motiv.components {
   .motiv-btn {
-    --_bg: var(--motiv-btn-bg, var(--motiv-color-primary));
-    --_color: var(--motiv-btn-color, var(--motiv-color-on-primary));
-    --_border: var(--motiv-btn-border-color, var(--_bg));
+    --_bg: var(--motiv-button-bg, var(--motiv-color-primary));
+    --_color: var(--motiv-button-color, var(--motiv-color-on-primary));
+    --_border: var(--motiv-button-border-color, var(--_bg));
     /* Hover moves the fill away from its label color, so contrast never drops in either theme:
        dark labels (primary, secondary) lighten, light labels (danger) darken. */
     --_hover-mix: white;
     --_bg-hover: color-mix(in oklch, var(--_bg), var(--_hover-mix) 15%);
+    --_border-hover: var(--motiv-button-border-color, var(--_bg-hover));
 
     box-sizing: border-box;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: calc(var(--motiv-space) * 2);
-    min-height: var(--motiv-btn-height, var(--_height));
-    padding: 0 var(--motiv-btn-px, var(--_px));
-    font-family: var(--motiv-btn-font, var(--motiv-font-body));
+    min-height: var(--motiv-button-height, var(--_height));
+    padding: 0 var(--motiv-button-px, var(--_px));
+    font-family: var(--motiv-button-font, var(--motiv-font-body));
     font-size: var(--_font-size);
     font-weight: 600;
     line-height: 1;
     color: var(--_color);
     background: var(--_bg);
-    border: var(--motiv-btn-border-width, 1px) solid var(--_border);
-    border-radius: var(--motiv-btn-radius, var(--motiv-radius-full));
+    border: var(--motiv-button-border-width, 1px) solid var(--_border);
+    border-radius: var(--motiv-button-radius, var(--motiv-radius-full));
     cursor: pointer;
     text-decoration: none;
     white-space: nowrap;
@@ -30,8 +31,8 @@
     transition: scale 0.35s var(--motiv-ease-spring);
 
     &:hover:not(:disabled, [aria-disabled="true"]) {
-      background: var(--motiv-btn-bg-hover, var(--_bg-hover));
-      border-color: var(--motiv-btn-border-color-hover, var(--_border-hover, var(--_bg-hover)));
+      background: var(--motiv-button-bg-hover, var(--_bg-hover));
+      border-color: var(--motiv-button-border-color-hover, var(--_border-hover));
     }
 
     &:active:not(:disabled, [aria-disabled="true"]) {
@@ -71,30 +72,34 @@
   }
 
   .motiv-btn--secondary {
-    --_bg: var(--motiv-btn-bg, var(--motiv-color-secondary));
-    --_color: var(--motiv-btn-color, var(--motiv-color-on-secondary));
+    --_bg: var(--motiv-button-bg, var(--motiv-color-secondary));
+    --_color: var(--motiv-button-color, var(--motiv-color-on-secondary));
   }
 
   .motiv-btn--danger {
-    --_bg: var(--motiv-btn-bg, var(--motiv-color-danger));
-    --_color: var(--motiv-btn-color, var(--motiv-color-on-danger));
+    --_bg: var(--motiv-button-bg, var(--motiv-color-danger));
+    --_color: var(--motiv-button-color, var(--motiv-color-on-danger));
     --_hover-mix: black;
   }
 
   .motiv-btn--outline {
-    --_bg: var(--motiv-btn-bg, transparent);
-    --_color: var(--motiv-btn-color, var(--motiv-color-text));
-    --_border: var(--motiv-btn-border-color, var(--motiv-color-primary));
-    --_bg-hover: color-mix(in oklch, var(--motiv-color-primary) 14%, transparent);
+    --_bg: var(--motiv-button-bg, transparent);
+    --_color: var(--motiv-button-color, var(--motiv-color-text));
+    --_border: var(--motiv-button-border-color, var(--motiv-color-primary));
+    --_bg-hover: color-mix(
+      in oklch,
+      var(--motiv-button-bg, transparent),
+      var(--motiv-color-primary) 14%
+    );
     --_border-hover: var(--_border);
   }
 
   .motiv-btn--ghost {
-    --_bg: var(--motiv-btn-bg, transparent);
-    --_color: var(--motiv-btn-color, var(--motiv-color-text));
-    --_border: var(--motiv-btn-border-color, transparent);
-    --_bg-hover: color-mix(in oklch, var(--motiv-color-text) 8%, transparent);
-    --_border-hover: transparent;
+    --_bg: var(--motiv-button-bg, transparent);
+    --_color: var(--motiv-button-color, var(--motiv-color-text));
+    --_border: var(--motiv-button-border-color, transparent);
+    --_bg-hover: color-mix(in oklch, var(--motiv-button-bg, transparent), var(--_color) 8%);
+    --_border-hover: var(--_border);
   }
 
   .motiv-btn__icon {

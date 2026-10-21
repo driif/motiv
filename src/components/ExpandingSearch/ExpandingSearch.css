@@ -33,14 +33,14 @@
     position: absolute;
     top: 0;
     height: var(--_size);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
+    background: var(--motiv-text-field-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-text-field-border-color, var(--motiv-color-border));
     transition:
       translate 0.5s var(--motiv-ease),
       scale 0.5s var(--motiv-ease);
 
     [data-open] & {
-      border-color: var(--motiv-color-primary);
+      border-color: var(--motiv-text-field-accent, var(--motiv-color-primary));
     }
   }
 
@@ -96,12 +96,12 @@
   .motiv-xsearch__toggle {
     width: var(--_size);
     height: var(--_size);
-    color: var(--motiv-color-text);
+    color: var(--motiv-text-field-color, var(--motiv-color-text));
     pointer-events: auto;
     transition: scale 0.4s var(--motiv-ease-spring);
 
     [data-open] & {
-      color: var(--motiv-color-primary);
+      color: var(--motiv-text-field-accent, var(--motiv-color-primary));
       scale: 0.9;
     }
   }
@@ -112,7 +112,7 @@
     flex: 1;
     min-width: 0;
     height: 100%;
-    color: var(--motiv-color-text);
+    color: var(--motiv-text-field-color, var(--motiv-color-text));
     font: inherit;
     font-size: 1rem;
     background: transparent;
@@ -144,7 +144,7 @@
       rotate 0.45s var(--motiv-ease-spring);
 
     &:hover {
-      color: var(--motiv-color-text);
+      color: var(--motiv-text-field-color, var(--motiv-color-text));
     }
   }
 
@@ -172,8 +172,8 @@
     margin: 0;
     padding: 6px;
     list-style: none;
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
+    background: var(--motiv-text-field-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-text-field-border-color, var(--motiv-color-border));
     border-radius: var(--motiv-radius);
     box-shadow: var(--motiv-shadow-md);
     opacity: 0;
@@ -204,7 +204,7 @@
     width: 100%;
     min-height: 44px;
     padding: 0 12px;
-    color: var(--motiv-color-text);
+    color: var(--motiv-text-field-color, var(--motiv-color-text));
     font: inherit;
     font-size: 0.875rem;
     text-align: left;
@@ -225,7 +225,8 @@
     }
 
     &:hover {
-      background: var(--motiv-color-surface-hover);
+      --_bg-hover: color-mix(in oklch, var(--motiv-text-field-bg), var(--motiv-color-primary) 10%);
+      background: var(--_bg-hover, var(--motiv-color-surface-hover));
     }
 
     &:focus-visible {

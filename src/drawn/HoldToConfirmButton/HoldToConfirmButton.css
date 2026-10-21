@@ -2,6 +2,8 @@
   .motiv-hold-button {
     --_hold: 1400ms;
     --_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --_ink: var(--motiv-color-danger);
+    --_border: var(--motiv-button-border-color, var(--_ink));
 
     position: relative;
     isolation: isolate;
@@ -16,10 +18,10 @@
     font-size: 0.9375rem;
     font-weight: 600;
     line-height: 1;
-    color: var(--motiv-color-danger);
-    background: transparent;
-    border: 2px solid var(--motiv-color-danger);
-    border-radius: 18px 7px 20px 6px / 7px 16px 6px 20px;
+    color: var(--motiv-button-color, var(--_ink));
+    background: var(--motiv-button-bg, transparent);
+    border: var(--motiv-button-border-width, 2px) solid var(--_border);
+    border-radius: var(--motiv-button-radius, 18px 7px 20px 6px / 7px 16px 6px 20px);
     cursor: pointer;
     touch-action: none;
     user-select: none;
@@ -56,7 +58,7 @@
   .motiv-hold-button__fill {
     position: absolute;
     inset: 0;
-    background: var(--motiv-color-danger);
+    background: var(--_ink);
     clip-path: polygon(
       0 0,
       94% 0,

@@ -19,7 +19,7 @@ JSDoc on an **exported** prop or component is consumer documentation and shows u
 | Pattern | Example |
 |---|---|
 | **Decision journal** — why this shape was chosen over another | `// Spread rest instead of picking props because apps pass data-* attributes` |
-| **Counterfactual** — what would break without the line | `// Without this the hover color ignores a subtree --motiv-btn-bg override` |
+| **Counterfactual** — what would break without the line | `// Without this the hover color ignores a subtree --motiv-button-bg override` |
 | **Per-guard justification** — a paragraph defending each condition | `// !loading: a loading button is already disabled, but we also check here so…` |
 | **Restatement** — the next line already says it | `// Merge class names`, `// Render the icon` |
 | **JSDoc echoing the signature** | `/** The button variant */` above `variant?: ButtonVariant` |
@@ -41,7 +41,7 @@ Before — a decision journal for one CSS line:
 
 ```css
 /* We compute the hover color here instead of using --motiv-color-primary-hover
-   from tokens.css, because an app may set --motiv-btn-bg on a wrapper to make
+   from tokens.css, because an app may set --motiv-button-bg on a wrapper to make
    a subtree of buttons a different color, and in that case the global hover
    token would still be the primary hover and the button would flash green on
    hover. Computing from --_bg makes hover follow whatever the bg resolved to. */
@@ -51,7 +51,7 @@ Before — a decision journal for one CSS line:
 After — the mechanism, once:
 
 ```css
-/* Derived from the resolved --_bg so subtree --motiv-btn-bg overrides also shift hover. */
+/* Derived from the resolved --_bg so subtree --motiv-button-bg overrides also shift hover. */
 --_bg-hover: color-mix(in oklch, var(--_bg), var(--motiv-color-text) 15%);
 ```
 

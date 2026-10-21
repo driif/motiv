@@ -17,20 +17,23 @@
 
   .motiv-matrix-progress__value {
     font-variant-numeric: tabular-nums;
-    color: var(--motiv-color-primary);
+    color: var(--motiv-progress-accent, var(--motiv-color-primary));
   }
 
   /* The mask cuts track and fill into block segments. */
   .motiv-matrix-progress__track {
     height: 12px;
     overflow: hidden;
-    background: color-mix(in oklch, var(--motiv-color-primary) 18%, transparent);
+    background: var(
+      --motiv-progress-bg,
+      color-mix(in oklch, var(--motiv-color-primary) 18%, transparent)
+    );
     mask: repeating-linear-gradient(90deg, #000 0 8px, transparent 8px 11px);
   }
 
   .motiv-matrix-progress__fill {
     height: 100%;
-    background: var(--motiv-color-primary);
+    background: var(--motiv-progress-accent, var(--motiv-color-primary));
     transform: scaleX(calc(var(--_value) / 100));
     transform-origin: left;
     transition: transform 0.5s steps(8);

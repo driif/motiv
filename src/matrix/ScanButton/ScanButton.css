@@ -13,10 +13,17 @@
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--motiv-color-primary);
-    background: color-mix(in oklch, var(--motiv-color-primary) 8%, transparent);
-    border: 1px solid color-mix(in oklch, var(--motiv-color-primary) 55%, transparent);
-    border-radius: var(--motiv-radius-sm);
+    color: var(--motiv-button-color, var(--motiv-color-primary));
+    background: var(
+      --motiv-button-bg,
+      color-mix(in oklch, var(--motiv-color-primary) 8%, transparent)
+    );
+    border: var(--motiv-button-border-width, 1px) solid
+      var(
+        --motiv-button-border-color,
+        color-mix(in oklch, var(--motiv-color-primary) 55%, transparent)
+      );
+    border-radius: var(--motiv-button-radius, var(--motiv-radius-sm));
     cursor: pointer;
 
     &:focus-visible {
@@ -57,7 +64,7 @@
     position: absolute;
     width: 11px;
     height: 11px;
-    border: 2px solid var(--motiv-color-primary);
+    border: 2px solid var(--motiv-button-border-color, var(--motiv-color-primary));
     transition: transform 0.35s var(--motiv-ease-spring);
   }
 

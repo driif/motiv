@@ -1,5 +1,7 @@
 @layer motiv.components {
   .motiv-float {
+    --_accent: var(--motiv-text-field-accent, var(--motiv-color-primary));
+
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 2);
@@ -17,7 +19,7 @@
       position: absolute;
       inset: -4px;
       border: 3px solid var(--motiv-color-primary-subtle);
-      border-radius: calc(var(--motiv-radius) + 4px);
+      border-radius: calc(var(--motiv-text-field-radius, var(--motiv-radius)) + 4px);
       opacity: 0;
       scale: 0.97;
       pointer-events: none;
@@ -36,16 +38,16 @@
     width: 100%;
     height: 58px;
     padding: 22px 44px 6px 14px;
-    color: var(--motiv-color-text);
+    color: var(--motiv-text-field-color, var(--motiv-color-text));
     font: inherit;
     font-size: 1rem;
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius);
+    background: var(--motiv-text-field-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-text-field-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-text-field-radius, var(--motiv-radius));
     outline: none;
 
     &:focus {
-      border-color: var(--motiv-color-primary);
+      border-color: var(--_accent);
     }
 
     &:not(:focus, :placeholder-shown):invalid {
@@ -77,7 +79,7 @@
     }
 
     :focus + & {
-      color: var(--motiv-color-primary);
+      color: var(--_accent);
     }
   }
 
@@ -87,7 +89,7 @@
     right: 14px;
     width: 20px;
     height: 20px;
-    color: var(--motiv-color-primary);
+    color: var(--_accent);
     stroke-width: 2;
     opacity: 0;
     scale: 0.3;

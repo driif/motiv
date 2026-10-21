@@ -5,10 +5,10 @@
     gap: calc(var(--motiv-space) * 1.5);
     max-width: 100%;
     padding: 4px 4px 4px 14px;
-    color: var(--motiv-color-text);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-md);
+    color: var(--motiv-text-field-color, var(--motiv-color-text));
+    background: var(--motiv-text-field-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-text-field-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-text-field-radius, var(--motiv-radius-md));
   }
 
   .motiv-copy__value {
@@ -38,7 +38,7 @@
 
     &[data-copied="true"] {
       color: var(--motiv-color-on-primary);
-      background: var(--motiv-color-primary);
+      background: var(--motiv-text-field-accent, var(--motiv-color-primary));
     }
 
     &:focus-visible {

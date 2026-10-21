@@ -11,9 +11,9 @@
     display: grid;
     grid-template-columns: repeat(var(--_count), minmax(0, 1fr));
     padding: 4px;
-    background: var(--motiv-color-surface-hover);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-sm);
+    background: var(--motiv-segmented-control-bg, var(--motiv-color-surface-hover));
+    border: 1px solid var(--motiv-segmented-control-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-segmented-control-radius, var(--motiv-radius-sm));
     isolation: isolate;
   }
 
@@ -32,9 +32,15 @@
     display: block;
     width: 100%;
     height: 100%;
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: calc(var(--motiv-radius-sm) - 2px);
+    /* Invalid while -bg is unset, so the var() below falls back to the surface pill. */
+    --_pill: color-mix(
+      in oklch,
+      var(--motiv-segmented-control-bg),
+      var(--motiv-segmented-control-color, var(--motiv-color-text)) 16%
+    );
+    background: var(--motiv-segmented-control-accent, var(--_pill, var(--motiv-color-surface)));
+    border: 1px solid var(--motiv-segmented-control-border-color, var(--motiv-color-border));
+    border-radius: calc(var(--motiv-segmented-control-radius, var(--motiv-radius-sm)) - 2px);
     box-shadow: var(--motiv-shadow-sm);
   }
 
@@ -44,15 +50,15 @@
     padding: 0 calc(var(--motiv-space) * 2);
     font: inherit;
     font-size: 0.875rem;
-    color: var(--motiv-color-text-muted);
+    color: var(--motiv-segmented-control-color, var(--motiv-color-text-muted));
     background: transparent;
     border: 0;
-    border-radius: calc(var(--motiv-radius-sm) - 2px);
+    border-radius: calc(var(--motiv-segmented-control-radius, var(--motiv-radius-sm)) - 2px);
     cursor: pointer;
 
     &:hover,
     &[aria-checked="true"] {
-      color: var(--motiv-color-text);
+      color: var(--motiv-segmented-control-color, var(--motiv-color-text));
     }
 
     &:focus-visible {

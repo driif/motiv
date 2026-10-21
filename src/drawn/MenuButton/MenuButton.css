@@ -9,10 +9,10 @@
     width: var(--_size);
     height: var(--_size);
     padding: 0;
-    color: var(--motiv-color-text);
-    background: transparent;
+    color: var(--motiv-menu-button-color, var(--motiv-color-text));
+    background: var(--motiv-menu-button-bg, transparent);
     border: 0;
-    border-radius: var(--motiv-radius-sm);
+    border-radius: var(--motiv-menu-button-radius, var(--motiv-radius-sm));
     cursor: pointer;
 
     &:focus-visible {

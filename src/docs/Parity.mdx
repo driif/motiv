@@ -1,0 +1,70 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Docs/Parity" />
+
+# Parity
+
+Every style is meant to cover the same set of component categories. An app should find a button, a
+card or a slider whichever entry it imports: `@driif/motiv` (kinetic), `@driif/motiv/drawn` or
+`@driif/motiv/matrix`. New parity components use the generic category name in every entry
+(`Slider` from all three, same props). Signature-effect components such as `InkSplatterButton`,
+`GlitchThemeToggle` or `MagneticButton` stay style-specific.
+
+All three styles already share the component tokens (see Docs/Theming), so an override like
+`--motiv-button-border-color` reaches every button.
+
+## Matrix
+
+— marks a gap. ¹ marks a component that covers the category under a style-specific name; it gets a
+generic export when that category is built. Drawn `NavItem` is a single nav link or button, a
+building block for a nav list rather than one.
+
+| Category | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| Button | `Button` | `Button` | `Button` |
+| IconButton | `IconButton` | `IconButton` | `IconButton` |
+| Card | `Card` | `Card` | `Card` |
+| TextField | `FloatingField` ¹ | `TextField` | `TextField` |
+| Textarea | `Textarea` | — | — |
+| Select | — | `Select` | `TerminalSelect` ¹ |
+| Checkbox | `SpringCheckbox` ¹ | `Checkbox` | `Checkbox` |
+| Radio | `Radio` | `Radio` | `Radio` |
+| Switch | `LiquidSwitch` ¹ | — | — |
+| Slider | `MomentumSlider` ¹, `FrequencySlider` ¹ | — | — |
+| Tabs | `ElasticTabs` ¹ | `Tabs` | `HudTabs` ¹ |
+| SegmentedControl | `SegmentedControl` | `SegmentedControl` | — |
+| Progress | `ProgressRing` ¹, `StepProgress` ¹ | `Progress` | `Progress` |
+| Link | — | `Link` | `Link` |
+| Tooltip | — | `Tooltip` | — |
+| Accordion | `Accordion` | — | — |
+| Nav | `GlideNav` ¹, `DrillStack` ¹ | — | `ChevronNav` ¹ |
+| ThemeToggle | `ThemeToggle` | `ThemeToggle` | `GlitchThemeToggle` ¹ |
+| MenuButton | `MenuButton` | `MenuButton` | `SignalBurger` ¹ |
+| Stepper | `Stepper` | — | — |
+| Carousel | `Carousel` | — | — |
+| Chips | `FilterChips` ¹ | — | — |
+| OtpInput | `OtpInput` | — | — |
+| CommandMenu | `CommandMenu` | — | — |
+
+Style-specific, outside the categories: kinetic `MagneticButton`, `MorphSubmitButton`,
+`LikeButton`, `BellButton`, `MuteToggle`, `BadgeButton`, `CopyField`, `ExpandingSearch`,
+`RadialMenu`, `Odometer`, `SlipCard`; drawn `InkSplatterButton`, `HoldToConfirmButton`,
+`OrbitalThemeToggle`, `NavItem`; matrix `ScanButton`, `DecodeSecretField`.
+
+## Backlog
+
+Gaps are filled in this order:
+
+1. Switch for drawn and matrix
+2. Slider for drawn and matrix
+3. Textarea for drawn and matrix
+4. Nav: a nav list for drawn (from `NavItem`), generic `Nav` in kinetic and matrix
+5. Tabs: generic `Tabs` in kinetic and matrix
+6. Select: kinetic, and a generic `Select` in matrix
+7. Tooltip for kinetic and matrix
+8. Accordion for drawn and matrix
+9. Stepper for drawn and matrix
+10. Carousel for drawn and matrix
+
+The remaining gaps (matrix SegmentedControl, kinetic Link, Chips, OtpInput and CommandMenu for
+drawn and matrix, and the other ¹ names) follow after.

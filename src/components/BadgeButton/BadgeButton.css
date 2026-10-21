@@ -6,16 +6,20 @@
     width: 56px;
     height: 56px;
     padding: 0;
-    color: var(--motiv-color-text);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-lg);
+    color: var(--motiv-icon-button-color, var(--motiv-color-text));
+    background: var(--motiv-icon-button-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-icon-button-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-icon-button-radius, var(--motiv-radius-lg));
     box-shadow: var(--motiv-shadow-sm);
     cursor: pointer;
     transition: scale 0.3s var(--motiv-ease-spring);
 
     &:hover:not(:disabled) {
-      background: var(--motiv-color-surface-hover);
+      --_bg-hover: color-mix(in oklch, var(--motiv-icon-button-bg), var(--motiv-color-primary) 10%);
+      background: var(
+        --motiv-icon-button-bg-hover,
+        var(--_bg-hover, var(--motiv-color-surface-hover))
+      );
     }
 
     &:active:not(:disabled) {

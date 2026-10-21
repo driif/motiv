@@ -77,24 +77,322 @@ A subtree can use its own theme:
 
 ## 3. Component tokens
 
-Components read their own tokens with a fallback to the base tokens. Set them on `:root` for every
-instance or on any ancestor for one subtree:
+Component tokens restyle one kind of component without touching the rest. They have the same names
+in all three styles, so an override works whichever stylesheet the app imports. Each falls back to
+the base or derived token the component uses today, so nothing changes until you set one. Set them
+on `:root` for every instance or on any ancestor for one subtree:
 
 ```css
+:root {
+  --motiv-button-border-color: green;
+  --motiv-text-field-accent: green;
+}
+
 .settings-page {
-  --motiv-btn-radius: var(--motiv-radius-sm);
+  --motiv-button-radius: var(--motiv-radius-sm);
   --motiv-card-padding: 2rem;
 }
 ```
 
-| Button | Card |
+Every category uses the same suffixes, and only where a component paints that property:
+
+| Suffix | Paints |
 |---|---|
-| `--motiv-btn-bg`, `--motiv-btn-bg-hover` | `--motiv-card-bg` |
-| `--motiv-btn-color` | `--motiv-card-border-color` |
-| `--motiv-btn-border-color`, `--motiv-btn-border-color-hover` | `--motiv-card-radius` |
-| `--motiv-btn-border-width` | `--motiv-card-padding`, `--motiv-card-gap` |
-| `--motiv-btn-radius`, `--motiv-btn-height`, `--motiv-btn-px` | `--motiv-card-shadow`, `--motiv-card-shadow-hover` |
-| `--motiv-btn-font` | |
+| `-bg`, `-bg-hover` | the fill, at rest and on hover |
+| `-color` | the label or text |
+| `-border-color`, `-border-color-hover`, `-border-width` | the outline, the frame or (matrix) the HUD corners |
+| `-radius` | the corner radius |
+| `-accent` | the checked, selected, active, focused or filled state |
+
+A component token overrides every variant at once: `--motiv-button-bg` fills primary, secondary,
+danger, outline and ghost buttons alike. Hover fills and borders derive from the overridden `-bg`
+and `-border-color` unless `-bg-hover` or `-border-color-hover` is set. Drawn's sketched corners and matrix's square ones are only
+the `-radius` fallbacks, so setting a radius replaces them.
+
+Unless stated otherwise, kinetic components are named first, then drawn (`@driif/motiv/drawn`), then
+matrix (`@driif/motiv/matrix`). ✓ means the style reads the token, — means its components have no
+such property.
+
+### Button
+
+Read by `Button`, `MagneticButton`, `MorphSubmitButton` · drawn `Button`, `InkSplatterButton`,
+`HoldToConfirmButton` · matrix `Button`, `ScanButton`. The flavored buttons read only the fill,
+color, border and radius tokens; their size is part of the effect.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-button-bg` | ✓ | ✓ | ✓ |
+| `--motiv-button-bg-hover` | ✓ | ✓ | ✓ |
+| `--motiv-button-color` | ✓ | ✓ | ✓ |
+| `--motiv-button-border-color` | ✓ | ✓ | ✓ |
+| `--motiv-button-border-color-hover` | ✓ | ✓ | ✓ |
+| `--motiv-button-border-width` | ✓ | ✓ | ✓ |
+| `--motiv-button-radius` | ✓ | ✓ | ✓ |
+| `--motiv-button-height` | ✓ | ✓ | ✓ |
+| `--motiv-button-px` | ✓ | ✓ | ✓ |
+| `--motiv-button-font` | ✓ | ✓ | ✓ |
+
+### IconButton
+
+Read by `IconButton`, `LikeButton`, `BellButton`, `MuteToggle`, `BadgeButton` · drawn
+`IconButton` · matrix `IconButton`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-icon-button-bg` | ✓ | ✓ | ✓ |
+| `--motiv-icon-button-bg-hover` | ✓ | — | ✓ |
+| `--motiv-icon-button-color` | ✓ | ✓ | ✓ |
+| `--motiv-icon-button-border-color` | ✓ | ✓ | ✓ |
+| `--motiv-icon-button-radius` | ✓ | ✓ | ✓ |
+| `--motiv-icon-button-accent` | ✓ | — | — |
+
+### Card
+
+Read by `Card`, `SlipCard`, `DrillStack` · drawn `Card` · matrix `Card`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-card-bg` | ✓ | ✓ | ✓ |
+| `--motiv-card-border-color` | ✓ | ✓ | ✓ |
+| `--motiv-card-radius` | ✓ | ✓ | ✓ |
+| `--motiv-card-padding` | ✓ | ✓ | ✓ |
+| `--motiv-card-gap` | ✓ | ✓ | ✓ |
+| `--motiv-card-shadow` | ✓ | ✓ | ✓ |
+| `--motiv-card-shadow-hover` | ✓ | ✓ | ✓ |
+
+### TextField
+
+Read by `FloatingField`, `CopyField`, `OtpInput`, `ExpandingSearch` · drawn `TextField` · matrix
+`TextField`, `DecodeSecretField`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-text-field-bg` | ✓ | ✓ | ✓ |
+| `--motiv-text-field-color` | ✓ | ✓ | ✓ |
+| `--motiv-text-field-border-color` | ✓ | ✓ | ✓ |
+| `--motiv-text-field-radius` | ✓ | — | ✓ |
+| `--motiv-text-field-accent` | ✓ | ✓ | ✓ |
+
+### Textarea
+
+Read by `Textarea`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-textarea-bg` | ✓ | — | — |
+| `--motiv-textarea-color` | ✓ | — | — |
+| `--motiv-textarea-border-color` | ✓ | — | — |
+| `--motiv-textarea-radius` | ✓ | — | — |
+| `--motiv-textarea-accent` | ✓ | — | — |
+
+### Select
+
+Read by drawn `Select` · matrix `TerminalSelect`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-select-bg` | — | ✓ | ✓ |
+| `--motiv-select-bg-hover` | — | ✓ | ✓ |
+| `--motiv-select-color` | — | ✓ | ✓ |
+| `--motiv-select-border-color` | — | ✓ | ✓ |
+| `--motiv-select-radius` | — | ✓ | ✓ |
+| `--motiv-select-accent` | — | ✓ | ✓ |
+
+### Checkbox
+
+Read by `SpringCheckbox` · drawn `Checkbox` · matrix `Checkbox`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-checkbox-color` | ✓ | ✓ | ✓ |
+| `--motiv-checkbox-border-color` | ✓ | ✓ | ✓ |
+| `--motiv-checkbox-radius` | ✓ | ✓ | — |
+| `--motiv-checkbox-accent` | ✓ | ✓ | ✓ |
+
+### Radio
+
+Read by `Radio` in all three styles.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-radio-bg` | ✓ | — | — |
+| `--motiv-radio-color` | ✓ | ✓ | ✓ |
+| `--motiv-radio-border-color` | ✓ | ✓ | ✓ |
+| `--motiv-radio-accent` | ✓ | ✓ | ✓ |
+
+### Switch
+
+Read by `LiquidSwitch`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-switch-bg` | ✓ | — | — |
+| `--motiv-switch-color` | ✓ | — | — |
+| `--motiv-switch-border-color` | ✓ | — | — |
+| `--motiv-switch-radius` | ✓ | — | — |
+| `--motiv-switch-accent` | ✓ | — | — |
+
+### Slider
+
+Read by `MomentumSlider`, `FrequencySlider`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-slider-bg` | ✓ | — | — |
+| `--motiv-slider-color` | ✓ | — | — |
+| `--motiv-slider-accent` | ✓ | — | — |
+
+### Tabs
+
+Read by `ElasticTabs` · drawn `Tabs` · matrix `HudTabs`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-tabs-color` | ✓ | ✓ | ✓ |
+| `--motiv-tabs-border-color` | ✓ | ✓ | ✓ |
+| `--motiv-tabs-accent` | ✓ | ✓ | ✓ |
+
+### SegmentedControl
+
+Read by `SegmentedControl` · drawn `SegmentedControl`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-segmented-control-bg` | ✓ | ✓ | — |
+| `--motiv-segmented-control-color` | ✓ | ✓ | — |
+| `--motiv-segmented-control-border-color` | ✓ | ✓ | — |
+| `--motiv-segmented-control-radius` | ✓ | ✓ | — |
+| `--motiv-segmented-control-accent` | ✓ | ✓ | — |
+
+### Progress
+
+Read by `ProgressRing`, `StepProgress` · drawn `Progress` · matrix `Progress`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-progress-bg` | ✓ | ✓ | ✓ |
+| `--motiv-progress-border-color` | ✓ | ✓ | — |
+| `--motiv-progress-accent` | ✓ | ✓ | ✓ |
+
+### Link
+
+Read by drawn `Link` · matrix `Link`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-link-bg-hover` | — | ✓ | ✓ |
+| `--motiv-link-color` | — | ✓ | ✓ |
+
+### Tooltip
+
+Read by drawn `Tooltip`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-tooltip-bg` | — | ✓ | — |
+| `--motiv-tooltip-color` | — | ✓ | — |
+| `--motiv-tooltip-border-color` | — | ✓ | — |
+| `--motiv-tooltip-radius` | — | ✓ | — |
+
+### Accordion
+
+Read by `Accordion`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-accordion-bg` | ✓ | — | — |
+| `--motiv-accordion-bg-hover` | ✓ | — | — |
+| `--motiv-accordion-color` | ✓ | — | — |
+| `--motiv-accordion-border-color` | ✓ | — | — |
+| `--motiv-accordion-radius` | ✓ | — | — |
+| `--motiv-accordion-accent` | ✓ | — | — |
+
+### Nav
+
+Read by `GlideNav` · drawn `NavItem` · matrix `ChevronNav`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-nav-bg` | ✓ | — | — |
+| `--motiv-nav-bg-hover` | ✓ | — | — |
+| `--motiv-nav-color` | ✓ | ✓ | ✓ |
+| `--motiv-nav-border-color` | ✓ | — | — |
+| `--motiv-nav-radius` | ✓ | ✓ | ✓ |
+| `--motiv-nav-accent` | ✓ | ✓ | ✓ |
+
+### ThemeToggle
+
+Read by `ThemeToggle` · drawn `ThemeToggle`, `OrbitalThemeToggle` · matrix `GlitchThemeToggle`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-theme-toggle-bg` | ✓ | ✓ | ✓ |
+| `--motiv-theme-toggle-color` | ✓ | ✓ | ✓ |
+| `--motiv-theme-toggle-border-color` | ✓ | — | — |
+
+### MenuButton
+
+Read by `MenuButton` · drawn `MenuButton` · matrix `SignalBurger`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-menu-button-bg` | ✓ | ✓ | ✓ |
+| `--motiv-menu-button-bg-hover` | ✓ | — | — |
+| `--motiv-menu-button-color` | ✓ | ✓ | ✓ |
+| `--motiv-menu-button-radius` | ✓ | ✓ | ✓ |
+
+The last four have no parity category: they are kinetic-only components with their own prefix.
+`Odometer` paints no color of its own and has no tokens.
+
+### Chip
+
+Read by `FilterChips`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-chip-bg` | ✓ | — | — |
+| `--motiv-chip-color` | ✓ | — | — |
+| `--motiv-chip-border-color` | ✓ | — | — |
+| `--motiv-chip-radius` | ✓ | — | — |
+| `--motiv-chip-accent` | ✓ | — | — |
+
+### Menu
+
+Read by `CommandMenu`, `RadialMenu`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-menu-bg` | ✓ | — | — |
+| `--motiv-menu-bg-hover` | ✓ | — | — |
+| `--motiv-menu-color` | ✓ | — | — |
+| `--motiv-menu-border-color` | ✓ | — | — |
+| `--motiv-menu-radius` | ✓ | — | — |
+| `--motiv-menu-accent` | ✓ | — | — |
+
+### Carousel
+
+Read by `Carousel`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-carousel-bg` | ✓ | — | — |
+| `--motiv-carousel-bg-hover` | ✓ | — | — |
+| `--motiv-carousel-color` | ✓ | — | — |
+| `--motiv-carousel-border-color` | ✓ | — | — |
+| `--motiv-carousel-radius` | ✓ | — | — |
+| `--motiv-carousel-accent` | ✓ | — | — |
+
+### Stepper
+
+Read by `Stepper`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-stepper-bg` | ✓ | — | — |
+| `--motiv-stepper-bg-hover` | ✓ | — | — |
+| `--motiv-stepper-color` | ✓ | — | — |
+| `--motiv-stepper-border-color` | ✓ | — | — |
+| `--motiv-stepper-radius` | ✓ | — | — |
 
 ## Drawn style
 
@@ -119,8 +417,7 @@ It sets its own values for the same base tokens, so every override above works u
 
 `Button`, `buttonClassName`, `Card`, `CardHeader`, `CardBody` and `CardFooter` take the same props
 and render the same `motiv-btn*` / `motiv-card*` classes as the default entry, so switching the
-import does not change app code. The component tokens (`--motiv-btn-*`, `--motiv-card-*`) are
-default-style only.
+import does not change app code.
 
 ## Matrix style
 

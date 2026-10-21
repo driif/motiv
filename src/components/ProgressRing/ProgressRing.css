@@ -22,17 +22,21 @@
   }
 
   .motiv-ring__track {
-    stroke: var(--motiv-color-surface-hover);
+    stroke: var(--motiv-progress-bg, var(--motiv-color-surface-hover));
   }
 
   /* The one dashoffset transition in kinetic: an arc has no transform equivalent. */
   .motiv-ring__arc {
-    stroke: color-mix(in oklch, var(--motiv-color-primary) 60%, var(--motiv-color-surface));
+    stroke: color-mix(
+      in oklch,
+      var(--motiv-progress-accent, var(--motiv-color-primary)) 60%,
+      var(--motiv-color-surface)
+    );
     stroke-dasharray: 1;
     transition: stroke-dashoffset 1s var(--motiv-ease);
 
     [data-done] & {
-      stroke: var(--motiv-color-primary);
+      stroke: var(--motiv-progress-accent, var(--motiv-color-primary));
     }
   }
 
@@ -65,7 +69,7 @@
     grid-area: 1 / 1;
     width: calc(var(--_size) / 3);
     height: calc(var(--_size) / 3);
-    color: var(--motiv-color-primary);
+    color: var(--motiv-progress-accent, var(--motiv-color-primary));
     stroke-width: 2.2;
     opacity: 0;
     scale: 0.3;

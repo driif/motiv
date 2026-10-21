@@ -12,7 +12,11 @@
     display: grid;
     grid-template-columns: repeat(var(--_count), minmax(0, 1fr));
     padding: 4px;
-    border: 1px solid color-mix(in oklch, var(--motiv-color-primary) 40%, transparent);
+    border: 1px solid
+      var(
+        --motiv-tabs-border-color,
+        color-mix(in oklch, var(--motiv-color-primary) 40%, transparent)
+      );
   }
 
   .motiv-matrix-hudtabs__target {
@@ -30,7 +34,7 @@
     position: absolute;
     width: 8px;
     height: 8px;
-    border: 2px solid var(--motiv-color-primary);
+    border: 2px solid var(--motiv-tabs-accent, var(--motiv-color-primary));
   }
 
   .motiv-matrix-hudtabs__corner--tl {
@@ -69,17 +73,17 @@
     text-overflow: ellipsis;
     text-transform: uppercase;
     white-space: nowrap;
-    color: var(--motiv-color-text-muted);
+    color: var(--motiv-tabs-color, var(--motiv-color-text-muted));
     background: transparent;
     border: 0;
     cursor: pointer;
 
     &:hover {
-      color: var(--motiv-color-text);
+      color: var(--motiv-tabs-color, var(--motiv-color-text));
     }
 
     &[aria-selected="true"] {
-      color: var(--motiv-color-primary);
+      color: var(--motiv-tabs-accent, var(--motiv-color-primary));
     }
 
     &:focus-visible {

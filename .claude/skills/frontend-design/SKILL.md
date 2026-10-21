@@ -26,9 +26,9 @@ Read first: `src/styles/tokens.css` (tokens, light/dark), `src/styles/index.css`
   everything and dark mode keeps working.
 - **Component tokens with fallbacks.** Every themable property reads
   `var(--motiv-<comp>-<prop>, var(--motiv-<base-token>))`, e.g.
-  `background: var(--motiv-btn-bg, var(--motiv-color-primary))`. Derived per-component shades
+  `background: var(--motiv-button-bg, var(--motiv-color-primary))`. Derived per-component shades
   (hover) are computed inside the component from the resolved `--_bg`, so a subtree override of
-  `--motiv-btn-bg` also changes hover. Each new `--motiv-<comp>-*` is public API — add only the
+  `--motiv-button-bg` also changes hover. Each new `--motiv-<comp>-*` is public API — add only the
   ones an app needs to override.
 - **Everything in `@layer motiv.*`.** An unlayered app rule must win without `!important`. Keep
   specificity flat: one BEM class per selector, modifiers as `.motiv-x--mod`, no IDs, no element

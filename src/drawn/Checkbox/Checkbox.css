@@ -8,7 +8,7 @@
     align-items: center;
     gap: calc(var(--motiv-space) * 3);
     min-height: 44px;
-    color: var(--motiv-color-text);
+    color: var(--motiv-checkbox-color, var(--motiv-color-text));
     cursor: pointer;
 
     &:has(.motiv-checkbox__input:disabled) {
@@ -22,8 +22,8 @@
     flex-shrink: 0;
     width: 26px;
     height: 26px;
-    border: 2px solid var(--motiv-color-text);
-    border-radius: 6px 3px 7px 4px / 4px 7px 3px 6px;
+    border: 2px solid var(--motiv-checkbox-border-color, var(--motiv-color-text));
+    border-radius: var(--motiv-checkbox-radius, 6px 3px 7px 4px / 4px 7px 3px 6px);
     transition: transform 0.3s var(--_spring);
 
     /* Pencil hatching fill. */
@@ -34,7 +34,12 @@
       border-radius: inherit;
       background: repeating-linear-gradient(
         -45deg,
-        color-mix(in oklch, var(--motiv-color-primary) 45%, transparent) 0 2px,
+        color-mix(
+            in oklch,
+            var(--motiv-checkbox-accent, var(--motiv-color-primary)) 45%,
+            transparent
+          )
+          0 2px,
         transparent 2px 5px
       );
       transform: scale(0);
@@ -53,7 +58,7 @@
 
     & path {
       fill: none;
-      stroke: var(--motiv-color-primary);
+      stroke: var(--motiv-checkbox-accent, var(--motiv-color-primary));
       stroke-width: 3;
       stroke-linecap: round;
       stroke-linejoin: round;

@@ -2,14 +2,14 @@
   .motiv-accordion {
     width: 100%;
     overflow: hidden;
-    color: var(--motiv-color-text);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-md);
+    color: var(--motiv-accordion-color, var(--motiv-color-text));
+    background: var(--motiv-accordion-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-accordion-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-accordion-radius, var(--motiv-radius-md));
   }
 
   .motiv-accordion__item + .motiv-accordion__item {
-    border-top: 1px solid var(--motiv-color-border);
+    border-top: 1px solid var(--motiv-accordion-border-color, var(--motiv-color-border));
   }
 
   .motiv-accordion__heading {
@@ -34,7 +34,13 @@
     cursor: pointer;
 
     &:hover {
-      background: var(--motiv-color-surface-hover);
+      /* --_bg-hover is invalid while --motiv-accordion-bg is unset (var() without fallback),
+         so the derived --motiv-color-surface-hover still applies. */
+      --_bg-hover: color-mix(in oklch, var(--motiv-accordion-bg), var(--motiv-color-primary) 10%);
+      background: var(
+        --motiv-accordion-bg-hover,
+        var(--_bg-hover, var(--motiv-color-surface-hover))
+      );
     }
 
     &:focus-visible {
@@ -50,7 +56,7 @@
     transition: rotate 0.45s var(--motiv-ease-spring);
 
     [aria-expanded="true"] > & {
-      color: var(--motiv-color-primary);
+      color: var(--motiv-accordion-accent, var(--motiv-color-primary));
       rotate: 135deg;
     }
   }

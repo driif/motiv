@@ -35,10 +35,10 @@
     font: inherit;
     text-align: left;
     text-decoration: none;
-    color: var(--motiv-color-text);
+    color: var(--motiv-nav-color, var(--motiv-color-text));
     background: transparent;
     border: 1px solid transparent;
-    border-radius: var(--motiv-radius-sm);
+    border-radius: var(--motiv-nav-radius, var(--motiv-radius-sm));
     cursor: pointer;
 
     &:hover {
@@ -52,9 +52,9 @@
   }
 
   .motiv-matrix-chevnav__item--active {
-    color: var(--motiv-color-primary);
+    color: var(--motiv-nav-accent, var(--motiv-color-primary));
     background: var(--motiv-color-primary-subtle);
-    border-color: var(--motiv-color-primary);
+    border-color: var(--motiv-nav-accent, var(--motiv-color-primary));
     box-shadow: 0 6px 18px -10px color-mix(in oklch, var(--motiv-color-primary) 45%, transparent);
   }
 

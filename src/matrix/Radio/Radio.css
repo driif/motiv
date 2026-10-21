@@ -24,7 +24,7 @@
     align-items: center;
     gap: calc(var(--motiv-space) * 2);
     min-height: 44px;
-    color: var(--motiv-color-text);
+    color: var(--motiv-radio-color, var(--motiv-color-text));
     cursor: pointer;
 
     &:has(.motiv-matrix-radio__input:disabled) {
@@ -36,7 +36,7 @@
   .motiv-matrix-radio__dot {
     font-weight: 700;
     white-space: pre;
-    color: var(--motiv-color-text-muted);
+    color: var(--motiv-radio-border-color, var(--motiv-color-text-muted));
 
     &::before {
       content: "( )";
@@ -44,7 +44,7 @@
   }
 
   .motiv-matrix-radio__input:checked + .motiv-matrix-radio__dot {
-    color: var(--motiv-color-primary);
+    color: var(--motiv-radio-accent, var(--motiv-color-primary));
 
     &::before {
       content: "(*)";
@@ -57,6 +57,6 @@
   }
 
   .motiv-matrix-radio:hover:not(:has(:disabled)) .motiv-matrix-radio__dot {
-    color: var(--motiv-color-primary);
+    color: var(--motiv-radio-accent, var(--motiv-color-primary));
   }
 }

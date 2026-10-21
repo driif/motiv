@@ -1,19 +1,24 @@
 @layer motiv.components {
   .motiv-matrix-card {
     --_bg: var(--motiv-color-surface);
-    --_border: color-mix(in oklch, var(--motiv-color-primary) 40%, transparent);
-    --_corner: var(--motiv-color-primary);
+    --_border: var(
+      --motiv-card-border-color,
+      color-mix(in oklch, var(--motiv-color-primary) 40%, transparent)
+    );
+    --_corner: var(--motiv-card-border-color, var(--motiv-color-primary));
+    --_shadow: none;
 
     position: relative;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: calc(var(--motiv-space) * 4);
-    padding: var(--_pad);
+    gap: var(--motiv-card-gap, calc(var(--motiv-space) * 4));
+    padding: var(--motiv-card-padding, var(--_pad));
     color: var(--motiv-color-text);
-    background: var(--_bg);
+    background: var(--motiv-card-bg, var(--_bg));
     border: 1px solid var(--_border);
-    border-radius: var(--motiv-radius-sm);
+    border-radius: var(--motiv-card-radius, var(--motiv-radius-sm));
+    box-shadow: var(--motiv-card-shadow, var(--_shadow));
 
     /* HUD corner brackets. */
     &::before,
@@ -43,7 +48,7 @@
   }
 
   .motiv-matrix-card--elevated {
-    box-shadow: 0 0 32px -16px color-mix(in oklch, var(--motiv-color-primary) 55%, transparent);
+    --_shadow: 0 0 32px -16px color-mix(in oklch, var(--motiv-color-primary) 55%, transparent);
   }
 
   .motiv-matrix-card--outlined {
@@ -52,8 +57,8 @@
 
   .motiv-matrix-card--subtle {
     --_bg: var(--motiv-color-primary-subtle);
-    --_border: transparent;
-    --_corner: transparent;
+    --_border: var(--motiv-card-border-color, transparent);
+    --_corner: var(--motiv-card-border-color, transparent);
   }
 
   .motiv-matrix-card--p-none {
@@ -73,8 +78,10 @@
     cursor: pointer;
 
     &:is(:hover, :focus-visible) {
-      --_border: var(--motiv-color-primary);
-      --_corner: var(--motiv-color-primary);
+      --_border: var(--motiv-card-border-color, var(--motiv-color-primary));
+      --_corner: var(--motiv-card-border-color, var(--motiv-color-primary));
+
+      box-shadow: var(--motiv-card-shadow-hover, var(--motiv-card-shadow, var(--_shadow)));
 
       &::before {
         transform: translate(-5px, -5px);

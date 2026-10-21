@@ -3,6 +3,7 @@
     --_pen: cubic-bezier(0.6, 0.05, 0.3, 1);
     --_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     --_hand-font: "Caveat", "Segoe Print", cursive;
+    --_accent: var(--motiv-text-field-accent, var(--motiv-color-primary));
 
     display: grid;
     gap: calc(var(--motiv-space) * 1.5);
@@ -23,10 +24,10 @@
     padding: calc(var(--motiv-space) * 2) 0;
     font: inherit;
     line-height: 1.5;
-    color: var(--motiv-color-text);
-    background: transparent;
+    color: var(--motiv-text-field-color, var(--motiv-color-text));
+    background: var(--motiv-text-field-bg, transparent);
     border: 0;
-    border-bottom: 1.5px solid var(--motiv-color-text-muted);
+    border-bottom: 1.5px solid var(--motiv-text-field-border-color, var(--motiv-color-text-muted));
     border-radius: 0;
     /* The primary line drawn in on focus below is the focus indicator. */
     outline: none;
@@ -49,7 +50,7 @@
     + .motiv-text-field__label {
     font-family: var(--_hand-font);
     font-size: 1.5em;
-    color: var(--motiv-color-primary);
+    color: var(--_accent);
     transform: translateY(-36px) rotate(-2deg);
   }
 
@@ -64,7 +65,7 @@
 
     & path {
       fill: none;
-      stroke: var(--motiv-color-primary);
+      stroke: var(--_accent);
       stroke-width: 3.5;
       stroke-linecap: round;
       stroke-dasharray: 1;

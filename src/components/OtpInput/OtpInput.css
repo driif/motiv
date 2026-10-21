@@ -1,5 +1,7 @@
 @layer motiv.components {
   .motiv-otp {
+    --_accent: var(--motiv-text-field-accent, var(--motiv-color-primary));
+
     display: inline-flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 2.5);
@@ -26,20 +28,20 @@
     width: 44px;
     height: 56px;
     padding: 0;
-    color: var(--motiv-color-text);
+    color: var(--motiv-text-field-color, var(--motiv-color-text));
     font: inherit;
     font-size: 1.375rem;
     font-weight: 600;
     font-variant-numeric: tabular-nums;
     text-align: center;
-    caret-color: var(--motiv-color-primary);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-sm);
+    caret-color: var(--_accent);
+    background: var(--motiv-text-field-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-text-field-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-text-field-radius, var(--motiv-radius-sm));
     transition: translate 0.3s var(--motiv-ease-spring);
 
     &:focus {
-      border-color: var(--motiv-color-primary);
+      border-color: var(--_accent);
       translate: 0 -3px;
     }
 
@@ -58,9 +60,10 @@
     }
 
     [data-status="success"] & {
-      color: var(--motiv-color-primary);
-      background: var(--motiv-color-primary-subtle);
-      border-color: var(--motiv-color-primary);
+      color: var(--_accent);
+      --_bg-success: color-mix(in oklch, var(--motiv-text-field-bg), var(--_accent) 14%);
+      background: var(--_bg-success, var(--motiv-color-primary-subtle));
+      border-color: var(--_accent);
     }
 
     [data-status="error"] & {

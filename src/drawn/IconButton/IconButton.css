@@ -3,7 +3,7 @@
     display: inline-flex;
     gap: 9px;
     padding: 4px;
-    border: 1.5px solid var(--motiv-color-secondary);
+    border: 1.5px solid var(--motiv-icon-button-border-color, var(--motiv-color-secondary));
     border-radius: 14px;
   }
 
@@ -17,10 +17,10 @@
     width: 48px;
     height: 48px;
     padding: 0;
-    color: var(--motiv-color-text);
-    background: transparent;
+    color: var(--motiv-icon-button-color, var(--motiv-color-text));
+    background: var(--motiv-icon-button-bg, transparent);
     border: 0;
-    border-radius: 10px;
+    border-radius: var(--motiv-icon-button-radius, 10px);
     cursor: pointer;
 
     &:focus-visible {
@@ -44,7 +44,7 @@
     width: 1px;
     background: repeating-linear-gradient(
       to bottom,
-      var(--motiv-color-secondary) 0 3px,
+      var(--motiv-icon-button-border-color, var(--motiv-color-secondary)) 0 3px,
       transparent 3px 6px
     );
   }
@@ -71,7 +71,7 @@
 
     & path {
       fill: none;
-      stroke: var(--motiv-color-secondary);
+      stroke: var(--motiv-icon-button-border-color, var(--motiv-color-secondary));
       stroke-width: 1.6;
       stroke-linecap: round;
       stroke-dasharray: 1;

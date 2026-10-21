@@ -1,5 +1,7 @@
 @layer motiv.components {
   .motiv-matrix-text-field {
+    --_accent: var(--motiv-text-field-accent, var(--motiv-color-primary));
+
     display: grid;
     gap: calc(var(--motiv-space) * 2);
     color: var(--motiv-color-text);
@@ -22,19 +24,19 @@
     gap: calc(var(--motiv-space) * 2);
     min-height: 3rem;
     padding: 0 calc(var(--motiv-space) * 3);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-sm);
+    background: var(--motiv-text-field-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-text-field-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-text-field-radius, var(--motiv-radius-sm));
 
     &:focus-within {
-      border-color: var(--motiv-color-primary);
-      box-shadow: 0 0 0 3px color-mix(in oklch, var(--motiv-color-primary) 22%, transparent);
+      border-color: var(--_accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--_accent) 22%, transparent);
     }
   }
 
   .motiv-matrix-text-field__prompt {
     font-weight: 700;
-    color: var(--motiv-color-primary);
+    color: var(--_accent);
   }
 
   .motiv-matrix-text-field__input {
@@ -43,8 +45,8 @@
     min-height: 2.75rem;
     padding: 0;
     font: inherit;
-    color: var(--motiv-color-text);
-    caret-color: var(--motiv-color-primary);
+    color: var(--motiv-text-field-color, var(--motiv-color-text));
+    caret-color: var(--_accent);
     background: transparent;
     border: 0;
     outline: none;

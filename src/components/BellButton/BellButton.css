@@ -6,15 +6,19 @@
     width: 52px;
     height: 52px;
     padding: 0;
-    color: var(--motiv-color-text);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: 50%;
+    color: var(--motiv-icon-button-color, var(--motiv-color-text));
+    background: var(--motiv-icon-button-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-icon-button-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-icon-button-radius, 50%);
     box-shadow: var(--motiv-shadow-sm);
     cursor: pointer;
 
     &:hover:not(:disabled) {
-      background: var(--motiv-color-surface-hover);
+      --_bg-hover: color-mix(in oklch, var(--motiv-icon-button-bg), var(--motiv-color-primary) 10%);
+      background: var(
+        --motiv-icon-button-bg-hover,
+        var(--_bg-hover, var(--motiv-color-surface-hover))
+      );
     }
 
     &:focus-visible {

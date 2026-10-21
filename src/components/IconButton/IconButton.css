@@ -3,7 +3,7 @@
     display: inline-flex;
     gap: 9px;
     padding: 4px;
-    border: 1px solid var(--motiv-color-border);
+    border: 1px solid var(--motiv-icon-button-border-color, var(--motiv-color-border));
     border-radius: 14px;
   }
 
@@ -14,10 +14,10 @@
     width: 48px;
     height: 48px;
     padding: 0;
-    color: var(--motiv-color-text);
-    background: transparent;
+    color: var(--motiv-icon-button-color, var(--motiv-color-text));
+    background: var(--motiv-icon-button-bg, transparent);
     border: 0;
-    border-radius: 10px;
+    border-radius: var(--motiv-icon-button-radius, 10px);
     cursor: pointer;
 
     /* The soft fill blooms in on hover; only opacity and scale move. */
@@ -25,7 +25,14 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: color-mix(in oklch, var(--motiv-color-primary) 18%, var(--motiv-color-surface));
+      background: var(
+        --motiv-icon-button-bg-hover,
+        color-mix(
+          in oklch,
+          var(--motiv-color-primary) 18%,
+          var(--motiv-icon-button-bg, var(--motiv-color-surface))
+        )
+      );
       border-radius: inherit;
       opacity: 0;
       scale: 0.85;
@@ -52,7 +59,7 @@
     bottom: 10px;
     left: -5px;
     width: 1px;
-    background: var(--motiv-color-border);
+    background: var(--motiv-icon-button-border-color, var(--motiv-color-border));
   }
 
   .motiv-icon-button__icon {

@@ -14,15 +14,15 @@
     right: 9px;
     left: 7px;
     height: 219px;
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-md);
+    border: 1px solid var(--motiv-card-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-card-radius, var(--motiv-radius-md));
     transition: transform 0.6s var(--motiv-ease-spring);
   }
 
   .motiv-slip-card__front {
     z-index: 2;
     padding: 24px;
-    background: var(--motiv-color-surface);
+    background: var(--motiv-card-bg, var(--motiv-color-surface));
 
     [data-open="true"] > & {
       transform: translate(-5px, -15px) rotate(-2deg);

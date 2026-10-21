@@ -23,10 +23,10 @@
     padding: 0 15px;
     font: inherit;
     font-size: 0.875rem;
-    color: var(--motiv-color-text);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-full);
+    color: var(--motiv-chip-color, var(--motiv-color-text));
+    background: var(--motiv-chip-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-chip-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-chip-radius, var(--motiv-radius-full));
     cursor: pointer;
     transition: scale 0.15s var(--motiv-ease);
 
@@ -40,8 +40,12 @@
     }
 
     &[aria-pressed="true"] {
-      background: color-mix(in oklch, var(--motiv-color-primary) 22%, var(--motiv-color-surface));
-      border-color: var(--motiv-color-primary);
+      background: color-mix(
+        in oklch,
+        var(--motiv-chip-accent, var(--motiv-color-primary)) 22%,
+        var(--motiv-chip-bg, var(--motiv-color-surface))
+      );
+      border-color: var(--motiv-chip-accent, var(--motiv-color-primary));
     }
   }
 

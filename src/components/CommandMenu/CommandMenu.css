@@ -15,15 +15,15 @@
     padding: 0 calc(var(--motiv-space) * 3);
     font: inherit;
     font-size: 0.875rem;
-    color: var(--motiv-color-text-muted);
+    color: var(--motiv-menu-color, var(--motiv-color-text-muted));
     text-align: left;
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-sm);
+    background: var(--motiv-menu-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-menu-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-menu-radius, var(--motiv-radius-sm));
     cursor: pointer;
 
     [data-open="true"] > & {
-      border-color: var(--motiv-color-primary);
+      border-color: var(--motiv-menu-accent, var(--motiv-color-primary));
     }
 
     &:focus-visible {
@@ -61,9 +61,9 @@
     z-index: 20;
     padding: 6px;
     visibility: hidden;
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-md);
+    background: var(--motiv-menu-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-menu-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-menu-radius, var(--motiv-radius-md));
     box-shadow: var(--motiv-shadow-md);
     opacity: 0;
     translate: 0 -6px;
@@ -97,7 +97,7 @@
     padding: 0 calc(var(--motiv-space) * 2.5);
     font: inherit;
     font-size: 0.875rem;
-    color: var(--motiv-color-text);
+    color: var(--motiv-menu-color, var(--motiv-color-text));
     text-align: left;
     background: transparent;
     border: 0;
@@ -117,7 +117,8 @@
 
     &:hover,
     &:focus-visible {
-      background: var(--motiv-color-surface-hover);
+      --_bg-hover: color-mix(in oklch, var(--motiv-menu-bg), var(--motiv-color-primary) 10%);
+      background: var(--motiv-menu-bg-hover, var(--_bg-hover, var(--motiv-color-surface-hover)));
       outline: none;
     }
 
@@ -130,7 +131,7 @@
     }
 
     &:is(:hover, :focus-visible) > svg {
-      color: var(--motiv-color-primary);
+      color: var(--motiv-menu-accent, var(--motiv-color-primary));
       translate: 3px 0;
     }
   }

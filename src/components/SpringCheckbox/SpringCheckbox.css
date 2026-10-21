@@ -5,7 +5,7 @@
     align-items: center;
     gap: calc(var(--motiv-space) * 3);
     min-height: 44px;
-    color: var(--motiv-color-text);
+    color: var(--motiv-checkbox-color, var(--motiv-color-text));
     cursor: pointer;
 
     &:has(:disabled) {
@@ -43,22 +43,22 @@
     place-items: center;
     width: 24px;
     height: 24px;
-    border: 1px solid var(--motiv-color-border);
-    border-radius: 7px;
+    border: 1px solid var(--motiv-checkbox-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-checkbox-radius, 7px);
     transition: scale 0.35s var(--motiv-ease-spring);
 
     &::before {
       content: "";
       position: absolute;
       inset: -1px;
-      background: var(--motiv-color-primary);
+      background: var(--motiv-checkbox-accent, var(--motiv-color-primary));
       border-radius: inherit;
       scale: 0;
       transition: scale 0.35s var(--motiv-ease-spring);
     }
 
     :checked + & {
-      border-color: var(--motiv-color-primary);
+      border-color: var(--motiv-checkbox-accent, var(--motiv-color-primary));
 
       &::before {
         scale: 1;

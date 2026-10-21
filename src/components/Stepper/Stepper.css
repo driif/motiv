@@ -12,15 +12,16 @@
     width: 44px;
     height: 44px;
     padding: 0;
-    color: var(--motiv-color-text);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
+    color: var(--motiv-stepper-color, var(--motiv-color-text));
+    background: var(--motiv-stepper-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-stepper-border-color, var(--motiv-color-border));
     border-radius: 50%;
     cursor: pointer;
     transition: scale 0.35s var(--motiv-ease-spring);
 
     &:hover {
-      background: var(--motiv-color-surface-hover);
+      --_bg-hover: color-mix(in oklch, var(--motiv-stepper-bg), var(--motiv-color-primary) 10%);
+      background: var(--motiv-stepper-bg-hover, var(--_bg-hover, var(--motiv-color-surface-hover)));
     }
 
     &:active {
@@ -43,10 +44,10 @@
     font-size: 2rem;
     font-weight: 450;
     font-variant-numeric: tabular-nums;
-    color: var(--motiv-color-text);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-md);
+    color: var(--motiv-stepper-color, var(--motiv-color-text));
+    background: var(--motiv-stepper-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-stepper-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-stepper-radius, var(--motiv-radius-md));
 
     &:focus-visible {
       outline: 2px solid var(--motiv-color-primary);

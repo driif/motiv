@@ -10,7 +10,7 @@
     position: relative;
     display: grid;
     grid-template-columns: repeat(var(--_count), minmax(0, 1fr));
-    border-bottom: 1px solid var(--motiv-color-border);
+    border-bottom: 1px solid var(--motiv-tabs-border-color, var(--motiv-color-border));
   }
 
   .motiv-elastic-tabs__tab {
@@ -18,7 +18,7 @@
     padding: 0 calc(var(--motiv-space) * 2);
     font: inherit;
     font-size: 0.875rem;
-    color: var(--motiv-color-text-muted);
+    color: var(--motiv-tabs-color, var(--motiv-color-text-muted));
     white-space: nowrap;
     background: transparent;
     border: 0;
@@ -27,7 +27,7 @@
 
     &:hover,
     &[aria-selected="true"] {
-      color: var(--motiv-color-text);
+      color: var(--motiv-tabs-color, var(--motiv-color-text));
     }
 
     &:focus-visible {
@@ -51,7 +51,7 @@
   .motiv-elastic-tabs__bar {
     display: block;
     height: 100%;
-    background: var(--motiv-color-primary);
+    background: var(--motiv-tabs-accent, var(--motiv-color-primary));
     border-radius: 2px;
   }
 

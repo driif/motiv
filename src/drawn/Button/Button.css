@@ -1,8 +1,9 @@
 @layer motiv.components {
   .motiv-btn {
     --_ink: var(--motiv-color-primary);
-    --_text: var(--_ink);
-    --_shape: 18px 7px 20px 6px / 7px 16px 6px 20px;
+    --_border: var(--motiv-button-border-color, var(--_ink));
+    --_text: var(--motiv-button-color, var(--_ink));
+    --_shape: var(--motiv-button-radius, 18px 7px 20px 6px / 7px 16px 6px 20px);
 
     position: relative;
     isolation: isolate;
@@ -11,14 +12,14 @@
     align-items: center;
     justify-content: center;
     gap: calc(var(--motiv-space) * 2);
-    min-height: var(--_height);
-    padding: 0 var(--_px);
-    font-family: var(--motiv-font-body);
+    min-height: var(--motiv-button-height, var(--_height));
+    padding: 0 var(--motiv-button-px, var(--_px));
+    font-family: var(--motiv-button-font, var(--motiv-font-body));
     font-size: var(--_font-size);
     font-weight: 600;
     line-height: 1;
     color: var(--_text);
-    background: transparent;
+    background: var(--motiv-button-bg, transparent);
     border: 0;
     border-radius: var(--_shape);
     cursor: pointer;
@@ -34,20 +35,29 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      border: 2px solid var(--_ink);
+      border: var(--motiv-button-border-width, 2px) solid var(--_border);
       border-radius: var(--_shape);
       pointer-events: none;
     }
 
     &::after {
-      border-color: color-mix(in oklch, var(--motiv-color-text) 55%, transparent);
-      border-radius: 7px 20px 6px 18px / 18px 6px 20px 7px;
+      border-color: var(
+        --motiv-button-border-color-hover,
+        color-mix(
+          in oklch,
+          var(--motiv-button-border-color, var(--motiv-color-text)) 55%,
+          transparent
+        )
+      );
+      border-radius: var(--motiv-button-radius, 7px 20px 6px 18px / 18px 6px 20px 7px);
       opacity: 0;
       transform: rotate(-1.2deg) translate(2px, 2px);
       transition: opacity var(--motiv-duration) var(--motiv-ease);
     }
 
     &:is(:hover, :focus-visible):not(:disabled, [aria-disabled="true"]) {
+      background: var(--motiv-button-bg-hover, var(--motiv-button-bg, transparent));
+
       &::before {
         background: repeating-linear-gradient(
           -45deg,
@@ -113,7 +123,7 @@
 
   .motiv-btn--ghost {
     --_line: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 12' preserveAspectRatio='none'%3E%3Cpath d='M2 7C60 3 120 10 180 6S270 4 298 7' fill='none' stroke='%23000' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E");
-    --_text: var(--motiv-color-text);
+    --_text: var(--motiv-button-color, var(--motiv-color-text));
 
     &::before {
       display: none;
@@ -123,7 +133,7 @@
     &::after {
       inset: auto var(--_px) 12%;
       height: 6px;
-      background: var(--motiv-color-primary);
+      background: var(--motiv-button-border-color, var(--motiv-color-primary));
       border: 0;
       border-radius: 0;
       mask: var(--_line) center / 100% 100% no-repeat;

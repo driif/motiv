@@ -5,7 +5,7 @@
     gap: calc(var(--motiv-space) * 3.5);
     width: 100%;
     max-width: 320px;
-    color: var(--motiv-color-text);
+    color: var(--motiv-slider-color, var(--motiv-color-text));
   }
 
   .motiv-freq__top {
@@ -15,7 +15,7 @@
     font-weight: 600;
 
     & output {
-      color: var(--motiv-color-primary);
+      color: var(--motiv-slider-accent, var(--motiv-color-primary));
       font-size: 0.875rem;
       font-variant-numeric: tabular-nums;
     }
@@ -30,12 +30,12 @@
 
   .motiv-freq__bar {
     width: 4px;
-    background: var(--motiv-color-border);
+    background: var(--motiv-slider-bg, var(--motiv-color-border));
     border-radius: 4px;
     transition: scale 0.35s var(--motiv-ease-spring);
 
     &[data-on] {
-      background: var(--motiv-color-primary);
+      background: var(--motiv-slider-accent, var(--motiv-color-primary));
     }
   }
 

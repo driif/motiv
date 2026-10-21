@@ -13,8 +13,8 @@
 
   .motiv-carousel__view {
     overflow: hidden;
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-md);
+    border: 1px solid var(--motiv-carousel-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-carousel-radius, var(--motiv-radius-md));
   }
 
   .motiv-carousel__track {
@@ -65,9 +65,9 @@
     width: 44px;
     height: 44px;
     padding: 0;
-    color: var(--motiv-color-text);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
+    color: var(--motiv-carousel-color, var(--motiv-color-text));
+    background: var(--motiv-carousel-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-carousel-border-color, var(--motiv-color-border));
     border-radius: 50%;
     cursor: pointer;
     transition:
@@ -75,7 +75,11 @@
       opacity 0.2s var(--motiv-ease);
 
     &:hover:not(:disabled) {
-      background: var(--motiv-color-surface-hover);
+      --_bg-hover: color-mix(in oklch, var(--motiv-carousel-bg), var(--motiv-color-primary) 10%);
+      background: var(
+        --motiv-carousel-bg-hover,
+        var(--_bg-hover, var(--motiv-color-surface-hover))
+      );
     }
 
     &:active:not(:disabled) {
@@ -138,7 +142,7 @@
     display: block;
     width: 8px;
     height: 8px;
-    background: var(--motiv-color-primary);
+    background: var(--motiv-carousel-accent, var(--motiv-color-primary));
     border-radius: 4px;
   }
 
