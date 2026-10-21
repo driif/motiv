@@ -5,7 +5,7 @@
     align-items: center;
     gap: calc(var(--motiv-space) * 3);
     min-height: 44px;
-    color: var(--motiv-color-text);
+    color: var(--motiv-radio-color, var(--motiv-color-text));
     cursor: pointer;
 
     &:has(.motiv-radio__input:disabled) {
@@ -19,8 +19,8 @@
     flex-shrink: 0;
     width: 22px;
     height: 22px;
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
+    background: var(--motiv-radio-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-radio-border-color, var(--motiv-color-border));
     border-radius: 50%;
     transition:
       scale 0.3s var(--motiv-ease-spring),
@@ -30,7 +30,7 @@
       content: "";
       position: absolute;
       inset: 4px;
-      background: var(--motiv-color-primary);
+      background: var(--motiv-radio-accent, var(--motiv-color-primary));
       border-radius: 50%;
       opacity: 0;
       scale: 0;
@@ -44,7 +44,7 @@
       content: "";
       position: absolute;
       inset: -1px;
-      border: 2px solid var(--motiv-color-primary);
+      border: 2px solid var(--motiv-radio-accent, var(--motiv-color-primary));
       border-radius: 50%;
       opacity: 0;
       pointer-events: none;
@@ -57,7 +57,11 @@
 
   @media (hover: hover) {
     .motiv-radio:hover .motiv-radio__input:not(:checked, :disabled) + .motiv-radio__dot {
-      border-color: color-mix(in oklch, var(--motiv-color-primary) 55%, var(--motiv-color-border));
+      border-color: color-mix(
+        in oklch,
+        var(--motiv-radio-accent, var(--motiv-color-primary)) 55%,
+        var(--motiv-radio-border-color, var(--motiv-color-border))
+      );
 
       &::before {
         opacity: 0.3;
@@ -67,7 +71,7 @@
   }
 
   .motiv-radio__input:checked + .motiv-radio__dot {
-    border-color: var(--motiv-color-primary);
+    border-color: var(--motiv-radio-accent, var(--motiv-color-primary));
 
     &::before {
       opacity: 1;

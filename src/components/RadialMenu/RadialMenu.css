@@ -17,7 +17,7 @@
     height: 56px;
     padding: 0;
     color: var(--motiv-color-on-primary);
-    background: var(--motiv-color-primary);
+    background: var(--motiv-menu-accent, var(--motiv-color-primary));
     border: 0;
     border-radius: 50%;
     box-shadow: var(--motiv-shadow-md);
@@ -43,9 +43,9 @@
     width: 44px;
     height: 44px;
     padding: 0;
-    color: var(--motiv-color-text);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
+    color: var(--motiv-menu-color, var(--motiv-color-text));
+    background: var(--motiv-menu-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-menu-border-color, var(--motiv-color-border));
     border-radius: 50%;
     box-shadow: var(--motiv-shadow-sm);
     cursor: pointer;
@@ -64,7 +64,14 @@
     }
 
     &:hover {
-      background: color-mix(in oklch, var(--motiv-color-primary) 22%, var(--motiv-color-surface));
+      background: var(
+        --motiv-menu-bg-hover,
+        color-mix(
+          in oklch,
+          var(--motiv-color-primary) 22%,
+          var(--motiv-menu-bg, var(--motiv-color-surface))
+        )
+      );
     }
   }
 

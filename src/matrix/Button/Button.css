@@ -1,9 +1,10 @@
 @layer motiv.components {
   .motiv-matrix-btn {
     --_accent: var(--motiv-color-primary);
-    --_bg: var(--_accent);
-    --_text: var(--motiv-color-on-primary);
-    --_border: var(--_accent);
+    --_bg: var(--motiv-button-bg, var(--motiv-color-primary));
+    --_text: var(--motiv-button-color, var(--motiv-color-on-primary));
+    --_border: var(--motiv-button-border-color, var(--_accent));
+    --_corner: var(--motiv-button-border-color, var(--_accent));
 
     position: relative;
     box-sizing: border-box;
@@ -11,9 +12,9 @@
     align-items: center;
     justify-content: center;
     gap: calc(var(--motiv-space) * 2);
-    min-height: var(--_height);
-    padding: 0 var(--_px);
-    font-family: var(--motiv-font-body);
+    min-height: var(--motiv-button-height, var(--_height));
+    padding: 0 var(--motiv-button-px, var(--_px));
+    font-family: var(--motiv-button-font, var(--motiv-font-body));
     font-size: var(--_font-size);
     font-weight: 600;
     line-height: 1;
@@ -21,8 +22,8 @@
     text-transform: uppercase;
     color: var(--_text);
     background: var(--_bg);
-    border: 1px solid var(--_border);
-    border-radius: var(--motiv-radius-sm);
+    border: var(--motiv-button-border-width, 1px) solid var(--_border);
+    border-radius: var(--motiv-button-radius, var(--motiv-radius-sm));
     cursor: pointer;
     text-decoration: none;
     white-space: nowrap;
@@ -35,7 +36,7 @@
       position: absolute;
       width: 8px;
       height: 8px;
-      border: 2px solid var(--_accent);
+      border: 2px solid var(--_corner);
       opacity: var(--_corners, 1);
       transition: transform 0.2s steps(3);
       pointer-events: none;
@@ -56,7 +57,9 @@
     }
 
     &:is(:hover, :focus-visible):not(:disabled, [aria-disabled="true"]) {
-      box-shadow: 0 0 18px -4px color-mix(in oklch, var(--_accent) 60%, transparent);
+      background: var(--motiv-button-bg-hover, var(--_bg));
+      border-color: var(--motiv-button-border-color-hover, var(--_border));
+      box-shadow: 0 0 18px -4px color-mix(in oklch, var(--_corner) 60%, transparent);
 
       &::before {
         transform: translate(-3px, -3px);
@@ -101,26 +104,28 @@
 
   .motiv-matrix-btn--secondary {
     --_accent: var(--motiv-color-secondary);
-    --_text: var(--motiv-color-on-secondary);
+    --_bg: var(--motiv-button-bg, var(--motiv-color-secondary));
+    --_text: var(--motiv-button-color, var(--motiv-color-on-secondary));
   }
 
   .motiv-matrix-btn--danger {
     --_accent: var(--motiv-color-danger);
-    --_text: var(--motiv-color-on-danger);
+    --_bg: var(--motiv-button-bg, var(--motiv-color-danger));
+    --_text: var(--motiv-button-color, var(--motiv-color-on-danger));
   }
 
   .motiv-matrix-btn--outline,
   .motiv-matrix-btn--ghost {
-    --_bg: transparent;
-    --_text: var(--motiv-color-primary);
+    --_bg: var(--motiv-button-bg, transparent);
+    --_text: var(--motiv-button-color, var(--motiv-color-primary));
 
     &:is(:hover, :focus-visible):not(:disabled, [aria-disabled="true"]) {
-      --_bg: var(--motiv-color-primary-subtle);
+      --_bg: var(--motiv-button-bg, var(--motiv-color-primary-subtle));
     }
   }
 
   .motiv-matrix-btn--ghost {
-    --_border: transparent;
+    --_border: var(--motiv-button-border-color, transparent);
     --_corners: 0;
 
     &:is(:hover, :focus-visible):not(:disabled, [aria-disabled="true"]) {

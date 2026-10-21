@@ -72,8 +72,8 @@ without `!important`.
    Rebranding = overriding one base token; dark mode keeps working because derivations mix
    against current `bg`/`text`.
 3. **Component tokens** read with fallbacks, e.g.
-   `background: var(--motiv-btn-bg, var(--motiv-color-primary))`, so an app can restyle all
-   buttons or one subtree by setting `--motiv-btn-*` on any ancestor.
+   `background: var(--motiv-button-bg, var(--motiv-color-primary))`, so an app can restyle all
+   buttons or one subtree by setting `--motiv-button-*` on any ancestor.
 
 Layer order is declared once in `index.css`: `@layer motiv.tokens, motiv.base, motiv.components;`.
 

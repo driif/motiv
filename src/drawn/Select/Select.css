@@ -26,14 +26,14 @@
     width: 100%;
     height: 56px;
     padding: 0 calc(var(--motiv-space) * 4);
-    color: var(--motiv-color-text);
+    color: var(--motiv-select-color, var(--motiv-color-text));
     font: inherit;
     font-size: 1.1875rem;
     font-weight: 600;
     text-align: start;
-    background: var(--motiv-color-surface);
-    border: 2px solid var(--motiv-color-text);
-    border-radius: 255px 14px 225px 14px / 14px 225px 14px 255px;
+    background: var(--motiv-select-bg, var(--motiv-color-surface));
+    border: 2px solid var(--motiv-select-border-color, var(--motiv-color-text));
+    border-radius: var(--motiv-select-radius, 255px 14px 225px 14px / 14px 225px 14px 255px);
     cursor: pointer;
     transition: transform 0.3s var(--_spring);
 
@@ -123,8 +123,9 @@
     height: 42px;
     padding: 0 14px;
     font-size: 1.0625rem;
-    background: var(--motiv-color-surface);
-    border: 1.5px solid var(--motiv-color-text);
+    color: var(--motiv-select-color, var(--motiv-color-text));
+    background: var(--motiv-select-bg, var(--motiv-color-surface));
+    border: 1.5px solid var(--motiv-select-border-color, var(--motiv-color-text));
     border-radius: 12px 6px 14px 8px / 8px 14px 6px 12px;
     box-shadow: 3px 3px 0 color-mix(in oklch, var(--motiv-color-text) 16%, transparent);
     cursor: pointer;
@@ -137,12 +138,20 @@
 
     &:hover,
     &.motiv-select__option--active {
-      background: color-mix(in oklch, var(--motiv-color-secondary) 16%, var(--motiv-color-surface));
+      background: var(
+        --motiv-select-bg-hover,
+        color-mix(
+          in oklch,
+          var(--motiv-color-secondary) 16%,
+          var(--motiv-select-bg, var(--motiv-color-surface))
+        )
+      );
     }
 
     &[aria-selected="true"] {
-      border: 2px solid var(--motiv-color-primary);
-      box-shadow: 3px 3px 0 color-mix(in oklch, var(--motiv-color-primary) 40%, transparent);
+      border: 2px solid var(--motiv-select-accent, var(--motiv-color-primary));
+      box-shadow: 3px 3px 0
+        color-mix(in oklch, var(--motiv-select-accent, var(--motiv-color-primary)) 40%, transparent);
     }
   }
 

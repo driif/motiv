@@ -9,13 +9,13 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: calc(var(--motiv-space) * 4);
-    padding: var(--_pad);
+    gap: var(--motiv-card-gap, calc(var(--motiv-space) * 4));
+    padding: var(--motiv-card-padding, var(--_pad));
     color: var(--motiv-color-text);
-    background: var(--_bg);
-    border: 2px solid var(--_border);
-    border-radius: 4px 14px 22px 8px / 18px 6px 10px 24px;
-    box-shadow: var(--_shadow);
+    background: var(--motiv-card-bg, var(--_bg));
+    border: 2px solid var(--motiv-card-border-color, var(--_border));
+    border-radius: var(--motiv-card-radius, 4px 14px 22px 8px / 18px 6px 10px 24px);
+    box-shadow: var(--motiv-card-shadow, var(--_shadow));
     transition:
       box-shadow 0.3s var(--_spring),
       transform 0.3s var(--_spring);
@@ -51,6 +51,7 @@
     &:hover {
       --_shadow: 8px 9px 0 -1px var(--_shadow-color);
 
+      box-shadow: var(--motiv-card-shadow-hover, var(--_shadow));
       transform: translate(-2px, -3px) rotate(-0.5deg);
     }
 

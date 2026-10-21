@@ -8,9 +8,9 @@
     max-width: 280px;
     padding: 6px;
     color: var(--motiv-color-text);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-md);
+    background: var(--motiv-nav-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-nav-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-nav-radius, var(--motiv-radius-md));
   }
 
   .motiv-glide-nav__hover {
@@ -19,8 +19,9 @@
     right: 6px;
     left: 6px;
     height: 44px;
-    background: var(--motiv-color-surface-hover);
-    border-radius: var(--motiv-radius-sm);
+    --_bg-hover: color-mix(in oklch, var(--motiv-nav-bg), var(--motiv-color-primary) 10%);
+    background: var(--motiv-nav-bg-hover, var(--_bg-hover, var(--motiv-color-surface-hover)));
+    border-radius: var(--motiv-nav-radius, var(--motiv-radius-sm));
     opacity: 0;
     pointer-events: none;
     transition:
@@ -34,7 +35,7 @@
     left: 0;
     width: 3px;
     height: 24px;
-    background: var(--motiv-color-primary);
+    background: var(--motiv-nav-accent, var(--motiv-color-primary));
     border-radius: 0 3px 3px 0;
     opacity: 0;
     transition:
@@ -51,16 +52,16 @@
     padding: 0 calc(var(--motiv-space) * 3);
     font: inherit;
     font-size: 0.875rem;
-    color: var(--motiv-color-text-muted);
+    color: var(--motiv-nav-color, var(--motiv-color-text-muted));
     text-align: left;
     background: transparent;
     border: 0;
-    border-radius: var(--motiv-radius-sm);
+    border-radius: var(--motiv-nav-radius, var(--motiv-radius-sm));
     cursor: pointer;
 
     &:hover,
     &[aria-current="page"] {
-      color: var(--motiv-color-text);
+      color: var(--motiv-nav-color, var(--motiv-color-text));
     }
 
     &:focus-visible {
@@ -82,10 +83,10 @@
   .motiv-glide-nav__count {
     font-size: 0.75rem;
     font-variant-numeric: tabular-nums;
-    color: var(--motiv-color-text-muted);
+    color: var(--motiv-nav-color, var(--motiv-color-text-muted));
 
     [aria-current="page"] > & {
-      color: var(--motiv-color-primary);
+      color: var(--motiv-nav-accent, var(--motiv-nav-color, var(--motiv-color-primary)));
     }
   }
 

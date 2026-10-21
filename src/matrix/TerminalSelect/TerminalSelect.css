@@ -1,5 +1,11 @@
 @layer motiv.components {
   .motiv-matrix-term {
+    --_accent: var(--motiv-select-accent, var(--motiv-color-primary));
+    --_border: var(
+      --motiv-select-border-color,
+      color-mix(in oklch, var(--motiv-color-primary) 55%, transparent)
+    );
+
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 2);
@@ -33,10 +39,13 @@
     letter-spacing: 0.12em;
     text-align: left;
     text-transform: uppercase;
-    color: var(--motiv-color-primary);
-    background: color-mix(in oklch, var(--motiv-color-primary) 7%, var(--motiv-color-surface));
-    border: 1px solid color-mix(in oklch, var(--motiv-color-primary) 55%, transparent);
-    border-radius: var(--motiv-radius-sm);
+    color: var(--motiv-select-color, var(--motiv-color-primary));
+    background: var(
+      --motiv-select-bg,
+      color-mix(in oklch, var(--motiv-color-primary) 7%, var(--motiv-color-surface))
+    );
+    border: 1px solid var(--_border);
+    border-radius: var(--motiv-select-radius, var(--motiv-radius-sm));
     cursor: pointer;
 
     &:focus-visible {
@@ -54,7 +63,7 @@
     position: absolute;
     width: 10px;
     height: 10px;
-    border: 2px solid var(--motiv-color-primary);
+    border: 2px solid var(--_accent);
     transition: transform 0.3s var(--motiv-ease-spring);
   }
 
@@ -118,7 +127,7 @@
     width: 9px;
     height: 17px;
     margin-left: 2px;
-    background: var(--motiv-color-primary);
+    background: var(--_accent);
   }
 
   .motiv-matrix-term__arrow {
@@ -151,8 +160,8 @@
     padding: 6px 0;
     overflow-y: auto;
     list-style: none;
-    background: var(--motiv-color-surface);
-    border: 1px solid color-mix(in oklch, var(--motiv-color-primary) 55%, transparent);
+    background: var(--motiv-select-bg, var(--motiv-color-surface));
+    border: 1px solid var(--_border);
     box-shadow: var(--motiv-shadow-md);
     opacity: 0;
     transform: scaleY(0.92);
@@ -184,13 +193,13 @@
     font-size: 0.8125rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--motiv-color-text);
+    color: var(--motiv-select-color, var(--motiv-color-text));
     cursor: pointer;
   }
 
   .motiv-matrix-term__option--active {
-    color: var(--motiv-color-primary);
-    background: var(--motiv-color-primary-subtle);
+    color: var(--motiv-select-color, var(--_accent));
+    background: var(--motiv-select-bg-hover, var(--motiv-color-primary-subtle));
 
     &::before {
       content: "";
@@ -199,7 +208,7 @@
       bottom: 0;
       left: 0;
       width: 3px;
-      background: var(--motiv-color-primary);
+      background: var(--_accent);
     }
   }
 
@@ -211,7 +220,7 @@
   .motiv-matrix-term__badge {
     margin-left: auto;
     font-size: 0.6875rem;
-    color: var(--motiv-color-primary);
+    color: var(--_accent);
   }
 
   .motiv-matrix-term__hint {

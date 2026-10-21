@@ -6,7 +6,7 @@
     align-items: center;
     gap: calc(var(--motiv-space) * 1.5);
     padding: 0 calc(var(--motiv-space) * 0.5);
-    color: var(--motiv-color-primary);
+    color: var(--motiv-link-color, var(--motiv-color-primary));
     font-weight: 600;
     text-decoration: underline dashed 1px;
     text-underline-offset: 0.3em;
@@ -17,7 +17,7 @@
       position: absolute;
       z-index: -1;
       inset: 0;
-      background: var(--motiv-color-primary-subtle);
+      background: var(--motiv-link-bg-hover, var(--motiv-color-primary-subtle));
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);

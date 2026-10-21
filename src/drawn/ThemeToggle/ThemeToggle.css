@@ -7,8 +7,8 @@
     width: 80px;
     height: 80px;
     padding: 0;
-    color: var(--motiv-color-secondary);
-    background: transparent;
+    color: var(--motiv-theme-toggle-color, var(--motiv-color-secondary));
+    background: var(--motiv-theme-toggle-bg, transparent);
     border: 0;
     border-radius: 50%;
     cursor: pointer;

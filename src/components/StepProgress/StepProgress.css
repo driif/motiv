@@ -1,5 +1,8 @@
 @layer motiv.components {
   .motiv-steps {
+    --_accent: var(--motiv-progress-accent, var(--motiv-color-primary));
+    --_border: var(--motiv-progress-border-color, var(--motiv-color-border));
+
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 4);
@@ -19,13 +22,13 @@
     left: 15px;
     height: 1px;
     overflow: hidden;
-    background: var(--motiv-color-border);
+    background: var(--_border);
   }
 
   .motiv-steps__fill {
     position: absolute;
     inset: 0;
-    background: var(--motiv-color-primary);
+    background: var(--_accent);
     transform-origin: left;
     transition: scale 0.6s var(--motiv-ease);
   }
@@ -58,21 +61,21 @@
     font-size: 0.8125rem;
     font-weight: 600;
     font-variant-numeric: tabular-nums;
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
+    background: var(--motiv-progress-bg, var(--motiv-color-surface));
+    border: 1px solid var(--_border);
     border-radius: 50%;
     transition: scale 0.4s var(--motiv-ease-spring);
 
     [data-state="current"] & {
-      color: var(--motiv-color-primary);
-      border-color: var(--motiv-color-primary);
+      color: var(--_accent);
+      border-color: var(--_accent);
       scale: 1.1;
 
       &::after {
         content: "";
         position: absolute;
         inset: -6px;
-        border: 1px solid var(--motiv-color-primary);
+        border: 1px solid var(--_accent);
         border-radius: 50%;
         opacity: 0;
         animation: motiv-steps-pulse 1.6s var(--motiv-ease) 3;
@@ -81,8 +84,8 @@
 
     [data-state="done"] & {
       color: var(--motiv-color-on-primary);
-      background: var(--motiv-color-primary);
-      border-color: var(--motiv-color-primary);
+      background: var(--_accent);
+      border-color: var(--_accent);
     }
   }
 

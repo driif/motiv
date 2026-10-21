@@ -1,5 +1,7 @@
 @layer motiv.components {
   .motiv-textarea {
+    --_accent: var(--motiv-textarea-accent, var(--motiv-color-primary));
+
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 2);
@@ -13,7 +15,7 @@
     transition: color 0.2s var(--motiv-ease);
 
     .motiv-textarea:focus-within > & {
-      color: var(--motiv-color-primary);
+      color: var(--_accent);
     }
   }
 
@@ -26,7 +28,7 @@
       position: absolute;
       inset: -4px;
       border: 3px solid var(--motiv-color-primary-subtle);
-      border-radius: calc(var(--motiv-radius) + 4px);
+      border-radius: calc(var(--motiv-textarea-radius, var(--motiv-radius)) + 4px);
       opacity: 0;
       scale: 0.97;
       pointer-events: none;
@@ -47,13 +49,13 @@
     max-height: calc(var(--_max-rows) * 1lh + var(--motiv-space) * 6 + 2px);
     padding: calc(var(--motiv-space) * 3) calc(var(--motiv-space) * 3.5);
     overflow-y: auto;
-    color: var(--motiv-color-text);
+    color: var(--motiv-textarea-color, var(--motiv-color-text));
     font: inherit;
     font-size: 1rem;
     line-height: 1.5;
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius);
+    background: var(--motiv-textarea-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-textarea-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-textarea-radius, var(--motiv-radius));
     outline: none;
     resize: none;
 
@@ -62,7 +64,7 @@
     }
 
     &:focus {
-      border-color: var(--motiv-color-primary);
+      border-color: var(--_accent);
     }
 
     &:user-invalid {

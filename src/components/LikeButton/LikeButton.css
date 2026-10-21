@@ -7,15 +7,19 @@
     min-height: 44px;
     padding: 0 18px 0 14px;
     font: inherit;
-    color: var(--motiv-color-text);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-full);
+    color: var(--motiv-icon-button-color, var(--motiv-color-text));
+    background: var(--motiv-icon-button-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-icon-button-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-icon-button-radius, var(--motiv-radius-full));
     cursor: pointer;
 
     &[aria-pressed="true"] {
-      background: color-mix(in oklch, var(--motiv-color-secondary) 22%, var(--motiv-color-surface));
-      border-color: var(--motiv-color-secondary);
+      background: color-mix(
+        in oklch,
+        var(--motiv-icon-button-accent, var(--motiv-color-secondary)) 22%,
+        var(--motiv-icon-button-bg, var(--motiv-color-surface))
+      );
+      border-color: var(--motiv-icon-button-accent, var(--motiv-color-secondary));
     }
 
     &:focus-visible {
@@ -38,8 +42,8 @@
     stroke-linejoin: round;
 
     [aria-pressed="true"] > & {
-      fill: var(--motiv-color-secondary);
-      stroke: var(--motiv-color-secondary);
+      fill: var(--motiv-icon-button-accent, var(--motiv-color-secondary));
+      stroke: var(--motiv-icon-button-accent, var(--motiv-color-secondary));
     }
   }
 

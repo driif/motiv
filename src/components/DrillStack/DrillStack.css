@@ -55,19 +55,19 @@
     align-items: center;
     justify-content: space-between;
     gap: calc(var(--motiv-space) * 3);
-    padding: calc(var(--motiv-space) * 4);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-md);
+    padding: var(--motiv-card-padding, calc(var(--motiv-space) * 4));
+    background: var(--motiv-card-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-card-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-card-radius, var(--motiv-radius-md));
   }
 
   /* The cards behind the current one are drawn with static shadows, no extra DOM. */
   .motiv-drill__card--stacked {
     box-shadow:
       6px -6px 0 -1px var(--motiv-color-surface-hover),
-      6px -6px 0 0 var(--motiv-color-border),
+      6px -6px 0 0 var(--motiv-card-border-color, var(--motiv-color-border)),
       12px -12px 0 -1px var(--motiv-color-surface-hover),
-      12px -12px 0 0 var(--motiv-color-border);
+      12px -12px 0 0 var(--motiv-card-border-color, var(--motiv-color-border));
   }
 
   .motiv-drill__text {

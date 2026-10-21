@@ -89,8 +89,8 @@
     height: clamp(44px, 26.8cqi, 118px);
     margin: auto;
     padding: 0;
-    color: var(--motiv-color-secondary);
-    background: var(--motiv-color-surface);
+    color: var(--motiv-theme-toggle-color, var(--motiv-color-secondary));
+    background: var(--motiv-theme-toggle-bg, var(--motiv-color-surface));
     border: 0;
     border-radius: 50%;
     box-shadow:

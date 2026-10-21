@@ -2,7 +2,11 @@
   .motiv-matrix-icon-button-group {
     display: inline-flex;
     padding: 3px;
-    border: 1px solid color-mix(in oklch, var(--motiv-color-primary) 45%, transparent);
+    border: 1px solid
+      var(
+        --motiv-icon-button-border-color,
+        color-mix(in oklch, var(--motiv-color-primary) 45%, transparent)
+      );
   }
 
   .motiv-matrix-icon-button {
@@ -12,10 +16,10 @@
     width: 48px;
     height: 48px;
     padding: 0;
-    color: var(--motiv-color-primary);
-    background: transparent;
+    color: var(--motiv-icon-button-color, var(--motiv-color-primary));
+    background: var(--motiv-icon-button-bg, transparent);
     border: 0;
-    border-radius: var(--motiv-radius-sm);
+    border-radius: var(--motiv-icon-button-radius, var(--motiv-radius-sm));
     cursor: pointer;
 
     /* Corner brackets lock onto the hovered button. */
@@ -49,7 +53,11 @@
     }
 
     &:is(:hover, :focus-visible):not(:disabled) {
-      background: var(--motiv-color-primary-subtle);
+      --_bg-hover: color-mix(in oklch, var(--motiv-icon-button-bg), var(--motiv-color-primary) 14%);
+      background: var(
+        --motiv-icon-button-bg-hover,
+        var(--_bg-hover, var(--motiv-color-primary-subtle))
+      );
 
       &::before,
       &::after {
@@ -71,7 +79,11 @@
 
   /* Dotted divider between neighbours. */
   .motiv-matrix-icon-button-group > .motiv-matrix-icon-button + .motiv-matrix-icon-button {
-    border-left: 1px dashed color-mix(in oklch, var(--motiv-color-primary) 45%, transparent);
+    border-left: 1px dashed
+      var(
+        --motiv-icon-button-border-color,
+        color-mix(in oklch, var(--motiv-color-primary) 45%, transparent)
+      );
   }
 
   .motiv-matrix-icon-button__icon {

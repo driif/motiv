@@ -8,11 +8,11 @@
     min-height: 44px;
     padding: 12px 22px;
     font: inherit;
-    color: var(--motiv-color-on-primary);
+    color: var(--motiv-button-color, var(--motiv-color-on-primary));
     white-space: nowrap;
     background: transparent;
     border: 0;
-    border-radius: var(--motiv-radius-full);
+    border-radius: var(--motiv-button-radius, var(--motiv-radius-full));
     cursor: pointer;
     isolation: isolate;
 
@@ -40,7 +40,7 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: var(--motiv-color-primary);
+    background: var(--motiv-button-bg, var(--motiv-color-primary));
     border-radius: inherit;
     transition: scale 0.5s var(--motiv-ease-spring);
 

@@ -8,7 +8,7 @@
     align-items: center;
     gap: calc(var(--motiv-space) * 1.5);
     padding: calc(var(--motiv-space) * 0.5) var(--motiv-space);
-    color: var(--motiv-color-primary);
+    color: var(--motiv-link-color, var(--motiv-color-primary));
     font-weight: 600;
     text-decoration: none;
     border-radius: var(--motiv-radius-sm);
@@ -20,7 +20,10 @@
       z-index: -1;
       inset: auto calc(var(--motiv-space) * -1) 1px;
       height: 48%;
-      background: color-mix(in oklch, var(--motiv-color-secondary) 24%, transparent);
+      background: var(
+        --motiv-link-bg-hover,
+        color-mix(in oklch, var(--motiv-color-secondary) 24%, transparent)
+      );
       border-radius: 3px 12px 4px 10px;
       transform: scaleX(0) skewX(-12deg);
       transform-origin: left;

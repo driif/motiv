@@ -17,10 +17,14 @@
     min-height: 45px;
     padding: 12px 18px;
     font: inherit;
-    color: var(--motiv-color-text);
-    background: color-mix(in oklch, var(--motiv-color-primary) 22%, var(--motiv-color-surface));
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-full);
+    color: var(--motiv-button-color, var(--motiv-color-text));
+    background: var(
+      --motiv-button-bg,
+      color-mix(in oklch, var(--motiv-color-primary) 22%, var(--motiv-color-surface))
+    );
+    border: var(--motiv-button-border-width, 1px) solid
+      var(--motiv-button-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-button-radius, var(--motiv-radius-full));
     box-shadow: 0 5px 0 -2px var(--motiv-color-surface-hover);
     cursor: pointer;
     transition:

@@ -4,17 +4,24 @@
     width: 44px;
     height: 44px;
     padding: 0;
-    color: var(--motiv-color-text);
-    background: transparent;
+    color: var(--motiv-menu-button-color, var(--motiv-color-text));
+    background: var(--motiv-menu-button-bg, transparent);
     border: 0;
-    border-radius: var(--motiv-radius-full);
+    border-radius: var(--motiv-menu-button-radius, var(--motiv-radius-full));
     cursor: pointer;
 
     &::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: color-mix(in oklch, var(--motiv-color-primary) 18%, var(--motiv-color-surface));
+      background: var(
+        --motiv-menu-button-bg-hover,
+        color-mix(
+          in oklch,
+          var(--motiv-color-primary) 18%,
+          var(--motiv-menu-button-bg, var(--motiv-color-surface))
+        )
+      );
       border-radius: inherit;
       opacity: 0;
       scale: 0.85;

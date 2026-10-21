@@ -5,7 +5,7 @@
     align-items: center;
     gap: calc(var(--motiv-space) * 3);
     min-height: 44px;
-    color: var(--motiv-color-text);
+    color: var(--motiv-radio-color, var(--motiv-color-text));
     cursor: pointer;
 
     &:has(.motiv-radio__input:disabled) {
@@ -19,7 +19,7 @@
     flex-shrink: 0;
     width: 26px;
     height: 26px;
-    border: 2px solid var(--motiv-color-text);
+    border: 2px solid var(--motiv-radio-border-color, var(--motiv-color-text));
     border-radius: 50%;
 
     /* ::before is the ink drop, ::after its splash ring. */
@@ -32,7 +32,7 @@
     }
 
     &::before {
-      background: var(--motiv-color-secondary);
+      background: var(--motiv-radio-accent, var(--motiv-color-secondary));
       opacity: 0;
       transform: translateY(-24px);
       transition:
@@ -41,7 +41,7 @@
     }
 
     &::after {
-      border: 2px solid var(--motiv-color-secondary);
+      border: 2px solid var(--motiv-radio-accent, var(--motiv-color-secondary));
       opacity: 0;
     }
   }
