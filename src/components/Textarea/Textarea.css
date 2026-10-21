@@ -1,0 +1,90 @@
+@layer motiv.components {
+  .motiv-textarea {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 2);
+    width: 100%;
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-textarea__label {
+    color: var(--motiv-color-text-muted);
+    font-size: 0.8125rem;
+    transition: color 0.2s var(--motiv-ease);
+
+    .motiv-textarea:focus-within > & {
+      color: var(--motiv-color-primary);
+    }
+  }
+
+  .motiv-textarea__control {
+    position: relative;
+
+    /* The focus bloom of FloatingField: a ring that fades and scales in. */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border: 3px solid var(--motiv-color-primary-subtle);
+      border-radius: calc(var(--motiv-radius) + 4px);
+      opacity: 0;
+      scale: 0.97;
+      pointer-events: none;
+      transition:
+        opacity 0.25s var(--motiv-ease),
+        scale 0.3s var(--motiv-ease);
+    }
+
+    &:focus-within::after {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  .motiv-textarea__input {
+    display: block;
+    width: 100%;
+    max-height: calc(var(--_max-rows) * 1lh + var(--motiv-space) * 6 + 2px);
+    padding: calc(var(--motiv-space) * 3) calc(var(--motiv-space) * 3.5);
+    overflow-y: auto;
+    color: var(--motiv-color-text);
+    font: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius);
+    outline: none;
+    resize: none;
+
+    &::placeholder {
+      color: var(--motiv-color-text-muted);
+    }
+
+    &:focus {
+      border-color: var(--motiv-color-primary);
+    }
+
+    &:user-invalid {
+      border-color: var(--motiv-color-danger);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-textarea__hint {
+    margin: 0;
+    color: var(--motiv-color-text-muted);
+    font-size: 0.8125rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-textarea__label,
+    .motiv-textarea__control::after {
+      transition: none;
+    }
+  }
+}
