@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.9.0
+
+### Minor Changes
+
+- e0e770c: Add `Switch`, `Slider` and `Textarea` to `@driif/motiv/drawn` and `@driif/motiv/matrix`, with the same props as kinetic `LiquidSwitch`, `MomentumSlider` and `Textarea`; kinetic now also exports `LiquidSwitch` as `Switch` and `MomentumSlider` as `Slider`.
+
 ## 0.8.0
 
 ### Minor Changes
