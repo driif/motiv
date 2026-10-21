@@ -269,6 +269,14 @@ export const catalog = {
         'A text field whose label lifts on focus; a check pops in once the browser calls the value valid.',
     },
     {
+      id: 'textarea',
+      title: 'Textarea',
+      symbols: ['Textarea'],
+      demo: 'Textarea',
+      blurb:
+        'A multi-line field that grows with its text up to maxRows, then scrolls. Your onKeyDown decides what Enter does.',
+    },
+    {
       id: 'otp-input',
       title: 'OtpInput',
       symbols: ['OtpInput'],
