@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.7.0
+
+### Minor Changes
+
+- 5879ce2: Add `Textarea` component: a labelled native textarea that grows with its content up to `maxRows`, then scrolls; props `label`, `hideLabel`, `hint`, `maxRows` plus all native textarea props.
+
 ## 0.6.0
 
 ### Minor Changes
