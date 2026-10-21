@@ -6,6 +6,7 @@ export * from './IconButton';
 export * from './InkSplatterButton';
 export * from './Link';
 export * from './MenuButton';
+export * from './Nav';
 export * from './NavItem';
 export * from './OrbitalThemeToggle';
 export * from './Progress';

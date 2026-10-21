@@ -1,0 +1,24 @@
+@layer motiv.components {
+  /* The label clips its text, never the count. */
+  .motiv-matrix-chevnav__label:has(.motiv-matrix-nav__text) {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .motiv-matrix-nav__text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .motiv-matrix-nav__count {
+    flex-shrink: 0;
+    margin-inline-start: 8px;
+    font-variant-numeric: tabular-nums;
+    color: var(--motiv-nav-color, var(--motiv-color-text-muted));
+
+    [aria-current="page"] & {
+      color: inherit;
+    }
+  }
+}
