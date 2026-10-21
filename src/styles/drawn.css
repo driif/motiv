@@ -20,6 +20,9 @@
 @import "../drawn/Tooltip/Tooltip.css";
 @import "../drawn/InkSplatterButton/InkSplatterButton.css";
 @import "../drawn/HoldToConfirmButton/HoldToConfirmButton.css";
+@import "../drawn/Switch/Switch.css";
+@import "../drawn/Slider/Slider.css";
+@import "../drawn/Textarea/Textarea.css";
 
 @layer motiv.tokens {
   /* tokens.css carries the kinetic palette; keep drawn's own ease, shadow and muted mix. */

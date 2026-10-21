@@ -1,2 +1,2 @@
-export type { LiquidSwitchProps } from './LiquidSwitch';
-export { LiquidSwitch } from './LiquidSwitch';
+export type { LiquidSwitchProps, LiquidSwitchProps as SwitchProps } from './LiquidSwitch';
+export { LiquidSwitch, LiquidSwitch as Switch } from './LiquidSwitch';

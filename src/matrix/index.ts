@@ -11,5 +11,8 @@ export * from './Progress';
 export * from './Radio';
 export * from './ScanButton';
 export * from './SignalBurger';
+export * from './Slider';
+export * from './Switch';
 export * from './TerminalSelect';
+export * from './Textarea';
 export * from './TextField';

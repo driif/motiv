@@ -1,0 +1,76 @@
+@layer motiv.components {
+  .motiv-matrix-textarea {
+    --_accent: var(--motiv-textarea-accent, var(--motiv-color-primary));
+
+    display: grid;
+    gap: calc(var(--motiv-space) * 2);
+    width: 100%;
+    color: var(--motiv-color-text);
+
+    &:has(.motiv-matrix-textarea__input:disabled) {
+      opacity: 0.5;
+    }
+  }
+
+  .motiv-matrix-textarea__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .motiv-matrix-textarea__control {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--motiv-space) * 2);
+    padding: calc(var(--motiv-space) * 3);
+    line-height: 1.5;
+    background: var(--motiv-textarea-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-textarea-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-textarea-radius, var(--motiv-radius-sm));
+
+    &:focus-within {
+      border-color: var(--_accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--_accent) 22%, transparent);
+    }
+
+    &:has(.motiv-matrix-textarea__input:user-invalid) {
+      border-color: var(--motiv-color-danger);
+    }
+  }
+
+  .motiv-matrix-textarea__prompt {
+    font-weight: 700;
+    color: var(--_accent);
+  }
+
+  .motiv-matrix-textarea__input {
+    flex: 1;
+    min-width: 0;
+    max-height: calc(var(--_max-rows) * 1lh);
+    padding: 0;
+    overflow-y: auto;
+    font: inherit;
+    line-height: inherit;
+    color: var(--motiv-textarea-color, var(--motiv-color-text));
+    caret-color: var(--_accent);
+    background: transparent;
+    border: 0;
+    outline: none;
+    resize: none;
+
+    &::placeholder {
+      color: var(--motiv-color-text-muted);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-matrix-textarea__hint {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--motiv-color-text-muted);
+  }
+}

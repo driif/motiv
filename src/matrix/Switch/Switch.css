@@ -1,0 +1,64 @@
+@layer motiv.components {
+  .motiv-matrix-switch {
+    --_accent: var(--motiv-switch-accent, var(--motiv-color-primary));
+
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2);
+    min-height: 44px;
+    color: var(--motiv-switch-color, var(--motiv-color-text));
+  }
+
+  .motiv-matrix-switch__track {
+    flex-shrink: 0;
+    min-height: 2rem;
+    padding: 0 calc(var(--motiv-space) * 2);
+    font: inherit;
+    font-weight: 700;
+    color: var(--motiv-switch-border-color, var(--motiv-color-text-muted));
+    background: var(--motiv-switch-bg, transparent);
+    border: 1px solid currentColor;
+    border-radius: var(--motiv-switch-radius, var(--motiv-radius-sm));
+    cursor: pointer;
+
+    &[aria-checked="true"] {
+      color: var(--_accent);
+      background: color-mix(in oklch, var(--_accent) 14%, var(--motiv-switch-bg, transparent));
+    }
+
+    &:hover:not(:disabled) {
+      color: var(--_accent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-matrix-switch__state {
+    white-space: pre;
+
+    &::before {
+      content: "[OFF]";
+    }
+
+    [aria-checked="true"] > &::before {
+      content: "[ON ]";
+    }
+  }
+
+  .motiv-matrix-switch__label {
+    cursor: pointer;
+
+    :disabled + & {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}

@@ -42,11 +42,34 @@ export const catalog = {
         'A pencil line to write on. Focus draws it in ink, the label floats, the hint stays put.',
     },
     {
+      id: 'textarea',
+      title: 'Textarea',
+      symbols: ['Textarea'],
+      demo: 'Textarea',
+      blurb:
+        'A pencil line under text that grows up to maxRows, then scrolls. Same props as the kinetic Textarea.',
+    },
+    {
       id: 'checkbox',
       title: 'Checkbox',
       symbols: ['Checkbox'],
       demo: 'Checkbox',
       blurb: 'A native checkbox, ticked by hand.',
+    },
+    {
+      id: 'switch',
+      title: 'Switch',
+      symbols: ['Switch'],
+      demo: 'Switch',
+      blurb: 'An on/off switch: a pencil pill that hatches in and rolls its scribbled knob across.',
+    },
+    {
+      id: 'slider',
+      title: 'Slider',
+      symbols: ['Slider'],
+      demo: 'Slider',
+      blurb:
+        'A native range over a pencil line that fills with ink up to the thumb. Same props as MomentumSlider.',
     },
     {
       id: 'radio',
@@ -303,17 +326,18 @@ export const catalog = {
     {
       id: 'momentum-slider',
       title: 'MomentumSlider',
-      symbols: ['MomentumSlider'],
+      symbols: ['MomentumSlider', 'Slider'],
       demo: 'MomentumSlider',
       blurb:
-        'A range whose value bubble swings with the drag and settles when you let go. Marks label the stops.',
+        'A range whose value bubble swings with the drag and settles when you let go. Marks label the stops. Also exported as Slider.',
     },
     {
       id: 'liquid-switch',
       title: 'LiquidSwitch',
-      symbols: ['LiquidSwitch'],
+      symbols: ['LiquidSwitch', 'Switch'],
       demo: 'LiquidSwitch',
-      blurb: 'An on/off switch whose thumb stretches mid-travel and wobbles to a stop.',
+      blurb:
+        'An on/off switch whose thumb stretches mid-travel and wobbles to a stop. Also exported as Switch.',
     },
     {
       id: 'spring-checkbox',
@@ -466,6 +490,13 @@ export const catalog = {
       blurb: 'A labelled input behind a > prompt, with a hint that stays put.',
     },
     {
+      id: 'textarea',
+      title: 'Textarea',
+      symbols: ['Textarea'],
+      demo: 'Textarea',
+      blurb: 'A multi-line field behind a > prompt that grows up to maxRows, then scrolls.',
+    },
+    {
       id: 'decode-secret-field',
       title: 'DecodeSecretField',
       symbols: ['DecodeSecretField'],
@@ -487,6 +518,20 @@ export const catalog = {
       symbols: ['Checkbox'],
       demo: 'Checkbox',
       blurb: 'A native checkbox, drawn as [ ] and [x].',
+    },
+    {
+      id: 'switch',
+      title: 'Switch',
+      symbols: ['Switch'],
+      demo: 'Switch',
+      blurb: 'An on/off switch that reads [ON ] or [OFF]; screen readers hear the switch state.',
+    },
+    {
+      id: 'slider',
+      title: 'Slider',
+      symbols: ['Slider'],
+      demo: 'Slider',
+      blurb: 'A native range over a bracketed bar that fills block by block, with a value readout.',
     },
     {
       id: 'radio',

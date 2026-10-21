@@ -18,7 +18,10 @@ import {
   RadioGroup,
   SegmentedControl,
   Select,
+  Slider,
+  Switch,
   Tabs,
+  Textarea,
   TextField,
   ThemeToggle,
   Tooltip,
@@ -136,6 +139,19 @@ describe('server rendering', () => {
     expect(html).toContain('aria-live="polite"');
     expect(html).toContain('aria-live="assertive"');
   });
+
+  it('renders the drawn Switch, Slider and Textarea without a DOM', () => {
+    const html = renderToStaticMarkup(
+      <>
+        <Switch label="Wi-Fi" checked onChange={() => {}} />
+        <Slider label="Budget" value={40} onChange={() => {}} marks={[0, 100]} />
+        <Textarea label="Message" hint="Hint" />
+      </>,
+    );
+    expect(html).toContain('role="switch"');
+    expect(html).toContain('aria-valuetext="40"');
+    expect(html).toMatch(/<textarea aria-describedby="[^"]+-hint"/);
+  });
   it('renders the kinetic components without a DOM', () => {
     const noop = () => {};
     const options = [
@@ -173,6 +189,8 @@ describe('server rendering', () => {
         <K.FrequencySlider label="Volume" value={40} onChange={noop} />
         <K.MomentumSlider label="Budget" value={40} onChange={noop} marks={[0, 100]} />
         <K.LiquidSwitch label="Wi-Fi" checked onChange={noop} />
+        <K.Switch label="Wi-Fi" checked onChange={noop} />
+        <K.Slider label="Budget" value={40} onChange={noop} />
         <K.SpringCheckbox label="Subscribe" defaultChecked />
         <K.LikeButton liked count={12} onToggle={noop} />
         <K.MuteToggle muted onChange={noop} />
@@ -242,6 +260,9 @@ describe('server rendering', () => {
           onChange={noop}
           panels={{ oidc: 'A' }}
         />
+        <M.Switch label="Wi-Fi" checked onChange={noop} />
+        <M.Slider label="Budget" value={40} onChange={noop} marks={[0, 100]} />
+        <M.Textarea label="Message" hint="Hint" />
         <M.ChevronNav
           label="Main"
           sections={[{ title: 'S', items: [{ id: 'a', label: 'A', expandable: true }] }]}
@@ -259,5 +280,8 @@ describe('server rendering', () => {
     expect(html).toContain('aria-expanded="true"');
     expect(html).toContain('TARGET 02 / 02');
     expect(html).toContain('aria-current="page"');
+    expect(html).toContain('role="switch"');
+    expect(html).toContain('aria-valuetext="40"');
+    expect(html).toContain('<textarea');
   });
 });
