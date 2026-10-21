@@ -1,0 +1,99 @@
+@layer motiv.components {
+  .motiv-textarea {
+    --_pen: cubic-bezier(0.6, 0.05, 0.3, 1);
+    --_hand-font: "Caveat", "Segoe Print", cursive;
+    --_accent: var(--motiv-textarea-accent, var(--motiv-color-primary));
+
+    display: grid;
+    gap: calc(var(--motiv-space) * 1.5);
+    width: 100%;
+
+    &:has(.motiv-textarea__input:disabled) {
+      opacity: 0.5;
+    }
+  }
+
+  .motiv-textarea__label {
+    font-family: var(--_hand-font);
+    font-size: 1.5em;
+    line-height: 1.2;
+    color: var(--motiv-color-text-muted);
+    transition: color var(--motiv-duration) var(--motiv-ease);
+
+    .motiv-textarea:focus-within > & {
+      color: var(--_accent);
+    }
+  }
+
+  .motiv-textarea__control {
+    position: relative;
+  }
+
+  .motiv-textarea__input {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    max-height: calc(var(--_max-rows) * 1lh + var(--motiv-space) * 4 + 1.5px);
+    padding: calc(var(--motiv-space) * 2) 0;
+    overflow-y: auto;
+    font: inherit;
+    line-height: 1.5;
+    color: var(--motiv-textarea-color, var(--motiv-color-text));
+    background: var(--motiv-textarea-bg, transparent);
+    border: 0;
+    border-bottom: 1.5px solid var(--motiv-textarea-border-color, var(--motiv-color-text-muted));
+    border-radius: var(--motiv-textarea-radius, 0);
+    /* The primary line drawn in on focus below is the focus indicator. */
+    outline: none;
+    resize: none;
+
+    &::placeholder {
+      color: var(--motiv-color-text-muted);
+    }
+
+    &:user-invalid {
+      border-bottom-color: var(--motiv-color-danger);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-textarea__line {
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 12px;
+    overflow: visible;
+    pointer-events: none;
+
+    & path {
+      fill: none;
+      stroke: var(--_accent);
+      stroke-width: 3.5;
+      stroke-linecap: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      transition: stroke-dashoffset 0.8s var(--_pen);
+    }
+  }
+
+  .motiv-textarea__input:focus ~ .motiv-textarea__line path {
+    stroke-dashoffset: 0;
+  }
+
+  .motiv-textarea__hint {
+    margin: 0;
+    font-size: 0.875em;
+    color: var(--motiv-color-text-muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-textarea__label,
+    .motiv-textarea__line path {
+      transition: none;
+    }
+  }
+}

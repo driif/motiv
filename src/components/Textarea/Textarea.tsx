@@ -1,5 +1,6 @@
 import { type ComponentProps, type CSSProperties, useId, useLayoutEffect, useRef } from 'react';
 import { cx } from '../../utils/cx';
+import { fitHeight } from '../../utils/fitHeight';
 
 export interface TextareaProps extends ComponentProps<'textarea'> {
   label: string;
@@ -8,12 +9,6 @@ export interface TextareaProps extends ComponentProps<'textarea'> {
   hint?: string;
   /** Rows the field grows to before its content scrolls */
   maxRows?: number;
-}
-
-// CSS caps the height at maxRows; above that the content scrolls.
-function fitHeight(textarea: HTMLTextAreaElement) {
-  textarea.style.height = 'auto';
-  textarea.style.height = `${textarea.scrollHeight + textarea.offsetHeight - textarea.clientHeight}px`;
 }
 
 export function Textarea({
