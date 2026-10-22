@@ -1,0 +1,158 @@
+@layer motiv.components {
+  .motiv-sketch-command-menu {
+    --_pen: cubic-bezier(0.6, 0.05, 0.3, 1);
+    --_accent: var(--motiv-menu-accent, var(--motiv-color-primary));
+
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-sketch-command-menu__launcher {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2.5);
+    width: 100%;
+    min-height: 48px;
+    padding: 0 calc(var(--motiv-space) * 3.5);
+    font: inherit;
+    color: var(--motiv-menu-color, var(--motiv-color-text-muted));
+    text-align: left;
+    background: var(--motiv-menu-bg, var(--motiv-color-surface));
+    border: 2px solid var(--motiv-menu-border-color, var(--motiv-color-text));
+    border-radius: var(--motiv-menu-radius, 255px 14px 225px 14px / 14px 225px 14px 255px);
+    cursor: pointer;
+
+    [data-open="true"] > & {
+      border-color: var(--_accent);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+  }
+
+  .motiv-sketch-command-menu__glass {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .motiv-sketch-command-menu__placeholder,
+  .motiv-sketch-command-menu__label {
+    flex: 1;
+  }
+
+  .motiv-sketch-command-menu__kbd {
+    padding: 0 6px;
+    font-family: "Caveat", "Segoe Print", cursive;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    color: var(--motiv-color-text-muted);
+    border: 1.5px solid currentColor;
+    border-radius: 8px 4px 9px 5px / 5px 9px 4px 8px;
+  }
+
+  /* A paper sheet with an offset ink shadow, pinned under the launcher. */
+  .motiv-sketch-command-menu__menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    left: 0;
+    z-index: 20;
+    padding: 8px;
+    visibility: hidden;
+    background: var(--motiv-menu-bg, var(--motiv-color-surface));
+    border: 2px solid var(--motiv-menu-border-color, var(--motiv-color-text));
+    border-radius: var(--motiv-menu-radius, 14px 225px 14px 255px / 255px 14px 225px 14px);
+    box-shadow: 4px 5px 0 color-mix(in oklch, var(--motiv-color-text) 18%, transparent);
+    opacity: 0;
+    rotate: -1deg;
+
+    [data-open="true"] > & {
+      visibility: visible;
+      opacity: 1;
+      rotate: 0deg;
+    }
+  }
+
+  .motiv-sketch-command-menu__item {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2);
+    width: 100%;
+    min-height: 44px;
+    padding: 0 calc(var(--motiv-space) * 2.5);
+    font: inherit;
+    color: var(--motiv-menu-color, var(--motiv-color-text));
+    text-align: left;
+    background: transparent;
+    border: 0;
+    border-radius: 12px 6px 14px 8px / 8px 14px 6px 12px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      background: var(
+        --motiv-menu-bg-hover,
+        repeating-linear-gradient(
+          -45deg,
+          color-mix(in oklch, var(--_accent) 16%, transparent) 0 2px,
+          transparent 2px 6px
+        )
+      );
+      outline: none;
+    }
+
+    &:focus-visible {
+      box-shadow: inset 0 0 0 2px var(--_accent);
+    }
+  }
+
+  .motiv-sketch-command-menu__arrow {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    overflow: visible;
+
+    & path {
+      fill: none;
+      stroke: var(--_accent);
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+
+    :is(:hover, :focus-visible) > & path {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .motiv-sketch-command-menu__menu {
+      transition:
+        opacity 0.2s var(--motiv-ease),
+        rotate 0.35s var(--_pen),
+        visibility 0s 0.35s;
+
+      [data-open="true"] > & {
+        transition:
+          opacity 0.2s var(--motiv-ease),
+          rotate 0.35s var(--_pen),
+          visibility 0s;
+      }
+    }
+
+    .motiv-sketch-command-menu__arrow path {
+      transition: stroke-dashoffset 0.35s var(--_pen);
+    }
+  }
+}

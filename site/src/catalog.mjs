@@ -151,6 +151,24 @@ export const catalog = {
         'Toggle chips for filtering a list. Pressed chips get pencil hatching and a check inked in; a summary with a Clear button sits below.',
     },
     {
+      id: 'otp-input',
+      category: 'OtpInput',
+      title: 'OtpInput',
+      symbols: ['OtpInput'],
+      demo: 'OtpInput',
+      blurb:
+        'One pencil-ruled box per digit. Focus hops forward, paste fills them all; a right code makes the digits hop, a wrong one scribbles the row.',
+    },
+    {
+      id: 'command-menu',
+      category: 'CommandMenu',
+      title: 'CommandMenu',
+      symbols: ['CommandMenu'],
+      demo: 'CommandMenu',
+      blurb:
+        'A launcher that tips open a paper sheet of commands, each with an arrow inked in on focus. Arrow keys move, Escape closes, ⌘K / Ctrl K if you ask for it.',
+    },
+    {
       id: 'link',
       category: 'Link',
       title: 'Link',
@@ -789,6 +807,24 @@ export const catalog = {
       demo: 'Chips',
       blurb:
         'Toggle chips for filtering a list, each with a [x] box. A summary line and [Clear] sit below.',
+    },
+    {
+      id: 'otp-input',
+      category: 'OtpInput',
+      title: 'OtpInput',
+      symbols: ['OtpInput'],
+      demo: 'OtpInput',
+      blurb:
+        'Bracketed digit cells with a blinking underscore caret. Paste fills them all; a right code locks in with a glow, a wrong one glitches the row.',
+    },
+    {
+      id: 'command-menu',
+      category: 'CommandMenu',
+      title: 'CommandMenu',
+      symbols: ['CommandMenu'],
+      demo: 'CommandMenu',
+      blurb:
+        'A > search_ prompt that opens a HUD list of commands with a ▸ on the active one. Arrow keys move, Escape closes, ⌘K / Ctrl K if you ask for it.',
     },
     {
       id: 'chevron-nav',

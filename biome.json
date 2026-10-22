@@ -82,7 +82,11 @@
       }
     },
     {
-      "includes": ["src/components/CommandMenu/CommandMenu.tsx"],
+      "includes": [
+        "src/components/CommandMenu/CommandMenu.tsx",
+        "src/drawn/CommandMenu/CommandMenu.tsx",
+        "src/matrix/CommandMenu/CommandMenu.tsx"
+      ],
       "linter": {
         "rules": {
           "a11y": {

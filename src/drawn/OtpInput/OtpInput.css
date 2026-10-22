@@ -1,0 +1,117 @@
+@layer motiv.components {
+  .motiv-sketch-otp {
+    --_pen: cubic-bezier(0.6, 0.05, 0.3, 1);
+    --_accent: var(--motiv-text-field-accent, var(--motiv-color-primary));
+
+    display: inline-flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 2);
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    color: var(--motiv-color-text);
+    border: 0;
+  }
+
+  .motiv-sketch-otp__label {
+    padding: 0;
+    font-family: "Caveat", "Segoe Print", cursive;
+    font-size: 1.35rem;
+    color: var(--motiv-color-text-muted);
+  }
+
+  .motiv-sketch-otp__boxes {
+    display: flex;
+    gap: calc(var(--motiv-space) * 2.5);
+  }
+
+  .motiv-sketch-otp__box {
+    box-sizing: border-box;
+    width: 40px;
+    height: 54px;
+    padding: 0;
+    font-family: "Caveat", "Segoe Print", cursive;
+    font-size: 2rem;
+    text-align: center;
+    color: var(--motiv-text-field-color, var(--motiv-color-text));
+    caret-color: var(--_accent);
+    background:
+      linear-gradient(
+        var(--_line, var(--motiv-text-field-border-color, var(--motiv-color-text-muted))) 0 0
+      )
+      bottom / 100% 2px no-repeat,
+      var(--motiv-text-field-bg, transparent);
+    border: 0;
+    border-radius: var(--motiv-text-field-radius, 0);
+    rotate: -1.5deg;
+
+    &:nth-child(even) {
+      rotate: 1.5deg;
+    }
+
+    &:focus {
+      --_line: var(--_accent);
+      outline: none;
+    }
+
+    &:focus-visible {
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    [data-status="success"] & {
+      --_line: var(--_accent);
+      color: var(--_accent);
+    }
+
+    [data-status="error"] & {
+      --_line: var(--motiv-color-danger);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .motiv-sketch-otp__box {
+      transition: rotate 0.3s var(--_pen);
+
+      &:focus {
+        rotate: 0deg;
+      }
+
+      [data-status="success"] & {
+        animation: motiv-sketch-otp-hop 0.55s var(--motiv-ease-spring) calc(var(--_i) * 50ms) both;
+      }
+    }
+
+    [data-status="error"] > .motiv-sketch-otp__boxes {
+      animation: motiv-sketch-otp-scribble 0.42s var(--_pen);
+    }
+  }
+
+  @keyframes motiv-sketch-otp-hop {
+    40% {
+      translate: 0 -8px;
+      rotate: 0deg;
+    }
+  }
+
+  @keyframes motiv-sketch-otp-scribble {
+    20% {
+      translate: -6px 0;
+      rotate: -1.5deg;
+    }
+    40% {
+      translate: 5px 0;
+      rotate: 1deg;
+    }
+    60% {
+      translate: -3px 0;
+    }
+    80% {
+      translate: 2px 0;
+    }
+  }
+}
