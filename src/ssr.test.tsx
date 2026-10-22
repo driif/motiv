@@ -345,4 +345,29 @@ describe('server rendering', () => {
     expect(html.match(/aria-roledescription="carousel"/g)).toHaveLength(2);
     expect(html).toContain('[01/01]');
   });
+  it('renders SegmentedControl, Link and Chips in their new styles without a DOM', () => {
+    const noop = () => {};
+    const options = [
+      { value: 'tea', label: 'Tea', hint: 'Hot' },
+      { value: 'coffee', label: 'Coffee' },
+    ];
+    const html = renderToStaticMarkup(
+      <>
+        <D.SegmentedControl label="Drink" options={options} value="tea" onChange={noop} />
+        <M.SegmentedControl label="Drink" options={options} value="tea" onChange={noop} />
+        <K.Link href="https://example.com" external>
+          Example
+        </K.Link>
+        <K.Chips label="Drinks" options={options} value={['tea']} onChange={noop} />
+        <D.Chips label="Drinks" options={options} value={['tea']} onChange={noop} />
+        <M.Chips label="Drinks" options={options} value={['tea']} onChange={noop} />
+      </>,
+    );
+    expect(html.match(/role="radiogroup"/g)).toHaveLength(2);
+    expect(html.match(/data-active="true"/g)).toHaveLength(2);
+    expect(html).toContain('class="motiv-underline-link"');
+    expect(html).toContain('rel="noopener noreferrer"');
+    expect(html.match(/aria-pressed="true"/g)).toHaveLength(3);
+    expect(html.match(/1 of 2 selected/g)).toHaveLength(3);
+  });
 });

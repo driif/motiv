@@ -130,7 +130,8 @@ export const catalog = {
       title: 'SegmentedControl',
       symbols: ['SegmentedControl'],
       demo: 'SegmentedControl',
-      blurb: 'Two to four mutually exclusive views, side by side.',
+      blurb:
+        'Two to four mutually exclusive views, side by side. The blob swings over, and a hint can be penned in underneath.',
     },
     {
       id: 'tabs',
@@ -139,6 +140,15 @@ export const catalog = {
       symbols: ['Tabs'],
       demo: 'Tabs',
       blurb: 'Panels behind labels, with arrow-key navigation.',
+    },
+    {
+      id: 'chips',
+      category: 'Chips',
+      title: 'Chips',
+      symbols: ['Chips'],
+      demo: 'Chips',
+      blurb:
+        'Toggle chips for filtering a list. Pressed chips get pencil hatching and a check inked in; a summary with a Clear button sits below.',
     },
     {
       id: 'link',
@@ -359,11 +369,20 @@ export const catalog = {
     {
       id: 'filter-chips',
       category: 'Chips',
-      title: 'FilterChips',
-      symbols: ['FilterChips'],
+      title: 'Chips (FilterChips)',
+      symbols: ['Chips', 'FilterChips'],
       demo: 'FilterChips',
       blurb:
         'Toggle chips for filtering a list. A check pops in without the chip changing width, and a summary with a Clear button sits below.',
+    },
+    {
+      id: 'link',
+      category: 'Link',
+      title: 'Link',
+      symbols: ['Link'],
+      demo: 'Link',
+      blurb:
+        'A hairline underline that thickens from the left on hover, with an arrow that nudges forward when it leads somewhere.',
     },
     {
       id: 'radio',
@@ -752,6 +771,24 @@ export const catalog = {
       symbols: ['Tabs'],
       demo: 'Tabs',
       blurb: 'HudTabs with the drawn Tabs props: each item carries its own panel.',
+    },
+    {
+      id: 'segmented-control',
+      category: 'SegmentedControl',
+      title: 'SegmentedControl',
+      symbols: ['SegmentedControl'],
+      demo: 'SegmentedControl',
+      blurb:
+        'Two to four views side by side. A bracketed lock-on box steps to the choice, and its hint types out behind a prompt.',
+    },
+    {
+      id: 'chips',
+      category: 'Chips',
+      title: 'Chips',
+      symbols: ['Chips'],
+      demo: 'Chips',
+      blurb:
+        'Toggle chips for filtering a list, each with a [x] box. A summary line and [Clear] sit below.',
     },
     {
       id: 'chevron-nav',

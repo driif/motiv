@@ -1,0 +1,55 @@
+@layer motiv.components {
+  /* A hairline underline at rest; a thicker one sweeps in from the left on hover and focus. */
+  .motiv-underline-link {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 1.5);
+    color: var(--motiv-link-color, var(--motiv-color-primary));
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--motiv-radius-sm);
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+  }
+
+  .motiv-underline-link__label {
+    padding-bottom: 2px;
+    background:
+      linear-gradient(currentColor, currentColor) left bottom / 0 2px no-repeat,
+      linear-gradient(
+        color-mix(in oklch, currentColor 35%, transparent),
+        color-mix(in oklch, currentColor 35%, transparent)
+      )
+      left bottom / 100% 1px no-repeat;
+    transition: background-size 0.45s var(--motiv-ease);
+  }
+
+  .motiv-underline-link__arrow {
+    width: 1.1em;
+    height: 1.1em;
+    flex-shrink: 0;
+    transition: translate 0.45s var(--motiv-ease-spring);
+  }
+
+  .motiv-underline-link:is(:hover, :focus-visible) {
+    .motiv-underline-link__label {
+      background-size:
+        100% 2px,
+        100% 1px;
+    }
+
+    .motiv-underline-link__arrow {
+      translate: 3px 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-underline-link__label,
+    .motiv-underline-link__arrow {
+      transition: none;
+    }
+  }
+}

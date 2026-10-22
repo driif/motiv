@@ -3,6 +3,7 @@ export * from './Button';
 export * from './Card';
 export * from './Carousel';
 export * from './Checkbox';
+export * from './Chips';
 export * from './HoldToConfirmButton';
 export * from './IconButton';
 export * from './InkSplatterButton';

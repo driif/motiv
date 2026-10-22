@@ -1,15 +1,10 @@
-import {
-  type ComponentProps,
-  type CSSProperties,
-  type KeyboardEvent,
-  type ReactNode,
-  useEffect,
-  useRef,
-} from 'react';
+import { type ComponentProps, type CSSProperties, useEffect, useRef } from 'react';
+import type { MotivOption } from '../../types';
 import { cx } from '../../utils/cx';
+import { useRadioGroupKeys } from '../../utils/useRadioGroupKeys';
 
 export interface SegmentedControlProps extends Omit<ComponentProps<'div'>, 'onChange'> {
-  options: { value: string; label: ReactNode }[];
+  options: MotivOption[];
   value: string;
   onChange: (value: string) => void;
   label: string;
@@ -21,13 +16,14 @@ export function SegmentedControl({
   onChange,
   label,
   className,
-  style,
   onKeyDown: onKeyDownProp,
   ...props
 }: SegmentedControlProps) {
   const index = options.findIndex((option) => option.value === value);
   const blobRef = useRef<HTMLSpanElement>(null);
   const prevIndex = useRef(index);
+  const hasHints = options.some((option) => option.hint != null);
+  const onKeyDown = useRadioGroupKeys({ options, index, onChange, onKeyDown: onKeyDownProp });
 
   useEffect(() => {
     if (prevIndex.current === index) return;
@@ -44,51 +40,47 @@ export function SegmentedControl({
     );
   }, [index]);
 
-  function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    onKeyDownProp?.(event);
-    if (event.defaultPrevented) return;
-    const last = options.length - 1;
-    let next: number;
-    switch (event.key) {
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        next = index <= 0 ? last : index - 1;
-        break;
-      case 'ArrowRight':
-      case 'ArrowDown':
-        next = index >= last ? 0 : index + 1;
-        break;
-      default:
-        return;
-    }
-    event.preventDefault();
-    onChange(options[next].value);
-    event.currentTarget.querySelectorAll<HTMLElement>('[role="radio"]')[next].focus();
-  }
-
   return (
     <div
       {...props}
       role="radiogroup"
       aria-label={label}
       className={cx('motiv-segmented', className)}
-      style={{ ...style, '--_count': options.length, '--_index': index } as CSSProperties}
       onKeyDown={onKeyDown}
     >
-      <span ref={blobRef} className="motiv-segmented__blob" aria-hidden="true" />
-      {options.map((option, i) => (
-        <button
-          key={option.value}
-          type="button"
-          role="radio"
-          aria-checked={i === index}
-          tabIndex={i === Math.max(index, 0) ? 0 : -1}
-          className="motiv-segmented__option"
-          onClick={() => onChange(option.value)}
-        >
-          {option.label}
-        </button>
-      ))}
+      <div
+        className="motiv-segmented__track"
+        style={{ '--_count': options.length, '--_index': index } as CSSProperties}
+      >
+        <span ref={blobRef} className="motiv-segmented__blob" aria-hidden="true" />
+        {options.map((option, i) => (
+          <button
+            key={option.value}
+            type="button"
+            role="radio"
+            aria-checked={i === index}
+            tabIndex={i === Math.max(index, 0) ? 0 : -1}
+            className="motiv-segmented__option"
+            onClick={() => onChange(option.value)}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
+      {hasHints && (
+        <div className="motiv-segmented__hints" aria-live="polite">
+          {options.map((option, i) => (
+            <span
+              key={option.value}
+              className="motiv-segmented__hint"
+              data-active={i === index}
+              aria-hidden={i !== index}
+            >
+              {option.hint}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

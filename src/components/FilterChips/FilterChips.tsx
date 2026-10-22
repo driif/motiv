@@ -2,6 +2,7 @@ import type { ComponentProps, ReactNode } from 'react';
 import type { MotivOption } from '../../types';
 import { cx } from '../../utils/cx';
 import { Icon } from '../../utils/Icon';
+import { useChips } from '../../utils/useChips';
 
 export interface FilterChipsProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   options: MotivOption[];
@@ -13,53 +14,45 @@ export interface FilterChipsProps extends Omit<ComponentProps<'div'>, 'onChange'
   clearLabel?: string;
 }
 
-const defaultSummary = (count: number, total: number) =>
-  count ? `${count} of ${total} selected` : 'None selected';
-
 export function FilterChips({
   options,
   value,
   onChange,
   label,
   showSummary = true,
-  summary = defaultSummary,
+  summary,
   clearLabel = 'Clear',
   className,
   ...props
 }: FilterChipsProps) {
-  const count = options.filter((option) => value.includes(option.value)).length;
+  const { count, toggle, clear, summarize } = useChips({ options, value, onChange, summary });
 
   return (
     <div {...props} className={cx('motiv-filter-chips', className)}>
       <div role="group" aria-label={label} className="motiv-filter-chips__list">
-        {options.map((option) => {
-          const on = value.includes(option.value);
-          return (
-            <button
-              key={option.value}
-              type="button"
-              aria-pressed={on}
-              className="motiv-filter-chips__chip"
-              onClick={() =>
-                onChange(on ? value.filter((v) => v !== option.value) : [...value, option.value])
-              }
-            >
-              <Icon className="motiv-filter-chips__check">
-                <path d="M5 12.5l4.5 4.5L19 7.5" />
-              </Icon>
-              <span className="motiv-filter-chips__label">{option.label}</span>
-            </button>
-          );
-        })}
+        {options.map((option) => (
+          <button
+            key={option.value}
+            type="button"
+            aria-pressed={value.includes(option.value)}
+            className="motiv-filter-chips__chip"
+            onClick={() => toggle(option.value)}
+          >
+            <Icon className="motiv-filter-chips__check">
+              <path d="M5 12.5l4.5 4.5L19 7.5" />
+            </Icon>
+            <span className="motiv-filter-chips__label">{option.label}</span>
+          </button>
+        ))}
       </div>
       {showSummary && (
         <div className="motiv-filter-chips__summary">
-          <span aria-live="polite">{summary(count, options.length)}</span>
+          <span aria-live="polite">{summarize()}</span>
           <button
             type="button"
             className="motiv-filter-chips__clear"
             disabled={!count}
-            onClick={() => onChange([])}
+            onClick={clear}
           >
             {clearLabel}
           </button>

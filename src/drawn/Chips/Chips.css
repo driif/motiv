@@ -1,0 +1,124 @@
+@layer motiv.components {
+  .motiv-sketch-chips {
+    --_pen: cubic-bezier(0.6, 0.05, 0.3, 1);
+    --_accent: var(--motiv-chip-accent, var(--motiv-color-primary));
+
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 2);
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-sketch-chips__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--motiv-space) * 2);
+  }
+
+  .motiv-sketch-chips__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 1.5);
+    min-height: 44px;
+    padding: 0 16px 0 10px;
+    font: inherit;
+    font-weight: 600;
+    color: var(--motiv-chip-color, var(--motiv-color-text));
+    background: var(--motiv-chip-bg, var(--motiv-color-surface));
+    border: 1.5px solid var(--motiv-chip-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-chip-radius, 22px 14px 20px 12px / 14px 20px 12px 22px);
+    cursor: pointer;
+    transition:
+      border-color 0.2s,
+      rotate 0.3s var(--_pen);
+
+    &:hover {
+      rotate: -1deg;
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    /* Pressed chips get the pencil hatching and an inked border. */
+    &[aria-pressed="true"] {
+      background:
+        repeating-linear-gradient(
+          -45deg,
+          color-mix(in oklch, var(--_accent) 22%, transparent) 0 2px,
+          transparent 2px 6px
+        ),
+        var(--motiv-chip-bg, var(--motiv-color-surface));
+      border-color: var(--_accent);
+    }
+  }
+
+  .motiv-sketch-chips__check {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    overflow: visible;
+
+    & path {
+      fill: none;
+      stroke: var(--_accent);
+      stroke-width: 2.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      transition: stroke-dashoffset 0.4s var(--_pen);
+    }
+
+    [aria-pressed="true"] > & path {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .motiv-sketch-chips__summary {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2);
+    min-height: 44px;
+    font-family: "Caveat", "Segoe Print", cursive;
+    font-size: 1.2rem;
+    color: var(--motiv-color-text-muted);
+  }
+
+  .motiv-sketch-chips__clear {
+    min-height: 44px;
+    padding: 0 calc(var(--motiv-space) * 2);
+    font: inherit;
+    color: var(--motiv-color-text);
+    text-decoration: underline wavy 1px;
+    text-underline-offset: 4px;
+    background: transparent;
+    border: 0;
+    border-radius: var(--motiv-radius-sm);
+    cursor: pointer;
+    transition: opacity 0.25s;
+
+    &:disabled {
+      opacity: 0;
+      cursor: default;
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-sketch-chips__chip,
+    .motiv-sketch-chips__check path,
+    .motiv-sketch-chips__clear {
+      transition: none;
+    }
+
+    .motiv-sketch-chips__chip:hover {
+      rotate: none;
+    }
+  }
+}

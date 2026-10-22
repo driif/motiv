@@ -1,2 +1,2 @@
-export type { FilterChipsProps } from './FilterChips';
-export { FilterChips } from './FilterChips';
+export type { FilterChipsProps as ChipsProps, FilterChipsProps } from './FilterChips';
+export { FilterChips as Chips, FilterChips } from './FilterChips';

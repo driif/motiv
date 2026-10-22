@@ -15,6 +15,7 @@ export * from './components/FrequencySlider';
 export * from './components/GlideNav';
 export * from './components/IconButton';
 export * from './components/LikeButton';
+export * from './components/Link';
 export * from './components/LiquidSwitch';
 export * from './components/MagneticButton';
 export * from './components/MenuButton';

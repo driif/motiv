@@ -70,4 +70,19 @@ describe('FilterChips', () => {
     );
     expect(screen.queryByText('1 of 3 selected')).toBeNull();
   });
+
+  it('does not call the summary formatter while the summary is hidden', () => {
+    const summary = vi.fn(() => 'x');
+    render(
+      <FilterChips
+        label="Status"
+        options={options}
+        value={[]}
+        onChange={vi.fn()}
+        summary={summary}
+        showSummary={false}
+      />,
+    );
+    expect(summary).not.toHaveBeenCalled();
+  });
 });
