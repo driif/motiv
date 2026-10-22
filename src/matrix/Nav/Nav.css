@@ -1,6 +1,6 @@
 @layer motiv.components {
   /* The label clips its text, never the count. */
-  .motiv-matrix-chevnav__label:has(.motiv-matrix-nav__text) {
+  .motiv-matrix-nav .motiv-matrix-chevnav__label {
     display: flex;
     align-items: baseline;
   }

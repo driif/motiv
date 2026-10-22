@@ -1,10 +1,12 @@
 import type { NavProps } from '../../components/GlideNav';
+import { cx } from '../../utils/cx';
 import { ChevronNav } from '../ChevronNav';
 
-export function Nav({ items, onChange, ...props }: NavProps) {
+export function Nav({ items, onChange, className, ...props }: NavProps) {
   return (
     <ChevronNav
       {...props}
+      className={cx('motiv-matrix-nav', className)}
       sections={[
         {
           items: items.map(({ id, label, icon, count }) => ({
