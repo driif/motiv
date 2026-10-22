@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.14.0
+
+### Minor Changes
+
+- 68cb5f5: Add `OtpInput` and `CommandMenu` to `@driif/motiv/drawn` and `@driif/motiv/matrix`, with the same props as the kinetic ones.
+
 ## 0.13.0
 
 ### Minor Changes
