@@ -48,6 +48,86 @@
   --motiv-focus-ring: 0 0 0 2px var(--motiv-color-bg), 0 0 0 4px var(--motiv-color-primary);
 }
 
+/* Measured frame heights, so frames above the fold don't shift the page when Shell resizes them.
+   drawn's use case measured no shift unreserved, and reserving it slowed its first paint. */
+.site-page[data-style="kinetic"] {
+  --site-usecase-height: 42.75rem;
+  --site-playground-height: 57rem;
+}
+
+.site-page[data-style="drawn"] {
+  --site-playground-height: 52.5rem;
+}
+
+.site-page[data-style="matrix"] {
+  --site-usecase-height: 59.75rem;
+  --site-playground-height: 62rem;
+}
+
+@media (max-width: 60rem) {
+  .site-page[data-style="kinetic"] {
+    --site-usecase-height: 50.5rem;
+    --site-playground-height: 60.25rem;
+  }
+
+  .site-page[data-style="drawn"] {
+    --site-playground-height: 56rem;
+  }
+
+  .site-page[data-style="matrix"] {
+    --site-usecase-height: 61rem;
+    --site-playground-height: 65.75rem;
+  }
+}
+
+@media (max-width: 43.5rem) {
+  .site-page[data-style="kinetic"] {
+    --site-playground-height: 76.75rem;
+  }
+
+  .site-page[data-style="drawn"] {
+    --site-playground-height: 72.75rem;
+  }
+
+  .site-page[data-style="matrix"] {
+    --site-usecase-height: 61.5rem;
+    --site-playground-height: 82.75rem;
+  }
+}
+
+@media (max-width: 38.5rem) {
+  .site-page[data-style="kinetic"] {
+    --site-usecase-height: 61.25rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .site-page[data-style="kinetic"] {
+    --site-usecase-height: 62.25rem;
+  }
+
+  .site-page[data-style="matrix"] {
+    --site-usecase-height: 67.75rem;
+    --site-playground-height: 85rem;
+  }
+}
+
+@media (max-width: 24rem) {
+  .site-page[data-style="kinetic"] {
+    --site-usecase-height: 66.25rem;
+    --site-playground-height: 83.5rem;
+  }
+
+  .site-page[data-style="drawn"] {
+    --site-playground-height: 76.25rem;
+  }
+
+  .site-page[data-style="matrix"] {
+    --site-usecase-height: 69rem;
+    --site-playground-height: 89.75rem;
+  }
+}
+
 .site-page[data-style="drawn"] {
   --site-title-font: "Caveat", "Segoe Print", cursive;
   --site-title-weight: 400;
@@ -91,7 +171,6 @@
 
 .site-top__mark:focus-visible,
 .site-section__anchor:focus-visible,
-.site-gap__link:focus-visible,
 .site-source__summary:focus-visible {
   outline: none;
   box-shadow: var(--motiv-focus-ring);
@@ -146,21 +225,20 @@
   place-items: center;
   min-height: 2rem;
   padding: 0 0.875rem;
-  color: var(--motiv-color-text-muted);
+  color: var(--motiv-color-text);
   font-size: 0.875rem;
   text-decoration: none;
   border: 1px solid transparent;
   border-radius: calc(var(--motiv-radius-sm) - 2px);
-  transition: color var(--motiv-duration) var(--motiv-ease);
+  transition: background-color var(--motiv-duration) var(--motiv-ease);
 }
 
 .site-switch__link:hover,
 .site-switch__link[aria-current="page"] {
-  color: var(--motiv-color-text);
+  background: var(--motiv-color-surface);
 }
 
 .site-switch__link[aria-current="page"] {
-  background: var(--motiv-color-surface);
   border-color: var(--motiv-color-border);
   box-shadow: var(--motiv-shadow-sm);
 }
@@ -296,6 +374,14 @@
   border: 0;
 }
 
+.site-usecase .site-preview {
+  height: var(--site-usecase-height, 7rem);
+}
+
+.site-playground .site-preview {
+  height: var(--site-playground-height);
+}
+
 /* Getting started, playground */
 
 .site-start,
@@ -352,20 +438,6 @@
 
 .site-category {
   padding-top: 3rem;
-}
-
-.site-gap {
-  margin: 0;
-  padding: 1.25rem 1.5rem;
-  color: var(--motiv-color-text-muted);
-  border: 1px dashed var(--motiv-color-border);
-  border-radius: var(--motiv-radius-lg);
-}
-
-.site-gap__link {
-  color: inherit;
-  border-radius: var(--motiv-radius-sm);
-  text-underline-offset: 0.2em;
 }
 
 .site-section {

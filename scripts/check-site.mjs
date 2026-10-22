@@ -30,6 +30,11 @@ for (const [style, entry] of Object.entries(entries)) {
   if (!page.includes(`<Sections style="${style}" />`)) {
     problems.push(`${style}: the page does not render <Sections style="${style}" />`);
   }
+  for (const category of categories) {
+    if (!sections.some((section) => section.category === category)) {
+      problems.push(`${style}: no section for category ${category}`);
+    }
+  }
   for (const { id, demo, category } of sections) {
     if (category !== null && !categories.includes(category)) {
       problems.push(`${style}: section #${id} has unknown category ${category}`);
