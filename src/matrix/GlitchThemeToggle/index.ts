@@ -1,2 +1,5 @@
-export type { GlitchThemeToggleProps } from './GlitchThemeToggle';
-export { GlitchThemeToggle } from './GlitchThemeToggle';
+export type {
+  GlitchThemeToggleProps,
+  GlitchThemeToggleProps as ThemeToggleProps,
+} from './GlitchThemeToggle';
+export { GlitchThemeToggle, GlitchThemeToggle as ThemeToggle } from './GlitchThemeToggle';

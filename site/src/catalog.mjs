@@ -436,7 +436,16 @@ export const catalog = {
       symbols: ['FloatingField'],
       demo: 'FloatingField',
       blurb:
-        'A text field whose label lifts on focus; a check pops in once the browser calls the value valid.',
+        'A text field whose label lifts on focus; a check pops in once the browser calls the value valid. Also exported as TextField, without the check.',
+    },
+    {
+      id: 'text-field',
+      category: 'TextField',
+      title: 'TextField',
+      symbols: ['TextField'],
+      demo: 'TextField',
+      blurb:
+        'The FloatingField look under the generic name, without the check. Same props as the drawn and matrix TextField.',
     },
     {
       id: 'textarea',
@@ -526,7 +535,16 @@ export const catalog = {
       symbols: ['SpringCheckbox'],
       demo: 'SpringCheckbox',
       blurb:
-        'A native checkbox that squashes under the press, fills from the centre and pops its tick.',
+        'A native checkbox that squashes under the press, fills from the centre and pops its tick. Also exported as Checkbox.',
+    },
+    {
+      id: 'checkbox',
+      category: 'Checkbox',
+      title: 'Checkbox',
+      symbols: ['Checkbox'],
+      demo: 'Checkbox',
+      blurb:
+        'SpringCheckbox under the generic name, with the same props as the drawn and matrix Checkbox.',
     },
     {
       id: 'like-button',
@@ -596,6 +614,15 @@ export const catalog = {
       symbols: ['Nav'],
       demo: 'Nav',
       blurb: 'GlideNav under the generic name, with the same props as the drawn and matrix Nav.',
+    },
+    {
+      id: 'progress',
+      category: 'Progress',
+      title: 'Progress',
+      symbols: ['Progress'],
+      demo: 'Progress',
+      blurb:
+        'A labelled bar whose fill springs to the value. Same props as the drawn and matrix Progress.',
     },
     {
       id: 'step-progress',
@@ -678,7 +705,16 @@ export const catalog = {
       symbols: ['GlitchThemeToggle'],
       demo: 'GlitchThemeToggle',
       blurb:
-        'Reports clicks, your app owns the theme. The icon swaps through an RGB-split glitch; reduced motion swaps it plainly.',
+        'Reports clicks, your app owns the theme. The icon swaps through an RGB-split glitch; reduced motion swaps it plainly. Also exported as ThemeToggle.',
+    },
+    {
+      id: 'theme-toggle',
+      category: 'ThemeToggle',
+      title: 'ThemeToggle',
+      symbols: ['ThemeToggle'],
+      demo: 'ThemeToggle',
+      blurb:
+        'GlitchThemeToggle under the generic name, with the same props as the kinetic and drawn ThemeToggle.',
     },
     {
       id: 'signal-burger',
@@ -686,7 +722,17 @@ export const catalog = {
       title: 'SignalBurger',
       symbols: ['SignalBurger'],
       demo: 'SignalBurger',
-      blurb: 'A menu button whose bars pulse like an equalizer on hover and jump to an X in steps.',
+      blurb:
+        'A menu button whose bars pulse like an equalizer on hover and jump to an X in steps. Also exported as MenuButton.',
+    },
+    {
+      id: 'menu-button',
+      category: 'MenuButton',
+      title: 'MenuButton',
+      symbols: ['MenuButton'],
+      demo: 'MenuButton',
+      blurb:
+        'SignalBurger under the generic name, with the same props as the kinetic and drawn MenuButton.',
     },
     {
       id: 'card',

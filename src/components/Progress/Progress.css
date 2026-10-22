@@ -1,0 +1,47 @@
+@layer motiv.components {
+  .motiv-bar {
+    --_accent: var(--motiv-progress-accent, var(--motiv-color-primary));
+
+    display: grid;
+    gap: calc(var(--motiv-space) * 2);
+    width: 100%;
+    max-width: 420px;
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-bar__head {
+    display: flex;
+    justify-content: space-between;
+    gap: calc(var(--motiv-space) * 2);
+    font-size: 0.875rem;
+  }
+
+  .motiv-bar__value {
+    color: var(--motiv-color-text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .motiv-bar__track {
+    height: 8px;
+    overflow: hidden;
+    background: var(--motiv-progress-bg, var(--motiv-color-surface-hover));
+    border: 1px solid var(--motiv-progress-border-color, transparent);
+    border-radius: 999px;
+  }
+
+  /* The spring overshoots past 100% at the end; the track's overflow clips it. */
+  .motiv-bar__fill {
+    height: 100%;
+    background: var(--_accent);
+    border-radius: inherit;
+    transform-origin: left;
+    scale: calc(var(--_value) / 100) 1;
+    transition: scale 0.6s var(--motiv-ease-spring);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-bar__fill {
+      transition: none;
+    }
+  }
+}
