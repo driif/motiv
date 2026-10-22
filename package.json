@@ -44,6 +44,7 @@
     "check:site": "node scripts/check-site.mjs",
     "typecheck:site": "tsc -p site --noEmit",
     "build:site": "pnpm --filter motiv-site build",
+    "check:site-size": "node scripts/check-site-size.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "changeset": "changeset",

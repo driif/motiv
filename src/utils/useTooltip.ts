@@ -5,7 +5,6 @@ export function useTooltip() {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
-  // Tracked in state because the CSS cannot use :has(), which Firefox < 121 lacks.
   const [focusVisible, setFocusVisible] = useState(false);
   // Escape hides the note even while hovered or focused, until the pointer or focus leaves.
   const [dismissed, setDismissed] = useState(false);

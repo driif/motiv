@@ -14,7 +14,7 @@ const groups = [
     ids: sections.filter((s) => s.category === category).map((s) => s.id),
   })),
   { title: `Only in ${style}`, ids: sections.filter((s) => s.category === null).map((s) => s.id) },
-];
+].filter(({ ids }) => ids.length);
 ---
 
 <div class="site-sections">
@@ -22,19 +22,9 @@ const groups = [
     groups.map(({ title, ids }) => (
       <div class="site-category">
         <h2 class="site-kicker">{title}</h2>
-        {ids.length ? (
-          ids.map((id) => <Section style={style} id={id} />)
-        ) : (
-          <p class="site-gap">
-            Not yet in {style}.{' '}
-            <a
-              class="site-gap__link"
-              href="https://github.com/driif/motiv/blob/main/src/docs/Parity.mdx#backlog"
-            >
-              See the parity backlog
-            </a>
-          </p>
-        )}
+        {ids.map((id) => (
+          <Section style={style} id={id} />
+        ))}
       </div>
     ))
   }

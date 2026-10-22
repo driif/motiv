@@ -33,7 +33,7 @@ export function Subscribe() {
     <iframe class="site-preview" src="/preview/drawn/settings/" title="Settings screen preview" />
     <details class="site-source">
       <summary class="site-source__summary">Source</summary>
-      <Code class="site-code" code={settingsSource} lang="tsx" theme="github-dark-dimmed" />
+      <Code class="site-code" code={settingsSource} lang="tsx" theme="github-dark-default" />
     </details>
   </section>
 
@@ -49,7 +49,7 @@ export function Subscribe() {
       <li class="site-steps__item">
         <h3 class="site-steps__title">Install</h3>
         <p class="site-steps__text">Peers: React 19, react-dom.</p>
-        <Code class="site-code" code="pnpm add @driif/motiv" lang="sh" theme="github-dark-dimmed" />
+        <Code class="site-code" code="pnpm add @driif/motiv" lang="sh" theme="github-dark-default" />
       </li>
       <li class="site-steps__item">
         <h3 class="site-steps__title">Import the stylesheet</h3>
@@ -58,18 +58,18 @@ export function Subscribe() {
           class="site-code"
           code="import '@driif/motiv/drawn.css';"
           lang="ts"
-          theme="github-dark-dimmed"
+          theme="github-dark-default"
         />
       </li>
       <li class="site-steps__item">
         <h3 class="site-steps__title">Use</h3>
         <p class="site-steps__text">Named exports, no provider.</p>
-        <Code class="site-code" code={first} lang="tsx" theme="github-dark-dimmed" />
+        <Code class="site-code" code={first} lang="tsx" theme="github-dark-default" />
       </li>
       <li class="site-steps__item">
         <h3 class="site-steps__title">Theme</h3>
         <p class="site-steps__text">Your app sets <code class="site-inline">data-theme</code> on <code class="site-inline">&lt;html&gt;</code>.</p>
-        <Code class="site-code" code={themeSource} lang="ts" theme="github-dark-dimmed" />
+        <Code class="site-code" code={themeSource} lang="ts" theme="github-dark-default" />
       </li>
     </ol>
   </section>

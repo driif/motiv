@@ -44,7 +44,7 @@ const retheme = `:root {
     />
     <details class="site-source">
       <summary class="site-source__summary">Source</summary>
-      <Code class="site-code" code={releaseSource} lang="tsx" theme="github-dark-dimmed" />
+      <Code class="site-code" code={releaseSource} lang="tsx" theme="github-dark-default" />
     </details>
   </section>
 
@@ -60,7 +60,7 @@ const retheme = `:root {
       <li class="site-steps__item">
         <h3 class="site-steps__title">Install</h3>
         <p class="site-steps__text">Peers: React 19, react-dom.</p>
-        <Code class="site-code" code="pnpm add @driif/motiv" lang="sh" theme="github-dark-dimmed" />
+        <Code class="site-code" code="pnpm add @driif/motiv" lang="sh" theme="github-dark-default" />
       </li>
       <li class="site-steps__item">
         <h3 class="site-steps__title">Import the stylesheet</h3>
@@ -69,18 +69,18 @@ const retheme = `:root {
           class="site-code"
           code="import '@driif/motiv/styles.css';"
           lang="ts"
-          theme="github-dark-dimmed"
+          theme="github-dark-default"
         />
       </li>
       <li class="site-steps__item">
         <h3 class="site-steps__title">Use</h3>
         <p class="site-steps__text">Named exports, no provider. <code class="site-inline">cx</code> joins class names.</p>
-        <Code class="site-code" code={first} lang="tsx" theme="github-dark-dimmed" />
+        <Code class="site-code" code={first} lang="tsx" theme="github-dark-default" />
       </li>
       <li class="site-steps__item">
         <h3 class="site-steps__title">Re-theme</h3>
         <p class="site-steps__text">Everything is in <code class="site-inline">@layer motiv.*</code>; your rules win.</p>
-        <Code class="site-code" code={retheme} lang="css" theme="github-dark-dimmed" />
+        <Code class="site-code" code={retheme} lang="css" theme="github-dark-default" />
       </li>
     </ol>
   </section>
