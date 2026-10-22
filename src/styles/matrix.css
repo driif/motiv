@@ -6,6 +6,7 @@
 @import "../matrix/IconButton/IconButton.css";
 @import "../matrix/Card/Card.css";
 @import "../matrix/TextField/TextField.css";
+@import "../matrix/OtpInput/OtpInput.css";
 @import "../matrix/Checkbox/Checkbox.css";
 @import "../matrix/Chips/Chips.css";
 @import "../matrix/Radio/Radio.css";
@@ -24,6 +25,7 @@
 @import "../matrix/Slider/Slider.css";
 @import "../matrix/Textarea/Textarea.css";
 @import "../matrix/Tooltip/Tooltip.css";
+@import "../matrix/CommandMenu/CommandMenu.css";
 @import "../matrix/Accordion/Accordion.css";
 @import "../matrix/Stepper/Stepper.css";
 @import "../matrix/Carousel/Carousel.css";

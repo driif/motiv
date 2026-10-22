@@ -370,4 +370,22 @@ describe('server rendering', () => {
     expect(html.match(/aria-pressed="true"/g)).toHaveLength(3);
     expect(html.match(/1 of 2 selected/g)).toHaveLength(3);
   });
+
+  it('renders OtpInput and CommandMenu in their new styles without a DOM', () => {
+    const noop = () => {};
+    const commands = [{ id: 'n', label: 'New', onSelect: noop }];
+    const html = renderToStaticMarkup(
+      <>
+        <D.OtpInput label="Code" value="12" onChange={noop} status="success" />
+        <M.OtpInput label="Code" value="12" onChange={noop} status="error" />
+        <D.CommandMenu commands={commands} hotkey />
+        <M.CommandMenu commands={commands} hotkey />
+      </>,
+    );
+    expect(html).toContain('class="motiv-sketch-otp" data-status="success"');
+    expect(html).toContain('class="motiv-matrix-otp" data-status="error"');
+    expect(html.match(/autoComplete="one-time-code"/g)).toHaveLength(2);
+    expect(html.match(/role="menu"/g)).toHaveLength(2);
+    expect(html.match(/Ctrl K/g)).toHaveLength(2);
+  });
 });

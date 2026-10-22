@@ -1,0 +1,173 @@
+@layer motiv.components {
+  .motiv-matrix-command-menu {
+    --_accent: var(--motiv-menu-accent, var(--motiv-color-primary));
+    --_border: var(
+      --motiv-menu-border-color,
+      color-mix(in oklch, var(--motiv-color-primary) 55%, transparent)
+    );
+
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    font-family: var(--motiv-font-body);
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-matrix-command-menu__launcher {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--motiv-menu-color, var(--motiv-color-text-muted));
+    text-align: left;
+    background: var(
+      --motiv-menu-bg,
+      color-mix(in oklch, var(--motiv-color-primary) 7%, var(--motiv-color-surface))
+    );
+    border: 1px solid var(--_border);
+    border-radius: var(--motiv-menu-radius, var(--motiv-radius));
+    cursor: pointer;
+
+    [data-open="true"] > & {
+      border-color: var(--_accent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+  }
+
+  .motiv-matrix-command-menu__prompt {
+    font-weight: 700;
+    color: var(--_accent);
+  }
+
+  .motiv-matrix-command-menu__placeholder {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .motiv-matrix-command-menu__caret {
+    flex-shrink: 0;
+    width: 9px;
+    height: 2px;
+    margin-top: 12px;
+    margin-right: auto;
+    background: var(--_accent);
+  }
+
+  .motiv-matrix-command-menu__label {
+    flex: 1;
+  }
+
+  .motiv-matrix-command-menu__kbd {
+    font: inherit;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    color: var(--motiv-color-text-muted);
+
+    &::before {
+      content: "[" / "";
+    }
+
+    &::after {
+      content: "]" / "";
+    }
+  }
+
+  .motiv-matrix-command-menu__menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    left: 0;
+    z-index: 20;
+    padding: 6px 0;
+    visibility: hidden;
+    /* HUD corner brackets over the panel fill. */
+    background:
+      linear-gradient(var(--_accent) 0 0) top left / 10px 2px no-repeat,
+      linear-gradient(var(--_accent) 0 0) top left / 2px 10px no-repeat,
+      linear-gradient(var(--_accent) 0 0) bottom right / 10px 2px no-repeat,
+      linear-gradient(var(--_accent) 0 0) bottom right / 2px 10px no-repeat,
+      var(--motiv-menu-bg, var(--motiv-color-surface));
+    border: 1px solid var(--_border);
+    border-radius: var(--motiv-menu-radius, var(--motiv-radius));
+    box-shadow: var(--motiv-shadow-md);
+    opacity: 0;
+
+    [data-open="true"] > & {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .motiv-matrix-command-menu__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 44px;
+    padding: 0 14px;
+    font: inherit;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--motiv-menu-color, var(--motiv-color-text));
+    text-align: left;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    &::before {
+      content: "▸" / "";
+      width: 1ch;
+      color: var(--_accent);
+      visibility: hidden;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: var(--_accent);
+      background: var(--motiv-menu-bg-hover, color-mix(in oklch, var(--_accent) 12%, transparent));
+      outline: none;
+
+      &::before {
+        visibility: visible;
+      }
+    }
+
+    &:focus-visible {
+      box-shadow: inset 2px 0 0 var(--_accent);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .motiv-matrix-command-menu__caret {
+      animation: motiv-matrix-command-menu-blink 1s steps(1) infinite;
+    }
+
+    .motiv-matrix-command-menu__menu {
+      transition:
+        opacity 0.2s steps(3),
+        visibility 0s 0.2s;
+
+      [data-open="true"] > & {
+        transition:
+          opacity 0.2s steps(3),
+          visibility 0s;
+      }
+    }
+  }
+
+  @keyframes motiv-matrix-command-menu-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+}

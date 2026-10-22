@@ -15,7 +15,7 @@ All three styles already share the component tokens (see Docs/Theming), so an ov
 
 ## Matrix
 
-— marks a gap. ¹ marks a component that covers the category under a style-specific name; it gets a
+¹ marks a component that covers the category under a style-specific name; it gets a
 generic export when that category is built. Drawn `NavItem` is a single nav link or button; drawn
 `Nav` is the list built from it. Kinetic `Switch`, `Slider` and `Nav` are the same components as
 `LiquidSwitch`, `MomentumSlider` and `GlideNav`, under the generic name. Kinetic and matrix `Tabs`
@@ -23,8 +23,8 @@ wrap `ElasticTabs` and `HudTabs` with the drawn `Tabs` props; matrix `Nav` wraps
 the `GlideNav` props. Kinetic and matrix `Select` and `Tooltip` take the drawn props; matrix `Select`
 wraps `TerminalSelect`, whose field shows an option's `code`, falling back to its `label`, as its own
 look. Drawn and matrix `Accordion`, `Stepper` and `Carousel` take the kinetic props. Kinetic `Chips`
-is `FilterChips` under the generic name; drawn and matrix `Chips` and matrix `SegmentedControl` take
-the kinetic props, and kinetic `Link` takes the drawn props.
+is `FilterChips` under the generic name; drawn and matrix `Chips`, `OtpInput` and `CommandMenu` and
+matrix `SegmentedControl` take the kinetic props, and kinetic `Link` takes the drawn props.
 
 | Category | Kinetic | Drawn | Matrix |
 |---|---|---|---|
@@ -50,8 +50,8 @@ the kinetic props, and kinetic `Link` takes the drawn props.
 | Stepper | `Stepper` | `Stepper` | `Stepper` |
 | Carousel | `Carousel` | `Carousel` | `Carousel` |
 | Chips | `Chips` (`FilterChips`) | `Chips` | `Chips` |
-| OtpInput | `OtpInput` | — | — |
-| CommandMenu | `CommandMenu` | — | — |
+| OtpInput | `OtpInput` | `OtpInput` | `OtpInput` |
+| CommandMenu | `CommandMenu` | `CommandMenu` | `CommandMenu` |
 
 Style-specific, outside the categories: kinetic `MagneticButton`, `MorphSubmitButton`,
 `LikeButton`, `BellButton`, `MuteToggle`, `BadgeButton`, `CopyField`, `ExpandingSearch`,
@@ -60,4 +60,4 @@ Style-specific, outside the categories: kinetic `MagneticButton`, `MorphSubmitBu
 
 ## Backlog
 
-The remaining gaps: OtpInput and CommandMenu for drawn and matrix, and the other ¹ names.
+Every category has a component in all three styles. The remaining gaps are the ¹ names.

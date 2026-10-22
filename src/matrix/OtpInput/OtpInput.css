@@ -1,0 +1,154 @@
+@layer motiv.components {
+  .motiv-matrix-otp {
+    --_accent: var(--motiv-text-field-accent, var(--motiv-color-primary));
+
+    display: inline-flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 2);
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    color: var(--motiv-color-text);
+    border: 0;
+  }
+
+  .motiv-matrix-otp__label {
+    padding: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .motiv-matrix-otp__boxes {
+    display: flex;
+    gap: calc(var(--motiv-space) * 2);
+  }
+
+  .motiv-matrix-otp__box {
+    --_bracket: var(--motiv-text-field-border-color, var(--motiv-color-border));
+
+    box-sizing: border-box;
+    width: 42px;
+    height: 52px;
+    padding: 0;
+    font-family: var(--motiv-font-body);
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--motiv-text-field-color, var(--motiv-color-text));
+    caret-color: transparent;
+    /* Bracket edges left and right instead of a full box. */
+    background:
+      linear-gradient(var(--_bracket) 0 0) left / 2px 100% no-repeat,
+      linear-gradient(var(--_bracket) 0 0) top left / 8px 2px no-repeat,
+      linear-gradient(var(--_bracket) 0 0) bottom left / 8px 2px no-repeat,
+      linear-gradient(var(--_bracket) 0 0) right / 2px 100% no-repeat,
+      linear-gradient(var(--_bracket) 0 0) top right / 8px 2px no-repeat,
+      linear-gradient(var(--_bracket) 0 0) bottom right / 8px 2px no-repeat,
+      var(--motiv-text-field-bg, var(--motiv-color-surface));
+    border: 0;
+    border-radius: var(--motiv-text-field-radius, var(--motiv-radius));
+
+    &:focus {
+      --_bracket: var(--_accent);
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+
+    /* The block caret is drawn as an underscore inside the empty focused cell. */
+    &:focus:not([data-filled]) {
+      background-image:
+        linear-gradient(var(--_accent) 0 0), linear-gradient(var(--_bracket) 0 0),
+        linear-gradient(var(--_bracket) 0 0), linear-gradient(var(--_bracket) 0 0),
+        linear-gradient(var(--_bracket) 0 0), linear-gradient(var(--_bracket) 0 0),
+        linear-gradient(var(--_bracket) 0 0);
+      background-position:
+        50% 75%,
+        left,
+        top left,
+        bottom left,
+        right,
+        top right,
+        bottom right;
+      background-size:
+        14px 3px,
+        2px 100%,
+        8px 2px,
+        8px 2px,
+        2px 100%,
+        8px 2px,
+        8px 2px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    [data-status="success"] & {
+      --_bracket: var(--_accent);
+      color: var(--_accent);
+      text-shadow: 0 0 8px color-mix(in oklch, var(--_accent) 60%, transparent);
+    }
+
+    [data-status="error"] & {
+      --_bracket: var(--motiv-color-danger);
+      color: var(--motiv-color-danger);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .motiv-matrix-otp__box {
+      &:focus:not([data-filled]) {
+        animation: motiv-matrix-otp-caret 1s steps(1) infinite;
+      }
+
+      [data-status="success"] & {
+        animation: motiv-matrix-otp-lock 0.4s steps(2) calc(var(--_i) * 60ms) both;
+      }
+    }
+
+    [data-status="error"] > .motiv-matrix-otp__boxes {
+      animation: motiv-matrix-otp-glitch 0.42s steps(1);
+    }
+  }
+
+  @keyframes motiv-matrix-otp-caret {
+    50% {
+      background-size:
+        0 0,
+        2px 100%,
+        8px 2px,
+        8px 2px,
+        2px 100%,
+        8px 2px,
+        8px 2px;
+    }
+  }
+
+  @keyframes motiv-matrix-otp-lock {
+    0% {
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes motiv-matrix-otp-glitch {
+    20% {
+      translate: -5px 0;
+    }
+    40% {
+      translate: 4px 0;
+    }
+    60% {
+      translate: -2px 0;
+    }
+    80% {
+      translate: 2px 0;
+    }
+  }
+}
