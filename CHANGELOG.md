@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.15.1
+
+### Patch Changes
+
+- e56f204: FilterChips and the drawn and matrix Chips render faster with large selections.
+
 ## 0.15.0
 
 ### Minor Changes
