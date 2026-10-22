@@ -1,6 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { useState } from 'react';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { TerminalSelect } from './TerminalSelect';
 
 const options = [
@@ -25,9 +25,11 @@ function Controlled({ initial = 'ldap' }: { initial?: string }) {
 }
 
 const combobox = () => screen.getByRole('combobox', { name: 'Auth method' });
-const key = (k: string) => fireEvent.keyDown(combobox(), { key: k });
+const key = (k: string, init?: object) => fireEvent.keyDown(combobox(), { key: k, ...init });
 const activeOption = () =>
   document.getElementById(combobox().getAttribute('aria-activedescendant') ?? '');
+
+afterEach(() => vi.useRealTimers());
 
 describe('TerminalSelect', () => {
   it('is a closed select-only combobox with an inert listbox and a hint', () => {
@@ -96,6 +98,35 @@ describe('TerminalSelect', () => {
     expect(activeOption()).toHaveTextContent('OIDC');
   });
 
+  it('types ahead on several characters, Space included, and resets after 500ms', () => {
+    vi.useFakeTimers();
+    render(<Controlled initial="token" />);
+    key('o');
+    expect(activeOption()).toHaveTextContent('OIDC');
+    key('k');
+    expect(activeOption()).toHaveTextContent('Okta');
+    key(' ');
+    expect(combobox()).toHaveAttribute('aria-expanded', 'true');
+    expect(combobox()).toHaveTextContent('Token');
+    act(() => vi.advanceTimersByTime(500));
+    key('l');
+    key('d');
+    expect(activeOption()).toHaveTextContent('LDAP');
+  });
+
+  it('pages with PageUp and PageDown, and Alt+ArrowUp commits and closes', () => {
+    render(<Controlled />);
+    key('ArrowDown');
+    key('PageDown');
+    expect(activeOption()).toHaveTextContent('Token');
+    key('PageUp');
+    expect(activeOption()).toHaveTextContent('LDAP');
+    key('ArrowDown');
+    key('ArrowUp', { altKey: true });
+    expect(combobox()).toHaveAttribute('aria-expanded', 'false');
+    expect(combobox()).toHaveTextContent('OIDC');
+  });
+
   it('moves the active option with the pointer', () => {
     render(<Controlled />);
     fireEvent.click(combobox());
@@ -120,6 +151,29 @@ describe('TerminalSelect', () => {
       />,
     );
     expect(combobox()).toBeDisabled();
+  });
+
+  it('shows the placeholder only while nothing is selected', () => {
+    const { rerender } = render(
+      <TerminalSelect
+        label="Auth method"
+        options={options}
+        value=""
+        onChange={() => {}}
+        placeholder="Pick one"
+      />,
+    );
+    expect(combobox()).toHaveTextContent('Pick one');
+    rerender(
+      <TerminalSelect
+        label="Auth method"
+        options={options}
+        value="ldap"
+        onChange={() => {}}
+        placeholder="Pick one"
+      />,
+    );
+    expect(combobox()).not.toHaveTextContent('Pick one');
   });
 
   it('shows the active badge with a custom label', () => {

@@ -33,7 +33,11 @@
       }
     },
     {
-      "includes": ["src/drawn/Select/Select.tsx", "src/matrix/TerminalSelect/TerminalSelect.tsx"],
+      "includes": [
+        "src/drawn/Select/Select.tsx",
+        "src/components/Select/Select.tsx",
+        "src/matrix/TerminalSelect/TerminalSelect.tsx"
+      ],
       "linter": {
         "rules": {
           "a11y": {

@@ -122,6 +122,11 @@
     white-space: nowrap;
   }
 
+  .motiv-matrix-term__value--empty {
+    font-weight: 400;
+    color: var(--motiv-color-text-muted);
+  }
+
   .motiv-matrix-term__caret {
     flex-shrink: 0;
     width: 9px;

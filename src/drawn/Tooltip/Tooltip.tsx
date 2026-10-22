@@ -1,5 +1,6 @@
-import { type ComponentProps, type ReactNode, useEffect, useId, useRef, useState } from 'react';
+import { type ComponentProps, type ReactNode, useId } from 'react';
 import { cx } from '../../utils/cx';
+import { useTooltip } from '../../utils/useTooltip';
 
 export interface TooltipProps extends Omit<ComponentProps<'span'>, 'content'> {
   content: ReactNode;
@@ -15,70 +16,28 @@ export function Tooltip({
   ...props
 }: TooltipProps) {
   const id = useId();
-  const triggerRef = useRef<HTMLButtonElement>(null);
-  const [open, setOpen] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  // Tracked in state because the CSS cannot use :has(), which Firefox < 121 lacks.
-  const [focusVisible, setFocusVisible] = useState(false);
-  // Escape hides the note even while hovered or focused, until the pointer or focus leaves.
-  const [dismissed, setDismissed] = useState(false);
-
-  // Hover can show the note while focus is elsewhere, so Escape is heard on the document too.
-  useEffect(() => {
-    if (!open && !hovered) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return;
-      setOpen(false);
-      setDismissed(true);
-    };
-    const onPointerDown = (event: PointerEvent) => {
-      if (!triggerRef.current?.parentElement?.contains(event.target as Node)) setOpen(false);
-    };
-    document.addEventListener('keydown', onKeyDown);
-    document.addEventListener('pointerdown', onPointerDown);
-    return () => {
-      document.removeEventListener('keydown', onKeyDown);
-      document.removeEventListener('pointerdown', onPointerDown);
-    };
-  }, [open, hovered]);
+  const { root, hover, trigger } = useTooltip();
 
   return (
     <span
       {...props}
+      {...root}
       className={cx('motiv-tooltip', className)}
-      data-open={open || undefined}
-      data-focus-visible={focusVisible || undefined}
-      data-dismissed={dismissed || undefined}
       onPointerEnter={(event) => {
-        setHovered(true);
+        hover(true);
         onPointerEnter?.(event);
       }}
       onPointerLeave={(event) => {
-        setHovered(false);
-        setDismissed(false);
+        hover(false);
         onPointerLeave?.(event);
       }}
     >
       <button
-        ref={triggerRef}
         type="button"
         className="motiv-tooltip__trigger"
         aria-label={label}
         aria-describedby={id}
-        onClick={() => {
-          setDismissed(open);
-          setOpen(!open);
-        }}
-        onKeyDown={(event) => {
-          if (event.key !== 'Escape') return;
-          setOpen(false);
-          setDismissed(true);
-        }}
-        onFocus={(event) => setFocusVisible(event.currentTarget.matches(':focus-visible'))}
-        onBlur={() => {
-          setFocusVisible(false);
-          setDismissed(false);
-        }}
+        {...trigger}
       >
         i
       </button>
