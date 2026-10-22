@@ -1,6 +1,7 @@
 // @vitest-environment node
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
+import * as D from './drawn';
 import {
   Checkbox,
   Button as DrawnButton,
@@ -322,5 +323,26 @@ describe('server rendering', () => {
     expect(html).toContain('<input type="hidden" name="k" value="tea"/>');
     expect(html).toContain('Select…');
     expect(html.match(/aria-describedby="([^"]+)".*?role="tooltip" id="\1"/g)).toHaveLength(2);
+  });
+
+  it('renders Accordion, Stepper and Carousel in drawn and matrix without a DOM', () => {
+    const noop = () => {};
+    const items = [{ id: 'a', title: 'Q', content: 'Answer' }];
+    const slides = [{ id: 'a', label: 'A', content: 'Slide' }];
+    const html = renderToStaticMarkup(
+      <>
+        <D.Accordion items={items} defaultOpen={['a']} />
+        <M.Accordion items={items} defaultOpen={['a']} />
+        <D.Stepper label="Guests" value={2} onChange={noop} />
+        <M.Stepper label="Guests" value={2} onChange={noop} />
+        <D.Carousel label="Plans" slides={slides} />
+        <M.Carousel label="Plans" slides={slides} />
+      </>,
+    );
+    expect(html.match(/aria-expanded="true"/g)).toHaveLength(2);
+    expect(html.match(/role="spinbutton"/g)).toHaveLength(2);
+    expect(html).toContain('>02</div>');
+    expect(html.match(/aria-roledescription="carousel"/g)).toHaveLength(2);
+    expect(html).toContain('[01/01]');
   });
 });

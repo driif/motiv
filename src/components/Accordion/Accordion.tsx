@@ -1,6 +1,7 @@
-import { type ComponentProps, type ReactNode, useId, useState } from 'react';
+import { type ComponentProps, type ReactNode, useId } from 'react';
 import { cx } from '../../utils/cx';
 import { Icon } from '../../utils/Icon';
+import { useDisclosure } from '../../utils/useDisclosure';
 
 export interface AccordionItem {
   id: string;
@@ -28,19 +29,8 @@ export function Accordion({
   ...props
 }: AccordionProps) {
   const baseId = useId();
-  const [inner, setInner] = useState(defaultOpen);
-  const openIds = open ?? inner;
+  const { openIds, toggle } = useDisclosure({ multiple, defaultOpen, open, onOpenChange });
   const Heading = `h${headingLevel}` as const;
-
-  function toggle(id: string) {
-    const next = openIds.includes(id)
-      ? openIds.filter((x) => x !== id)
-      : multiple
-        ? [...openIds, id]
-        : [id];
-    if (open === undefined) setInner(next);
-    onOpenChange?.(next);
-  }
 
   return (
     <div {...props} className={cx('motiv-accordion', className)}>

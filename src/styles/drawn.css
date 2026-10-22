@@ -24,6 +24,9 @@
 @import "../drawn/Switch/Switch.css";
 @import "../drawn/Slider/Slider.css";
 @import "../drawn/Textarea/Textarea.css";
+@import "../drawn/Accordion/Accordion.css";
+@import "../drawn/Stepper/Stepper.css";
+@import "../drawn/Carousel/Carousel.css";
 
 @layer motiv.tokens {
   /* tokens.css carries the kinetic palette; keep drawn's own ease, shadow and muted mix. */

@@ -1,0 +1,105 @@
+@layer motiv.components {
+  .motiv-sketch-accordion {
+    --_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --_ink: var(--motiv-accordion-border-color, var(--motiv-color-text));
+
+    display: grid;
+    gap: calc(var(--motiv-space) * 2.5);
+    width: 100%;
+    color: var(--motiv-accordion-color, var(--motiv-color-text));
+  }
+
+  .motiv-sketch-accordion__item {
+    background: var(--motiv-accordion-bg, var(--motiv-color-surface));
+    border: 2px solid var(--_ink);
+    border-radius: var(--motiv-accordion-radius, 6px 16px 10px 20px / 18px 8px 14px 6px);
+
+    &:nth-child(even) {
+      border-radius: var(--motiv-accordion-radius, 16px 6px 20px 10px / 8px 18px 6px 14px);
+    }
+  }
+
+  .motiv-sketch-accordion__heading {
+    margin: 0;
+    font: inherit;
+  }
+
+  .motiv-sketch-accordion__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--motiv-space) * 3);
+    width: 100%;
+    min-height: 48px;
+    padding: 0 calc(var(--motiv-space) * 4);
+    font: inherit;
+    font-weight: 600;
+    color: inherit;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    border-radius: inherit;
+    cursor: pointer;
+
+    &:hover {
+      --_bg-hover: color-mix(in oklch, var(--motiv-accordion-bg), var(--motiv-color-primary) 10%);
+      background: var(
+        --motiv-accordion-bg-hover,
+        var(--_bg-hover, var(--motiv-color-primary-subtle))
+      );
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    &[aria-expanded="true"] {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .motiv-sketch-accordion__chevron {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    [aria-expanded="true"] > & {
+      color: var(--motiv-accordion-accent, var(--motiv-color-primary));
+      rotate: 180deg;
+    }
+  }
+
+  /* A pencil rule between the trigger and the open panel. */
+  .motiv-sketch-accordion__panel {
+    margin: 0 calc(var(--motiv-space) * 4);
+    padding: calc(var(--motiv-space) * 3) 0 calc(var(--motiv-space) * 4);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--motiv-color-text-muted);
+    border-top: 1.5px dashed color-mix(in oklch, var(--_ink) 45%, transparent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .motiv-sketch-accordion__chevron {
+      transition: rotate 0.4s var(--_spring);
+    }
+
+    .motiv-sketch-accordion__panel {
+      animation: motiv-sketch-accordion-in 0.35s var(--motiv-ease);
+    }
+  }
+
+  @keyframes motiv-sketch-accordion-in {
+    from {
+      opacity: 0;
+      translate: 0 -4px;
+    }
+  }
+}

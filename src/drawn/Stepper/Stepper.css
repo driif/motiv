@@ -1,0 +1,79 @@
+@layer motiv.components {
+  .motiv-sketch-stepper {
+    --_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --_hand-font: "Caveat", "Segoe Print", cursive;
+    --_ink: var(--motiv-stepper-border-color, var(--motiv-color-text));
+
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 3);
+    color: var(--motiv-stepper-color, var(--motiv-color-text));
+  }
+
+  .motiv-sketch-stepper__button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    color: inherit;
+    background: var(--motiv-stepper-bg, var(--motiv-color-surface));
+    border: 2px solid var(--_ink);
+    border-radius: 55% 45% 50% 48% / 48% 52% 45% 55%;
+    cursor: pointer;
+
+    &:last-child {
+      border-radius: 46% 54% 47% 53% / 55% 45% 52% 48%;
+    }
+
+    &:hover {
+      --_bg-hover: color-mix(in oklch, var(--motiv-stepper-bg), var(--motiv-color-primary) 10%);
+      background: var(
+        --motiv-stepper-bg-hover,
+        var(--_bg-hover, var(--motiv-color-primary-subtle))
+      );
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    & > svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+    }
+  }
+
+  /* The number sits on a pencil underline. */
+  .motiv-sketch-stepper__value {
+    min-width: 2ch;
+    padding: 0 calc(var(--motiv-space) * 2);
+    font-family: var(--_hand-font);
+    font-size: 2.25rem;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    text-align: center;
+    border-bottom: 2px solid var(--_ink);
+    border-radius: var(--motiv-stepper-radius, 0 0 40% 60% / 0 0 6px 4px);
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .motiv-sketch-stepper__button {
+      transition: rotate 0.35s var(--_spring);
+
+      &:active {
+        rotate: -12deg;
+      }
+    }
+  }
+}

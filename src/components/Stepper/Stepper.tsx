@@ -1,7 +1,8 @@
-import { type ComponentProps, type KeyboardEvent, useRef } from 'react';
+import { type ComponentProps, useRef } from 'react';
 import { cx } from '../../utils/cx';
 import { Icon } from '../../utils/Icon';
 import { playOnce, SHAKE } from '../../utils/motion';
+import { useStepper } from '../../utils/useStepper';
 import { Odometer } from '../Odometer/Odometer';
 
 export interface StepperProps extends Omit<ComponentProps<'div'>, 'onChange'> {
@@ -29,36 +30,14 @@ export function Stepper({
 }: StepperProps) {
   const valueRef = useRef<HTMLDivElement>(null);
   const digits = String(Math.trunc(Math.max(Math.abs(min), Math.abs(max)))).length;
-  const decimals = Math.max(...[step, min, value].map((n) => String(n).split('.')[1]?.length ?? 0));
-
-  function bump(delta: number) {
-    // Rounded to the finest precision in play so 0.1 + 0.2 lands on 0.3.
-    const next = Number((value + delta).toFixed(decimals));
-    if (next < min || next > max) playOnce(valueRef.current, SHAKE, { duration: 400 });
-    else onChange(next);
-  }
-
-  function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    switch (event.key) {
-      case 'ArrowUp':
-      case 'ArrowRight':
-        bump(step);
-        break;
-      case 'ArrowDown':
-      case 'ArrowLeft':
-        bump(-step);
-        break;
-      case 'Home':
-        onChange(min);
-        break;
-      case 'End':
-        onChange(max);
-        break;
-      default:
-        return;
-    }
-    event.preventDefault();
-  }
+  const { decimals, bump, onKeyDown } = useStepper({
+    value,
+    onChange,
+    min,
+    max,
+    step,
+    onOutOfRange: () => playOnce(valueRef.current, SHAKE, { duration: 400 }),
+  });
 
   return (
     <div {...props} className={cx('motiv-stepper', className)}>

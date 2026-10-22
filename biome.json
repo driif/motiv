@@ -66,6 +66,8 @@
         "src/components/SegmentedControl/SegmentedControl.tsx",
         "src/components/FilterChips/FilterChips.tsx",
         "src/components/Carousel/Carousel.tsx",
+        "src/drawn/Carousel/Carousel.tsx",
+        "src/matrix/Carousel/Carousel.tsx",
         "src/components/IconButton/IconButton.tsx"
       ],
       "linter": {

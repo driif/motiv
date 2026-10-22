@@ -1,17 +1,10 @@
-import {
-  type ComponentProps,
-  type CSSProperties,
-  type ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { type ComponentProps, type CSSProperties, type ReactNode, useEffect, useRef } from 'react';
 import { cx } from '../../utils/cx';
 import { Icon } from '../../utils/Icon';
 import { EASE_OUT, playOnce } from '../../utils/motion';
+import { useCarousel } from '../../utils/useCarousel';
 
 const STRETCH: Keyframe[] = [{ scale: '1 1' }, { scale: '3.5 1', offset: 0.35 }, { scale: '1 1' }];
-const SWIPE_MIN = 40;
 
 export interface CarouselSlide {
   id: string;
@@ -47,11 +40,15 @@ export function Carousel({
   ...props
 }: CarouselProps) {
   const n = slides.length;
-  const [inner, setInner] = useState(defaultIndex);
-  const current = Math.min(Math.max(index ?? inner, 0), Math.max(n - 1, 0));
+  const { current, goTo, keyNav, swipe } = useCarousel({
+    count: n,
+    index,
+    defaultIndex,
+    onIndexChange,
+    loop,
+  });
   const wormRef = useRef<HTMLSpanElement>(null);
   const prev = useRef(current);
-  const startX = useRef<number | null>(null);
 
   useEffect(() => {
     const from = prev.current;
@@ -63,14 +60,6 @@ export function Carousel({
     playOnce(worm, STRETCH, { duration: 450, easing: EASE_OUT });
   }, [current]);
 
-  function goTo(i: number) {
-    if (n === 0) return;
-    const next = loop ? (i + n) % n : Math.min(Math.max(i, 0), n - 1);
-    if (next === current) return;
-    if (index === undefined) setInner(next);
-    onIndexChange?.(next);
-  }
-
   return (
     <section
       {...props}
@@ -80,29 +69,10 @@ export function Carousel({
       style={{ ...style, '--_index': current } as CSSProperties}
       onKeyDown={(event) => {
         onKeyDown?.(event);
-        if (event.defaultPrevented) return;
-        if ((event.target as HTMLElement).closest('input, textarea, select, [contenteditable]'))
-          return;
-        if (event.key === 'ArrowLeft') goTo(current - 1);
-        else if (event.key === 'ArrowRight') goTo(current + 1);
+        keyNav(event);
       }}
     >
-      <div
-        className="motiv-carousel__view"
-        aria-live="polite"
-        onPointerDown={(event) => {
-          startX.current = event.clientX;
-        }}
-        onPointerCancel={() => {
-          startX.current = null;
-        }}
-        onPointerUp={(event) => {
-          if (startX.current === null) return;
-          const dx = event.clientX - startX.current;
-          startX.current = null;
-          if (Math.abs(dx) > SWIPE_MIN) goTo(current + (dx < 0 ? 1 : -1));
-        }}
-      >
+      <div className="motiv-carousel__view" aria-live="polite" {...swipe}>
         <div className="motiv-carousel__track">
           {slides.map((slide, i) => (
             <div
