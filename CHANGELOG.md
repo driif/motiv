@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.12.0
+
+### Minor Changes
+
+- 328f819: Add `Accordion`, `Stepper` and `Carousel` to `@driif/motiv/drawn` and `@driif/motiv/matrix`, with the kinetic props.
+
 ## 0.11.0
 
 ### Minor Changes
