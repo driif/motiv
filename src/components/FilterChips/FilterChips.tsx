@@ -25,7 +25,12 @@ export function FilterChips({
   className,
   ...props
 }: FilterChipsProps) {
-  const { count, toggle, clear, summarize } = useChips({ options, value, onChange, summary });
+  const { selected, count, toggle, clear, summarize } = useChips({
+    options,
+    value,
+    onChange,
+    summary,
+  });
 
   return (
     <div {...props} className={cx('motiv-filter-chips', className)}>
@@ -34,7 +39,7 @@ export function FilterChips({
           <button
             key={option.value}
             type="button"
-            aria-pressed={value.includes(option.value)}
+            aria-pressed={selected.has(option.value)}
             className="motiv-filter-chips__chip"
             onClick={() => toggle(option.value)}
           >

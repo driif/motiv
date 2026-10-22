@@ -12,6 +12,33 @@ const checks = [
     kept: 'motiv-matrix-scan',
     dropped: ['motiv-matrix-term', 'motiv-matrix-decode', 'motiv-matrix-btn', 'motiv-link'],
   },
+  {
+    input: 'test/fixtures/treeshake-select.js',
+    kept: 'motiv-picker',
+    dropped: ['motiv-filter-chips', 'motiv-carousel', 'useChips', 'useCommandMenu', 'useCarousel'],
+  },
+  {
+    input: 'test/fixtures/treeshake-drawn-select.js',
+    kept: 'motiv-select',
+    dropped: [
+      'motiv-sketch-chips',
+      'motiv-sketch-carousel',
+      'useChips',
+      'useCommandMenu',
+      'useCarousel',
+    ],
+  },
+  {
+    input: 'test/fixtures/treeshake-matrix-terminal-select.js',
+    kept: 'motiv-matrix-term',
+    dropped: [
+      'motiv-matrix-chips',
+      'motiv-matrix-scan',
+      'useChips',
+      'useCommandMenu',
+      'useCarousel',
+    ],
+  },
 ];
 
 const problems = [];
