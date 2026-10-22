@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.15.0
+
+### Minor Changes
+
+- a740b66: Add kinetic `TextField`, `Checkbox` and `Progress` and matrix `ThemeToggle` and `MenuButton`, so every category has its generic name in all three styles with the same props.
+
 ## 0.14.0
 
 ### Minor Changes
