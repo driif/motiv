@@ -16,13 +16,15 @@ export function useChips({
   onChange: (value: string[]) => void;
   summary?: (count: number, total: number) => ReactNode;
 }) {
-  const count = options.filter((option) => value.includes(option.value)).length;
+  const selected = new Set(value);
+  const count = options.filter((option) => selected.has(option.value)).length;
 
   function toggle(v: string) {
-    onChange(value.includes(v) ? value.filter((x) => x !== v) : [...value, v]);
+    onChange(selected.has(v) ? value.filter((x) => x !== v) : [...value, v]);
   }
 
   return {
+    selected,
     count,
     toggle,
     clear: () => onChange([]),
