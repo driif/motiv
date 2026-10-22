@@ -15,10 +15,13 @@ All three styles already share the component tokens (see Docs/Theming), so an ov
 
 ## Matrix
 
-¹ marks a component that covers the category under a style-specific name; it gets a
-generic export when that category is built. Drawn `NavItem` is a single nav link or button; drawn
-`Nav` is the list built from it. Kinetic `Switch`, `Slider` and `Nav` are the same components as
-`LiquidSwitch`, `MomentumSlider` and `GlideNav`, under the generic name. Kinetic and matrix `Tabs`
+Every cell leads with the generic name; a flavored name in parentheses is the same component
+under its own name, and ² marks a style's extra component in that category. Drawn `NavItem` is a single nav link or button; drawn
+`Nav` is the list built from it. Kinetic `Switch`, `Slider`, `Nav` and `Checkbox` are the same components as
+`LiquidSwitch`, `MomentumSlider`, `GlideNav` and `SpringCheckbox`, and matrix `ThemeToggle` and
+`MenuButton` are `GlitchThemeToggle` and `SignalBurger`, under the generic name. Kinetic
+`TextField` has the `FloatingField` look without its validity check, and kinetic `TextField` and
+`Progress` take the drawn props. Kinetic and matrix `Tabs`
 wrap `ElasticTabs` and `HudTabs` with the drawn `Tabs` props; matrix `Nav` wraps `ChevronNav` with
 the `GlideNav` props. Kinetic and matrix `Select` and `Tooltip` take the drawn props; matrix `Select`
 wraps `TerminalSelect`, whose field shows an option's `code`, falling back to its `label`, as its own
@@ -31,22 +34,22 @@ matrix `SegmentedControl` take the kinetic props, and kinetic `Link` takes the d
 | Button | `Button` | `Button` | `Button` |
 | IconButton | `IconButton` | `IconButton` | `IconButton` |
 | Card | `Card` | `Card` | `Card` |
-| TextField | `FloatingField` ¹ | `TextField` | `TextField` |
+| TextField | `TextField`, `FloatingField` ² | `TextField` | `TextField` |
 | Textarea | `Textarea` | `Textarea` | `Textarea` |
 | Select | `Select` | `Select` | `Select` (`TerminalSelect`) |
-| Checkbox | `SpringCheckbox` ¹ | `Checkbox` | `Checkbox` |
+| Checkbox | `Checkbox` (`SpringCheckbox`) | `Checkbox` | `Checkbox` |
 | Radio | `Radio` | `Radio` | `Radio` |
 | Switch | `Switch` (`LiquidSwitch`) | `Switch` | `Switch` |
-| Slider | `Slider` (`MomentumSlider`), `FrequencySlider` ¹ | `Slider` | `Slider` |
+| Slider | `Slider` (`MomentumSlider`), `FrequencySlider` ² | `Slider` | `Slider` |
 | Tabs | `Tabs` (`ElasticTabs`) | `Tabs` | `Tabs` (`HudTabs`) |
 | SegmentedControl | `SegmentedControl` | `SegmentedControl` | `SegmentedControl` |
-| Progress | `ProgressRing` ¹, `StepProgress` ¹ | `Progress` | `Progress` |
+| Progress | `Progress`, `ProgressRing` ², `StepProgress` ² | `Progress` | `Progress` |
 | Link | `Link` | `Link` | `Link` |
 | Tooltip | `Tooltip` | `Tooltip` | `Tooltip` |
 | Accordion | `Accordion` | `Accordion` | `Accordion` |
-| Nav | `Nav` (`GlideNav`), `DrillStack` ¹ | `Nav` | `Nav` (`ChevronNav`) |
-| ThemeToggle | `ThemeToggle` | `ThemeToggle` | `GlitchThemeToggle` ¹ |
-| MenuButton | `MenuButton` | `MenuButton` | `SignalBurger` ¹ |
+| Nav | `Nav` (`GlideNav`), `DrillStack` ² | `Nav` | `Nav` (`ChevronNav`) |
+| ThemeToggle | `ThemeToggle` | `ThemeToggle` | `ThemeToggle` (`GlitchThemeToggle`) |
+| MenuButton | `MenuButton` | `MenuButton` | `MenuButton` (`SignalBurger`) |
 | Stepper | `Stepper` | `Stepper` | `Stepper` |
 | Carousel | `Carousel` | `Carousel` | `Carousel` |
 | Chips | `Chips` (`FilterChips`) | `Chips` | `Chips` |
@@ -60,4 +63,4 @@ Style-specific, outside the categories: kinetic `MagneticButton`, `MorphSubmitBu
 
 ## Backlog
 
-Every category has a component in all three styles. The remaining gaps are the ¹ names.
+Parity complete: every category has its generic name in all three styles.

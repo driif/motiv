@@ -194,6 +194,9 @@ describe('server rendering', () => {
         <K.Switch label="Wi-Fi" checked onChange={noop} />
         <K.Slider label="Budget" value={40} onChange={noop} />
         <K.SpringCheckbox label="Subscribe" defaultChecked />
+        <K.Checkbox label="Subscribe" defaultChecked />
+        <K.TextField label="Name" hint="Hint" aria-describedby="err" />
+        <K.Progress value={40} label="Upload" />
         <K.LikeButton liked count={12} onToggle={noop} />
         <K.MuteToggle muted onChange={noop} />
         <K.SlipCard title="T" description="D" note="N" />
@@ -224,6 +227,14 @@ describe('server rendering', () => {
     expect(html).toContain('aria-valuenow="40"');
     expect(html).toContain('Ctrl K');
     expect(html).toContain('aria-current="step"');
+    expect(html).toMatch(/aria-describedby="err [^"]+-hint"/);
+    expect(html).toContain('class="motiv-bar"');
+  });
+
+  it('exports the generic names as aliases of the flavored components', () => {
+    expect(K.Checkbox).toBe(K.SpringCheckbox);
+    expect(M.ThemeToggle).toBe(M.GlitchThemeToggle);
+    expect(M.MenuButton).toBe(M.SignalBurger);
   });
   it('renders the matrix components without a DOM', () => {
     const noop = () => {};
@@ -255,6 +266,8 @@ describe('server rendering', () => {
         <M.TerminalSelect label="Auth" options={options} value="oidc" onChange={noop} name="a" />
         <M.DecodeSecretField label="Token" value="secret" onChange={noop} />
         <M.SignalBurger open onToggle={noop} />
+        <M.MenuButton open={false} onToggle={noop} />
+        <M.ThemeToggle dark={false} onToggle={noop} />
         <M.HudTabs
           label="Tabs"
           tabs={options}
@@ -280,6 +293,8 @@ describe('server rendering', () => {
     expect(html).toContain('<input type="hidden" name="a" value="oidc"/>');
     expect(html).toContain('type="password"');
     expect(html).toContain('aria-expanded="true"');
+    expect(html).toContain('aria-expanded="false"');
+    expect(html).toContain('aria-pressed="false"');
     expect(html).toContain('TARGET 02 / 02');
     expect(html).toContain('aria-current="page"');
     expect(html).toContain('role="switch"');
