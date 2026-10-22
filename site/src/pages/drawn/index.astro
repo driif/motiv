@@ -1,6 +1,6 @@
 ---
 import { Code } from 'astro:components';
-import Section from '../../components/Section.astro';
+import Sections from '../../components/Sections.astro';
 import Shell from '../../layouts/Shell.astro';
 import settingsSource from '../../showcase/DrawnSettings.tsx?raw';
 import themeSource from '../../useTheme.ts?raw';
@@ -37,6 +37,12 @@ export function Subscribe() {
     </details>
   </section>
 
+  <section class="site-playground" id="playground">
+    <h2 class="site-playground__title">Playground</h2>
+    <p class="site-playground__text">Change a token and every drawn component follows. Paste the CSS into your app.</p>
+    <iframe class="site-preview" src="/preview/drawn/playground/" title="Token playground preview" />
+  </section>
+
   <section class="site-start" id="getting-started">
     <h2 class="site-start__title">Getting started</h2>
     <ol class="site-steps">
@@ -68,28 +74,5 @@ export function Subscribe() {
     </ol>
   </section>
 
-  <div class="site-sections">
-    <Section style="drawn" id="button" />
-    <Section style="drawn" id="ink-splatter-button" />
-    <Section style="drawn" id="hold-to-confirm-button" />
-    <Section style="drawn" id="card" />
-    <Section style="drawn" id="text-field" />
-    <Section style="drawn" id="textarea" />
-    <Section style="drawn" id="checkbox" />
-    <Section style="drawn" id="switch" />
-    <Section style="drawn" id="slider" />
-    <Section style="drawn" id="radio" />
-    <Section style="drawn" id="select" />
-    <Section style="drawn" id="segmented-control" />
-    <Section style="drawn" id="tabs" />
-    <Section style="drawn" id="link" />
-    <Section style="drawn" id="nav-item" />
-    <Section style="drawn" id="nav" />
-    <Section style="drawn" id="icon-button" />
-    <Section style="drawn" id="menu-button" />
-    <Section style="drawn" id="tooltip" />
-    <Section style="drawn" id="progress" />
-    <Section style="drawn" id="theme-toggle" />
-    <Section style="drawn" id="orbital-theme-toggle" />
-  </div>
+  <Sections style="drawn" />
 </Shell>

@@ -1,5 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { catalog } from '../site/src/catalog.mjs';
+import { catalog, categories } from '../site/src/catalog.mjs';
 
 const entries = {
   kinetic: '../dist/index.js',
@@ -17,7 +17,8 @@ for (const [style, entry] of Object.entries(entries)) {
     if (!claimed.includes(name) && !(style === 'kinetic' && name === 'cx'))
       problems.push(`${style}: ${name} is exported but not on the site`);
   }
-  for (const name of claimed) {
+  for (const [index, name] of claimed.entries()) {
+    if (claimed.indexOf(name) !== index) problems.push(`${style}: ${name} is claimed twice`);
     if (!exported.includes(name))
       problems.push(`${style}: ${name} is on the site but not exported`);
   }
@@ -25,7 +26,14 @@ for (const [style, entry] of Object.entries(entries)) {
   if (style === 'kinetic' && !String(page).includes('cx(')) {
     problems.push('kinetic: cx is neither on the site nor in the getting-started snippet');
   }
-  for (const { id, demo } of sections) {
+  // The page renders the catalog by category, so every section is on it.
+  if (!page.includes(`<Sections style="${style}" />`)) {
+    problems.push(`${style}: the page does not render <Sections style="${style}" />`);
+  }
+  for (const { id, demo, category } of sections) {
+    if (category !== null && !categories.includes(category)) {
+      problems.push(`${style}: section #${id} has unknown category ${category}`);
+    }
     if (!existsSync(new URL(`../site/src/demos/${style}/${demo}.tsx`, import.meta.url))) {
       problems.push(`${style}: demo site/src/demos/${style}/${demo}.tsx is missing`);
     }
@@ -33,7 +41,6 @@ for (const [style, entry] of Object.entries(entries)) {
     if (!existsSync(new URL(`../site/src/pages/preview/${style}/${id}.astro`, import.meta.url))) {
       problems.push(`${style}: preview site/src/pages/preview/${style}/${id}.astro is missing`);
     }
-    if (!page.includes(`id="${id}"`)) problems.push(`${style}: section #${id} is not on the page`);
   }
 }
 

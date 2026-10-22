@@ -5,19 +5,21 @@ import {
   CardFooter,
   CardHeader,
   Checkbox,
-  ChevronNav,
-  type ChevronNavSection,
   DecodeSecretField,
   GlitchThemeToggle,
-  HudTabs,
   IconButton,
   IconButtonGroup,
   Link,
+  Nav,
   Progress,
   RadioGroup,
   ScanButton,
   SignalBurger,
+  Slider,
+  Switch,
+  Tabs,
   TerminalSelect,
+  Textarea,
   TextField,
 } from '@driif/motiv/matrix';
 import { useState } from 'react';
@@ -31,24 +33,19 @@ function Icon({ d }: { d: string }) {
   );
 }
 
-const sections: ChevronNavSection[] = [
+const pages = [
   {
-    title: 'Vault',
-    items: [
-      {
-        id: 'secrets',
-        label: 'Secrets',
-        icon: <Icon d="M6 10V7a6 6 0 0 1 12 0v3M5 10h14v10H5z" />,
-        expandable: true,
-      },
-      {
-        id: 'policies',
-        label: 'Policies',
-        icon: <Icon d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z" />,
-      },
-      { id: 'audit', label: 'Audit log', icon: <Icon d="M5 4h14v16H5zM9 9h6M9 13h6" /> },
-    ],
+    id: 'secrets',
+    label: 'Secrets',
+    icon: <Icon d="M6 10V7a6 6 0 0 1 12 0v3M5 10h14v10H5z" />,
+    count: 12,
   },
+  {
+    id: 'policies',
+    label: 'Policies',
+    icon: <Icon d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z" />,
+  },
+  { id: 'audit', label: 'Audit log', icon: <Icon d="M5 4h14v16H5zM9 9h6M9 13h6" /> },
 ];
 
 const engines = [
@@ -63,12 +60,6 @@ const levels = [
   { value: 'admin', label: 'Admin' },
 ];
 
-const tabs = [
-  { value: 'secret', label: 'Secret' },
-  { value: 'access', label: 'Access' },
-  { value: 'sync', label: 'Sync' },
-];
-
 export function MatrixConsole() {
   const { dark, toggle } = useTheme();
   const [menu, setMenu] = useState(false);
@@ -78,6 +69,8 @@ export function MatrixConsole() {
   const [secret, setSecret] = useState('hvs.CAESIJ3x9QmZkT2pL');
   const [rotate, setRotate] = useState(true);
   const [level, setLevel] = useState('read');
+  const [renew, setRenew] = useState(false);
+  const [syncEvery, setSyncEvery] = useState(15);
   const [sealing, setSealing] = useState(false);
 
   return (
@@ -92,11 +85,11 @@ export function MatrixConsole() {
         <strong className="site-console__brand">vault://prod</strong>
         <GlitchThemeToggle dark={dark} onToggle={toggle} />
       </header>
-      <ChevronNav
+      <Nav
         id="console-nav"
         className="site-console__nav"
         label="Console"
-        sections={sections}
+        items={pages}
         value={page}
         onChange={setPage}
       />
@@ -113,52 +106,79 @@ export function MatrixConsole() {
           }
         />
         <CardBody>
-          <HudTabs
+          <Tabs
             label="Secret"
-            tabs={tabs}
             value={tab}
             onChange={setTab}
-            panels={{
-              secret: (
-                <div className="site-console__panel">
-                  <TerminalSelect
-                    label="Engine"
-                    prefix="mount://"
-                    options={engines}
-                    value={engine}
-                    onChange={setEngine}
-                  />
-                  <TextField label="Path" defaultValue="app/db" />
-                  <DecodeSecretField label="Password" value={secret} onChange={setSecret} />
-                  <Checkbox
-                    label="Rotate every 30 days"
-                    checked={rotate}
-                    onChange={(event) => setRotate(event.target.checked)}
-                  />
-                </div>
-              ),
-              access: (
-                <div className="site-console__panel">
-                  <RadioGroup
-                    name="level"
-                    legend="Billing service may"
-                    options={levels}
-                    value={level}
-                    onChange={setLevel}
-                  />
-                  <p className="site-console__note">
-                    Policies are checked on every read. <Link href="#hud-tabs">How tabs work</Link>
-                  </p>
-                </div>
-              ),
-              sync: (
-                <div className="site-console__panel">
-                  <Progress value={100} label="Frankfurt" />
-                  <Progress value={64} label="Zürich" />
-                  <Progress value={12} label="Kyiv" />
-                </div>
-              ),
-            }}
+            items={[
+              {
+                value: 'secret',
+                label: 'Secret',
+                panel: (
+                  <div className="site-console__panel">
+                    <TerminalSelect
+                      label="Engine"
+                      prefix="mount://"
+                      options={engines}
+                      value={engine}
+                      onChange={setEngine}
+                    />
+                    <TextField label="Path" defaultValue="app/db" />
+                    <DecodeSecretField label="Password" value={secret} onChange={setSecret} />
+                    <Checkbox
+                      label="Rotate every 30 days"
+                      checked={rotate}
+                      onChange={(event) => setRotate(event.target.checked)}
+                    />
+                    <Textarea
+                      label="Note"
+                      rows={2}
+                      maxRows={5}
+                      placeholder="Why this secret exists"
+                    />
+                  </div>
+                ),
+              },
+              {
+                value: 'access',
+                label: 'Access',
+                panel: (
+                  <div className="site-console__panel">
+                    <RadioGroup
+                      name="level"
+                      legend="Billing service may"
+                      options={levels}
+                      value={level}
+                      onChange={setLevel}
+                    />
+                    <Switch checked={renew} onChange={setRenew} label="Allow token renewal" />
+                    <p className="site-console__note">
+                      Policies are checked on every read. <Link href="#tabs">How tabs work</Link>
+                    </p>
+                  </div>
+                ),
+              },
+              {
+                value: 'sync',
+                label: 'Sync',
+                panel: (
+                  <div className="site-console__panel">
+                    <Slider
+                      label="Sync interval"
+                      value={syncEvery}
+                      onChange={setSyncEvery}
+                      min={5}
+                      max={60}
+                      step={5}
+                      format={(v) => `${v}s`}
+                    />
+                    <Progress value={100} label="Frankfurt" />
+                    <Progress value={64} label="Zürich" />
+                    <Progress value={12} label="Kyiv" />
+                  </div>
+                ),
+              },
+            ]}
           />
         </CardBody>
         <CardFooter>

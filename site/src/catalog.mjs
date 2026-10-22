@@ -1,9 +1,38 @@
+// Parity categories in src/docs/Parity.mdx table order; the style pages render one row each.
+export const categories = [
+  'Button',
+  'IconButton',
+  'Card',
+  'TextField',
+  'Textarea',
+  'Select',
+  'Checkbox',
+  'Radio',
+  'Switch',
+  'Slider',
+  'Tabs',
+  'SegmentedControl',
+  'Progress',
+  'Link',
+  'Tooltip',
+  'Accordion',
+  'Nav',
+  'ThemeToggle',
+  'MenuButton',
+  'Stepper',
+  'Carousel',
+  'Chips',
+  'OtpInput',
+  'CommandMenu',
+];
+
 // Every runtime export of a style's entry must be claimed by exactly one section;
-// scripts/check-site.mjs enforces it against the built package.
+// scripts/check-site.mjs enforces it against the built package. category null = style-specific.
 export const catalog = {
   drawn: [
     {
       id: 'button',
+      category: 'Button',
       title: 'Button',
       symbols: ['Button', 'buttonClassName'],
       demo: 'Button',
@@ -12,6 +41,7 @@ export const catalog = {
     },
     {
       id: 'ink-splatter-button',
+      category: null,
       title: 'InkSplatterButton',
       symbols: ['InkSplatterButton'],
       demo: 'InkSplatterButton',
@@ -20,6 +50,7 @@ export const catalog = {
     },
     {
       id: 'hold-to-confirm-button',
+      category: null,
       title: 'HoldToConfirmButton',
       symbols: ['HoldToConfirmButton'],
       demo: 'HoldToConfirmButton',
@@ -28,6 +59,7 @@ export const catalog = {
     },
     {
       id: 'card',
+      category: 'Card',
       title: 'Card',
       symbols: ['Card', 'CardHeader', 'CardBody', 'CardFooter'],
       demo: 'Card',
@@ -35,6 +67,7 @@ export const catalog = {
     },
     {
       id: 'text-field',
+      category: 'TextField',
       title: 'TextField',
       symbols: ['TextField'],
       demo: 'TextField',
@@ -43,6 +76,7 @@ export const catalog = {
     },
     {
       id: 'textarea',
+      category: 'Textarea',
       title: 'Textarea',
       symbols: ['Textarea'],
       demo: 'Textarea',
@@ -51,6 +85,7 @@ export const catalog = {
     },
     {
       id: 'checkbox',
+      category: 'Checkbox',
       title: 'Checkbox',
       symbols: ['Checkbox'],
       demo: 'Checkbox',
@@ -58,6 +93,7 @@ export const catalog = {
     },
     {
       id: 'switch',
+      category: 'Switch',
       title: 'Switch',
       symbols: ['Switch'],
       demo: 'Switch',
@@ -65,6 +101,7 @@ export const catalog = {
     },
     {
       id: 'slider',
+      category: 'Slider',
       title: 'Slider',
       symbols: ['Slider'],
       demo: 'Slider',
@@ -73,6 +110,7 @@ export const catalog = {
     },
     {
       id: 'radio',
+      category: 'Radio',
       title: 'Radio & RadioGroup',
       symbols: ['Radio', 'RadioGroup'],
       demo: 'Radio',
@@ -80,6 +118,7 @@ export const catalog = {
     },
     {
       id: 'select',
+      category: 'Select',
       title: 'Select',
       symbols: ['Select'],
       demo: 'Select',
@@ -87,6 +126,7 @@ export const catalog = {
     },
     {
       id: 'segmented-control',
+      category: 'SegmentedControl',
       title: 'SegmentedControl',
       symbols: ['SegmentedControl'],
       demo: 'SegmentedControl',
@@ -94,6 +134,7 @@ export const catalog = {
     },
     {
       id: 'tabs',
+      category: 'Tabs',
       title: 'Tabs',
       symbols: ['Tabs'],
       demo: 'Tabs',
@@ -101,6 +142,7 @@ export const catalog = {
     },
     {
       id: 'link',
+      category: 'Link',
       title: 'Link',
       symbols: ['Link'],
       demo: 'Link',
@@ -108,6 +150,7 @@ export const catalog = {
     },
     {
       id: 'nav-item',
+      category: null,
       title: 'NavItem',
       symbols: ['NavItem'],
       demo: 'NavItem',
@@ -115,6 +158,7 @@ export const catalog = {
     },
     {
       id: 'nav',
+      category: 'Nav',
       title: 'Nav',
       symbols: ['Nav'],
       demo: 'Nav',
@@ -123,6 +167,7 @@ export const catalog = {
     },
     {
       id: 'icon-button',
+      category: 'IconButton',
       title: 'IconButton & IconButtonGroup',
       symbols: ['IconButton', 'IconButtonGroup'],
       demo: 'IconButton',
@@ -130,6 +175,7 @@ export const catalog = {
     },
     {
       id: 'menu-button',
+      category: 'MenuButton',
       title: 'MenuButton',
       symbols: ['MenuButton'],
       demo: 'MenuButton',
@@ -137,6 +183,7 @@ export const catalog = {
     },
     {
       id: 'tooltip',
+      category: 'Tooltip',
       title: 'Tooltip',
       symbols: ['Tooltip'],
       demo: 'Tooltip',
@@ -144,6 +191,7 @@ export const catalog = {
     },
     {
       id: 'progress',
+      category: 'Progress',
       title: 'Progress',
       symbols: ['Progress'],
       demo: 'Progress',
@@ -151,6 +199,7 @@ export const catalog = {
     },
     {
       id: 'theme-toggle',
+      category: 'ThemeToggle',
       title: 'ThemeToggle',
       symbols: ['ThemeToggle'],
       demo: 'ThemeToggle',
@@ -158,6 +207,7 @@ export const catalog = {
     },
     {
       id: 'orbital-theme-toggle',
+      category: null,
       title: 'OrbitalThemeToggle',
       symbols: ['OrbitalThemeToggle'],
       demo: 'OrbitalThemeToggle',
@@ -167,6 +217,7 @@ export const catalog = {
   kinetic: [
     {
       id: 'button',
+      category: 'Button',
       title: 'Button',
       symbols: ['Button', 'buttonClassName'],
       demo: 'Button',
@@ -175,6 +226,7 @@ export const catalog = {
     },
     {
       id: 'magnetic-button',
+      category: null,
       title: 'MagneticButton',
       symbols: ['MagneticButton'],
       demo: 'MagneticButton',
@@ -183,6 +235,7 @@ export const catalog = {
     },
     {
       id: 'morph-submit-button',
+      category: null,
       title: 'MorphSubmitButton',
       symbols: ['MorphSubmitButton'],
       demo: 'MorphSubmitButton',
@@ -191,6 +244,7 @@ export const catalog = {
     },
     {
       id: 'bell-button',
+      category: null,
       title: 'BellButton',
       symbols: ['BellButton'],
       demo: 'BellButton',
@@ -198,6 +252,7 @@ export const catalog = {
     },
     {
       id: 'badge-button',
+      category: null,
       title: 'BadgeButton',
       symbols: ['BadgeButton'],
       demo: 'BadgeButton',
@@ -206,6 +261,7 @@ export const catalog = {
     },
     {
       id: 'copy-field',
+      category: null,
       title: 'CopyField',
       symbols: ['CopyField'],
       demo: 'CopyField',
@@ -214,6 +270,7 @@ export const catalog = {
     },
     {
       id: 'radial-menu',
+      category: null,
       title: 'RadialMenu',
       symbols: ['RadialMenu'],
       demo: 'RadialMenu',
@@ -222,6 +279,7 @@ export const catalog = {
     },
     {
       id: 'icon-button',
+      category: 'IconButton',
       title: 'IconButton & IconButtonGroup',
       symbols: ['IconButton', 'IconButtonGroup'],
       demo: 'IconButton',
@@ -230,6 +288,7 @@ export const catalog = {
     },
     {
       id: 'menu-button',
+      category: 'MenuButton',
       title: 'MenuButton',
       symbols: ['MenuButton'],
       demo: 'MenuButton',
@@ -237,6 +296,7 @@ export const catalog = {
     },
     {
       id: 'theme-toggle',
+      category: 'ThemeToggle',
       title: 'ThemeToggle',
       symbols: ['ThemeToggle'],
       demo: 'ThemeToggle',
@@ -245,6 +305,7 @@ export const catalog = {
     },
     {
       id: 'segmented-control',
+      category: 'SegmentedControl',
       title: 'SegmentedControl',
       symbols: ['SegmentedControl'],
       demo: 'SegmentedControl',
@@ -253,6 +314,7 @@ export const catalog = {
     },
     {
       id: 'elastic-tabs',
+      category: 'Tabs',
       title: 'ElasticTabs',
       symbols: ['ElasticTabs'],
       demo: 'ElasticTabs',
@@ -261,6 +323,7 @@ export const catalog = {
     },
     {
       id: 'tabs',
+      category: 'Tabs',
       title: 'Tabs',
       symbols: ['Tabs'],
       demo: 'Tabs',
@@ -268,6 +331,7 @@ export const catalog = {
     },
     {
       id: 'filter-chips',
+      category: 'Chips',
       title: 'FilterChips',
       symbols: ['FilterChips'],
       demo: 'FilterChips',
@@ -276,6 +340,7 @@ export const catalog = {
     },
     {
       id: 'radio',
+      category: 'Radio',
       title: 'Radio & RadioGroup',
       symbols: ['Radio', 'RadioGroup'],
       demo: 'Radio',
@@ -284,6 +349,7 @@ export const catalog = {
     },
     {
       id: 'stepper',
+      category: 'Stepper',
       title: 'Stepper',
       symbols: ['Stepper'],
       demo: 'Stepper',
@@ -292,6 +358,7 @@ export const catalog = {
     },
     {
       id: 'command-menu',
+      category: 'CommandMenu',
       title: 'CommandMenu',
       symbols: ['CommandMenu'],
       demo: 'CommandMenu',
@@ -300,6 +367,7 @@ export const catalog = {
     },
     {
       id: 'floating-field',
+      category: 'TextField',
       title: 'FloatingField',
       symbols: ['FloatingField'],
       demo: 'FloatingField',
@@ -308,6 +376,7 @@ export const catalog = {
     },
     {
       id: 'textarea',
+      category: 'Textarea',
       title: 'Textarea',
       symbols: ['Textarea'],
       demo: 'Textarea',
@@ -316,6 +385,7 @@ export const catalog = {
     },
     {
       id: 'otp-input',
+      category: 'OtpInput',
       title: 'OtpInput',
       symbols: ['OtpInput'],
       demo: 'OtpInput',
@@ -324,6 +394,7 @@ export const catalog = {
     },
     {
       id: 'expanding-search',
+      category: null,
       title: 'ExpandingSearch',
       symbols: ['ExpandingSearch'],
       demo: 'ExpandingSearch',
@@ -332,6 +403,7 @@ export const catalog = {
     },
     {
       id: 'frequency-slider',
+      category: 'Slider',
       title: 'FrequencySlider',
       symbols: ['FrequencySlider'],
       demo: 'FrequencySlider',
@@ -340,22 +412,43 @@ export const catalog = {
     },
     {
       id: 'momentum-slider',
+      category: 'Slider',
       title: 'MomentumSlider',
-      symbols: ['MomentumSlider', 'Slider'],
+      symbols: ['MomentumSlider'],
       demo: 'MomentumSlider',
       blurb:
         'A range whose value bubble swings with the drag and settles when you let go. Marks label the stops. Also exported as Slider.',
     },
     {
+      id: 'slider',
+      category: 'Slider',
+      title: 'Slider',
+      symbols: ['Slider'],
+      demo: 'Slider',
+      blurb:
+        'MomentumSlider under the generic name, with the same props as the drawn and matrix Slider.',
+    },
+    {
       id: 'liquid-switch',
+      category: 'Switch',
       title: 'LiquidSwitch',
-      symbols: ['LiquidSwitch', 'Switch'],
+      symbols: ['LiquidSwitch'],
       demo: 'LiquidSwitch',
       blurb:
         'An on/off switch whose thumb stretches mid-travel and wobbles to a stop. Also exported as Switch.',
     },
     {
+      id: 'switch',
+      category: 'Switch',
+      title: 'Switch',
+      symbols: ['Switch'],
+      demo: 'Switch',
+      blurb:
+        'LiquidSwitch under the generic name, with the same props as the drawn and matrix Switch.',
+    },
+    {
       id: 'spring-checkbox',
+      category: 'Checkbox',
       title: 'SpringCheckbox',
       symbols: ['SpringCheckbox'],
       demo: 'SpringCheckbox',
@@ -364,6 +457,7 @@ export const catalog = {
     },
     {
       id: 'like-button',
+      category: null,
       title: 'LikeButton',
       symbols: ['LikeButton'],
       demo: 'LikeButton',
@@ -371,6 +465,7 @@ export const catalog = {
     },
     {
       id: 'mute-toggle',
+      category: null,
       title: 'MuteToggle',
       symbols: ['MuteToggle'],
       demo: 'MuteToggle',
@@ -379,6 +474,7 @@ export const catalog = {
     },
     {
       id: 'card',
+      category: 'Card',
       title: 'Card',
       symbols: ['Card', 'CardHeader', 'CardBody', 'CardFooter'],
       demo: 'Card',
@@ -386,6 +482,7 @@ export const catalog = {
     },
     {
       id: 'slip-card',
+      category: null,
       title: 'SlipCard',
       symbols: ['SlipCard'],
       demo: 'SlipCard',
@@ -394,6 +491,7 @@ export const catalog = {
     },
     {
       id: 'accordion',
+      category: 'Accordion',
       title: 'Accordion',
       symbols: ['Accordion'],
       demo: 'Accordion',
@@ -402,6 +500,7 @@ export const catalog = {
     },
     {
       id: 'carousel',
+      category: 'Carousel',
       title: 'Carousel',
       symbols: ['Carousel'],
       demo: 'Carousel',
@@ -410,14 +509,24 @@ export const catalog = {
     },
     {
       id: 'glide-nav',
+      category: 'Nav',
       title: 'GlideNav',
-      symbols: ['GlideNav', 'Nav'],
+      symbols: ['GlideNav'],
       demo: 'GlideNav',
       blurb:
         'Sidebar navigation where a soft highlight follows the pointer and the active bar springs to your choice. Also exported as Nav.',
     },
     {
+      id: 'nav',
+      category: 'Nav',
+      title: 'Nav',
+      symbols: ['Nav'],
+      demo: 'Nav',
+      blurb: 'GlideNav under the generic name, with the same props as the drawn and matrix Nav.',
+    },
+    {
       id: 'step-progress',
+      category: 'Progress',
       title: 'StepProgress',
       symbols: ['StepProgress'],
       demo: 'StepProgress',
@@ -426,6 +535,7 @@ export const catalog = {
     },
     {
       id: 'drill-stack',
+      category: 'Nav',
       title: 'DrillStack',
       symbols: ['DrillStack'],
       demo: 'DrillStack',
@@ -434,6 +544,7 @@ export const catalog = {
     },
     {
       id: 'progress-ring',
+      category: 'Progress',
       title: 'ProgressRing',
       symbols: ['ProgressRing'],
       demo: 'ProgressRing',
@@ -442,6 +553,7 @@ export const catalog = {
     },
     {
       id: 'odometer',
+      category: null,
       title: 'Odometer',
       symbols: ['Odometer'],
       demo: 'Odometer',
@@ -452,6 +564,7 @@ export const catalog = {
   matrix: [
     {
       id: 'scan-button',
+      category: null,
       title: 'ScanButton',
       symbols: ['ScanButton'],
       demo: 'ScanButton',
@@ -460,6 +573,7 @@ export const catalog = {
     },
     {
       id: 'button',
+      category: 'Button',
       title: 'Button',
       symbols: ['Button', 'buttonClassName'],
       demo: 'Button',
@@ -468,6 +582,7 @@ export const catalog = {
     },
     {
       id: 'icon-button',
+      category: 'IconButton',
       title: 'IconButton & IconButtonGroup',
       symbols: ['IconButton', 'IconButtonGroup'],
       demo: 'IconButton',
@@ -476,6 +591,7 @@ export const catalog = {
     },
     {
       id: 'glitch-theme-toggle',
+      category: 'ThemeToggle',
       title: 'GlitchThemeToggle',
       symbols: ['GlitchThemeToggle'],
       demo: 'GlitchThemeToggle',
@@ -484,6 +600,7 @@ export const catalog = {
     },
     {
       id: 'signal-burger',
+      category: 'MenuButton',
       title: 'SignalBurger',
       symbols: ['SignalBurger'],
       demo: 'SignalBurger',
@@ -491,6 +608,7 @@ export const catalog = {
     },
     {
       id: 'card',
+      category: 'Card',
       title: 'Card',
       symbols: ['Card', 'CardHeader', 'CardBody', 'CardFooter'],
       demo: 'Card',
@@ -499,6 +617,7 @@ export const catalog = {
     },
     {
       id: 'text-field',
+      category: 'TextField',
       title: 'TextField',
       symbols: ['TextField'],
       demo: 'TextField',
@@ -506,6 +625,7 @@ export const catalog = {
     },
     {
       id: 'textarea',
+      category: 'Textarea',
       title: 'Textarea',
       symbols: ['Textarea'],
       demo: 'Textarea',
@@ -513,6 +633,7 @@ export const catalog = {
     },
     {
       id: 'decode-secret-field',
+      category: null,
       title: 'DecodeSecretField',
       symbols: ['DecodeSecretField'],
       demo: 'DecodeSecretField',
@@ -521,6 +642,7 @@ export const catalog = {
     },
     {
       id: 'terminal-select',
+      category: 'Select',
       title: 'TerminalSelect',
       symbols: ['TerminalSelect'],
       demo: 'TerminalSelect',
@@ -529,6 +651,7 @@ export const catalog = {
     },
     {
       id: 'checkbox',
+      category: 'Checkbox',
       title: 'Checkbox',
       symbols: ['Checkbox'],
       demo: 'Checkbox',
@@ -536,6 +659,7 @@ export const catalog = {
     },
     {
       id: 'switch',
+      category: 'Switch',
       title: 'Switch',
       symbols: ['Switch'],
       demo: 'Switch',
@@ -543,6 +667,7 @@ export const catalog = {
     },
     {
       id: 'slider',
+      category: 'Slider',
       title: 'Slider',
       symbols: ['Slider'],
       demo: 'Slider',
@@ -550,6 +675,7 @@ export const catalog = {
     },
     {
       id: 'radio',
+      category: 'Radio',
       title: 'Radio & RadioGroup',
       symbols: ['Radio', 'RadioGroup'],
       demo: 'Radio',
@@ -558,6 +684,7 @@ export const catalog = {
     },
     {
       id: 'hud-tabs',
+      category: 'Tabs',
       title: 'HudTabs',
       symbols: ['HudTabs'],
       demo: 'HudTabs',
@@ -566,6 +693,7 @@ export const catalog = {
     },
     {
       id: 'tabs',
+      category: 'Tabs',
       title: 'Tabs',
       symbols: ['Tabs'],
       demo: 'Tabs',
@@ -573,6 +701,7 @@ export const catalog = {
     },
     {
       id: 'chevron-nav',
+      category: 'Nav',
       title: 'ChevronNav',
       symbols: ['ChevronNav'],
       demo: 'ChevronNav',
@@ -581,6 +710,7 @@ export const catalog = {
     },
     {
       id: 'nav',
+      category: 'Nav',
       title: 'Nav',
       symbols: ['Nav'],
       demo: 'Nav',
@@ -588,6 +718,7 @@ export const catalog = {
     },
     {
       id: 'progress',
+      category: 'Progress',
       title: 'Progress',
       symbols: ['Progress'],
       demo: 'Progress',
@@ -595,6 +726,7 @@ export const catalog = {
     },
     {
       id: 'link',
+      category: 'Link',
       title: 'Link',
       symbols: ['Link'],
       demo: 'Link',
