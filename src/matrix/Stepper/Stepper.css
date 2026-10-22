@@ -1,0 +1,58 @@
+@layer motiv.components {
+  .motiv-matrix-stepper {
+    --_accent: var(--motiv-color-primary);
+    --_line: var(
+      --motiv-stepper-border-color,
+      color-mix(in oklch, var(--motiv-color-primary) 55%, transparent)
+    );
+
+    display: inline-flex;
+    align-items: stretch;
+    width: fit-content;
+    color: var(--motiv-stepper-color, var(--motiv-color-text));
+    font-family: var(--motiv-font-body);
+    background: var(--motiv-stepper-bg, var(--motiv-color-surface));
+    border: 1px solid var(--_line);
+    border-radius: var(--motiv-stepper-radius, var(--motiv-radius));
+  }
+
+  .motiv-matrix-stepper__button {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 calc(var(--motiv-space) * 2);
+    font: inherit;
+    font-weight: 700;
+    color: var(--_accent);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--motiv-stepper-bg-hover, var(--motiv-color-primary-subtle));
+    }
+
+    &:active {
+      color: var(--motiv-color-on-primary);
+      background: var(--_accent);
+    }
+  }
+
+  .motiv-matrix-stepper__value {
+    display: grid;
+    place-items: center;
+    min-width: 4ch;
+    padding: 0 calc(var(--motiv-space) * 3);
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.08em;
+    border-inline: 1px solid var(--_line);
+    text-shadow: 0 0 8px color-mix(in oklch, var(--_accent) 45%, transparent);
+  }
+
+  .motiv-matrix-stepper__button:focus-visible,
+  .motiv-matrix-stepper__value:focus-visible {
+    outline: 2px solid var(--_accent);
+    outline-offset: 2px;
+  }
+}

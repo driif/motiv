@@ -213,6 +213,33 @@ export const catalog = {
       demo: 'OrbitalThemeToggle',
       blurb: 'The theme switch as a small illustration, for a hero or a settings page.',
     },
+    {
+      id: 'accordion',
+      category: 'Accordion',
+      title: 'Accordion',
+      symbols: ['Accordion'],
+      demo: 'Accordion',
+      blurb:
+        'Questions folded into pencil-outlined cards. The chevron turns when one opens; one at a time, or several with multiple. Same props as the kinetic Accordion.',
+    },
+    {
+      id: 'stepper',
+      category: 'Stepper',
+      title: 'Stepper',
+      symbols: ['Stepper'],
+      demo: 'Stepper',
+      blurb:
+        'A handwritten number between two sketched buttons. Arrow keys, Home and End work too. Same props as the kinetic Stepper.',
+    },
+    {
+      id: 'carousel',
+      category: 'Carousel',
+      title: 'Carousel',
+      symbols: ['Carousel'],
+      demo: 'Carousel',
+      blurb:
+        'A few slides in a sketched frame, changed by swipe, arrow keys, buttons or ink dots. Same props as the kinetic Carousel.',
+    },
   ],
   kinetic: [
     {
@@ -767,6 +794,33 @@ export const catalog = {
       demo: 'Tooltip',
       blurb:
         'A bracketed HUD note over an info button, on hover, focus or click. Same props as the drawn Tooltip.',
+    },
+    {
+      id: 'accordion',
+      category: 'Accordion',
+      title: 'Accordion',
+      symbols: ['Accordion'],
+      demo: 'Accordion',
+      blurb:
+        'Stacked HUD rows that expand with a [+] and fold with a [-]. One open at a time, or several with multiple. Same props as the kinetic Accordion.',
+    },
+    {
+      id: 'stepper',
+      category: 'Stepper',
+      title: 'Stepper',
+      symbols: ['Stepper'],
+      demo: 'Stepper',
+      blurb:
+        'A zero-padded terminal readout between [-] and [+]. Arrow keys, Home and End work too. Same props as the kinetic Stepper.',
+    },
+    {
+      id: 'carousel',
+      category: 'Carousel',
+      title: 'Carousel',
+      symbols: ['Carousel'],
+      demo: 'Carousel',
+      blurb:
+        'Slides in a HUD frame with segment indicators and an [01/03] counter; swipe, arrow keys, buttons or segments move it. Same props as the kinetic Carousel.',
     },
   ],
 };

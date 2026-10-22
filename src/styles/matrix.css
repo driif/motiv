@@ -22,6 +22,9 @@
 @import "../matrix/Slider/Slider.css";
 @import "../matrix/Textarea/Textarea.css";
 @import "../matrix/Tooltip/Tooltip.css";
+@import "../matrix/Accordion/Accordion.css";
+@import "../matrix/Stepper/Stepper.css";
+@import "../matrix/Carousel/Carousel.css";
 
 @layer motiv.tokens {
   /* tokens.css carries the kinetic palette; matrix is a monospace phosphor terminal. */

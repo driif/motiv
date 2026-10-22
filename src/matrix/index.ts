@@ -1,5 +1,7 @@
+export * from './Accordion';
 export * from './Button';
 export * from './Card';
+export * from './Carousel';
 export * from './Checkbox';
 export * from './ChevronNav';
 export * from './DecodeSecretField';
@@ -14,6 +16,7 @@ export * from './ScanButton';
 export * from './Select';
 export * from './SignalBurger';
 export * from './Slider';
+export * from './Stepper';
 export * from './Switch';
 export * from './Tabs';
 export * from './TerminalSelect';

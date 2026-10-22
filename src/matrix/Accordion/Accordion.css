@@ -1,0 +1,97 @@
+@layer motiv.components {
+  .motiv-matrix-accordion {
+    --_accent: var(--motiv-accordion-accent, var(--motiv-color-primary));
+    --_line: var(
+      --motiv-accordion-border-color,
+      color-mix(in oklch, var(--motiv-color-primary) 55%, transparent)
+    );
+
+    width: 100%;
+    color: var(--motiv-accordion-color, var(--motiv-color-text));
+    font-family: var(--motiv-font-body);
+    /* Bracket corners top-left and bottom-right over the panel fill. */
+    background:
+      linear-gradient(var(--_accent) 0 0) top left / 12px 2px no-repeat,
+      linear-gradient(var(--_accent) 0 0) top left / 2px 12px no-repeat,
+      linear-gradient(var(--_accent) 0 0) bottom right / 12px 2px no-repeat,
+      linear-gradient(var(--_accent) 0 0) bottom right / 2px 12px no-repeat,
+      var(--motiv-accordion-bg, var(--motiv-color-surface));
+    border: 1px solid var(--_line);
+    border-radius: var(--motiv-accordion-radius, var(--motiv-radius));
+  }
+
+  .motiv-matrix-accordion__item + .motiv-matrix-accordion__item {
+    border-top: 1px dashed var(--_line);
+  }
+
+  .motiv-matrix-accordion__heading {
+    margin: 0;
+    font: inherit;
+  }
+
+  .motiv-matrix-accordion__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--motiv-space) * 3);
+    width: 100%;
+    min-height: 48px;
+    padding: 0 calc(var(--motiv-space) * 4);
+    font: inherit;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: inherit;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--motiv-accordion-bg-hover, var(--motiv-color-primary-subtle));
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--_accent);
+      outline-offset: -4px;
+    }
+
+    &[aria-expanded="true"] {
+      color: var(--_accent);
+    }
+  }
+
+  .motiv-matrix-accordion__glyph {
+    flex-shrink: 0;
+    color: var(--_accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .motiv-matrix-accordion__panel {
+    padding: 0 calc(var(--motiv-space) * 4) calc(var(--motiv-space) * 4);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--motiv-color-text-muted);
+
+    &::before {
+      content: "> ";
+      color: var(--_accent);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .motiv-matrix-accordion__panel {
+      animation: motiv-matrix-accordion-in 0.24s steps(4);
+    }
+  }
+
+  @keyframes motiv-matrix-accordion-in {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0);
+    }
+  }
+}

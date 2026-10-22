@@ -1,5 +1,7 @@
+export * from './Accordion';
 export * from './Button';
 export * from './Card';
+export * from './Carousel';
 export * from './Checkbox';
 export * from './HoldToConfirmButton';
 export * from './IconButton';
@@ -14,6 +16,7 @@ export * from './Radio';
 export * from './SegmentedControl';
 export * from './Select';
 export * from './Slider';
+export * from './Stepper';
 export * from './Switch';
 export * from './Tabs';
 export * from './Textarea';
