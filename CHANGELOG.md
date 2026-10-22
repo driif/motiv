@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.11.0
+
+### Minor Changes
+
+- 1fd6e70: Add `Select` and `Tooltip` to the kinetic and matrix entries, with the drawn props, and an optional `placeholder` to `TerminalSelect`; `TerminalSelect` keyboard fixed to match `Select` (multi-character typeahead, Space during typeahead, PageUp/PageDown, Alt+ArrowUp commits).
+
 ## 0.10.0
 
 ### Minor Changes
