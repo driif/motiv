@@ -31,6 +31,7 @@ export * from './components/SlipCard';
 export * from './components/SpringCheckbox';
 export * from './components/StepProgress';
 export * from './components/Stepper';
+export * from './components/Tabs';
 export * from './components/Textarea';
 export * from './components/ThemeToggle';
 export type { MotivOption } from './types';

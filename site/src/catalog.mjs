@@ -114,6 +114,14 @@ export const catalog = {
       blurb: 'Sidebar entries. An anchor with href, a button without.',
     },
     {
+      id: 'nav',
+      title: 'Nav',
+      symbols: ['Nav'],
+      demo: 'Nav',
+      blurb:
+        'A sidebar list of NavItem buttons; the current one is circled in ink. Same props as GlideNav.',
+    },
+    {
       id: 'icon-button',
       title: 'IconButton & IconButtonGroup',
       symbols: ['IconButton', 'IconButtonGroup'],
@@ -250,6 +258,13 @@ export const catalog = {
       demo: 'ElasticTabs',
       blurb:
         'Tabs with an underline that stretches toward its next tab. Panels slide in from the side you moved toward.',
+    },
+    {
+      id: 'tabs',
+      title: 'Tabs',
+      symbols: ['Tabs'],
+      demo: 'Tabs',
+      blurb: 'ElasticTabs with the drawn Tabs props: each item carries its own panel.',
     },
     {
       id: 'filter-chips',
@@ -396,10 +411,10 @@ export const catalog = {
     {
       id: 'glide-nav',
       title: 'GlideNav',
-      symbols: ['GlideNav'],
+      symbols: ['GlideNav', 'Nav'],
       demo: 'GlideNav',
       blurb:
-        'Sidebar navigation where a soft highlight follows the pointer and the active bar springs to your choice.',
+        'Sidebar navigation where a soft highlight follows the pointer and the active bar springs to your choice. Also exported as Nav.',
     },
     {
       id: 'step-progress',
@@ -550,12 +565,26 @@ export const catalog = {
         'A tablist whose bracketed target slides to the selected tab, with a target readout underneath.',
     },
     {
+      id: 'tabs',
+      title: 'Tabs',
+      symbols: ['Tabs'],
+      demo: 'Tabs',
+      blurb: 'HudTabs with the drawn Tabs props: each item carries its own panel.',
+    },
+    {
       id: 'chevron-nav',
       title: 'ChevronNav',
       symbols: ['ChevronNav'],
       demo: 'ChevronNav',
       blurb:
         'Sidebar navigation in sections. The current item is outlined; items that open a subtree carry a chevron.',
+    },
+    {
+      id: 'nav',
+      title: 'Nav',
+      symbols: ['Nav'],
+      demo: 'Nav',
+      blurb: 'ChevronNav as one flat list with the GlideNav props; counts follow the label.',
     },
     {
       id: 'progress',

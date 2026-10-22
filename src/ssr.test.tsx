@@ -12,6 +12,7 @@ import {
   InkSplatterButton,
   Link,
   MenuButton,
+  Nav,
   NavItem,
   OrbitalThemeToggle,
   Progress,
@@ -283,5 +284,26 @@ describe('server rendering', () => {
     expect(html).toContain('role="switch"');
     expect(html).toContain('aria-valuetext="40"');
     expect(html).toContain('<textarea');
+  });
+
+  it('renders Nav and Tabs in all three styles without a DOM', () => {
+    const noop = () => {};
+    const items = [
+      { id: 'a', label: 'Inbox', count: 4 },
+      { id: 'b', label: 'Sent' },
+    ];
+    const tabs = [{ value: 'a', label: 'A', panel: 'Panel A' }];
+    const html = renderToStaticMarkup(
+      <>
+        <K.Nav label="Main" items={items} value="b" onChange={noop} />
+        <Nav label="Main" items={items} value="b" onChange={noop} />
+        <M.Nav label="Main" items={items} value="b" onChange={noop} />
+        <K.Tabs label="T" items={tabs} value="a" onChange={noop} />
+        <M.Tabs label="T" items={tabs} value="a" onChange={noop} />
+      </>,
+    );
+    expect(html.match(/aria-current="page"/g)).toHaveLength(3);
+    expect(html.match(/role="tablist"/g)).toHaveLength(2);
+    expect(html.match(/Panel A/g)).toHaveLength(2);
   });
 });

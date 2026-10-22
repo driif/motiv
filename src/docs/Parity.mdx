@@ -16,9 +16,11 @@ All three styles already share the component tokens (see Docs/Theming), so an ov
 ## Matrix
 
 — marks a gap. ¹ marks a component that covers the category under a style-specific name; it gets a
-generic export when that category is built. Drawn `NavItem` is a single nav link or button, a
-building block for a nav list rather than one. Kinetic `Switch` and `Slider` are the same components
-as `LiquidSwitch` and `MomentumSlider`, under the generic name.
+generic export when that category is built. Drawn `NavItem` is a single nav link or button; drawn
+`Nav` is the list built from it. Kinetic `Switch`, `Slider` and `Nav` are the same components as
+`LiquidSwitch`, `MomentumSlider` and `GlideNav`, under the generic name. Kinetic and matrix `Tabs`
+wrap `ElasticTabs` and `HudTabs` with the drawn `Tabs` props; matrix `Nav` wraps `ChevronNav` with
+the `GlideNav` props.
 
 | Category | Kinetic | Drawn | Matrix |
 |---|---|---|---|
@@ -32,13 +34,13 @@ as `LiquidSwitch` and `MomentumSlider`, under the generic name.
 | Radio | `Radio` | `Radio` | `Radio` |
 | Switch | `Switch` (`LiquidSwitch`) | `Switch` | `Switch` |
 | Slider | `Slider` (`MomentumSlider`), `FrequencySlider` ¹ | `Slider` | `Slider` |
-| Tabs | `ElasticTabs` ¹ | `Tabs` | `HudTabs` ¹ |
+| Tabs | `Tabs` (`ElasticTabs`) | `Tabs` | `Tabs` (`HudTabs`) |
 | SegmentedControl | `SegmentedControl` | `SegmentedControl` | — |
 | Progress | `ProgressRing` ¹, `StepProgress` ¹ | `Progress` | `Progress` |
 | Link | — | `Link` | `Link` |
 | Tooltip | — | `Tooltip` | — |
 | Accordion | `Accordion` | — | — |
-| Nav | `GlideNav` ¹, `DrillStack` ¹ | — | `ChevronNav` ¹ |
+| Nav | `Nav` (`GlideNav`), `DrillStack` ¹ | `Nav` | `Nav` (`ChevronNav`) |
 | ThemeToggle | `ThemeToggle` | `ThemeToggle` | `GlitchThemeToggle` ¹ |
 | MenuButton | `MenuButton` | `MenuButton` | `SignalBurger` ¹ |
 | Stepper | `Stepper` | — | — |
@@ -56,13 +58,11 @@ Style-specific, outside the categories: kinetic `MagneticButton`, `MorphSubmitBu
 
 Gaps are filled in this order:
 
-1. Nav: a nav list for drawn (from `NavItem`), generic `Nav` in kinetic and matrix
-2. Tabs: generic `Tabs` in kinetic and matrix
-3. Select: kinetic, and a generic `Select` in matrix
-4. Tooltip for kinetic and matrix
-5. Accordion for drawn and matrix
-6. Stepper for drawn and matrix
-7. Carousel for drawn and matrix
+1. Select: kinetic, and a generic `Select` in matrix
+2. Tooltip for kinetic and matrix
+3. Accordion for drawn and matrix
+4. Stepper for drawn and matrix
+5. Carousel for drawn and matrix
 
 The remaining gaps (matrix SegmentedControl, kinetic Link, Chips, OtpInput and CommandMenu for
 drawn and matrix, and the other ¹ names) follow after.

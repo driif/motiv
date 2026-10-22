@@ -38,4 +38,10 @@ describe('NavItem', () => {
     );
     expect(screen.getByRole('button', { name: 'Settings' })).toBeInTheDocument();
   });
+
+  it('leaves out the icon chrome without an icon', () => {
+    const { container } = render(<NavItem icon={undefined} label={<b>Settings</b>} />);
+    expect(container.querySelector('.motiv-nav-item__icon')).toBeNull();
+    expect(screen.getByRole('button', { name: 'Settings' })).toBeInTheDocument();
+  });
 });
