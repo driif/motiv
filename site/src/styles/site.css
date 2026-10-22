@@ -91,6 +91,7 @@
 
 .site-top__mark:focus-visible,
 .site-section__anchor:focus-visible,
+.site-gap__link:focus-visible,
 .site-source__summary:focus-visible {
   outline: none;
   box-shadow: var(--motiv-focus-ring);
@@ -295,14 +296,21 @@
   border: 0;
 }
 
-/* Getting started */
+/* Getting started, playground */
 
-.site-start {
+.site-start,
+.site-playground {
   margin-top: clamp(4rem, 10vw, 7rem);
   scroll-margin-top: 8rem;
 }
 
-.site-start__title {
+.site-playground__text {
+  margin: -1.5rem 0 2rem;
+  color: var(--motiv-color-text-muted);
+}
+
+.site-start__title,
+.site-playground__title {
   font-family: var(--site-title-font);
   max-width: 24ch;
   margin: 0 0 2.5rem;
@@ -340,6 +348,24 @@
 
 .site-sections {
   margin-top: clamp(4rem, 10vw, 7rem);
+}
+
+.site-category {
+  padding-top: 3rem;
+}
+
+.site-gap {
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  color: var(--motiv-color-text-muted);
+  border: 1px dashed var(--motiv-color-border);
+  border-radius: var(--motiv-radius-lg);
+}
+
+.site-gap__link {
+  color: inherit;
+  border-radius: var(--motiv-radius-sm);
+  text-underline-offset: 0.2em;
 }
 
 .site-section {

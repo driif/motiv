@@ -1,6 +1,6 @@
 ---
 import { Code } from 'astro:components';
-import Section from '../../components/Section.astro';
+import Sections from '../../components/Sections.astro';
 import Shell from '../../layouts/Shell.astro';
 import consoleSource from '../../showcase/MatrixConsole.tsx?raw';
 import themeSource from '../../useTheme.ts?raw';
@@ -39,6 +39,12 @@ export function Unseal() {
     </details>
   </section>
 
+  <section class="site-playground" id="playground">
+    <h2 class="site-playground__title">Playground</h2>
+    <p class="site-playground__text">Change a token and every matrix component follows. Paste the CSS into your app.</p>
+    <iframe class="site-preview" src="/preview/matrix/playground/" title="Token playground preview" />
+  </section>
+
   <section class="site-start" id="getting-started">
     <h2 class="site-start__title">Getting started</h2>
     <ol class="site-steps">
@@ -70,26 +76,5 @@ export function Unseal() {
     </ol>
   </section>
 
-  <div class="site-sections">
-    <Section style="matrix" id="scan-button" />
-    <Section style="matrix" id="button" />
-    <Section style="matrix" id="icon-button" />
-    <Section style="matrix" id="glitch-theme-toggle" />
-    <Section style="matrix" id="signal-burger" />
-    <Section style="matrix" id="card" />
-    <Section style="matrix" id="text-field" />
-    <Section style="matrix" id="textarea" />
-    <Section style="matrix" id="decode-secret-field" />
-    <Section style="matrix" id="terminal-select" />
-    <Section style="matrix" id="checkbox" />
-    <Section style="matrix" id="switch" />
-    <Section style="matrix" id="slider" />
-    <Section style="matrix" id="radio" />
-    <Section style="matrix" id="hud-tabs" />
-    <Section style="matrix" id="tabs" />
-    <Section style="matrix" id="chevron-nav" />
-    <Section style="matrix" id="nav" />
-    <Section style="matrix" id="progress" />
-    <Section style="matrix" id="link" />
-  </div>
+  <Sections style="matrix" />
 </Shell>

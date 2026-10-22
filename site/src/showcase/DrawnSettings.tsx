@@ -9,12 +9,15 @@ import {
   IconButtonGroup,
   Link,
   MenuButton,
-  NavItem,
+  Nav,
   Progress,
   RadioGroup,
   SegmentedControl,
   Select,
+  Slider,
+  Switch,
   Tabs,
+  Textarea,
   TextField,
   ThemeToggle,
 } from '@driif/motiv/drawn';
@@ -28,6 +31,12 @@ function Icon({ d }: { d: string }) {
     </svg>
   );
 }
+
+const pages = [
+  { id: 'home', label: 'Home', icon: <Icon d="M4 11l8-7 8 7v9h-5v-6H9v6H4z" /> },
+  { id: 'inbox', label: 'Inbox', icon: <Icon d="M4 6h16v12H4zM4 6l8 7 8-7" />, count: 2 },
+  { id: 'settings', label: 'Settings', icon: <Icon d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" /> },
+];
 
 const languages = [
   { value: 'en', label: 'English', code: 'EN' },
@@ -49,12 +58,15 @@ const densities = [
 export function DrawnSettings() {
   const { dark, toggle } = useTheme();
   const [menu, setMenu] = useState(false);
+  const [page, setPage] = useState('settings');
   const [tab, setTab] = useState('profile');
   const [language, setLanguage] = useState('en');
   const [digest, setDigest] = useState('weekly');
   const [density, setDensity] = useState('cozy');
   const [name, setName] = useState('Ada Lovelace');
   const [newsletter, setNewsletter] = useState(false);
+  const [replies, setReplies] = useState(true);
+  const [textSize, setTextSize] = useState(100);
   const [saving, setSaving] = useState(false);
 
   const done = [name, language, newsletter, digest !== 'never'].filter(Boolean).length;
@@ -66,16 +78,13 @@ export function DrawnSettings() {
         <strong className="site-app__brand">sketchbook</strong>
         <ThemeToggle dark={dark} onToggle={toggle} />
       </header>
-      <nav className="site-app__nav" aria-label="Sketchbook">
-        <NavItem href="#settings" icon={<Icon d="M4 11l8-7 8 7v9h-5v-6H9v6H4z" />} label="Home" />
-        <NavItem href="#settings" icon={<Icon d="M4 6h16v12H4zM4 6l8 7 8-7" />} label="Inbox" />
-        <NavItem
-          href="#settings"
-          icon={<Icon d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />}
-          label="Settings"
-          active
-        />
-      </nav>
+      <Nav
+        className="site-app__nav"
+        label="Sketchbook"
+        items={pages}
+        value={page}
+        onChange={setPage}
+      />
       <Card as="section" className="site-app__main" aria-label="Account settings">
         <CardHeader
           title="Account"
@@ -109,6 +118,7 @@ export function DrawnSettings() {
                       onChange={(event) => setName(event.target.value)}
                     />
                     <TextField label="Email" type="email" hint="We only use it to reply." />
+                    <Textarea label="About you" rows={2} maxRows={5} />
                     <Select
                       label="Language"
                       options={languages}
@@ -128,6 +138,7 @@ export function DrawnSettings() {
                       checked={newsletter}
                       onChange={(event) => setNewsletter(event.target.checked)}
                     />
+                    <Switch checked={replies} onChange={setReplies} label="Tell me about replies" />
                     <RadioGroup
                       name="digest"
                       legend="Activity digest"
@@ -148,6 +159,15 @@ export function DrawnSettings() {
                       options={densities}
                       value={density}
                       onChange={setDensity}
+                    />
+                    <Slider
+                      label="Text size"
+                      value={textSize}
+                      onChange={setTextSize}
+                      min={80}
+                      max={140}
+                      step={10}
+                      format={(v) => `${v}%`}
                     />
                     <p className="site-app__note">
                       Dark mode lives in the top bar. <Link href="#theme-toggle">How it works</Link>

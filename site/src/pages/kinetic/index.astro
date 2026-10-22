@@ -1,6 +1,6 @@
 ---
 import { Code } from 'astro:components';
-import Section from '../../components/Section.astro';
+import Sections from '../../components/Sections.astro';
 import Shell from '../../layouts/Shell.astro';
 import releaseSource from '../../showcase/MotivRelease.tsx?raw';
 
@@ -48,6 +48,12 @@ const retheme = `:root {
     </details>
   </section>
 
+  <section class="site-playground" id="playground">
+    <h2 class="site-playground__title">Playground</h2>
+    <p class="site-playground__text">Change a token and every kinetic component follows. Paste the CSS into your app.</p>
+    <iframe class="site-preview" src="/preview/kinetic/playground/" title="Token playground preview" />
+  </section>
+
   <section class="site-start" id="getting-started">
     <h2 class="site-start__title">Getting started</h2>
     <ol class="site-steps">
@@ -79,42 +85,5 @@ const retheme = `:root {
     </ol>
   </section>
 
-  <div class="site-sections">
-    <Section style="kinetic" id="button" />
-    <Section style="kinetic" id="magnetic-button" />
-    <Section style="kinetic" id="morph-submit-button" />
-    <Section style="kinetic" id="bell-button" />
-    <Section style="kinetic" id="badge-button" />
-    <Section style="kinetic" id="copy-field" />
-    <Section style="kinetic" id="radial-menu" />
-    <Section style="kinetic" id="icon-button" />
-    <Section style="kinetic" id="menu-button" />
-    <Section style="kinetic" id="theme-toggle" />
-    <Section style="kinetic" id="segmented-control" />
-    <Section style="kinetic" id="elastic-tabs" />
-    <Section style="kinetic" id="tabs" />
-    <Section style="kinetic" id="filter-chips" />
-    <Section style="kinetic" id="radio" />
-    <Section style="kinetic" id="stepper" />
-    <Section style="kinetic" id="command-menu" />
-    <Section style="kinetic" id="floating-field" />
-    <Section style="kinetic" id="textarea" />
-    <Section style="kinetic" id="otp-input" />
-    <Section style="kinetic" id="expanding-search" />
-    <Section style="kinetic" id="frequency-slider" />
-    <Section style="kinetic" id="momentum-slider" />
-    <Section style="kinetic" id="liquid-switch" />
-    <Section style="kinetic" id="spring-checkbox" />
-    <Section style="kinetic" id="like-button" />
-    <Section style="kinetic" id="mute-toggle" />
-    <Section style="kinetic" id="card" />
-    <Section style="kinetic" id="slip-card" />
-    <Section style="kinetic" id="accordion" />
-    <Section style="kinetic" id="carousel" />
-    <Section style="kinetic" id="glide-nav" />
-    <Section style="kinetic" id="step-progress" />
-    <Section style="kinetic" id="drill-stack" />
-    <Section style="kinetic" id="progress-ring" />
-    <Section style="kinetic" id="odometer" />
-  </div>
+  <Sections style="kinetic" />
 </Shell>
