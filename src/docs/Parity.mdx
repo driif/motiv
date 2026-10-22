@@ -20,7 +20,9 @@ generic export when that category is built. Drawn `NavItem` is a single nav link
 `Nav` is the list built from it. Kinetic `Switch`, `Slider` and `Nav` are the same components as
 `LiquidSwitch`, `MomentumSlider` and `GlideNav`, under the generic name. Kinetic and matrix `Tabs`
 wrap `ElasticTabs` and `HudTabs` with the drawn `Tabs` props; matrix `Nav` wraps `ChevronNav` with
-the `GlideNav` props.
+the `GlideNav` props. Kinetic and matrix `Select` and `Tooltip` take the drawn props; matrix `Select`
+wraps `TerminalSelect`, whose field shows an option's `code`, falling back to its `label`, as its own
+look.
 
 | Category | Kinetic | Drawn | Matrix |
 |---|---|---|---|
@@ -29,7 +31,7 @@ the `GlideNav` props.
 | Card | `Card` | `Card` | `Card` |
 | TextField | `FloatingField` ¹ | `TextField` | `TextField` |
 | Textarea | `Textarea` | `Textarea` | `Textarea` |
-| Select | — | `Select` | `TerminalSelect` ¹ |
+| Select | `Select` | `Select` | `Select` (`TerminalSelect`) |
 | Checkbox | `SpringCheckbox` ¹ | `Checkbox` | `Checkbox` |
 | Radio | `Radio` | `Radio` | `Radio` |
 | Switch | `Switch` (`LiquidSwitch`) | `Switch` | `Switch` |
@@ -38,7 +40,7 @@ the `GlideNav` props.
 | SegmentedControl | `SegmentedControl` | `SegmentedControl` | — |
 | Progress | `ProgressRing` ¹, `StepProgress` ¹ | `Progress` | `Progress` |
 | Link | — | `Link` | `Link` |
-| Tooltip | — | `Tooltip` | — |
+| Tooltip | `Tooltip` | `Tooltip` | `Tooltip` |
 | Accordion | `Accordion` | — | — |
 | Nav | `Nav` (`GlideNav`), `DrillStack` ¹ | `Nav` | `Nav` (`ChevronNav`) |
 | ThemeToggle | `ThemeToggle` | `ThemeToggle` | `GlitchThemeToggle` ¹ |
@@ -58,11 +60,9 @@ Style-specific, outside the categories: kinetic `MagneticButton`, `MorphSubmitBu
 
 Gaps are filled in this order:
 
-1. Select: kinetic, and a generic `Select` in matrix
-2. Tooltip for kinetic and matrix
-3. Accordion for drawn and matrix
-4. Stepper for drawn and matrix
-5. Carousel for drawn and matrix
+1. Accordion for drawn and matrix
+2. Stepper for drawn and matrix
+3. Carousel for drawn and matrix
 
 The remaining gaps (matrix SegmentedControl, kinetic Link, Chips, OtpInput and CommandMenu for
 drawn and matrix, and the other ¹ names) follow after.

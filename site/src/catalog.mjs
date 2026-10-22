@@ -438,6 +438,15 @@ export const catalog = {
         'An on/off switch whose thumb stretches mid-travel and wobbles to a stop. Also exported as Switch.',
     },
     {
+      id: 'select',
+      category: 'Select',
+      title: 'Select',
+      symbols: ['Select'],
+      demo: 'Select',
+      blurb:
+        'A listbox that springs open under a fine outline, with codes, hints and typeahead. Same props as the drawn Select.',
+    },
+    {
       id: 'switch',
       category: 'Switch',
       title: 'Switch',
@@ -560,6 +569,15 @@ export const catalog = {
       blurb:
         'Rolling digits for any number that changes. It is decorative, so label whatever holds it.',
     },
+    {
+      id: 'tooltip',
+      category: 'Tooltip',
+      title: 'Tooltip',
+      symbols: ['Tooltip'],
+      demo: 'Tooltip',
+      blurb:
+        'An info button whose note springs up on hover, focus or click; Escape puts it away. Same props as the drawn Tooltip.',
+    },
   ],
   matrix: [
     {
@@ -650,6 +668,15 @@ export const catalog = {
         'A select-only combobox in a bracketed terminal field. The list snaps open on a solid panel; arrows, Home, End and letters work.',
     },
     {
+      id: 'select',
+      category: 'Select',
+      title: 'Select',
+      symbols: ['Select'],
+      demo: 'Select',
+      blurb:
+        'TerminalSelect with the drawn Select props. The field shows an option code if it has one, else its label.',
+    },
+    {
       id: 'checkbox',
       category: 'Checkbox',
       title: 'Checkbox',
@@ -731,6 +758,15 @@ export const catalog = {
       symbols: ['Link'],
       demo: 'Link',
       blurb: 'A dashed link with a block highlight. External links open in a new tab and say so.',
+    },
+    {
+      id: 'tooltip',
+      category: 'Tooltip',
+      title: 'Tooltip',
+      symbols: ['Tooltip'],
+      demo: 'Tooltip',
+      blurb:
+        'A bracketed HUD note over an info button, on hover, focus or click. Same props as the drawn Tooltip.',
     },
   ],
 };

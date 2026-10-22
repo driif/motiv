@@ -306,4 +306,21 @@ describe('server rendering', () => {
     expect(html.match(/role="tablist"/g)).toHaveLength(2);
     expect(html.match(/Panel A/g)).toHaveLength(2);
   });
+
+  it('renders Select and Tooltip in kinetic and matrix without a DOM', () => {
+    const noop = () => {};
+    const options = [{ value: 'tea', label: 'Tea' }];
+    const html = renderToStaticMarkup(
+      <>
+        <K.Select label="Drink" options={options} value="tea" onChange={noop} name="k" />
+        <M.Select label="Drink" options={options} value="" onChange={noop} name="m" />
+        <K.Tooltip content="Note" />
+        <M.Tooltip content="Note" />
+      </>,
+    );
+    expect(html.match(/role="combobox"/g)).toHaveLength(2);
+    expect(html).toContain('<input type="hidden" name="k" value="tea"/>');
+    expect(html).toContain('Select…');
+    expect(html.match(/aria-describedby="([^"]+)".*?role="tooltip" id="\1"/g)).toHaveLength(2);
+  });
 });

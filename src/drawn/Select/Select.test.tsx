@@ -119,6 +119,16 @@ describe('Select', () => {
     expect(activeOption()).toHaveTextContent('Apple');
   });
 
+  it('types ahead on the rendered text of a non-string label', () => {
+    const rich = [
+      { value: 'a', label: <em>Apple</em> },
+      { value: 'p', label: <strong>Pear</strong> },
+    ];
+    render(<Select label="Fruit" options={rich} value="" onChange={vi.fn()} />);
+    key('p');
+    expect(activeOption()).toHaveTextContent('Pear');
+  });
+
   it('closes on outside pointerdown only', () => {
     render(<Controlled />);
     fireEvent.click(combobox());
