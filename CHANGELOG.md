@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.13.0
+
+### Minor Changes
+
+- 6e2f9d8: Add `SegmentedControl` to `@driif/motiv/matrix`, `Link` to `@driif/motiv`, `Chips` to all three entries (kinetic `Chips` is `FilterChips`), and hints to the drawn `SegmentedControl`.
+
 ## 0.12.0
 
 ### Minor Changes
