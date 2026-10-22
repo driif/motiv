@@ -22,7 +22,9 @@ generic export when that category is built. Drawn `NavItem` is a single nav link
 wrap `ElasticTabs` and `HudTabs` with the drawn `Tabs` props; matrix `Nav` wraps `ChevronNav` with
 the `GlideNav` props. Kinetic and matrix `Select` and `Tooltip` take the drawn props; matrix `Select`
 wraps `TerminalSelect`, whose field shows an option's `code`, falling back to its `label`, as its own
-look. Drawn and matrix `Accordion`, `Stepper` and `Carousel` take the kinetic props.
+look. Drawn and matrix `Accordion`, `Stepper` and `Carousel` take the kinetic props. Kinetic `Chips`
+is `FilterChips` under the generic name; drawn and matrix `Chips` and matrix `SegmentedControl` take
+the kinetic props, and kinetic `Link` takes the drawn props.
 
 | Category | Kinetic | Drawn | Matrix |
 |---|---|---|---|
@@ -37,9 +39,9 @@ look. Drawn and matrix `Accordion`, `Stepper` and `Carousel` take the kinetic pr
 | Switch | `Switch` (`LiquidSwitch`) | `Switch` | `Switch` |
 | Slider | `Slider` (`MomentumSlider`), `FrequencySlider` ¹ | `Slider` | `Slider` |
 | Tabs | `Tabs` (`ElasticTabs`) | `Tabs` | `Tabs` (`HudTabs`) |
-| SegmentedControl | `SegmentedControl` | `SegmentedControl` | — |
+| SegmentedControl | `SegmentedControl` | `SegmentedControl` | `SegmentedControl` |
 | Progress | `ProgressRing` ¹, `StepProgress` ¹ | `Progress` | `Progress` |
-| Link | — | `Link` | `Link` |
+| Link | `Link` | `Link` | `Link` |
 | Tooltip | `Tooltip` | `Tooltip` | `Tooltip` |
 | Accordion | `Accordion` | `Accordion` | `Accordion` |
 | Nav | `Nav` (`GlideNav`), `DrillStack` ¹ | `Nav` | `Nav` (`ChevronNav`) |
@@ -47,7 +49,7 @@ look. Drawn and matrix `Accordion`, `Stepper` and `Carousel` take the kinetic pr
 | MenuButton | `MenuButton` | `MenuButton` | `SignalBurger` ¹ |
 | Stepper | `Stepper` | `Stepper` | `Stepper` |
 | Carousel | `Carousel` | `Carousel` | `Carousel` |
-| Chips | `FilterChips` ¹ | — | — |
+| Chips | `Chips` (`FilterChips`) | `Chips` | `Chips` |
 | OtpInput | `OtpInput` | — | — |
 | CommandMenu | `CommandMenu` | — | — |
 
@@ -58,5 +60,4 @@ Style-specific, outside the categories: kinetic `MagneticButton`, `MorphSubmitBu
 
 ## Backlog
 
-The remaining gaps: matrix SegmentedControl, kinetic Link, Chips, OtpInput and CommandMenu for
-drawn and matrix, and the other ¹ names.
+The remaining gaps: OtpInput and CommandMenu for drawn and matrix, and the other ¹ names.

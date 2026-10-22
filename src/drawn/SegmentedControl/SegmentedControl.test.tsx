@@ -32,6 +32,19 @@ describe('SegmentedControl', () => {
     expect(screen.getByRole('radio', { name: 'Day' })).toHaveAttribute('tabindex', '-1');
   });
 
+  it('shows the hint of the selected option', () => {
+    render(
+      <SegmentedControl
+        label="Range"
+        options={options.map((option) => ({ ...option, hint: `${option.label} hint` }))}
+        value="week"
+        onChange={vi.fn()}
+      />,
+    );
+    expect(screen.getByText('Week hint')).toHaveAttribute('data-active', 'true');
+    expect(screen.getByText('Day hint')).toHaveAttribute('aria-hidden', 'true');
+  });
+
   it('reports clicks', () => {
     const onChange = vi.fn();
     render(<SegmentedControl label="Range" options={options} value="day" onChange={onChange} />);

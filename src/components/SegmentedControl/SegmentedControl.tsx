@@ -1,13 +1,8 @@
-import {
-  type ComponentProps,
-  type CSSProperties,
-  type KeyboardEvent,
-  useEffect,
-  useRef,
-} from 'react';
+import { type ComponentProps, type CSSProperties, useEffect, useRef } from 'react';
 import type { MotivOption } from '../../types';
 import { cx } from '../../utils/cx';
 import { EASE_OUT, playOnce } from '../../utils/motion';
+import { useRadioGroupKeys } from '../../utils/useRadioGroupKeys';
 
 const SQUASH: Keyframe[] = [
   { scale: '1 1' },
@@ -43,27 +38,7 @@ export function SegmentedControl({
     playOnce(pillRef.current, SQUASH, { duration: 550, easing: EASE_OUT });
   }, [index]);
 
-  function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    onKeyDownProp?.(event);
-    if (event.defaultPrevented) return;
-    const last = options.length - 1;
-    let next: number;
-    switch (event.key) {
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        next = index <= 0 ? last : index - 1;
-        break;
-      case 'ArrowRight':
-      case 'ArrowDown':
-        next = index >= last ? 0 : index + 1;
-        break;
-      default:
-        return;
-    }
-    event.preventDefault();
-    onChange(options[next].value);
-    event.currentTarget.querySelectorAll<HTMLElement>('[role="radio"]')[next].focus();
-  }
+  const onKeyDown = useRadioGroupKeys({ options, index, onChange, onKeyDown: onKeyDownProp });
 
   return (
     <div

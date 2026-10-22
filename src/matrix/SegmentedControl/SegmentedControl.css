@@ -1,0 +1,121 @@
+@layer motiv.components {
+  .motiv-matrix-segmented {
+    --_accent: var(--motiv-segmented-control-accent, var(--motiv-color-primary));
+
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 2);
+    color: var(--motiv-color-text);
+  }
+
+  .motiv-matrix-segmented__track {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--_count), minmax(0, 1fr));
+    padding: 4px;
+    background: var(--motiv-segmented-control-bg, var(--motiv-color-surface));
+    border: 1px solid
+      var(
+        --motiv-segmented-control-border-color,
+        color-mix(in oklch, var(--motiv-color-primary) 40%, transparent)
+      );
+    border-radius: var(--motiv-segmented-control-radius, var(--motiv-radius));
+  }
+
+  /* Lock-on box: tinted cell with two corner brackets, stepping to the checked option. */
+  .motiv-matrix-segmented__marker {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    width: calc((100% - 8px) / var(--_count));
+    background: color-mix(in oklch, var(--_accent) 14%, transparent);
+    translate: calc(var(--_index) * 100%) 0;
+    transition: translate 0.18s var(--motiv-ease);
+    pointer-events: none;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border: 2px solid var(--_accent);
+    }
+
+    &::before {
+      top: -3px;
+      left: -3px;
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    &::after {
+      right: -3px;
+      bottom: -3px;
+      border-top: 0;
+      border-left: 0;
+    }
+  }
+
+  .motiv-matrix-segmented__option {
+    position: relative;
+    min-width: 0;
+    min-height: 44px;
+    padding: 0 6px;
+    overflow: hidden;
+    font-family: var(--motiv-font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--motiv-segmented-control-color, var(--motiv-color-text-muted));
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--motiv-segmented-control-color, var(--motiv-color-text));
+    }
+
+    &[aria-checked="true"] {
+      color: var(--_accent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: -2px;
+    }
+  }
+
+  /* Hints stack in one cell; the active one types itself out behind a prompt. */
+  .motiv-matrix-segmented__hints {
+    display: grid;
+  }
+
+  .motiv-matrix-segmented__hint {
+    grid-area: 1 / 1;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--motiv-color-text-muted);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.3s steps(16);
+
+    &::before {
+      content: "> " / "";
+      color: var(--_accent);
+    }
+
+    &[data-active="true"] {
+      clip-path: inset(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-matrix-segmented__marker,
+    .motiv-matrix-segmented__hint {
+      transition: none;
+    }
+  }
+}

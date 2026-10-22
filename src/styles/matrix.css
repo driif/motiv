@@ -7,6 +7,7 @@
 @import "../matrix/Card/Card.css";
 @import "../matrix/TextField/TextField.css";
 @import "../matrix/Checkbox/Checkbox.css";
+@import "../matrix/Chips/Chips.css";
 @import "../matrix/Radio/Radio.css";
 @import "../matrix/Progress/Progress.css";
 @import "../matrix/Link/Link.css";
@@ -16,6 +17,7 @@
 @import "../matrix/DecodeSecretField/DecodeSecretField.css";
 @import "../matrix/SignalBurger/SignalBurger.css";
 @import "../matrix/HudTabs/HudTabs.css";
+@import "../matrix/SegmentedControl/SegmentedControl.css";
 @import "../matrix/ChevronNav/ChevronNav.css";
 @import "../matrix/Nav/Nav.css";
 @import "../matrix/Switch/Switch.css";
