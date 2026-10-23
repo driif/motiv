@@ -21,7 +21,7 @@ describe('Nav', () => {
     const onChange = vi.fn();
     render(<Nav label="Mail" items={items} value="inbox" onChange={onChange} />);
     fireEvent.click(screen.getByRole('button', { name: 'Sent' }));
-    expect(onChange).toHaveBeenCalledWith('sent');
+    expect(onChange).toHaveBeenCalledWith('sent', expect.objectContaining({ type: 'click' }));
   });
 
   it('renders the icon chrome only for items with an icon', () => {
@@ -30,5 +30,22 @@ describe('Nav', () => {
     );
     expect(container.querySelectorAll('.motiv-nav-item__icon')).toHaveLength(1);
     expect(container.querySelectorAll('.motiv-nav__count')).toHaveLength(1);
+  });
+
+  it('renders href items as links and passes the click event', () => {
+    const onChange = vi.fn();
+    render(
+      <Nav
+        label="Mail"
+        items={[...items, { id: 'help', label: 'Help', href: '/help' }]}
+        value="help"
+        onChange={onChange}
+      />,
+    );
+    const help = screen.getByRole('link', { name: 'Help' });
+    expect(help).toHaveAttribute('href', '/help');
+    expect(help).toHaveAttribute('aria-current', 'page');
+    fireEvent.click(help);
+    expect(onChange).toHaveBeenCalledWith('help', expect.objectContaining({ type: 'click' }));
   });
 });

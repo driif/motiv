@@ -54,6 +54,7 @@
     font-size: 0.875rem;
     color: var(--motiv-nav-color, var(--motiv-color-text-muted));
     text-align: left;
+    text-decoration: none;
     background: transparent;
     border: 0;
     border-radius: var(--motiv-nav-radius, var(--motiv-radius-sm));
@@ -74,6 +75,18 @@
       width: 18px;
       height: 18px;
     }
+  }
+
+  /* Static stand-in for the bar until the layout effect places it (SSR, before hydration). */
+  .motiv-glide-nav:not([data-placed]) .motiv-glide-nav__item[aria-current="page"]::before {
+    position: absolute;
+    top: calc(50% - 12px);
+    left: -6px;
+    width: 3px;
+    height: 24px;
+    content: "";
+    background: var(--motiv-nav-accent, var(--motiv-color-primary));
+    border-radius: 0 3px 3px 0;
   }
 
   .motiv-glide-nav__label {

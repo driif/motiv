@@ -231,6 +231,19 @@ describe('server rendering', () => {
     expect(html).toContain('class="motiv-bar"');
   });
 
+  it('renders GlideNav links with the static active bar hook', () => {
+    const html = renderToStaticMarkup(
+      <K.GlideNav
+        label="Main"
+        items={[{ id: 'a', label: 'Home', href: '/' }]}
+        value="a"
+        onChange={() => {}}
+      />,
+    );
+    expect(html).toContain('<a href="/" class="motiv-glide-nav__item" aria-current="page">');
+    expect(html).not.toContain('data-placed');
+  });
+
   it('exports the generic names as aliases of the flavored components', () => {
     expect(K.Checkbox).toBe(K.SpringCheckbox);
     expect(M.ThemeToggle).toBe(M.GlitchThemeToggle);

@@ -22,6 +22,34 @@ describe('GlideNav', () => {
     const onChange = vi.fn();
     render(<GlideNav items={items} value="inbox" onChange={onChange} label="Mail" />);
     fireEvent.click(screen.getByRole('button', { name: 'Sent' }));
-    expect(onChange).toHaveBeenCalledWith('sent');
+    expect(onChange).toHaveBeenCalledWith('sent', expect.objectContaining({ type: 'click' }));
+  });
+
+  it('renders href items as links and passes the click event', () => {
+    const onChange = vi.fn((_id: string, event?: { preventDefault: () => void }) =>
+      event?.preventDefault(),
+    );
+    render(
+      <GlideNav
+        items={[
+          { id: 'inbox', label: 'Inbox', href: '#inbox' },
+          { id: 'sent', label: 'Sent', href: '#sent' },
+        ]}
+        value="inbox"
+        onChange={onChange}
+        label="Mail"
+      />,
+    );
+    expect(screen.getByRole('link', { name: 'Inbox' })).toHaveAttribute('aria-current', 'page');
+    const sent = screen.getByRole('link', { name: 'Sent' });
+    expect(sent).toHaveAttribute('href', '#sent');
+    expect(sent).toHaveClass('motiv-glide-nav__item');
+    expect(fireEvent.click(sent)).toBe(false);
+    expect(onChange).toHaveBeenCalledWith('sent', expect.objectContaining({ type: 'click' }));
+  });
+
+  it('marks the nav once the bar is placed', () => {
+    render(<GlideNav items={items} value="inbox" onChange={() => {}} label="Mail" />);
+    expect(screen.getByRole('navigation')).toHaveAttribute('data-placed');
   });
 });

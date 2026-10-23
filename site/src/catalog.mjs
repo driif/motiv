@@ -605,7 +605,7 @@ export const catalog = {
       symbols: ['GlideNav'],
       demo: 'GlideNav',
       blurb:
-        'Sidebar navigation where a soft highlight follows the pointer and the active bar springs to your choice. Also exported as Nav.',
+        'Sidebar navigation where a soft highlight follows the pointer and the active bar springs to your choice. Items with href render as links. Also exported as Nav.',
     },
     {
       id: 'nav',
