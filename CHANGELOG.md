@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.16.0
+
+### Minor Changes
+
+- 8694fb6: `GlideNav` and the drawn and matrix `Nav` render items with `href` as links, `onChange` also receives the click event, and the active bar shows before hydration.
+
 ## 0.15.1
 
 ### Patch Changes
