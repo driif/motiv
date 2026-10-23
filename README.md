@@ -68,6 +68,8 @@ Besides `Button` and `Card`, the root entry ships the kinetic set: `MagneticButt
 `Odometer`. Every animation moves only `transform` and `opacity`; `prefers-reduced-motion` stills
 them. `IconButton`, `MenuButton`, `ThemeToggle`, `Radio`, `RadioGroup` and `SegmentedControl` take
 the same props as their drawn namesakes, so switching styles only changes the import.
+`GlideNav` items take an optional `href` and then render as `<a>`; `onChange(id, event)` lets a
+router `preventDefault()`. Server-rendered, the active item already shows its accent bar.
 
 ```tsx
 import { LiquidSwitch, SegmentedControl } from '@driif/motiv';

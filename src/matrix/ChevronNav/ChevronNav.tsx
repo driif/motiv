@@ -64,7 +64,7 @@ export function ChevronNav({
               );
               return (
                 <li key={item.id}>
-                  {item.href ? (
+                  {item.href !== undefined ? (
                     <a href={item.href} {...common}>
                       {content}
                     </a>

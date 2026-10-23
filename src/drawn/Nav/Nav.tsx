@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react';
 import type { NavProps } from '../../components/GlideNav';
 import { cx } from '../../utils/cx';
 import { NavItem } from '../NavItem';
@@ -22,7 +23,8 @@ export function Nav({ items, value, onChange, label, className, ...props }: NavP
                 </>
               }
               active={item.id === value}
-              onClick={() => onChange(item.id)}
+              {...(item.href !== undefined ? { href: item.href } : {})}
+              onClick={(event: MouseEvent<HTMLElement>) => onChange(item.id, event)}
             />
           </li>
         ))}

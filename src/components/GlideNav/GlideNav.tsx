@@ -1,6 +1,7 @@
 import {
   type ComponentProps,
   type FocusEvent,
+  type MouseEvent,
   type ReactNode,
   type SyntheticEvent,
   useLayoutEffect,
@@ -13,12 +14,13 @@ export interface GlideNavItem {
   label: ReactNode;
   icon?: ReactNode;
   count?: ReactNode;
+  href?: string;
 }
 
 export interface GlideNavProps extends Omit<ComponentProps<'nav'>, 'onChange'> {
   items: GlideNavItem[];
   value: string;
-  onChange: (id: string) => void;
+  onChange: (id: string, event?: MouseEvent<HTMLElement>) => void;
   /** Accessible name of the nav landmark. */
   label: string;
 }
@@ -42,8 +44,8 @@ export function GlideNav({
   useLayoutEffect(() => {
     const bar = barRef.current;
     if (!bar) return;
-    const el =
-      bar.parentElement?.querySelectorAll<HTMLElement>('.motiv-glide-nav__item')[activeIndex];
+    const nav = bar.parentElement;
+    const el = nav?.querySelectorAll<HTMLElement>('.motiv-glide-nav__item')[activeIndex];
     if (!el) {
       bar.style.opacity = '0';
       return;
@@ -51,15 +53,19 @@ export function GlideNav({
     bar.style.transform = `translateY(${el.offsetTop + (el.offsetHeight - bar.offsetHeight) / 2}px)`;
     if (!placed.current) {
       // The first placement jumps there instead of sliding in from the top.
+      // Shown before the reflow, so the handoff from the CSS bar does not fade.
       bar.style.transition = 'none';
+      bar.style.opacity = '1';
       void bar.offsetWidth;
       bar.style.transition = '';
       placed.current = true;
+      // Retires the CSS bar drawn before hydration; React never writes this attribute.
+      nav?.setAttribute('data-placed', '');
     }
     bar.style.opacity = '1';
   }, [activeIndex, items.length]);
 
-  function showHover(event: SyntheticEvent<HTMLButtonElement>) {
+  function showHover(event: SyntheticEvent<HTMLElement>) {
     const hover = hoverRef.current;
     if (!hover) return;
     const { offsetTop, offsetHeight } = event.currentTarget;
@@ -88,26 +94,36 @@ export function GlideNav({
     >
       <span ref={hoverRef} className="motiv-glide-nav__hover" aria-hidden="true" />
       <span ref={barRef} className="motiv-glide-nav__bar" aria-hidden="true" />
-      {items.map((item) => (
-        <button
-          key={item.id}
-          type="button"
-          className="motiv-glide-nav__item"
-          aria-current={item.id === value ? 'page' : undefined}
-          onPointerEnter={showHover}
-          onFocus={showHover}
-          onClick={() => onChange(item.id)}
-        >
-          {item.icon}
-          <span className="motiv-glide-nav__label">{item.label}</span>
-          {item.count != null && (
-            <span className="motiv-glide-nav__count">
-              <span className="motiv-visually-hidden">, </span>
-              {item.count}
-            </span>
-          )}
-        </button>
-      ))}
+      {items.map((item) => {
+        const common = {
+          className: 'motiv-glide-nav__item',
+          'aria-current': item.id === value ? ('page' as const) : undefined,
+          onPointerEnter: showHover,
+          onFocus: showHover,
+          onClick: (event: MouseEvent<HTMLElement>) => onChange(item.id, event),
+        };
+        const content = (
+          <>
+            {item.icon}
+            <span className="motiv-glide-nav__label">{item.label}</span>
+            {item.count != null && (
+              <span className="motiv-glide-nav__count">
+                <span className="motiv-visually-hidden">, </span>
+                {item.count}
+              </span>
+            )}
+          </>
+        );
+        return item.href !== undefined ? (
+          <a key={item.id} href={item.href} {...common}>
+            {content}
+          </a>
+        ) : (
+          <button key={item.id} type="button" {...common}>
+            {content}
+          </button>
+        );
+      })}
     </nav>
   );
 }

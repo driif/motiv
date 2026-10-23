@@ -20,11 +20,24 @@ describe('Nav', () => {
     );
   });
 
-  it('reports only the clicked id', () => {
+  it('reports the clicked id with the event', () => {
     const onChange = vi.fn();
     render(<Nav label="Vault" items={items} value="secrets" onChange={onChange} />);
     fireEvent.click(screen.getByRole('button', { name: 'Audit log' }));
-    expect(onChange).toHaveBeenCalledWith('audit');
-    expect(onChange.mock.calls[0]).toHaveLength(1);
+    expect(onChange).toHaveBeenCalledWith('audit', expect.objectContaining({ type: 'click' }));
+  });
+
+  it('renders href items as links', () => {
+    render(
+      <Nav
+        label="Vault"
+        items={[...items, { id: 'help', label: 'Help', href: '/help' }]}
+        value="help"
+        onChange={() => {}}
+      />,
+    );
+    const help = screen.getByRole('link', { name: 'Help' });
+    expect(help).toHaveAttribute('href', '/help');
+    expect(help).toHaveAttribute('aria-current', 'page');
   });
 });

@@ -320,6 +320,17 @@ Read by `GlideNav` (`Nav`) · drawn `NavItem`, `Nav` · matrix `ChevronNav`, `Na
 | `--motiv-nav-radius` | ✓ | ✓ | ✓ |
 | `--motiv-nav-accent` | ✓ | ✓ | ✓ |
 
+Flat in a sidebar: let `GlideNav` take the sidebar's surface and width. The hover pill still shows,
+tinted from the accent.
+
+```css
+.app-sidebar .motiv-glide-nav {
+  --motiv-nav-bg: transparent;
+  --motiv-nav-border-color: transparent;
+  max-width: none;
+}
+```
+
 ### ThemeToggle
 
 Read by `ThemeToggle` · drawn `ThemeToggle`, `OrbitalThemeToggle` · matrix `GlitchThemeToggle` (`ThemeToggle`).
