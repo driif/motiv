@@ -27,6 +27,10 @@
     pointer-events: auto;
   }
 
+  .motiv-toast-stack__list:empty {
+    display: none;
+  }
+
   .motiv-toast {
     --_tone: var(--motiv-color-primary);
     display: flex;
