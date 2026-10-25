@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.19.0
+
+### Minor Changes
+
+- c896426: Add FileUpload with per-file progress, cancel and retry, plus a putFile helper for presigned PUT uploads.
+
 ## 0.18.0
 
 ### Minor Changes
