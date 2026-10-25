@@ -87,9 +87,11 @@ run_model() {  # run_model <opus|sol> <promptfile> <outfile> <name> <read|write>
     run_watched "$prompt" "$out" "$name" claude_streamed --model opus \
       --permission-mode bypassPermissions --add-dir "$ROOT"
   else
-    local sandbox=read-only
-    [ "$mode" = write ] && sandbox=workspace-write
-    run_watched "$prompt" "$out" "$name" codex exec -m gpt-6-sol -s "$sandbox" \
+    # Reviewers run the gates too: read-only blocks the pnpm store, and sol stalled.
+    # The review prompts still forbid edits.
+    run_watched "$prompt" "$out" "$name" codex exec -s workspace-write \
+      -c sandbox_workspace_write.network_access=true \
+      --add-dir "$(dirname "$(dirname "$(pnpm store path)")")" \
       -C "$ROOT" -c model_reasoning_effort="xhigh" --skip-git-repo-check -
   fi
 }
