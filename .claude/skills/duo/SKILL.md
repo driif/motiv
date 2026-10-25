@@ -115,7 +115,9 @@ the whole reason the exchange costs what it does.
 
 Then `manifest.json`: `implementer`, `crossreview_verdict`, `ship` and `ship_basis`. A non-empty
 `degraded` leads — a walkover means one model never planned, so nothing was agreed and the
-assignment carries no information.
+assignment carries no information. `crossreview_verdict: missing` means the reviewer produced
+nothing even after a retry: the change had no cross review, so revmux is its only outside check —
+say so in the PR.
 
 `ship` is true only when **both** final reviewers reported and both said so; `ship_basis` says which
 it was. One reviewer on a degraded run is not a verdict.
@@ -176,9 +178,10 @@ where the pipeline made a call. When a run surprises you, read `events.jsonl` fi
 
 ## Knobs
 
-`DUO_TURNS` (2 exchange turns before a tiebreak), `DUO_IDLE_TIMEOUT` (600s with no output before a
-kill), `DUO_HARD_TIMEOUT` (1800s for one attempt), `DUO_STAGGER` (10s before the second model in a
-parallel stage). Raising the timeouts makes a stuck run take longer to fail, not likelier to succeed.
+`DUO_TURNS` (2 exchange turns before a tiebreak), `DUO_IDLE_TIMEOUT` (1200s with no output before a
+kill; sol can reason silently for over ten minutes), `DUO_HARD_TIMEOUT` (2700s for one attempt),
+`DUO_STAGGER` (10s before the second model in a parallel stage). A stalled or timed-out stage runs
+once more before the round degrades it.
 `DUO_TURNS=1` roughly halves the exchange cost and sends more rounds to the tiebreak.
 
 ## Degrading
