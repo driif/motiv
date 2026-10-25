@@ -11,8 +11,10 @@ SKILL="$ROOT/.claude/skills/duo"
 PROMPTS="$SKILL/prompts"
 RULES="$ROOT/AGENTS.md"
 
-IDLE_TIMEOUT=${DUO_IDLE_TIMEOUT:-600}
-HARD_TIMEOUT=${DUO_HARD_TIMEOUT:-1800}
+# Codex prints nothing while it reasons; at xhigh a review of a large diff stays silent for more
+# than ten minutes, so a shorter idle limit kills healthy reviewers.
+IDLE_TIMEOUT=${DUO_IDLE_TIMEOUT:-1200}
+HARD_TIMEOUT=${DUO_HARD_TIMEOUT:-2700}
 STAGGER=${DUO_STAGGER:-10}
 TURNS=${DUO_TURNS:-2}                      # exchange turns before a tiebreak
 
@@ -81,7 +83,15 @@ for l in sys.stdin:
     if e.get("type") == "result": sys.stdout.write(e.get("result") or "")'
 }
 
+# A stage that stalls or times out runs once more before the round degrades it.
 run_model() {  # run_model <opus|sol> <promptfile> <outfile> <name> <read|write>
+  run_once "$@"; local rc=$?
+  [ "$rc" -eq 124 ] || return "$rc"
+  ev retry "$4"
+  run_once "$@"
+}
+
+run_once() {
   local who="$1" prompt="$2" out="$3" name="$4" mode="$5"
   if [ "$who" = opus ]; then
     run_watched "$prompt" "$out" "$name" claude_streamed --model opus \
@@ -210,9 +220,10 @@ run_model "$reviewer" "$ROUND/crossreview.prompt.md" "$ROUND/crossreview.raw" cr
 jsonblock "$ROUND/crossreview.raw" > "$ROUND/crossreview.json" 2>/dev/null || \
   ev agent_degraded "$reviewer returned no structured review"
 
+# No review is not a clean review: a reviewer that produced nothing leaves the verdict "missing".
 verdict=$(python3 -c 'import json,sys
-try: print(json.load(open(sys.argv[1])).get("verdict","accept"))
-except Exception: print("accept")' "$ROUND/crossreview.json")
+try: print(json.load(open(sys.argv[1])).get("verdict") or "missing")
+except Exception: print("missing")' "$ROUND/crossreview.json")
 ev crossreview "$verdict"
 
 # --- stage 6: revise ----------------------------------------------------------
