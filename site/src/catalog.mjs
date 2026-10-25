@@ -324,6 +324,15 @@ export const catalog = {
         'A value with a copy button whose label rolls to "Copied". Show a masked version if the value is secret.',
     },
     {
+      id: 'confirm',
+      category: null,
+      title: 'Confirm',
+      symbols: ['Confirm'],
+      demo: 'Confirm',
+      blurb:
+        'A modal confirm for destructive actions: list what else goes, optionally require typing a slug, and lock it while the delete runs.',
+    },
+    {
       id: 'radial-menu',
       category: null,
       title: 'RadialMenu',

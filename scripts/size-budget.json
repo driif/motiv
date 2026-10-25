@@ -7,6 +7,7 @@
   "components/Card/Card.js": 550,
   "components/Carousel/Carousel.js": 1250,
   "components/CommandMenu/CommandMenu.js": 950,
+  "components/Confirm/Confirm.js": 1050,
   "components/CopyField/CopyField.js": 1150,
   "components/DrillStack/DrillStack.js": 1050,
   "components/ElasticTabs/ElasticTabs.js": 1300,

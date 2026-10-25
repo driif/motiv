@@ -65,7 +65,7 @@ Besides `Button` and `Card`, the root entry ships the kinetic set: `MagneticButt
 `Radio`, `RadioGroup`, `Stepper`, `CommandMenu`, `FloatingField`, `OtpInput`, `ExpandingSearch`,
 `FrequencySlider`, `MomentumSlider`, `LiquidSwitch`, `SpringCheckbox`, `LikeButton`, `MuteToggle`,
 `SlipCard`, `Accordion`, `Carousel`, `GlideNav`, `StepProgress`, `DrillStack`, `ProgressRing` and
-`Odometer`. Every animation moves only `transform` and `opacity`; `prefers-reduced-motion` stills
+`Odometer`, plus the native `Confirm` dialog. Every animation moves only `transform` and `opacity`; `prefers-reduced-motion` stills
 them. `IconButton`, `MenuButton`, `ThemeToggle`, `Radio`, `RadioGroup` and `SegmentedControl` take
 the same props as their drawn namesakes, so switching styles only changes the import.
 `GlideNav` items take an optional `href` and then render as `<a>`; `onChange(id, event)` lets a
@@ -77,6 +77,62 @@ import { LiquidSwitch, SegmentedControl } from '@driif/motiv';
 <SegmentedControl label="Range" options={ranges} value={range} onChange={setRange} />;
 <LiquidSwitch label="Wi-Fi" checked={wifi} onChange={setWifi} />;
 ```
+
+## Confirm
+
+`Confirm` is a controlled native modal `<dialog>` for destructive actions. Impact counts and
+errors go in `children`.
+
+```tsx
+import { Button, Confirm } from '@driif/motiv';
+import { useState } from 'react';
+
+function DeleteProject({ slug, deleteProject }: { slug: string; deleteProject: () => Promise<void> }) {
+  const [open, setOpen] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState('');
+
+  async function remove() {
+    setPending(true);
+    setError('');
+    try {
+      await deleteProject();
+      setOpen(false);
+    } catch {
+      setError('Could not delete the project. Please try again.');
+    } finally {
+      setPending(false);
+    }
+  }
+
+  return (
+    <>
+      <Button variant="danger" onClick={() => { setError(''); setOpen(true); }}>
+        Delete project
+      </Button>
+      <Confirm
+        open={open}
+        title="Delete project?"
+        slug={slug}
+        pending={pending}
+        onConfirm={remove}
+        onCancel={() => setOpen(false)}
+      >
+        <p>This action cannot be undone.</p>
+        <ul><li>3 bindings will also be deleted.</li></ul>
+        {error && <p role="alert">{error}</p>}
+      </Confirm>
+    </>
+  );
+}
+```
+
+With `slug`, Delete stays disabled until the field matches exactly; the slug shows as the field's
+hint. `confirmLabel` (`Delete`), `cancelLabel` (`Cancel`) and `slugLabel`
+(`Type the slug to confirm`) take translated strings. `pending` locks both buttons, the field and
+Escape. The dialog never closes itself: Cancel and Escape call `onCancel`, the backdrop does
+nothing, and your app sets `open={false}`. Focus starts on Cancel or the field and returns to the
+opener on close.
 
 ## Drawn style
 
