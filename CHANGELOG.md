@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.18.0
+
+### Minor Changes
+
+- 5234c20: Add Toaster, toast() and dismissToast() for success, error and info notifications without a provider.
+
 ## 0.17.0
 
 ### Minor Changes
