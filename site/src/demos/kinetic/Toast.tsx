@@ -6,8 +6,8 @@ export function ToastDemo() {
   return (
     <div style={{ minHeight: '28rem' }}>
       <p>
-        Hover or focus to pause. After a pointer dismissal, move away to resume the remaining
-        timers.
+        Mouse hover or focus pauses timers. After touch dismissal, remaining timers resume
+        immediately. Long stacks scroll within the viewport.
       </p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
         <Button

@@ -13,10 +13,16 @@
   }
 
   .motiv-toast-stack__list {
+    box-sizing: border-box;
     display: grid;
     gap: calc(var(--motiv-space) * 3);
+    max-height: calc(100dvh - var(--motiv-space) * 8);
     margin: 0;
-    padding: 0;
+    padding: calc(var(--motiv-space) * 2);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
     list-style: none;
     pointer-events: auto;
   }

@@ -152,16 +152,17 @@ dismissToast(id);
 
 `tone` defaults to `info`. Success and info dismiss after 5000 ms; errors stay until dismissed.
 `duration` overrides the time in milliseconds, with `Infinity` for persistence. Up to three
-toasts appear in arrival order, newest at the bottom. Others wait until a slot opens after an
-exit; their timers start when shown. Hovering the stack or focusing inside pauses every visible
-timer, preserving the remaining time until both end. `dismissToast(id)` is safe to repeat.
+toasts appear in arrival order, newest at the bottom; long stacks scroll within the viewport.
+Others wait until a slot opens after an exit; their timers start when shown. Mouse hover over
+the stack or focus inside pauses every visible timer, preserving the remaining time until
+both end. Touch pointers do not pause on hover. `dismissToast(id)` is safe to repeat.
 
 Success and info use polite announcements; errors use an alert. New notifications never move
 focus. Dismissing a toast with keyboard-visible focus moves focus to another dismiss button,
-or back outside the stack. Pointer dismissal clears focus so remaining timers resume once the
-pointer leaves the stack. `label` and `dismissLabel` accept translated strings; native section
-props and `ref` pass through. Server calls to `toast()` do nothing and return an empty string;
-server rendering produces an empty stack.
+or back outside the stack. Pointer dismissal clears focus; remaining timers resume when the
+mouse no longer hovers the stack, or immediately after touch dismissal. `label` and
+`dismissLabel` accept translated strings; native section props and `ref` pass through. Server
+calls to `toast()` do nothing and return an empty string; server rendering produces an empty stack.
 
 The stack uses fixed positioning below native modal dialogs. While `Confirm` is open, show
 errors that need attention in its existing `children` slot (for example, `<p role="alert">`),

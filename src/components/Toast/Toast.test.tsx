@@ -217,15 +217,15 @@ describe('Toaster', () => {
       advance(2000);
       const region = screen.getByRole('region');
       const outside = screen.getByRole('button', { name: 'Outside' });
-      fireEvent.mouseEnter(region);
+      fireEvent.pointerEnter(region, { pointerType: 'mouse' });
       act(() => stack().getAllByRole('button')[0].focus());
       advance(10000);
-      if (endsFirst === 'hover') fireEvent.mouseLeave(region);
+      if (endsFirst === 'hover') fireEvent.pointerLeave(region, { pointerType: 'mouse' });
       else act(() => outside.focus());
       advance(10000);
       expect(stack().getAllByRole('listitem')).toHaveLength(2);
       if (endsFirst === 'hover') act(() => outside.focus());
-      else fireEvent.mouseLeave(region);
+      else fireEvent.pointerLeave(region, { pointerType: 'mouse' });
       advance(2999);
       expect(stack().getByText('First')).toBeInTheDocument();
       advance(1);
@@ -243,16 +243,89 @@ describe('Toaster', () => {
     notify({ title: 'Second', duration: Infinity });
     notify({ title: 'Third', duration: Infinity });
     notify({ title: 'Fourth', duration: 1000 });
-    fireEvent.mouseEnter(screen.getByRole('region'));
+    const region = screen.getByRole('region');
+    vi.spyOn(region, 'matches').mockReturnValue(true);
+    fireEvent.pointerEnter(region, { pointerType: 'mouse' });
     act(() => dismissToast(first));
     advance(0);
     advance(10000);
     expect(stack().getByText('Fourth')).toBeInTheDocument();
-    fireEvent.mouseLeave(screen.getByRole('region'));
+    fireEvent.pointerLeave(region, { pointerType: 'mouse' });
     advance(999);
     expect(stack().getByText('Fourth')).toBeInTheDocument();
     advance(1);
     expect(stack().queryByText('Fourth')).not.toBeInTheDocument();
+  });
+
+  it('does not pause for touch hover or compatibility mouse events', () => {
+    render(<Toaster />);
+    notify({ title: 'Touch hover', duration: 1000 });
+    const region = screen.getByRole('region');
+    fireEvent.pointerEnter(region, { pointerType: 'touch' });
+    fireEvent.mouseEnter(region);
+    advance(999);
+    expect(stack().getByText('Touch hover')).toBeInTheDocument();
+    advance(1);
+    expect(stack().queryAllByRole('listitem')).toHaveLength(0);
+  });
+
+  it('resumes after touch dismissal without pointerleave or mouseleave', () => {
+    render(<Toaster />);
+    notify({ title: 'First' });
+    notify({ title: 'Second' });
+    advance(2000);
+    const button = stack().getAllByRole('button')[0];
+    fireEvent.pointerEnter(button, { pointerType: 'touch' });
+    fireEvent.mouseEnter(button);
+    fireEvent.pointerDown(button, { pointerType: 'touch' });
+    fireEvent.mouseDown(button);
+    act(() => button.focus());
+    fireEvent.pointerUp(button, { pointerType: 'touch' });
+    fireEvent.mouseUp(button);
+    fireEvent.click(button);
+    advance(0);
+    expect(document.body).toHaveFocus();
+    advance(2999);
+    expect(stack().getByText('Second')).toBeInTheDocument();
+    advance(1);
+    expect(stack().queryAllByRole('listitem')).toHaveLength(0);
+  });
+
+  it.each([0, 200])('resumes after a hovered toast exits in %s ms without pointerleave', (exit) => {
+    render(<Toaster />);
+    const first = notify({ title: 'First', duration: Infinity });
+    notify({ title: 'Second' });
+    advance(2000);
+    const item = stack().getAllByRole('listitem')[0];
+    item.style.transitionDuration = `${exit}ms`;
+    vi.spyOn(screen.getByRole('region'), 'matches').mockImplementation(() => item.isConnected);
+    fireEvent.pointerEnter(item, { pointerType: 'mouse' });
+    advance(10000);
+    expect(stack().getByText('Second')).toBeInTheDocument();
+    act(() => dismissToast(first));
+    advance(exit);
+    expect(item).not.toBeInTheDocument();
+    advance(2999);
+    expect(stack().getByText('Second')).toBeInTheDocument();
+    advance(1);
+    expect(stack().queryAllByRole('listitem')).toHaveLength(0);
+  });
+
+  it('clears hover when the last toast is removed before another arrives', () => {
+    render(<Toaster />);
+    const first = notify({ title: 'First', duration: 1000 });
+    const region = screen.getByRole('region');
+    vi.spyOn(region, 'matches').mockReturnValue(true);
+    fireEvent.pointerEnter(region, { pointerType: 'mouse' });
+    advance(2000);
+    expect(stack().getByText('First')).toBeInTheDocument();
+    act(() => dismissToast(first));
+    advance(0);
+    notify({ title: 'Later', duration: 1000 });
+    advance(999);
+    expect(stack().getByText('Later')).toBeInTheDocument();
+    advance(1);
+    expect(stack().queryAllByRole('listitem')).toHaveLength(0);
   });
 
   it('dismisses by button and id, and tolerates repeated or unknown ids', () => {
@@ -305,7 +378,8 @@ describe('Toaster', () => {
     advance(2000);
     const region = screen.getByRole('region');
     const button = stack().getAllByRole('button')[0];
-    fireEvent.mouseEnter(region);
+    vi.spyOn(region, 'matches').mockReturnValue(true);
+    fireEvent.pointerEnter(region, { pointerType: 'mouse' });
     fireEvent.pointerDown(button, { pointerType: 'mouse' });
     fireEvent.mouseDown(button);
     act(() => button.focus());
@@ -316,7 +390,7 @@ describe('Toaster', () => {
     expect(document.body).toHaveFocus();
     advance(10000);
     expect(stack().getAllByRole('listitem')).toHaveLength(2);
-    fireEvent.mouseLeave(region);
+    fireEvent.pointerLeave(region, { pointerType: 'mouse' });
     advance(2999);
     expect(stack().getAllByRole('listitem')).toHaveLength(2);
     advance(1);
@@ -406,6 +480,8 @@ describe('Toaster', () => {
     const ref = createRef<HTMLElement>();
     const onMouseEnter = vi.fn();
     const onMouseLeave = vi.fn();
+    const onPointerEnter = vi.fn();
+    const onPointerLeave = vi.fn();
     const onFocus = vi.fn();
     const onBlur = vi.fn();
     render(
@@ -418,6 +494,8 @@ describe('Toaster', () => {
         style={{ zIndex: 2000 }}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        onPointerEnter={onPointerEnter}
+        onPointerLeave={onPointerLeave}
         onFocus={onFocus}
         onBlur={onBlur}
       />,
@@ -428,12 +506,21 @@ describe('Toaster', () => {
     expect(region).toHaveAttribute('id', 'updates');
     expect(region).toHaveStyle({ zIndex: 2000 });
     notify({ title: 'Saved' });
+    fireEvent.pointerEnter(region, { pointerType: 'mouse' });
+    fireEvent.pointerLeave(region, { pointerType: 'mouse' });
     fireEvent.mouseEnter(region);
     fireEvent.mouseLeave(region);
     const button = stack().getByRole('button', { name: 'Close update' });
     act(() => button.focus());
     act(() => button.blur());
-    for (const handler of [onMouseEnter, onMouseLeave, onFocus, onBlur])
+    for (const handler of [
+      onMouseEnter,
+      onMouseLeave,
+      onPointerEnter,
+      onPointerLeave,
+      onFocus,
+      onBlur,
+    ])
       expect(handler).toHaveBeenCalledOnce();
   });
 

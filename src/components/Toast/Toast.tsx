@@ -176,8 +176,8 @@ export function Toaster({
   dismissLabel = 'Dismiss',
   className,
   children,
-  onMouseEnter,
-  onMouseLeave,
+  onPointerEnter,
+  onPointerLeave,
   onFocus,
   onBlur,
   ...props
@@ -185,11 +185,13 @@ export function Toaster({
   const items = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
+  const list = useRef<HTMLOListElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
   const [announcements, setAnnouncements] = useState<ToastEntry[]>([]);
 
   useEffect(() => {
     setAnnouncements(items.slice(0, 3).filter((item) => !item.dismissed));
+    if (!items.length || !list.current?.parentElement?.matches(':hover')) setHovered(false);
   }, [items]);
 
   return (
@@ -197,13 +199,13 @@ export function Toaster({
       aria-label={label}
       {...props}
       className={cx('motiv-toast-stack', className)}
-      onMouseEnter={(event) => {
-        setHovered(true);
-        onMouseEnter?.(event);
+      onPointerEnter={(event) => {
+        if (event.pointerType === 'mouse') setHovered(true);
+        onPointerEnter?.(event);
       }}
-      onMouseLeave={(event) => {
-        setHovered(false);
-        onMouseLeave?.(event);
+      onPointerLeave={(event) => {
+        if (event.pointerType === 'mouse') setHovered(false);
+        onPointerLeave?.(event);
       }}
       onFocus={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
@@ -249,7 +251,7 @@ export function Toaster({
             </div>
           ))}
       </div>
-      <ol className="motiv-toast-stack__list">
+      <ol ref={list} className="motiv-toast-stack__list">
         {items.slice(0, 3).map((item) => (
           <ToastItem
             key={item.id}
