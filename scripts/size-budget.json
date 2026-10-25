@@ -41,6 +41,7 @@
   "components/TextField/TextField.js": 550,
   "components/Textarea/Textarea.js": 700,
   "components/ThemeToggle/ThemeToggle.js": 550,
+  "components/Toast/Toast.js": 2350,
   "components/Tooltip/Tooltip.js": 550,
   "drawn.css": 12650,
   "drawn/Accordion/Accordion.js": 850,

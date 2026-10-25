@@ -39,6 +39,7 @@ export * from './components/Tabs';
 export * from './components/Textarea';
 export * from './components/TextField';
 export * from './components/ThemeToggle';
+export * from './components/Toast';
 export * from './components/Tooltip';
 export type { MotivOption } from './types';
 export { cx } from './utils/cx';

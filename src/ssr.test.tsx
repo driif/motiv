@@ -33,6 +33,19 @@ import { Button, Card, CardBody, CardHeader } from './index';
 import * as M from './matrix';
 
 describe('server rendering', () => {
+  it('keeps Toaster empty and toast calls inert without a DOM', () => {
+    const before = renderToStaticMarkup(<K.Toaster />);
+    const id = K.toast({ tone: 'error', title: 'Request-specific error' });
+    K.dismissToast(id);
+    const after = renderToStaticMarkup(<K.Toaster />);
+    expect(after).toBe(before);
+    expect(after).toContain('role="status"');
+    expect(after).toContain('role="alert"');
+    expect(after).toContain('aria-label="Notifications"');
+    expect(after).not.toContain('<li');
+    expect(after).not.toContain('Request-specific error');
+  });
+
   it.each([false, true])('renders Confirm without opening a non-modal dialog (open=%s)', (open) => {
     const html = renderToStaticMarkup(
       <K.Confirm

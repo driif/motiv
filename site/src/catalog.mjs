@@ -333,6 +333,15 @@ export const catalog = {
         'A modal confirm for destructive actions: list what else goes, optionally require typing a slug, and lock it while the delete runs.',
     },
     {
+      id: 'toast',
+      category: null,
+      title: 'Toast',
+      symbols: ['Toaster', 'toast', 'dismissToast'],
+      demo: 'Toast',
+      blurb:
+        'Success, error and info notifications from any callback: mount one Toaster, queue up to three on screen, and pause timers on hover or focus. Keyboard dismissal keeps focus in the stack; pointer dismissal lets timers resume when you move away. Errors stay until dismissed.',
+    },
+    {
       id: 'radial-menu',
       category: null,
       title: 'RadialMenu',
