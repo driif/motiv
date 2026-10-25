@@ -7,6 +7,7 @@ export * from './components/Carousel';
 export * from './components/CommandMenu';
 export * from './components/Confirm';
 export * from './components/CopyField';
+export * from './components/DatePicker';
 export * from './components/DrillStack';
 export * from './components/ElasticTabs';
 export * from './components/ExpandingSearch';

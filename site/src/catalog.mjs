@@ -475,6 +475,15 @@ export const catalog = {
         'The FloatingField look under the generic name, without the check. Same props as the drawn and matrix TextField.',
     },
     {
+      id: 'date-picker',
+      category: null,
+      title: 'DatePicker',
+      symbols: ['DatePicker'],
+      demo: 'DatePicker',
+      blurb:
+        'A native date or date-and-time field in the TextField look. Values stay native strings such as 2026-11-13, and a clear button empties the field in one click.',
+    },
+    {
       id: 'textarea',
       category: 'Textarea',
       title: 'Textarea',
