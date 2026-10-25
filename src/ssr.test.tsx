@@ -50,6 +50,32 @@ it('renders DatePicker with its native type and value and a clear button without
   expect(renderToStaticMarkup(<K.DatePicker label="Due date" />)).not.toContain('<button');
 });
 
+it('renders Table and TableColumnsMenu with widths and a closed popover without a DOM', () => {
+  const columns = [
+    { id: 'name', label: 'Name', cell: (row: { name: string }) => row.name },
+    { id: 'city', label: 'City', cell: () => 'London', width: 150 },
+  ];
+  const html = renderToStaticMarkup(
+    <>
+      <K.TableColumnsMenu columns={columns} hiddenColumns={[]} onHiddenColumnsChange={() => {}} />
+      <K.Table
+        caption="Documents"
+        columns={columns}
+        rows={[{ name: 'Ada' }]}
+        getRowKey={(row) => row.name}
+        columnWidths={{ name: 240 }}
+      />
+    </>,
+  );
+  expect(html).toMatch(/popovertarget="([^"]+)".*<fieldset[^>]*id="\1" popover="auto"/i);
+  expect(html).toContain('role="region" aria-label="Documents" tabindex="0"');
+  expect(html).toContain('<caption class="motiv-visually-hidden">Documents</caption>');
+  expect(html).toContain('<col style="width:240px"/><col style="width:150px"/>');
+  expect(html).toContain('style="width:390px"');
+  expect(html).toContain('aria-valuenow="240"');
+  expect(html).toContain('<td class="motiv-table__cell">Ada</td>');
+});
+
 describe('server rendering', () => {
   it('keeps Toaster empty and toast calls inert without a DOM', () => {
     const before = renderToStaticMarkup(<K.Toaster />);

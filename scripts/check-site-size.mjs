@@ -3,7 +3,7 @@ import { readdirSync, statSync } from 'node:fs';
 // Bytes, about 15% above the sizes measured when the budget was set; raise them on purpose.
 const pages = {
   'index.html': 13_000,
-  'kinetic/index.html': 260_000,
+  'kinetic/index.html': 273_000,
   'drawn/index.html': 205_000,
   'matrix/index.html': 215_000,
 };

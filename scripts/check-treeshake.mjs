@@ -7,6 +7,11 @@ const checks = [
     dropped: ['motiv-picker', 'motiv-filter-chips', 'useListbox', 'useChips', 'useCommandMenu'],
   },
   {
+    input: 'test/fixtures/treeshake-table.js',
+    kept: 'motiv-table__resize',
+    dropped: ['motiv-table-menu', 'motiv-check', 'motiv-btn', 'motiv-multi-select'],
+  },
+  {
     input: 'test/fixtures/treeshake-button.js',
     kept: 'motiv-btn',
     dropped: ['motiv-card', 'motiv-toast', 'useSyncExternalStore'],

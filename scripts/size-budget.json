@@ -41,6 +41,8 @@
   "components/SpringCheckbox/SpringCheckbox.js": 500,
   "components/StepProgress/StepProgress.js": 950,
   "components/Stepper/Stepper.js": 850,
+  "components/Table/Table.js": 1450,
+  "components/Table/TableColumnsMenu.js": 1250,
   "components/Tabs/Tabs.js": 300,
   "components/TextField/TextField.js": 550,
   "components/Textarea/Textarea.js": 700,

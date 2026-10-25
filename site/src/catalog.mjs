@@ -714,6 +714,15 @@ export const catalog = {
       blurb:
         'Search labels and hints, select several options, and remove them as chips. The popover escapes clipped containers, stays open while selecting, and closes when focus leaves.',
     },
+    {
+      id: 'table',
+      category: null,
+      title: 'Table & TableColumnsMenu',
+      symbols: ['Table', 'TableColumnsMenu'],
+      demo: 'Table',
+      blurb:
+        'A native table whose columns resize by dragging a header edge or with the arrow keys; Enter or a double-click resets. Widths arrive once per change, ready to save. TableColumnsMenu picks the columns to hide; pass the rest to Table.',
+    },
   ],
   matrix: [
     {
