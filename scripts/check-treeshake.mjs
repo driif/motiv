@@ -2,6 +2,11 @@ import { rolldown } from 'rolldown';
 
 const checks = [
   {
+    input: 'test/fixtures/treeshake-multi-select.js',
+    kept: 'motiv-multi-select',
+    dropped: ['motiv-picker', 'motiv-filter-chips', 'useListbox', 'useChips', 'useCommandMenu'],
+  },
+  {
     input: 'test/fixtures/treeshake-button.js',
     kept: 'motiv-btn',
     dropped: ['motiv-card', 'motiv-toast', 'useSyncExternalStore'],

@@ -696,6 +696,15 @@ export const catalog = {
       blurb:
         'An info button whose note springs up on hover, focus or click; Escape puts it away. Same props as the drawn Tooltip.',
     },
+    {
+      id: 'multi-select',
+      category: 'Select',
+      title: 'MultiSelect',
+      symbols: ['MultiSelect'],
+      demo: 'MultiSelect',
+      blurb:
+        'Search labels and hints, select several options, and remove them as chips. The popover escapes clipped containers, stays open while selecting, and closes when focus leaves.',
+    },
   ],
   matrix: [
     {
