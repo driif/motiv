@@ -65,8 +65,9 @@ Besides `Button` and `Card`, the root entry ships the kinetic set: `MagneticButt
 `Radio`, `RadioGroup`, `Stepper`, `CommandMenu`, `FloatingField`, `OtpInput`, `ExpandingSearch`,
 `FrequencySlider`, `MomentumSlider`, `LiquidSwitch`, `SpringCheckbox`, `LikeButton`, `MuteToggle`,
 `SlipCard`, `Accordion`, `Carousel`, `GlideNav`, `StepProgress`, `DrillStack`, `ProgressRing` and
-`Odometer`, plus the native `Confirm` dialog, `FileUpload`, `DatePicker` and `MultiSelect`, a
-searchable multiple choice whose `name` posts one hidden input per value. Every animation moves only `transform` and `opacity`; `prefers-reduced-motion` stills
+`Odometer`, plus the native `Confirm` dialog, `FileUpload`, `DatePicker`, `Table` with
+`TableColumnsMenu`, and `MultiSelect`, a searchable multiple choice whose `name` posts one hidden
+input per value. Every animation moves only `transform` and `opacity`; `prefers-reduced-motion` stills
 them. `IconButton`, `MenuButton`, `ThemeToggle`, `Radio`, `RadioGroup` and `SegmentedControl` take
 the same props as their drawn namesakes, so switching styles only changes the import.
 `GlideNav` items take an optional `href` and then render as `<a>`; `onChange(id, event)` lets a
@@ -234,6 +235,37 @@ Clearing calls `onChange` once with `''` and focuses the input; the button is na
 appears once the date is complete. Errors work as on `TextField`: pass `aria-invalid` and show the
 message in `hint` or link it with `aria-describedby`. An empty `required` date turns red only after
 the user has interacted with it.
+
+## Tables
+
+`Table` renders a native `<table>` from `columns` and `rows`. Each column has an `id`, a plain-text
+`label` (also the resize handle's name), an optional `header` node that replaces the label, for
+example a sort button, and a `cell(row)` renderer. Columns start at `width` (default 200px) and
+resize between `minWidth` (default 80px) and 800px by dragging a header edge or with the arrow
+keys; a double-click or Enter resets one. `onColumnWidthsChange` fires once per finished drag, key
+press or reset, never while dragging, so it can save to a server. Without `columnWidths` the table
+keeps the widths itself.
+
+`TableColumnsMenu` only lists the columns: the app keeps `hiddenColumns` and filters `columns`
+before passing them to `Table`. Storing the hidden ids means columns added later show up.
+
+```tsx
+import { Table, TableColumnsMenu } from '@driif/motiv';
+
+<TableColumnsMenu columns={columns} hiddenColumns={hidden} onHiddenColumnsChange={setHidden} />;
+<Table
+  caption="Submitted forms"
+  columns={columns.filter((column) => !hidden.includes(column.id))}
+  rows={entries}
+  getRowKey={(entry) => entry.id}
+  columnWidths={widths}
+  onColumnWidthsChange={setWidths}
+  style={{ maxHeight: '32rem' }}
+/>;
+```
+
+The table scrolls inside its wrapper. The header row only sticks once the wrapper has a `height`
+or `max-height`, as above. Cells stay on one line and end in an ellipsis.
 
 ## Drawn style
 

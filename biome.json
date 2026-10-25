@@ -50,7 +50,11 @@
       }
     },
     {
-      "includes": ["src/drawn/Tabs/Tabs.tsx", "src/matrix/HudTabs/HudTabs.tsx"],
+      "includes": [
+        "src/drawn/Tabs/Tabs.tsx",
+        "src/matrix/HudTabs/HudTabs.tsx",
+        "src/components/Table/Table.tsx"
+      ],
       "linter": {
         "rules": {
           "a11y": {
@@ -72,7 +76,8 @@
         "src/matrix/SegmentedControl/SegmentedControl.tsx",
         "src/drawn/Chips/Chips.tsx",
         "src/matrix/Chips/Chips.tsx",
-        "src/components/IconButton/IconButton.tsx"
+        "src/components/IconButton/IconButton.tsx",
+        "src/components/Table/Table.tsx"
       ],
       "linter": {
         "rules": {

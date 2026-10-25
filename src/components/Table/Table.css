@@ -1,0 +1,160 @@
+@layer motiv.components {
+  .motiv-table {
+    width: fit-content;
+    max-width: 100%;
+    overflow: auto;
+    color: var(--motiv-color-text);
+    font-family: var(--motiv-font-body);
+    font-size: calc(var(--motiv-font-size) * 0.875);
+    background: var(--motiv-color-surface);
+    border: calc(var(--motiv-space) / 4) solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius);
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+  }
+
+  .motiv-table__table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .motiv-table__head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .motiv-table__header,
+  .motiv-table__cell {
+    padding: calc(var(--motiv-space) * 2) calc(var(--motiv-space) * 3);
+    text-align: start;
+    border-bottom: calc(var(--motiv-space) / 4) solid var(--motiv-color-border);
+  }
+
+  .motiv-table__header {
+    position: relative;
+    color: var(--motiv-color-text-muted);
+    font-weight: 600;
+    background: var(--motiv-color-surface);
+  }
+
+  .motiv-table__label,
+  .motiv-table__cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .motiv-table__label {
+    display: block;
+  }
+
+  .motiv-table__row:last-child .motiv-table__cell {
+    border-bottom: 0;
+  }
+
+  /* The hit area straddles the column border and sits above the next header cell. */
+  .motiv-table__resize {
+    position: absolute;
+    top: 0;
+    right: calc(var(--motiv-space) * -3);
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: calc(var(--motiv-space) * 6);
+    cursor: col-resize;
+    touch-action: none;
+    user-select: none;
+
+    &::after {
+      content: "";
+      width: calc(var(--motiv-space) / 2);
+      background: var(--motiv-color-border);
+      opacity: 0;
+      transition: opacity var(--motiv-duration) var(--motiv-ease);
+    }
+
+    &:focus-visible {
+      outline: calc(var(--motiv-space) / 2) solid var(--motiv-color-primary);
+      outline-offset: calc(var(--motiv-space) / -2);
+    }
+
+    &:focus-visible::after {
+      opacity: 1;
+      background: var(--motiv-color-primary);
+    }
+
+    .motiv-table__header:last-child > & {
+      right: 0;
+      justify-content: flex-end;
+    }
+  }
+
+  .motiv-table__resize--dragging::after {
+    opacity: 1;
+    background: var(--motiv-color-primary);
+  }
+
+  .motiv-table-menu {
+    display: inline-flex;
+  }
+
+  .motiv-table-menu__panel {
+    position: fixed;
+    inset: auto;
+    min-width: calc(var(--motiv-space) * 48);
+    max-width: calc(var(--motiv-space) * 80);
+    max-height: min(
+      calc(var(--motiv-space) * 80),
+      calc(var(--_space, 100vh) - var(--motiv-space) * 2)
+    );
+    margin: var(--motiv-space) 0;
+    padding: var(--motiv-space) calc(var(--motiv-space) * 4);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    overflow-wrap: anywhere;
+    color: var(--motiv-color-text);
+    font-family: var(--motiv-font-body);
+    font-size: var(--motiv-font-size);
+    background: var(--motiv-color-surface);
+    border: calc(var(--motiv-space) / 4) solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius);
+    box-shadow: var(--motiv-shadow-md);
+    opacity: 1;
+    transition: opacity var(--motiv-duration) var(--motiv-ease);
+
+    &:popover-open {
+      display: grid;
+    }
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  @media (hover: hover) {
+    .motiv-table__row:hover {
+      background: var(--motiv-color-surface-hover);
+    }
+
+    .motiv-table__header:hover > .motiv-table__resize::after {
+      opacity: 1;
+    }
+
+    .motiv-table__resize:hover::after {
+      background: var(--motiv-color-primary);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-table__resize::after,
+    .motiv-table-menu__panel {
+      transition: none;
+    }
+  }
+}
