@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.17.0
+
+### Minor Changes
+
+- f25ea98: Add `Confirm`, a modal confirm dialog for destructive actions that lists impact in `children`, can require typing a `slug`, and locks while `pending`.
+
 ## 0.16.0
 
 ### Minor Changes
