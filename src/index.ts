@@ -5,6 +5,7 @@ export * from './components/Button';
 export * from './components/Card';
 export * from './components/Carousel';
 export * from './components/CommandMenu';
+export * from './components/Confirm';
 export * from './components/CopyField';
 export * from './components/DrillStack';
 export * from './components/ElasticTabs';

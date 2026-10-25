@@ -33,6 +33,27 @@ import { Button, Card, CardBody, CardHeader } from './index';
 import * as M from './matrix';
 
 describe('server rendering', () => {
+  it.each([false, true])('renders Confirm without opening a non-modal dialog (open=%s)', (open) => {
+    const html = renderToStaticMarkup(
+      <K.Confirm
+        open={open}
+        title="Delete project?"
+        slug="my-project"
+        onConfirm={() => {}}
+        onCancel={() => {}}
+      >
+        <ul>
+          <li>3 bindings</li>
+        </ul>
+      </K.Confirm>,
+    );
+    expect(html).toContain('<dialog');
+    expect(html).not.toContain(' open=');
+    expect(html).toContain('Delete project?');
+    expect(html).toContain('<ul><li>3 bindings</li></ul>');
+    expect(html).toMatch(/aria-labelledby="([^"]+)".*?<h2 id="\1"/);
+  });
+
   it('renders Button and Card without a DOM', () => {
     const html = renderToStaticMarkup(
       <Card>
