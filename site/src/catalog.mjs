@@ -324,6 +324,15 @@ export const catalog = {
         'A value with a copy button whose label rolls to "Copied". Show a masked version if the value is secret.',
     },
     {
+      id: 'file-upload',
+      category: null,
+      title: 'FileUpload',
+      symbols: ['FileUpload', 'putFile'],
+      demo: 'FileUpload',
+      blurb:
+        'Pick files with per-file progress, cancel and retry. Supply your upload function; putFile supports presigned PUT URLs. Validate required attachments in your app. This demo simulates uploads and one failure.',
+    },
+    {
       id: 'confirm',
       category: null,
       title: 'Confirm',

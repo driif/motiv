@@ -12,6 +12,8 @@
   "components/DrillStack/DrillStack.js": 1050,
   "components/ElasticTabs/ElasticTabs.js": 1300,
   "components/ExpandingSearch/ExpandingSearch.js": 1600,
+  "components/FileUpload/FileUpload.js": 2350,
+  "components/FileUpload/putFile.js": 700,
   "components/FilterChips/FilterChips.js": 750,
   "components/FloatingField/FloatingField.js": 650,
   "components/FrequencySlider/FrequencySlider.js": 950,

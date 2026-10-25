@@ -1,0 +1,59 @@
+@layer motiv.components {
+  .motiv-file-upload {
+    display: grid;
+    gap: calc(var(--motiv-space) * 4);
+    width: 100%;
+    min-width: 0;
+    color: var(--motiv-color-text);
+    font-family: var(--motiv-font-body);
+    font-size: var(--motiv-font-size);
+    overflow-wrap: anywhere;
+  }
+
+  .motiv-file-upload__picker {
+    justify-self: start;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .motiv-file-upload__input:focus-visible + .motiv-file-upload__picker {
+    box-shadow: var(--motiv-focus-ring);
+  }
+
+  .motiv-file-upload__list {
+    display: grid;
+    gap: calc(var(--motiv-space) * 5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .motiv-file-upload__row {
+    display: grid;
+    gap: calc(var(--motiv-space) * 2);
+    min-width: 0;
+  }
+
+  .motiv-file-upload__progress {
+    min-width: 0;
+    max-width: none;
+  }
+
+  .motiv-file-upload__details,
+  .motiv-file-upload__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--motiv-space) * 2);
+  }
+
+  .motiv-file-upload__details {
+    justify-content: space-between;
+    color: var(--motiv-color-text-muted);
+    font-size: calc(var(--motiv-font-size) * 0.875);
+  }
+
+  .motiv-file-upload__error {
+    margin: 0;
+    color: var(--motiv-color-danger);
+  }
+}
