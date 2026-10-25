@@ -32,6 +32,14 @@ import * as K from './index';
 import { Button, Card, CardBody, CardHeader } from './index';
 import * as M from './matrix';
 
+it('renders FileUpload and imports putFile without a DOM or XHR', () => {
+  const html = renderToStaticMarkup(<K.FileUpload upload={async () => {}} />);
+  expect(html).toContain('type="file"');
+  expect(html).toContain('Choose files');
+  expect(html).toContain('aria-live="polite"');
+  expect(K.putFile).toBeTypeOf('function');
+});
+
 describe('server rendering', () => {
   it('keeps Toaster empty and toast calls inert without a DOM', () => {
     const before = renderToStaticMarkup(<K.Toaster />);

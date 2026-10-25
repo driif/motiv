@@ -10,6 +10,7 @@ export * from './components/CopyField';
 export * from './components/DrillStack';
 export * from './components/ElasticTabs';
 export * from './components/ExpandingSearch';
+export * from './components/FileUpload';
 export * from './components/FilterChips';
 export * from './components/FloatingField';
 export * from './components/FrequencySlider';

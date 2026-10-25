@@ -65,7 +65,7 @@ Besides `Button` and `Card`, the root entry ships the kinetic set: `MagneticButt
 `Radio`, `RadioGroup`, `Stepper`, `CommandMenu`, `FloatingField`, `OtpInput`, `ExpandingSearch`,
 `FrequencySlider`, `MomentumSlider`, `LiquidSwitch`, `SpringCheckbox`, `LikeButton`, `MuteToggle`,
 `SlipCard`, `Accordion`, `Carousel`, `GlideNav`, `StepProgress`, `DrillStack`, `ProgressRing` and
-`Odometer`, plus the native `Confirm` dialog. Every animation moves only `transform` and `opacity`; `prefers-reduced-motion` stills
+`Odometer`, plus the native `Confirm` dialog and `FileUpload`. Every animation moves only `transform` and `opacity`; `prefers-reduced-motion` stills
 them. `IconButton`, `MenuButton`, `ThemeToggle`, `Radio`, `RadioGroup` and `SegmentedControl` take
 the same props as their drawn namesakes, so switching styles only changes the import.
 `GlideNav` items take an optional `href` and then render as `<a>`; `onChange(id, event)` lets a
@@ -167,6 +167,48 @@ calls to `toast()` do nothing and return an empty string; server rendering produ
 The stack uses fixed positioning below native modal dialogs. While `Confirm` is open, show
 errors that need attention in its existing `children` slot (for example, `<p role="alert">`),
 because the modal makes the rest of the page inert.
+
+## File uploads
+
+The app supplies `upload` and obtains its own presigned URL. `putFile` sends the file body by
+XHR, reports progress as a percentage (0–100), and uses `file.type` for `Content-Type` unless
+`contentType` is supplied. Its headers must match those used when signing the URL.
+
+```tsx
+import { FileUpload, putFile } from '@driif/motiv';
+
+function Attachments({
+  getUploadUrl,
+}: {
+  getUploadUrl: (file: File, signal: AbortSignal) => Promise<string>;
+}) {
+  return (
+    <FileUpload
+      multiple
+      upload={async (file, { signal, onProgress }) => {
+        const url = await getUploadUrl(file, signal);
+        await putFile(url, file, { signal, onProgress });
+      }}
+    />
+  );
+}
+```
+
+Single selection replaces the previous entry; `multiple` appends. `onUploaded(file)` runs on
+success. `onRemove(file)` runs when a completed entry is removed or replaced; cancelling an
+upload only aborts its signal. Removing a failed entry does not call `onRemove`.
+
+Customize the picker, statuses and actions with `label`, `uploadingLabel`, `uploadedLabel`,
+`errorLabel`, `retryLabel`, `removeLabel` and `cancelLabel`. `errorMessage` supplies the fallback
+when a rejection has no message; `formatSize(bytes)`, `formatUploadedMessage(name)` and
+`formatErrorMessage(name)` customize sizes and live announcements. Native input props and `ref`
+reach the file input; `className` and `style` apply to the wrapper.
+
+`putFile` rejects with English `Error` messages that take precedence over `errorMessage`; wrap
+the call in `upload` and rethrow with a localized message, or `new Error('')` to use the fallback.
+
+The picker resets after each selection, so native `required` validation is unsupported; validate
+required attachments in the app using `onUploaded` and `onRemove`.
 
 ## Drawn style
 
