@@ -1,0 +1,48 @@
+@layer motiv.components {
+  .motiv-date-picker__clear {
+    position: absolute;
+    inset-block: 0;
+    right: calc(var(--motiv-space) * 1.5);
+    display: grid;
+    place-items: center;
+    width: calc(var(--motiv-space) * 8);
+    height: calc(var(--motiv-space) * 8);
+    margin-block: auto;
+    padding: 0;
+    color: var(--motiv-color-text-muted);
+    background: transparent;
+    border: 0;
+    border-radius: var(--motiv-radius-full);
+    cursor: pointer;
+    transition:
+      color var(--motiv-duration) var(--motiv-ease),
+      background-color var(--motiv-duration) var(--motiv-ease);
+
+    & svg {
+      width: calc(var(--motiv-space) * 4.5);
+      height: calc(var(--motiv-space) * 4.5);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+  }
+
+  @media (hover: hover) {
+    .motiv-date-picker__clear:hover {
+      color: var(--motiv-text-field-color, var(--motiv-color-text));
+      background: color-mix(
+        in oklch,
+        var(--motiv-text-field-bg, var(--motiv-color-surface)),
+        var(--_accent) 12%
+      );
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-date-picker__clear {
+      transition: none;
+    }
+  }
+}

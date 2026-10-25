@@ -65,8 +65,8 @@ Besides `Button` and `Card`, the root entry ships the kinetic set: `MagneticButt
 `Radio`, `RadioGroup`, `Stepper`, `CommandMenu`, `FloatingField`, `OtpInput`, `ExpandingSearch`,
 `FrequencySlider`, `MomentumSlider`, `LiquidSwitch`, `SpringCheckbox`, `LikeButton`, `MuteToggle`,
 `SlipCard`, `Accordion`, `Carousel`, `GlideNav`, `StepProgress`, `DrillStack`, `ProgressRing` and
-`Odometer`, plus the native `Confirm` dialog, `FileUpload` and `MultiSelect`, a searchable
-multiple choice whose `name` posts one hidden input per value. Every animation moves only `transform` and `opacity`; `prefers-reduced-motion` stills
+`Odometer`, plus the native `Confirm` dialog, `FileUpload`, `DatePicker` and `MultiSelect`, a
+searchable multiple choice whose `name` posts one hidden input per value. Every animation moves only `transform` and `opacity`; `prefers-reduced-motion` stills
 them. `IconButton`, `MenuButton`, `ThemeToggle`, `Radio`, `RadioGroup` and `SegmentedControl` take
 the same props as their drawn namesakes, so switching styles only changes the import.
 `GlideNav` items take an optional `href` and then render as `<a>`; `onChange(id, event)` lets a
@@ -210,6 +210,30 @@ the call in `upload` and rethrow with a localized message, or `new Error('')` to
 
 The picker resets after each selection, so native `required` validation is unsupported; validate
 required attachments in the app using `onUploaded` and `onRemove`.
+
+## Dates
+
+`DatePicker` wraps a native `<input type="date">` or `type="datetime-local"` in the `TextField`
+look and adds a clear button while it holds a value. Values are the native strings, `YYYY-MM-DD`,
+`YYYY-MM-DDTHH:mm` (plus `:ss` for non-zero seconds) or `''`, and reach `onChange`, `FormData`
+and `min`/`max` unchanged.
+
+```tsx
+import { DatePicker } from '@driif/motiv';
+
+<DatePicker label="Due date" value={due} onChange={(event) => setDue(event.target.value)} />;
+<DatePicker label="Starts" type="datetime-local" name="starts" min="2026-11-02T09:00" required />;
+```
+
+The browser draws the date format, the picker and its indicator; they follow the browser locale
+and differ between browsers. motiv uses no `Date` objects and converts no timezones: a
+`datetime-local` value is wall-clock time, and the app turns it into an instant.
+
+Clearing calls `onChange` once with `''` and focuses the input; the button is named
+`clearLabel` (default `"Clear"`) plus the label. A partly typed date is still `''`, so the button
+appears once the date is complete. Errors work as on `TextField`: pass `aria-invalid` and show the
+message in `hint` or link it with `aria-describedby`. An empty `required` date turns red only after
+the user has interacted with it.
 
 ## Drawn style
 

@@ -40,6 +40,16 @@ it('renders FileUpload and imports putFile without a DOM or XHR', () => {
   expect(K.putFile).toBeTypeOf('function');
 });
 
+it('renders DatePicker with its native type and value and a clear button without a DOM', () => {
+  const html = renderToStaticMarkup(
+    <K.DatePicker label="Starts" type="datetime-local" defaultValue="2026-10-25T09:30" />,
+  );
+  expect(html).toContain('type="datetime-local"');
+  expect(html).toContain('value="2026-10-25T09:30"');
+  expect(html).toContain('type="button"');
+  expect(renderToStaticMarkup(<K.DatePicker label="Due date" />)).not.toContain('<button');
+});
+
 describe('server rendering', () => {
   it('keeps Toaster empty and toast calls inert without a DOM', () => {
     const before = renderToStaticMarkup(<K.Toaster />);

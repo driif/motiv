@@ -9,6 +9,7 @@
   "components/CommandMenu/CommandMenu.js": 950,
   "components/Confirm/Confirm.js": 1050,
   "components/CopyField/CopyField.js": 1150,
+  "components/DatePicker/DatePicker.js": 1250,
   "components/DrillStack/DrillStack.js": 1050,
   "components/ElasticTabs/ElasticTabs.js": 1300,
   "components/ExpandingSearch/ExpandingSearch.js": 1600,

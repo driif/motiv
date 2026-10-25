@@ -50,8 +50,18 @@
       border-color: var(--_accent);
     }
 
-    &:not(:focus, :placeholder-shown):invalid {
+    /* Date inputs never show a placeholder, so they wait for user interaction instead. */
+    &:not(:focus, :placeholder-shown, [type^="date"]):invalid {
       border-color: var(--motiv-color-danger);
+    }
+
+    &[type^="date"]:not(:focus):user-invalid {
+      border-color: var(--motiv-color-danger);
+    }
+
+    /* iOS Safari centers the date value. */
+    &::-webkit-date-and-time-value {
+      text-align: start;
     }
 
     &:disabled {
