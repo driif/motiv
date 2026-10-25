@@ -36,6 +36,7 @@
       "includes": [
         "src/drawn/Select/Select.tsx",
         "src/components/Select/Select.tsx",
+        "src/components/MultiSelect/MultiSelect.tsx",
         "src/matrix/TerminalSelect/TerminalSelect.tsx"
       ],
       "linter": {
@@ -84,6 +85,7 @@
     {
       "includes": [
         "src/components/CommandMenu/CommandMenu.tsx",
+        "src/components/MultiSelect/MultiSelect.tsx",
         "src/drawn/CommandMenu/CommandMenu.tsx",
         "src/matrix/CommandMenu/CommandMenu.tsx"
       ],

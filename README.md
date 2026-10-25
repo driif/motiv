@@ -65,7 +65,8 @@ Besides `Button` and `Card`, the root entry ships the kinetic set: `MagneticButt
 `Radio`, `RadioGroup`, `Stepper`, `CommandMenu`, `FloatingField`, `OtpInput`, `ExpandingSearch`,
 `FrequencySlider`, `MomentumSlider`, `LiquidSwitch`, `SpringCheckbox`, `LikeButton`, `MuteToggle`,
 `SlipCard`, `Accordion`, `Carousel`, `GlideNav`, `StepProgress`, `DrillStack`, `ProgressRing` and
-`Odometer`, plus the native `Confirm` dialog and `FileUpload`. Every animation moves only `transform` and `opacity`; `prefers-reduced-motion` stills
+`Odometer`, plus the native `Confirm` dialog, `FileUpload` and `MultiSelect`, a searchable
+multiple choice whose `name` posts one hidden input per value. Every animation moves only `transform` and `opacity`; `prefers-reduced-motion` stills
 them. `IconButton`, `MenuButton`, `ThemeToggle`, `Radio`, `RadioGroup` and `SegmentedControl` take
 the same props as their drawn namesakes, so switching styles only changes the import.
 `GlideNav` items take an optional `href` and then render as `<a>`; `onChange(id, event)` lets a

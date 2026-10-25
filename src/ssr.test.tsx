@@ -459,3 +459,22 @@ describe('server rendering', () => {
     expect(html.match(/Ctrl K/g)).toHaveLength(2);
   });
 });
+
+it('renders MultiSelect closed without a DOM and preserves all hidden form values', () => {
+  const html = renderToStaticMarkup(
+    <K.MultiSelect
+      label="Permissions"
+      options={[{ value: 'read', label: 'Read' }]}
+      value={['read', 'unknown']}
+      onChange={() => {}}
+      name="permissions"
+    />,
+  );
+  expect(html).toContain('aria-expanded="false"');
+  expect(html).not.toContain('aria-expanded="true"');
+  expect(html).not.toContain('aria-activedescendant');
+  expect(html).toContain('popover="manual" hidden=""');
+  expect(html).toContain('aria-multiselectable="true"');
+  expect(html).toContain('<input type="hidden" name="permissions" value="read"/>');
+  expect(html).toContain('<input type="hidden" name="permissions" value="unknown"/>');
+});
