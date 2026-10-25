@@ -1,7 +1,11 @@
 import { rolldown } from 'rolldown';
 
 const checks = [
-  { input: 'test/fixtures/treeshake-button.js', kept: 'motiv-btn', dropped: ['motiv-card'] },
+  {
+    input: 'test/fixtures/treeshake-button.js',
+    kept: 'motiv-btn',
+    dropped: ['motiv-card', 'motiv-toast', 'useSyncExternalStore'],
+  },
   {
     input: 'test/fixtures/treeshake-drawn-link.js',
     kept: 'motiv-link',

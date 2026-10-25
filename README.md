@@ -134,6 +134,40 @@ Escape. The dialog never closes itself: Cancel and Escape call `onCancel`, the b
 nothing, and your app sets `open={false}`. Focus starts on Cancel or the field and returns to the
 opener on close.
 
+## Toast
+
+Mount exactly one `<Toaster />` per app (or one shared Astro island), then call `toast()` from
+any browser callback. No Provider is needed; a second host duplicates the same notifications.
+This API is available in the kinetic style only, with `@driif/motiv/styles.css`.
+
+```tsx
+import { dismissToast, toast, Toaster } from '@driif/motiv';
+
+<Toaster label="Notifications" dismissLabel="Dismiss" />;
+
+toast({ tone: 'success', title: 'Changes saved', description: 'Your project is up to date.' });
+const id = toast({ tone: 'error', title: 'Could not save', description: 'Please try again.' });
+dismissToast(id);
+```
+
+`tone` defaults to `info`. Success and info dismiss after 5000 ms; errors stay until dismissed.
+`duration` overrides the time in milliseconds, with `Infinity` for persistence. Up to three
+toasts appear in arrival order, newest at the bottom; long stacks scroll within the viewport.
+Others wait until a slot opens after an exit; their timers start when shown. Mouse hover over
+the stack or focus inside pauses every visible timer, preserving the remaining time until
+both end. Touch pointers do not pause on hover. `dismissToast(id)` is safe to repeat.
+
+Success and info use polite announcements; errors use an alert. New notifications never move
+focus. Dismissing a toast with keyboard-visible focus moves focus to another dismiss button,
+or back outside the stack. Pointer dismissal clears focus; remaining timers resume when the
+mouse no longer hovers the stack, or immediately after touch dismissal. `label` and
+`dismissLabel` accept translated strings; native section props and `ref` pass through. Server
+calls to `toast()` do nothing and return an empty string; server rendering produces an empty stack.
+
+The stack uses fixed positioning below native modal dialogs. While `Confirm` is open, show
+errors that need attention in its existing `children` slot (for example, `<p role="alert">`),
+because the modal makes the rest of the page inert.
+
 ## Drawn style
 
 `@driif/motiv/drawn` is a hand-drawn style: `Link`, `TextField`, `Checkbox`, `Radio`,
