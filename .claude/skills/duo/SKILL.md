@@ -5,7 +5,7 @@ description: Run a task through both frontier models — opus and sol draft plan
 
 # duo — two models plan together, one writes, both sign off
 
-A task goes to both `claude/opus:xhigh` and `codex/gpt-6-sol:xhigh`. They draft plans blind, then
+A task goes to both `claude/opus:xhigh` and `codex` (its configured default model) at xhigh. They draft plans blind, then
 **exchange messages** until they agree on one plan and one implementer. That one writes it; the other
 reviews the diff; the implementer revises; then both read the whole change independently and say
 whether it ships.
