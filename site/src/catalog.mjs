@@ -63,7 +63,8 @@ export const catalog = {
       title: 'Card',
       symbols: ['Card', 'CardHeader', 'CardBody', 'CardFooter'],
       demo: 'Card',
-      blurb: 'A hand-cut sheet of paper with a heading, some words and a place for actions.',
+      blurb:
+        'A hand-cut sheet with a heading, words and actions. Use titleAs for the right heading level, including h1.',
     },
     {
       id: 'text-field',
@@ -605,7 +606,8 @@ export const catalog = {
       title: 'Card',
       symbols: ['Card', 'CardHeader', 'CardBody', 'CardFooter'],
       demo: 'Card',
-      blurb: 'A white sheet with a fine outline: a header, a body and a footer for actions.',
+      blurb:
+        'A white sheet with a header, body and footer. Use titleAs for the right heading level, including h1.',
     },
     {
       id: 'slip-card',
@@ -795,7 +797,7 @@ export const catalog = {
       symbols: ['Card', 'CardHeader', 'CardBody', 'CardFooter'],
       demo: 'Card',
       blurb:
-        'A bracketed panel with a heading, some words and a place for actions. Same props as the drawn Card.',
+        'A bracketed panel with a heading, words and actions. Use titleAs for the right heading level, including h1.',
     },
     {
       id: 'text-field',

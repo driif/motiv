@@ -110,7 +110,7 @@ Layer order is declared once in `index.css`: `@layer motiv.tokens, motiv.base, m
 - `padding`: `none` · `sm` · `md` (default) · `lg`.
 - `interactive`: hover lift + focus-visible ring.
 - `as`: `'div'` (default) · `'section'` · `'article'` · `'li'`.
-- `CardHeader` props: `title` (ReactNode), `titleAs?` (`h2`·`h3` default·`h4`·`p`),
+- `CardHeader` props: `title` (ReactNode), `titleAs?` (`h1`·`h2`·`h3` default·`h4`·`p`),
   `description?`, `actions?`, plus div props.
   `CardBody` and `CardFooter` are div wrappers with classes.
 - Classes: `motiv-card`, `motiv-card--{variant}`, `motiv-card--p-{padding}`,

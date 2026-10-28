@@ -37,7 +37,7 @@ export function Card({
 
 export interface CardHeaderProps extends Omit<ComponentProps<'div'>, 'title'> {
   title: ReactNode;
-  titleAs?: 'h2' | 'h3' | 'h4' | 'p';
+  titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'p';
   description?: ReactNode;
   actions?: ReactNode;
 }

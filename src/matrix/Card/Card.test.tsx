@@ -71,6 +71,13 @@ describe('Card', () => {
     expect(container.querySelector('.motiv-matrix-card__actions')).toBeNull();
   });
 
+  it('CardHeader renders a styled level-one heading', () => {
+    render(<CardHeader title="Page title" titleAs="h1" />);
+    expect(screen.getByRole('heading', { level: 1, name: 'Page title' })).toHaveClass(
+      'motiv-matrix-card__title',
+    );
+  });
+
   it('CardBody and CardFooter merge className', () => {
     render(
       <>
