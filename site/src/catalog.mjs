@@ -340,7 +340,7 @@ export const catalog = {
       symbols: ['Confirm'],
       demo: 'Confirm',
       blurb:
-        'A modal confirm for destructive actions: list what else goes, optionally require typing a slug, and lock it while the delete runs.',
+        'A modal confirm with a danger action by default. Use a primary action for non-destructive work.',
     },
     {
       id: 'toast',

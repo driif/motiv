@@ -18,6 +18,7 @@ export interface ConfirmProps extends Omit<ComponentProps<'dialog'>, 'onCancel'>
   slug?: string;
   pending?: boolean;
   confirmLabel?: string;
+  confirmVariant?: 'primary' | 'danger';
   cancelLabel?: string;
   slugLabel?: string;
 }
@@ -30,6 +31,7 @@ export function Confirm({
   slug,
   pending = false,
   confirmLabel = 'Delete',
+  confirmVariant = 'danger',
   cancelLabel = 'Cancel',
   slugLabel = 'Type the slug to confirm',
   children,
@@ -104,7 +106,7 @@ export function Confirm({
             {cancelLabel}
           </Button>
           <Button
-            variant="danger"
+            variant={confirmVariant}
             loading={pending}
             disabled={slug !== undefined && typed !== slug}
             onClick={onConfirm}

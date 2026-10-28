@@ -38,10 +38,16 @@ describe('Confirm', () => {
     const dialog = screen.getByRole('dialog', { name: 'Delete project?' });
     expect(dialog).toHaveAttribute('open');
     expect(screen.getByRole('button', { name: 'Cancel' })).toHaveFocus();
+    expect(screen.getByRole('button', { name: 'Delete' })).toHaveClass('motiv-btn--danger');
     rerender(<Confirm {...defaults} open />);
     expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalledTimes(1);
     rerender(<Confirm {...defaults} open={false} />);
     expect(dialog).not.toHaveAttribute('open');
+  });
+
+  it('offers a primary action for non-destructive dialogs', () => {
+    render(<Confirm {...defaults} open confirmLabel="Register" confirmVariant="primary" />);
+    expect(screen.getByRole('button', { name: 'Register' })).toHaveClass('motiv-btn--primary');
   });
 
   it('reports confirmation and cancellation without closing itself', () => {
