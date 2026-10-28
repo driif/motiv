@@ -58,6 +58,25 @@ plain `<div>` changes button colors and hover shades inside it (those are derive
 itself), but `--motiv-color-primary-subtle` and `--motiv-focus-ring` keep the root's primary.
 Add `data-theme` to the wrapper, or set the derived tokens too.
 
+## Small layouts
+
+Use `40rem` as the small breakpoint. Below it, stack multi-column layouts. Use the same value in
+viewport or container queries:
+
+```css
+@media (width < 40rem) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@container (width < 40rem) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+```
+
 ## Dark mode
 
 Set `data-theme` on `<html>`:
