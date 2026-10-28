@@ -2,6 +2,7 @@ import { type ComponentProps, type CSSProperties, type ReactNode, useId } from '
 import type { MotivOption } from '../../types';
 import { cx } from '../../utils/cx';
 import { useListbox } from '../../utils/useListbox';
+import { useSelectOptions } from '../../utils/useSelectOptions';
 
 export interface TerminalSelectOption extends MotivOption {
   code?: string;
@@ -16,6 +17,8 @@ export interface TerminalSelectProps
   prefix?: string;
   activeLabel?: string;
   placeholder?: string;
+  clearable?: boolean;
+  clearLabel?: string;
   disabled?: boolean;
   name?: string;
 }
@@ -28,15 +31,18 @@ export function TerminalSelect({
   prefix,
   activeLabel = '● active',
   placeholder,
+  clearable,
+  clearLabel = 'Clear selection',
   disabled,
   name,
   className,
   ...props
 }: TerminalSelectProps) {
   const id = useId();
+  const items = useSelectOptions(options, clearable, clearLabel);
   const { anchorRef, listRef, isOpen, current, selectedIndex, setActive, commit, trigger } =
-    useListbox(options, value, onChange, disabled);
-  const selected = options[selectedIndex];
+    useListbox(items, value, onChange, disabled);
+  const selected = items !== options && value === '' ? undefined : items[selectedIndex];
 
   return (
     <div
@@ -92,7 +98,7 @@ export function TerminalSelect({
             // Keeps focus on the combobox when an option is clicked.
             onMouseDown={(event) => event.preventDefault()}
           >
-            {options.map((option, i) => (
+            {items.map((option, i) => (
               <li
                 key={option.value}
                 id={`${id}-option-${i}`}

@@ -11,7 +11,7 @@ const options = [
   { value: 'userpass', label: 'Username', code: 'USERPASS', hint: 'Username and password.' },
 ];
 
-function Select() {
+function Select({ clearable = false }: { clearable?: boolean }) {
   const [value, setValue] = useState('oidc');
   return (
     <TerminalSelect
@@ -20,6 +20,7 @@ function Select() {
       options={options}
       value={value}
       onChange={setValue}
+      clearable={clearable}
     />
   );
 }
@@ -35,6 +36,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = { render: () => <Select /> };
+
+export const Clearable: Story = { render: () => <Select clearable /> };
 
 export const Disabled: Story = { args: { disabled: true } };
 

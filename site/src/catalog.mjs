@@ -123,7 +123,7 @@ export const catalog = {
       title: 'Select',
       symbols: ['Select'],
       demo: 'Select',
-      blurb: 'A listbox with codes and hints, for when there are too many radios.',
+      blurb: 'A listbox with codes and hints. Use clearable to add a clear option.',
     },
     {
       id: 'segmented-control',
@@ -554,7 +554,7 @@ export const catalog = {
       symbols: ['Select'],
       demo: 'Select',
       blurb:
-        'A listbox with codes, hints and typeahead. Its popover stays visible inside clipped containers.',
+        'A listbox with codes, hints and typeahead. The popover escapes clipped containers. Use clearable to add a clear option.',
     },
     {
       id: 'switch',
@@ -831,7 +831,7 @@ export const catalog = {
       symbols: ['TerminalSelect'],
       demo: 'TerminalSelect',
       blurb:
-        'A select-only combobox in a bracketed terminal field. The list snaps open on a solid panel; arrows, Home, End and letters work.',
+        'A select-only combobox in a bracketed terminal field. Use clearable to add a clear option.',
     },
     {
       id: 'select',
@@ -839,8 +839,7 @@ export const catalog = {
       title: 'Select',
       symbols: ['Select'],
       demo: 'Select',
-      blurb:
-        'TerminalSelect with the drawn Select props. The field shows an option code if it has one, else its label.',
+      blurb: 'TerminalSelect with the drawn Select props. Use clearable to add a clear option.',
     },
     {
       id: 'checkbox',

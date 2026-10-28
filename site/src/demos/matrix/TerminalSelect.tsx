@@ -17,6 +17,7 @@ export function TerminalSelectDemo() {
       options={methods}
       value={method}
       onChange={setMethod}
+      clearable
     />
   );
 }

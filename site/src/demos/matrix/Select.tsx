@@ -11,7 +11,7 @@ export function SelectDemo() {
   const [method, setMethod] = useState('');
   return (
     <div style={{ display: 'grid', alignContent: 'start', width: '20rem', minHeight: '15rem' }}>
-      <Select label="Auth method" options={methods} value={method} onChange={setMethod} />
+      <Select label="Auth method" options={methods} value={method} onChange={setMethod} clearable />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { type CSSProperties, useCallback, useId, useLayoutEffect } from 'react';
 import type { SelectProps } from '../../drawn/Select';
 import { cx } from '../../utils/cx';
 import { useListbox } from '../../utils/useListbox';
+import { useSelectOptions } from '../../utils/useSelectOptions';
 
 export function Select({
   label,
@@ -9,19 +10,22 @@ export function Select({
   value,
   onChange,
   placeholder = 'Select…',
+  clearable,
+  clearLabel = 'Clear selection',
   disabled,
   name,
   className,
   ...props
 }: SelectProps) {
   const id = useId();
+  const items = useSelectOptions(options, clearable, clearLabel);
   const { anchorRef, listRef, isOpen, current, selectedIndex, commit, trigger } = useListbox(
-    options,
+    items,
     value,
     onChange,
     disabled,
   );
-  const selected = options[selectedIndex];
+  const selected = items !== options && value === '' ? undefined : items[selectedIndex];
 
   const position = useCallback(
     (event?: Event) => {
@@ -63,7 +67,7 @@ export function Select({
   // biome-ignore lint/correctness/useExhaustiveDependencies: option content changes the list height.
   useLayoutEffect(() => {
     if (isOpen) position();
-  }, [isOpen, options, position]);
+  }, [isOpen, items, position]);
 
   return (
     <div {...props} className={cx('motiv-picker', isOpen && 'motiv-picker--open', className)}>
@@ -103,7 +107,7 @@ export function Select({
           // Keeps focus on the combobox when an option is clicked.
           onMouseDown={(event) => event.preventDefault()}
         >
-          {options.map((option, i) => (
+          {items.map((option, i) => (
             <li
               key={option.value}
               id={`${id}-option-${i}`}

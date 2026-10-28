@@ -1,6 +1,7 @@
 import { type ComponentProps, type CSSProperties, type ReactNode, useId } from 'react';
 import { cx } from '../../utils/cx';
 import { useListbox } from '../../utils/useListbox';
+import { useSelectOptions } from '../../utils/useSelectOptions';
 
 export interface SelectProps extends Omit<ComponentProps<'div'>, 'onChange' | 'children'> {
   label: ReactNode;
@@ -8,6 +9,8 @@ export interface SelectProps extends Omit<ComponentProps<'div'>, 'onChange' | 'c
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  clearable?: boolean;
+  clearLabel?: string;
   disabled?: boolean;
   name?: string;
 }
@@ -18,6 +21,8 @@ export function Select({
   value,
   onChange,
   placeholder = 'Select…',
+  clearable,
+  clearLabel = 'Clear selection',
   disabled,
   name,
   className,
@@ -25,18 +30,19 @@ export function Select({
   ...props
 }: SelectProps) {
   const id = useId();
+  const items = useSelectOptions(options, clearable, clearLabel);
   const { anchorRef, listRef, isOpen, current, selectedIndex, commit, trigger } = useListbox(
-    options,
+    items,
     value,
     onChange,
     disabled,
   );
-  const selected = options[selectedIndex];
+  const selected = items !== options && value === '' ? undefined : items[selectedIndex];
 
   return (
     <div
       className={cx('motiv-select', isOpen && 'motiv-select--open', className)}
-      style={{ ...style, '--_count': options.length } as CSSProperties}
+      style={{ ...style, '--_count': items.length } as CSSProperties}
       {...props}
     >
       <span id={`${id}-label`} className="motiv-select__label">
@@ -73,7 +79,7 @@ export function Select({
           // Keeps focus on the combobox when an option is clicked.
           onMouseDown={(event) => event.preventDefault()}
         >
-          {options.map((option, i) => (
+          {items.map((option, i) => (
             <li
               key={option.value}
               id={`${id}-option-${i}`}

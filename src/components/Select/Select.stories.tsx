@@ -33,6 +33,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
+export const Clearable: Story = { render: () => <Demo clearable /> };
+
 export const Disabled: Story = { render: () => <Demo disabled /> };
 
 export const LongList: Story = {
