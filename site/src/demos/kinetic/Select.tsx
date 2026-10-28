@@ -1,4 +1,4 @@
-import { Select } from '@driif/motiv';
+import { Select, Table } from '@driif/motiv';
 import { useState } from 'react';
 
 const options = [
@@ -11,7 +11,20 @@ export function SelectDemo() {
   const [language, setLanguage] = useState('');
   return (
     <div style={{ display: 'grid', alignContent: 'start', width: '18rem', minHeight: '15rem' }}>
-      <Select label="Language" options={options} value={language} onChange={setLanguage} />
+      <Table
+        caption="Language preferences"
+        columns={[
+          {
+            id: 'language',
+            label: 'Language',
+            cell: () => (
+              <Select label="Language" options={options} value={language} onChange={setLanguage} />
+            ),
+          },
+        ]}
+        rows={[{ id: 'preference' }]}
+        getRowKey={(row) => row.id}
+      />
     </div>
   );
 }
