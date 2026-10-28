@@ -333,6 +333,25 @@ Everything is driven by `--motiv-*` custom properties, and all library CSS sits 
 Dark mode: `<html data-theme="dark">`. Without `data-theme`, `prefers-color-scheme` applies.
 The Storybook [**Docs/Theming**](src/docs/Theming.mdx) page lists every token and the component-level overrides.
 
+## Small layouts
+
+Use `40rem` as the small breakpoint. Below it, stack multi-column layouts. Use the same value in
+viewport or container queries:
+
+```css
+@media (width < 40rem) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@container (width < 40rem) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+```
+
 ## Astro
 
 Components render to static HTML, no client directive needed unless you attach handlers:
