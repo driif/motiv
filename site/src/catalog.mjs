@@ -331,7 +331,7 @@ export const catalog = {
       symbols: ['FileUpload', 'putFile'],
       demo: 'FileUpload',
       blurb:
-        'Pick files with per-file progress, cancel and retry. Supply your upload function; putFile supports presigned PUT URLs. Validate required attachments in your app. This demo simulates uploads and one failure.',
+        'Show attached files and pick new files with progress, cancel and retry. Supply your upload function; putFile supports presigned PUT URLs. This demo simulates uploads and one failure.',
     },
     {
       id: 'confirm',

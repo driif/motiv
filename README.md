@@ -198,10 +198,16 @@ function Attachments({
 
 Single selection replaces the previous entry; `multiple` appends. `onUploaded(file)` runs on
 success. `onRemove(file)` runs when a completed entry is removed or replaced; cancelling an
-upload only aborts its signal. Removing a failed entry does not call `onRemove`.
+upload only aborts its signal. Removing a failed entry does not call `onRemove`. `onDiscard(file)`
+reports a canceled, failed or replaced unfinished entry. It does not run on unmount.
+
+Pass `attachedFiles` to show files the app already holds. Each item has `id`, `name`, `onRemove`, and optional `size` and `onDownload`. The app owns this list. When `attachedFiles` is supplied,
+a successful upload leaves the internal list; update `attachedFiles` from `onUploaded` to show it.
+The component does not match files by name, so two files can have the same name. Use
+`formatDownloadLabel(name)` and `formatRemoveLabel(name)` to translate the attachment action names.
 
 Customize the picker, statuses and actions with `label`, `uploadingLabel`, `uploadedLabel`,
-`errorLabel`, `retryLabel`, `removeLabel` and `cancelLabel`. `errorMessage` supplies the fallback
+`errorLabel`, `retryLabel`, `removeLabel`, `cancelLabel` and `downloadLabel`. `errorMessage` supplies the fallback
 when a rejection has no message; `formatSize(bytes)`, `formatUploadedMessage(name)` and
 `formatErrorMessage(name)` customize sizes and live announcements. Native input props and `ref`
 reach the file input; `className` and `style` apply to the wrapper.

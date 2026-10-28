@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { CSSProperties } from 'react';
+import { type CSSProperties, useState } from 'react';
 import { ThemePair } from '../../../.storybook/ThemePair';
 import { FileUpload, type FileUploadProps } from './FileUpload';
 
@@ -56,6 +56,32 @@ export const Failed: Story = {
   },
   play: ({ canvasElement }) => selectFiles(canvasElement),
 };
+
+export const Attached: Story = {
+  render: (args) => <AttachedExample {...args} />,
+};
+
+function AttachedExample(args: FileUploadProps) {
+  const [attached, setAttached] = useState(true);
+  return (
+    <FileUpload
+      {...args}
+      attachedFiles={
+        attached
+          ? [
+              {
+                id: 'report',
+                name: 'report.pdf',
+                size: 1024,
+                onRemove: () => setAttached(false),
+                onDownload: () => {},
+              },
+            ]
+          : []
+      }
+    />
+  );
+}
 
 export const Multiple: Story = {
   args: {

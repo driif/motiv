@@ -1,13 +1,30 @@
 import { FileUpload } from '@driif/motiv';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 export function FileUploadDemo() {
   const failed = useRef(false);
+  const nextId = useRef(1);
+  const [attached, setAttached] = useState([
+    { id: 'initial', name: 'Attached document.pdf', size: 10240 },
+  ]);
+  const [message, setMessage] = useState('');
   return (
     <div style={{ width: '100%' }}>
       <p>Choose files to simulate uploads. The first one fails once; retry it.</p>
       <FileUpload
         multiple
+        attachedFiles={attached.map((file) => ({
+          ...file,
+          onDownload: () => setMessage(`Download ${file.name}`),
+          onRemove: () => setAttached((current) => current.filter((item) => item.id !== file.id)),
+        }))}
+        onUploaded={(file) =>
+          setAttached((current) => [
+            ...current,
+            { id: String(nextId.current++), name: file.name, size: file.size },
+          ])
+        }
+        onDiscard={(file) => setMessage(`Removed ${file.name}`)}
         upload={(_file, { signal, onProgress }) => {
           const fail = !failed.current;
           failed.current = true;
@@ -31,6 +48,7 @@ export function FileUploadDemo() {
           });
         }}
       />
+      {message && <p role="status">{message}</p>}
     </div>
   );
 }
