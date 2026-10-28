@@ -100,11 +100,10 @@
   }
 
   .motiv-picker__list {
-    position: absolute;
+    position: fixed;
+    inset: auto;
     z-index: 10;
-    top: calc(100% + 8px);
-    right: 0;
-    left: 0;
+    box-sizing: border-box;
     max-height: 18rem;
     margin: 0;
     padding: 6px;
@@ -136,6 +135,14 @@
         scale 0.45s var(--motiv-ease-spring),
         translate 0.45s var(--motiv-ease-spring),
         visibility 0s;
+    }
+
+    @starting-style {
+      .motiv-picker--open & {
+        opacity: 0;
+        scale: 0.96;
+        translate: 0 -6px;
+      }
     }
   }
 

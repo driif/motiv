@@ -36,7 +36,7 @@
   "components/RadialMenu/RadialMenu.js": 1200,
   "components/Radio/Radio.js": 550,
   "components/SegmentedControl/SegmentedControl.js": 1000,
-  "components/Select/Select.js": 1250,
+  "components/Select/Select.js": 1700,
   "components/SlipCard/SlipCard.js": 800,
   "components/SpringCheckbox/SpringCheckbox.js": 500,
   "components/StepProgress/StepProgress.js": 950,

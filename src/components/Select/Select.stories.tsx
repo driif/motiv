@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { ThemePair } from '../../../.storybook/ThemePair';
 import type { SelectProps } from '../../drawn/Select';
+import { Table } from '../Table/Table';
 import { Select } from './Select';
 
 const options = [
@@ -44,4 +45,29 @@ export const LongList: Story = {
 
 export const Themes: Story = {
   render: () => <ThemePair>{() => <Demo />}</ThemePair>,
+};
+
+export const InsideTable: Story = {
+  render: () => {
+    function Example() {
+      const [value, setValue] = useState('');
+      return (
+        <Table
+          caption="Language preferences"
+          columns={[
+            {
+              id: 'language',
+              label: 'Language',
+              cell: () => (
+                <Select label="Language" options={options} value={value} onChange={setValue} />
+              ),
+            },
+          ]}
+          rows={[{ id: 'preference' }]}
+          getRowKey={(row) => row.id}
+        />
+      );
+    }
+    return <Example />;
+  },
 };

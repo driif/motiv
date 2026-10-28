@@ -554,7 +554,7 @@ export const catalog = {
       symbols: ['Select'],
       demo: 'Select',
       blurb:
-        'A listbox that springs open under a fine outline, with codes, hints and typeahead. Same props as the drawn Select.',
+        'A listbox with codes, hints and typeahead. Its popover stays visible inside clipped containers.',
     },
     {
       id: 'switch',
