@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
-import { Activity, createRef, StrictMode } from 'react';
+import { Activity, createRef, StrictMode, useState } from 'react';
 import { describe, expect, expectTypeOf, it, vi } from 'vitest';
 import { FileUpload, type FileUploadProps } from './FileUpload';
 
@@ -30,6 +30,172 @@ const second = new File(['world'], 'second.txt', { type: 'text/plain' });
 const third = new File(['again'], 'third.txt', { type: 'text/plain' });
 
 describe('FileUpload', () => {
+  it('shows attached files with download and remove actions', () => {
+    const onDownload = vi.fn();
+    const onRemove = vi.fn();
+    render(
+      <FileUpload
+        upload={async () => {}}
+        attachedFiles={[{ id: 'a', name: 'report.pdf', size: 123, onDownload, onRemove }]}
+      />,
+    );
+    const row = screen.getByRole('listitem', { name: 'report.pdf' });
+    expect(within(row).getByText('123 B')).toBeInTheDocument();
+    fireEvent.click(within(row).getByRole('button', { name: 'Download report.pdf' }));
+    fireEvent.click(within(row).getByRole('button', { name: 'Remove report.pdf' }));
+    expect(onDownload).toHaveBeenCalledOnce();
+    expect(onRemove).toHaveBeenCalledOnce();
+  });
+
+  it('shows an attachment before its size is known', () => {
+    render(
+      <FileUpload
+        upload={async () => {}}
+        attachedFiles={[{ id: 'a', name: 'report.pdf', onRemove: () => {} }]}
+      />,
+    );
+    const row = screen.getByRole('listitem', { name: 'report.pdf' });
+    expect(row).toHaveTextContent('report.pdf');
+    expect(row).not.toHaveTextContent('0 B');
+    expect(
+      within(row).queryByRole('button', { name: 'Download report.pdf' }),
+    ).not.toBeInTheDocument();
+  });
+
+  it('uses localized accessible names for attachment actions', () => {
+    render(
+      <FileUpload
+        upload={async () => {}}
+        attachedFiles={[{ id: 'a', name: 'report.pdf', onDownload: () => {}, onRemove: () => {} }]}
+        formatDownloadLabel={(name) => `${name} herunterladen`}
+        formatRemoveLabel={(name) => `${name} entfernen`}
+      />,
+    );
+    expect(screen.getByRole('button', { name: 'report.pdf herunterladen' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'report.pdf entfernen' })).toBeInTheDocument();
+  });
+
+  it('reports failed and canceled removals without changing onRemove', async () => {
+    const { upload, attempts } = uploads();
+    const onRemove = vi.fn();
+    const onDiscard = vi.fn();
+    render(<FileUpload upload={upload} multiple onRemove={onRemove} onDiscard={onDiscard} />);
+    pick(first, second);
+    await act(async () => attempts[0].reject(new Error('Failed')));
+    expect(onDiscard).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole('button', { name: `Remove: ${first.name}` }));
+    expect(onDiscard).toHaveBeenCalledExactlyOnceWith(first);
+    fireEvent.click(screen.getByRole('button', { name: `Cancel: ${second.name}` }));
+    expect(onDiscard).toHaveBeenNthCalledWith(1, first);
+    expect(onDiscard).toHaveBeenNthCalledWith(2, second);
+    expect(onRemove).not.toHaveBeenCalled();
+    expect(attempts[1].signal.aborted).toBe(true);
+  });
+
+  it('hands a completed upload to attached files without a duplicate or remount', async () => {
+    const { upload, attempts } = uploads();
+    const onDownload = vi.fn();
+    function Host() {
+      const [attached, setAttached] = useState(false);
+      return (
+        <FileUpload
+          upload={upload}
+          attachedFiles={
+            attached
+              ? [
+                  {
+                    id: 'a',
+                    name: first.name,
+                    size: first.size,
+                    onDownload,
+                    onRemove: () => setAttached(false),
+                  },
+                ]
+              : []
+          }
+          onUploaded={() => setAttached(true)}
+        />
+      );
+    }
+    render(<Host />);
+    pick(first);
+    await act(async () => attempts[0].resolve());
+    expect(screen.getAllByRole('listitem', { name: first.name })).toHaveLength(1);
+    fireEvent.click(screen.getByRole('button', { name: `Download ${first.name}` }));
+    expect(onDownload).toHaveBeenCalledOnce();
+    fireEvent.click(screen.getByRole('button', { name: `Remove ${first.name}` }));
+    expect(screen.queryByRole('listitem', { name: first.name })).not.toBeInTheDocument();
+  });
+
+  it('reports an unfinished upload discarded by a single-file replacement', async () => {
+    const { upload, attempts } = uploads();
+    const onDiscard = vi.fn();
+    render(<FileUpload upload={upload} onDiscard={onDiscard} />);
+    pick(first);
+    pick(second);
+    expect(onDiscard).toHaveBeenCalledExactlyOnceWith(first);
+    expect(attempts[0].signal.aborted).toBe(true);
+  });
+
+  it('updates attached rows from props and disables their actions', () => {
+    const onRemove = vi.fn();
+    const onDownload = vi.fn();
+    const item = { id: 'a', name: 'report.pdf', size: 123, onRemove, onDownload };
+    const { rerender } = render(
+      <FileUpload upload={async () => {}} attachedFiles={[item]} disabled />,
+    );
+    expect(screen.getByRole('button', { name: 'Download report.pdf' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Remove report.pdf' })).toBeDisabled();
+    rerender(<FileUpload upload={async () => {}} attachedFiles={[]} />);
+    expect(screen.queryByRole('listitem', { name: 'report.pdf' })).not.toBeInTheDocument();
+    expect(onRemove).not.toHaveBeenCalled();
+    expect(onDownload).not.toHaveBeenCalled();
+  });
+
+  it('keeps a failed upload in the same list as an attached file', async () => {
+    const { upload, attempts } = uploads();
+    const onDiscard = vi.fn();
+    render(
+      <FileUpload
+        upload={upload}
+        multiple
+        onDiscard={onDiscard}
+        attachedFiles={[{ id: 'a', name: 'report.pdf', size: 123, onRemove: () => {} }]}
+      />,
+    );
+    pick(first);
+    await act(async () => attempts[0].reject(new Error('Try again')));
+    expect(screen.getByRole('listitem', { name: 'report.pdf' })).toBeInTheDocument();
+    expect(screen.getByRole('listitem', { name: first.name })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: `Remove: ${first.name}` }));
+    expect(onDiscard).toHaveBeenCalledExactlyOnceWith(first);
+    expect(screen.getByRole('listitem', { name: 'report.pdf' })).toBeInTheDocument();
+  });
+
+  it('keeps focus on the picker when a focused retry becomes an attachment', async () => {
+    const { upload, attempts } = uploads();
+    function Host() {
+      const [attached, setAttached] = useState(false);
+      return (
+        <FileUpload
+          upload={upload}
+          attachedFiles={
+            attached ? [{ id: 'a', name: first.name, size: first.size, onRemove: () => {} }] : []
+          }
+          onUploaded={() => setAttached(true)}
+        />
+      );
+    }
+    render(<Host />);
+    const picker = pick(first);
+    await act(async () => attempts[0].reject(new Error('Failed')));
+    const retry = screen.getByRole('button', { name: `Retry: ${first.name}` });
+    retry.focus();
+    fireEvent.click(retry);
+    await act(async () => attempts[1].resolve());
+    expect(picker).toHaveFocus();
+  });
+
   it('excludes native required validation from its props', () => {
     expectTypeOf<FileUploadProps>().not.toHaveProperty('required');
   });
@@ -431,9 +597,16 @@ describe('FileUpload', () => {
     const { upload, attempts } = uploads();
     const onUploaded = vi.fn();
     const onRemove = vi.fn();
+    const onDiscard = vi.fn();
     const { unmount } = render(
       <StrictMode>
-        <FileUpload upload={upload} multiple onUploaded={onUploaded} onRemove={onRemove} />
+        <FileUpload
+          upload={upload}
+          multiple
+          onUploaded={onUploaded}
+          onRemove={onRemove}
+          onDiscard={onDiscard}
+        />
       </StrictMode>,
     );
     pick(first, second);
@@ -446,5 +619,6 @@ describe('FileUpload', () => {
     });
     expect(onUploaded).not.toHaveBeenCalled();
     expect(onRemove).not.toHaveBeenCalled();
+    expect(onDiscard).not.toHaveBeenCalled();
   });
 });

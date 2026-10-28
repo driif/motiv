@@ -3,6 +3,14 @@ import { cx } from '../../utils/cx';
 import { Button, buttonClassName } from '../Button';
 import { Progress } from '../Progress';
 
+export interface FileUploadAttachment {
+  id: string;
+  name: string;
+  size?: number;
+  onRemove: () => void;
+  onDownload?: () => void;
+}
+
 export interface FileUploadProps
   extends Omit<
     ComponentProps<'input'>,
@@ -14,6 +22,9 @@ export interface FileUploadProps
   ) => Promise<void>;
   onUploaded?: (file: File) => void;
   onRemove?: (file: File) => void;
+  onDiscard?: (file: File) => void;
+  attachedFiles?: readonly FileUploadAttachment[];
+  downloadLabel?: string;
   label?: string;
   uploadingLabel?: string;
   uploadedLabel?: string;
@@ -23,6 +34,8 @@ export interface FileUploadProps
   removeLabel?: string;
   cancelLabel?: string;
   formatSize?: (bytes: number) => string;
+  formatDownloadLabel?: (name: string) => string;
+  formatRemoveLabel?: (name: string) => string;
   formatUploadedMessage?: (name: string) => string;
   formatErrorMessage?: (name: string) => string;
 }
@@ -41,6 +54,9 @@ export function FileUpload({
   upload,
   onUploaded,
   onRemove,
+  onDiscard,
+  attachedFiles,
+  downloadLabel = 'Download',
   label = 'Choose files',
   uploadingLabel = 'Uploading',
   uploadedLabel = 'Uploaded',
@@ -55,6 +71,8 @@ export function FileUpload({
       : bytes < 1024 ** 2
         ? `${(bytes / 1024).toFixed(1)} KB`
         : `${(bytes / 1024 ** 2).toFixed(1)} MB`,
+  formatDownloadLabel,
+  formatRemoveLabel,
   formatUploadedMessage = (name) => `${name} uploaded`,
   formatErrorMessage = (name) => `${name} upload failed`,
   id,
@@ -71,6 +89,8 @@ export function FileUpload({
   const input = useRef<HTMLInputElement>(null);
   const actions = useRef(new Map<number, HTMLButtonElement>());
   const sequence = useRef(0);
+  const controlled = useRef(attachedFiles !== undefined);
+  controlled.current = attachedFiles !== undefined;
   const current = useRef<Entry[]>([]);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [announcements, setAnnouncements] = useState<{ id: number; text: string }[]>([]);
@@ -133,7 +153,11 @@ export function FileUpload({
       return;
     }
     if (!isCurrent()) return;
-    change({ status: 'done', progress: 100 });
+    if (controlled.current) {
+      const action = actions.current.get(rowId);
+      if (action && action.ownerDocument.activeElement === action) input.current?.focus();
+      update(current.current.filter((row) => row.id !== rowId));
+    } else change({ status: 'done', progress: 100 });
     setAnnouncements((messages) => [
       ...messages,
       { id: attempt, text: formatUploadedMessage(file.name) },
@@ -150,6 +174,7 @@ export function FileUpload({
     if (entry.status === 'uploading') entry.controller.abort();
     (neighbor ? actions.current.get(neighbor.id) : input.current)?.focus();
     if (entry.status === 'done') onRemove?.(entry.file);
+    else onDiscard?.(entry.file);
   }
 
   return (
@@ -177,7 +202,8 @@ export function FileUpload({
             update([]);
             for (const entry of previous) {
               if (entry.status === 'uploading') entry.controller.abort();
-              else if (entry.status === 'done') onRemove?.(entry.file);
+              if (entry.status === 'done') onRemove?.(entry.file);
+              else onDiscard?.(entry.file);
             }
           }
           for (const file of multiple ? files : files.slice(0, 1)) void start(file);
@@ -190,8 +216,41 @@ export function FileUpload({
       >
         {label}
       </label>
-      {entries.length > 0 && (
+      {(entries.length > 0 || (attachedFiles?.length ?? 0) > 0) && (
         <ul className="motiv-file-upload__list">
+          {attachedFiles?.map((file) => (
+            <li key={file.id} className="motiv-file-upload__row" aria-label={file.name}>
+              <span>{file.name}</span>
+              {file.size !== undefined && (
+                <div className="motiv-file-upload__details">{formatSize(file.size)}</div>
+              )}
+              <div className="motiv-file-upload__actions">
+                {file.onDownload && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    disabled={disabled}
+                    aria-label={formatDownloadLabel?.(file.name) ?? `${downloadLabel} ${file.name}`}
+                    onClick={file.onDownload}
+                  >
+                    {downloadLabel}
+                  </Button>
+                )}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  disabled={disabled}
+                  aria-label={formatRemoveLabel?.(file.name) ?? `${removeLabel} ${file.name}`}
+                  onClick={() => {
+                    file.onRemove();
+                    input.current?.focus();
+                  }}
+                >
+                  {removeLabel}
+                </Button>
+              </div>
+            </li>
+          ))}
           {entries.map((entry) => {
             const actionLabel =
               entry.status === 'uploading'
