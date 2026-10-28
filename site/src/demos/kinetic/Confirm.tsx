@@ -5,6 +5,7 @@ export function ConfirmDemo() {
   const [open, setOpen] = useState(false);
   const [pending, setPending] = useState(false);
   const [deleted, setDeleted] = useState(false);
+  const [registering, setRegistering] = useState(false);
 
   async function remove() {
     setPending(true);
@@ -19,6 +20,17 @@ export function ConfirmDemo() {
       <Button variant="danger" onClick={() => setOpen(true)}>
         Delete project
       </Button>
+      <Button onClick={() => setRegistering(true)}>Register plugin</Button>
+      <Confirm
+        open={registering}
+        title="Register plugin?"
+        confirmLabel="Register"
+        confirmVariant="primary"
+        onCancel={() => setRegistering(false)}
+        onConfirm={() => setRegistering(false)}
+      >
+        <p>The plugin will be available to this organization.</p>
+      </Confirm>
       {deleted && <p role="status">The demo project was deleted. You can try again.</p>}
       <Confirm
         open={open}

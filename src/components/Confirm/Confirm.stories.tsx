@@ -8,8 +8,11 @@ function Example(args: ConfirmProps) {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <Button variant="danger" onClick={() => setOpen(true)}>
-        Delete project
+      <Button
+        variant={args.confirmVariant === 'primary' ? 'primary' : 'danger'}
+        onClick={() => setOpen(true)}
+      >
+        {args.confirmVariant === 'primary' ? 'Register plugin' : 'Delete project'}
       </Button>
       <Confirm
         {...args}
@@ -38,6 +41,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {};
+
+export const NonDestructive: Story = {
+  args: { title: 'Register plugin?', confirmLabel: 'Register', confirmVariant: 'primary' },
+};
 
 export const Impact: Story = {
   args: {

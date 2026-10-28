@@ -82,7 +82,7 @@ import { LiquidSwitch, SegmentedControl } from '@driif/motiv';
 
 ## Confirm
 
-`Confirm` is a controlled native modal `<dialog>` for destructive actions. Impact counts and
+`Confirm` is a controlled native modal `<dialog>`. Its action uses the danger variant by default; set `confirmVariant="primary"` for a non-destructive action. Impact counts and
 errors go in `children`.
 
 ```tsx
