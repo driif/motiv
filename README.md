@@ -80,6 +80,12 @@ import { LiquidSwitch, SegmentedControl } from '@driif/motiv';
 <LiquidSwitch label="Wi-Fi" checked={wifi} onChange={setWifi} />;
 ```
 
+## Select
+
+`Select` and `TerminalSelect` accept `clearable` to add a clear option. It calls `onChange('')`.
+Set `clearLabel` to change the option text; its default is `Clear selection`. An existing empty-value
+option is used as the clear option.
+
 ## Confirm
 
 `Confirm` is a controlled native modal `<dialog>`. Its action uses the danger variant by default; set `confirmVariant="primary"` for a non-destructive action. Impact counts and

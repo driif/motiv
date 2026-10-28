@@ -10,11 +10,17 @@ const options = [
   { value: 'ldap', label: 'LDAP', hint: 'Use your directory credentials.' },
 ];
 
-function Demo() {
+function Demo({ clearable = false }: { clearable?: boolean }) {
   const [value, setValue] = useState('');
   return (
     <div style={{ minHeight: '16rem' }}>
-      <Select label="Auth method" options={options} value={value} onChange={setValue} />
+      <Select
+        label="Auth method"
+        options={options}
+        value={value}
+        onChange={setValue}
+        clearable={clearable}
+      />
     </div>
   );
 }
@@ -31,6 +37,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const Clearable: Story = { render: () => <Demo clearable /> };
 
 export const Themes: Story = {
   render: () => <ThemePair>{() => <Demo />}</ThemePair>,

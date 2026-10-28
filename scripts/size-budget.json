@@ -123,6 +123,7 @@
   "utils/useListbox.js": 1450,
   "utils/useOtp.js": 1100,
   "utils/useRadioGroupKeys.js": 500,
+  "utils/useSelectOptions.js": 300,
   "utils/useStepper.js": 550,
   "utils/useTooltip.js": 750
 }

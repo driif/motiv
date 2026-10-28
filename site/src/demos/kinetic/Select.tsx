@@ -18,7 +18,13 @@ export function SelectDemo() {
             id: 'language',
             label: 'Language',
             cell: () => (
-              <Select label="Language" options={options} value={language} onChange={setLanguage} />
+              <Select
+                label="Language"
+                options={options}
+                value={language}
+                onChange={setLanguage}
+                clearable
+              />
             ),
           },
         ]}
