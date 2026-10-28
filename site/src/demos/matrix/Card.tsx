@@ -20,6 +20,7 @@ export function CardDemo() {
   return (
     <Card style={{ maxWidth: '28rem' }}>
       <CardHeader
+        titleAs="h4"
         title="Account"
         description="Operator profile and keys."
         actions={

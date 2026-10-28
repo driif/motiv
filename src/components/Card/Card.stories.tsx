@@ -47,6 +47,14 @@ export const Default: Story = {
   ),
 };
 
+export const PageTitle: Story = {
+  render: () => (
+    <Card>
+      <CardHeader title="Users" titleAs="h1" />
+    </Card>
+  ),
+};
+
 export const Variants: Story = {
   render: () => (
     <div style={grid}>
