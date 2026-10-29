@@ -34,5 +34,24 @@ const source = sources[`../demos/${style}/${section.demo}.tsx`];
       loading="lazy"
     />
   </div>
-  <Code class="site-code" code={source} lang="tsx" theme="github-dark-default" />
+  <Code
+    class="site-code"
+    code={source}
+    lang="tsx"
+    theme="github-dark-default"
+    transformers={[{
+      span(node) {
+        const color = node.properties.style;
+        const parentStyle = this.pre.properties.style;
+        if (
+          typeof color === 'string' &&
+          color.startsWith('color:') &&
+          typeof parentStyle === 'string' &&
+          parentStyle.toLowerCase().split(';').includes(color.toLowerCase())
+        ) {
+          delete node.properties.style;
+        }
+      },
+    }]}
+  />
 </section>

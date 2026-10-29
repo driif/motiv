@@ -7,8 +7,8 @@ this repo cannot see. Current spec: `docs/specs/2026-10-05-motiv-foundation-desi
 ## Working agreement
 
 - Done = every gate the task can affect is green: `pnpm check`, `typecheck`, `test`, `build`,
-  `check:package`, `build-storybook`, and for component or export changes `check:site`,
-  `typecheck:site`, `build:site`.
+  `check:package`, `build-storybook`, and for site, component or export changes `check:site`,
+  `typecheck:site`, `build:site`, `check:site-size` (after `build:site`).
 - **Work autonomously.** Decide routine and API details yourself (props, classes, tokens,
   defaults of components the user asked for), commit, push, open and merge PRs once gates and
   reviews are green, run as many review rounds (duo, revmux) as needed. Report outcomes; don't ask
