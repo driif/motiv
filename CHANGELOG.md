@@ -1,5 +1,19 @@
 # @driif/motiv
 
+## 0.23.0
+
+### Minor Changes
+
+- da7b53d: FileUpload can show attached files and report discarded uploads.
+- 2e6e830: Allow CardHeader titles to render as level-one headings.
+- ecd7ed7: Select and TerminalSelect can add a localized option that clears the selection.
+- 065cb46: Allow a primary action in Confirm for non-destructive dialogs.
+
+### Patch Changes
+
+- 71d1d2e: Select options stay visible inside clipped containers such as Table cells.
+- ca4b07a: Document the small breakpoint for responsive layouts.
+
 ## 0.22.0
 
 ### Minor Changes
