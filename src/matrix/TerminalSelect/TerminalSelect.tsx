@@ -1,6 +1,7 @@
 import { type ComponentProps, type CSSProperties, type ReactNode, useId } from 'react';
 import type { MotivOption } from '../../types';
 import { cx } from '../../utils/cx';
+import { useAnchoredPopover } from '../../utils/useAnchoredPopover';
 import { useListbox } from '../../utils/useListbox';
 import { useSelectOptions } from '../../utils/useSelectOptions';
 
@@ -43,6 +44,7 @@ export function TerminalSelect({
   const { anchorRef, listRef, isOpen, current, selectedIndex, setActive, commit, trigger } =
     useListbox(items, value, onChange, disabled);
   const selected = items !== options && value === '' ? undefined : items[selectedIndex];
+  useAnchoredPopover(anchorRef, listRef, isOpen, 12, items);
 
   return (
     <div
@@ -92,6 +94,8 @@ export function TerminalSelect({
             ref={listRef}
             id={`${id}-list`}
             role="listbox"
+            popover="manual"
+            hidden={!isOpen}
             aria-labelledby={`${id}-label`}
             inert={!isOpen}
             className="motiv-matrix-term__list"

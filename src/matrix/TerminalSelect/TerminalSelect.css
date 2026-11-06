@@ -151,41 +151,29 @@
     transform: rotate(180deg);
   }
 
-  .motiv-matrix-term__pop {
-    position: absolute;
-    z-index: 10;
-    top: calc(100% + 12px);
-    right: 0;
-    left: 0;
-  }
-
   .motiv-matrix-term__list {
+    position: fixed;
+    inset: auto;
+    z-index: 10;
+    box-sizing: border-box;
     max-height: 320px;
     margin: 0;
     padding: 6px 0;
     overflow-y: auto;
     list-style: none;
+    color: inherit;
     background: var(--motiv-select-bg, var(--motiv-color-surface));
     border: 1px solid var(--_border);
     box-shadow: var(--motiv-shadow-md);
-    opacity: 0;
-    transform: scaleY(0.92);
-    transform-origin: top;
-    visibility: hidden;
+    transform-origin: 50% calc(var(--_flip, 0) * 100%);
     transition:
       opacity 0.12s var(--motiv-ease),
-      transform 0.12s var(--motiv-ease),
-      visibility 0s 0.12s;
-  }
+      transform 0.12s var(--motiv-ease);
 
-  .motiv-matrix-term--open .motiv-matrix-term__list {
-    opacity: 1;
-    transform: none;
-    visibility: visible;
-    transition:
-      opacity 0.12s var(--motiv-ease),
-      transform 0.12s var(--motiv-ease),
-      visibility 0s;
+    @starting-style {
+      opacity: 0;
+      transform: scaleY(0.92);
+    }
   }
 
   .motiv-matrix-term__option {
@@ -250,8 +238,7 @@
   @media (prefers-reduced-motion: reduce) {
     .motiv-matrix-term__corner,
     .motiv-matrix-term__arrow,
-    .motiv-matrix-term__list,
-    .motiv-matrix-term--open .motiv-matrix-term__list {
+    .motiv-matrix-term__list {
       transition: none;
     }
   }

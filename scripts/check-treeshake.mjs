@@ -53,6 +53,26 @@ const checks = [
       'useCarousel',
     ],
   },
+  {
+    input: 'test/fixtures/treeshake-drawn-multi-select.js',
+    kept: 'motiv-sketch-multi-select',
+    dropped: ['motiv-multi-select', 'motiv-select', 'useListbox', 'useChips', 'useCommandMenu'],
+  },
+  {
+    input: 'test/fixtures/treeshake-matrix-multi-select.js',
+    kept: 'motiv-matrix-multi-select',
+    dropped: ['motiv-multi-select', 'motiv-matrix-term', 'useListbox', 'useChips'],
+  },
+  {
+    input: 'test/fixtures/treeshake-drawn-file-upload.js',
+    kept: 'motiv-sketch-file-upload',
+    dropped: ['motiv-file-upload', 'motiv-bar', 'motiv-sketch-multi-select', 'useMultiSelect'],
+  },
+  {
+    input: 'test/fixtures/treeshake-matrix-put-file.js',
+    kept: 'XMLHttpRequest',
+    dropped: ['motiv-file-upload', 'motiv-matrix-file-upload', 'motiv-matrix-btn', 'useFileUpload'],
+  },
 ];
 
 const problems = [];

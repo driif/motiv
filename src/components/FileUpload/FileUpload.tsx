@@ -1,5 +1,6 @@
-import { type ComponentProps, useEffect, useId, useRef, useState } from 'react';
+import { type ComponentProps, useId } from 'react';
 import { cx } from '../../utils/cx';
+import { formatBytes, useFileUpload } from '../../utils/useFileUpload';
 import { Button, buttonClassName } from '../Button';
 import { Progress } from '../Progress';
 
@@ -40,16 +41,6 @@ export interface FileUploadProps
   formatErrorMessage?: (name: string) => string;
 }
 
-interface Entry {
-  id: number;
-  file: File;
-  attempt: number;
-  controller: AbortController;
-  status: 'uploading' | 'done' | 'error';
-  progress: number;
-  error?: string;
-}
-
 export function FileUpload({
   upload,
   onUploaded,
@@ -61,20 +52,15 @@ export function FileUpload({
   uploadingLabel = 'Uploading',
   uploadedLabel = 'Uploaded',
   errorLabel = 'Error',
-  errorMessage = 'Upload failed',
+  errorMessage,
   retryLabel = 'Retry',
   removeLabel = 'Remove',
   cancelLabel = 'Cancel',
-  formatSize = (bytes) =>
-    bytes < 1024
-      ? `${bytes} B`
-      : bytes < 1024 ** 2
-        ? `${(bytes / 1024).toFixed(1)} KB`
-        : `${(bytes / 1024 ** 2).toFixed(1)} MB`,
+  formatSize = formatBytes,
   formatDownloadLabel,
   formatRemoveLabel,
-  formatUploadedMessage = (name) => `${name} uploaded`,
-  formatErrorMessage = (name) => `${name} upload failed`,
+  formatUploadedMessage,
+  formatErrorMessage,
   id,
   ref,
   multiple,
@@ -86,128 +72,29 @@ export function FileUpload({
 }: FileUploadProps) {
   const generatedId = useId();
   const inputId = id ?? generatedId;
-  const input = useRef<HTMLInputElement>(null);
-  const actions = useRef(new Map<number, HTMLButtonElement>());
-  const sequence = useRef(0);
-  const controlled = useRef(attachedFiles !== undefined);
-  controlled.current = attachedFiles !== undefined;
-  const current = useRef<Entry[]>([]);
-  const [entries, setEntries] = useState<Entry[]>([]);
-  const [announcements, setAnnouncements] = useState<{ id: number; text: string }[]>([]);
-
-  useEffect(
-    () => () => {
-      const previous = current.current;
-      current.current = previous.filter((entry) => entry.status !== 'uploading');
-      setEntries(current.current);
-      for (const entry of previous) {
-        if (entry.status === 'uploading') entry.controller.abort();
-      }
-    },
-    [],
-  );
-
-  function update(next: Entry[]) {
-    current.current = next;
-    setEntries(next);
-  }
-
-  async function start(file: File, rowId = sequence.current++) {
-    const attempt = sequence.current++;
-    const controller = new AbortController();
-    const entry: Entry = { id: rowId, file, attempt, controller, status: 'uploading', progress: 0 };
-    const previous = current.current.find((row) => row.id === rowId);
-    update(
-      previous
-        ? current.current.map((row) => (row.id === rowId ? entry : row))
-        : [...current.current, entry],
-    );
-    const isCurrent = () =>
-      current.current.some(
-        (row) => row.id === rowId && row.attempt === attempt && row.status === 'uploading',
-      );
-    const change = (patch: Partial<Entry>) =>
-      update(current.current.map((row) => (row.id === rowId ? { ...row, ...patch } : row)));
-
-    try {
-      await upload(file, {
-        signal: controller.signal,
-        onProgress: (progress) => {
-          if (isCurrent()) change({ progress });
-        },
-      });
-    } catch (error) {
-      if (!isCurrent()) return;
-      const message =
-        error &&
-        typeof error === 'object' &&
-        'message' in error &&
-        typeof error.message === 'string'
-          ? error.message
-          : '';
-      change({ status: 'error', error: message || errorMessage });
-      setAnnouncements((messages) => [
-        ...messages,
-        { id: attempt, text: formatErrorMessage(file.name) },
-      ]);
-      return;
-    }
-    if (!isCurrent()) return;
-    if (controlled.current) {
-      const action = actions.current.get(rowId);
-      if (action && action.ownerDocument.activeElement === action) input.current?.focus();
-      update(current.current.filter((row) => row.id !== rowId));
-    } else change({ status: 'done', progress: 100 });
-    setAnnouncements((messages) => [
-      ...messages,
-      { id: attempt, text: formatUploadedMessage(file.name) },
-    ]);
-    onUploaded?.(file);
-  }
-
-  function remove(id: number) {
-    const index = current.current.findIndex((row) => row.id === id);
-    const entry = current.current[index];
-    if (!entry) return;
-    const neighbor = current.current[index + 1] ?? current.current[index - 1];
-    update(current.current.filter((row) => row.id !== id));
-    if (entry.status === 'uploading') entry.controller.abort();
-    (neighbor ? actions.current.get(neighbor.id) : input.current)?.focus();
-    if (entry.status === 'done') onRemove?.(entry.file);
-    else onDiscard?.(entry.file);
-  }
+  const { entries, announcements, inputProps, actionRef, retryOrRemove, remove, removeAttachment } =
+    useFileUpload({
+      upload,
+      onUploaded,
+      onRemove,
+      onDiscard,
+      attachedFiles,
+      errorMessage,
+      formatUploadedMessage,
+      formatErrorMessage,
+      multiple,
+      disabled,
+      onChange,
+      ref,
+    });
 
   return (
     <div className={cx('motiv-file-upload', className)} style={style}>
       <input
         {...props}
+        {...inputProps}
         id={inputId}
-        ref={(node) => {
-          input.current = node;
-          if (typeof ref === 'function') return ref(node);
-          if (ref) ref.current = node;
-        }}
-        type="file"
         className="motiv-file-upload__input motiv-visually-hidden"
-        multiple={multiple}
-        disabled={disabled}
-        onChange={(event) => {
-          if (disabled) return;
-          const files = Array.from(event.currentTarget.files ?? []);
-          onChange?.(event);
-          event.currentTarget.value = '';
-          if (!files.length) return;
-          if (!multiple) {
-            const previous = current.current;
-            update([]);
-            for (const entry of previous) {
-              if (entry.status === 'uploading') entry.controller.abort();
-              if (entry.status === 'done') onRemove?.(entry.file);
-              else onDiscard?.(entry.file);
-            }
-          }
-          for (const file of multiple ? files : files.slice(0, 1)) void start(file);
-        }}
       />
       <label
         htmlFor={inputId}
@@ -241,10 +128,7 @@ export function FileUpload({
                   size="sm"
                   disabled={disabled}
                   aria-label={formatRemoveLabel?.(file.name) ?? `${removeLabel} ${file.name}`}
-                  onClick={() => {
-                    file.onRemove();
-                    input.current?.focus();
-                  }}
+                  onClick={() => removeAttachment(file.onRemove)}
                 >
                   {removeLabel}
                 </Button>
@@ -289,19 +173,12 @@ export function FileUpload({
                 )}
                 <div className="motiv-file-upload__actions">
                   <Button
-                    ref={(node) => {
-                      if (node) actions.current.set(entry.id, node);
-                      return () => {
-                        actions.current.delete(entry.id);
-                      };
-                    }}
+                    ref={actionRef(entry.id)}
                     variant="ghost"
                     size="sm"
                     disabled={disabled}
                     aria-label={`${actionLabel}: ${entry.file.name}`}
-                    onClick={() =>
-                      entry.status === 'error' ? void start(entry.file, entry.id) : remove(entry.id)
-                    }
+                    onClick={() => retryOrRemove(entry)}
                   >
                     {actionLabel}
                   </Button>

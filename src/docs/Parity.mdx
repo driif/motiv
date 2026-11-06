@@ -26,8 +26,9 @@ wrap `ElasticTabs` and `HudTabs` with the drawn `Tabs` props; matrix `Nav` wraps
 the `GlideNav` props. Kinetic and matrix `Select` and `Tooltip` take the drawn props; matrix `Select`
 wraps `TerminalSelect`, whose field shows an option's `code`, falling back to its `label`, as its own
 look. Drawn and matrix `Accordion`, `Stepper` and `Carousel` take the kinetic props. Kinetic `Chips`
-is `FilterChips` under the generic name; drawn and matrix `Chips`, `OtpInput` and `CommandMenu` and
-matrix `SegmentedControl` take the kinetic props, and kinetic `Link` takes the drawn props.
+is `FilterChips` under the generic name; drawn and matrix `Chips`, `OtpInput`, `CommandMenu`,
+`MultiSelect`, `DatePicker` and `FileUpload` and matrix `SegmentedControl` take the kinetic props, and
+kinetic `Link` takes the drawn props. Drawn and matrix also export the kinetic `putFile` helper.
 
 | Category | Kinetic | Drawn | Matrix |
 |---|---|---|---|
@@ -55,6 +56,9 @@ matrix `SegmentedControl` take the kinetic props, and kinetic `Link` takes the d
 | Chips | `Chips` (`FilterChips`) | `Chips` | `Chips` |
 | OtpInput | `OtpInput` | `OtpInput` | `OtpInput` |
 | CommandMenu | `CommandMenu` | `CommandMenu` | `CommandMenu` |
+| MultiSelect | `MultiSelect` | `MultiSelect` | `MultiSelect` |
+| DatePicker | `DatePicker` | `DatePicker` | `DatePicker` |
+| FileUpload | `FileUpload` | `FileUpload` | `FileUpload` |
 
 Style-specific, outside the categories: kinetic `MagneticButton`, `MorphSubmitButton`,
 `LikeButton`, `BellButton`, `MuteToggle`, `BadgeButton`, `CopyField`, `ExpandingSearch`,

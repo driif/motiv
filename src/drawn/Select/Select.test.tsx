@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { useState } from 'react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { Select } from './Select';
 
 const options = [
@@ -27,6 +27,14 @@ const activeOption = () =>
 
 afterEach(() => vi.useRealTimers());
 
+// jsdom has UA popover hiding but no popover API; mirror the open-list CSS.
+const style = document.createElement('style');
+beforeAll(() => {
+  style.textContent = '[popover]:not([hidden]) { display: block !important; }';
+  document.head.append(style);
+});
+afterAll(() => style.remove());
+
 describe('Select', () => {
   it('is a closed combobox showing the placeholder, with an inert listbox', () => {
     render(<Controlled />);
@@ -36,6 +44,37 @@ describe('Select', () => {
     const list = document.getElementById(combobox().getAttribute('aria-controls') ?? '');
     expect(list).toHaveAttribute('role', 'listbox');
     expect(list).toHaveAttribute('inert');
+  });
+
+  it('opens in the top layer, flips above near the viewport bottom and follows scroll', () => {
+    const { container } = render(<Controlled />);
+    const list = container.querySelector('[role="listbox"]') as HTMLUListElement;
+    list.showPopover = vi.fn();
+    list.hidePopover = vi.fn();
+    expect(list).toHaveAttribute('popover', 'manual');
+    expect(list).toHaveAttribute('hidden');
+    const rect = vi.spyOn(combobox().parentElement as HTMLDivElement, 'getBoundingClientRect');
+    rect.mockReturnValue({
+      top: window.innerHeight - 60,
+      bottom: window.innerHeight - 12,
+      left: 24,
+      width: 240,
+    } as DOMRect);
+    Object.defineProperty(list, 'offsetHeight', { value: 200 });
+    fireEvent.click(combobox());
+    expect(list.showPopover).toHaveBeenCalledOnce();
+    expect(list).not.toHaveAttribute('hidden');
+    expect(list.style.top).toBe(`${window.innerHeight - 268}px`);
+    expect(list.style.left).toBe('24px');
+    expect(list.style.width).toBe('240px');
+    expect(list.style.getPropertyValue('--_flip')).toBe('1');
+    rect.mockReturnValue({ top: 20, bottom: 68, left: 30, width: 300 } as DOMRect);
+    fireEvent.scroll(container);
+    expect(list.style.top).toBe('76px');
+    expect(list.style.getPropertyValue('--_flip')).toBe('0');
+    key('Escape');
+    expect(list.hidePopover).toHaveBeenCalledOnce();
+    expect(list).toHaveAttribute('hidden');
   });
 
   it('opens on click and selects a clicked option', () => {

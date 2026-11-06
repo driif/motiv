@@ -1,0 +1,38 @@
+@layer motiv.components {
+  /* iOS Safari centers the date value. */
+  .motiv-matrix-date-picker__input::-webkit-date-and-time-value {
+    text-align: start;
+  }
+
+  .motiv-matrix-date-picker__clear {
+    flex-shrink: 0;
+    min-width: 44px;
+    min-height: 44px;
+    margin-right: calc(var(--motiv-space) * -2);
+    padding: 0;
+    font: inherit;
+    font-weight: 700;
+    color: var(--motiv-color-text-muted);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: color 0.15s var(--motiv-ease);
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: -2px;
+    }
+  }
+
+  @media (hover: hover) {
+    .motiv-matrix-date-picker__clear:hover {
+      color: var(--_accent);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-matrix-date-picker__clear {
+      transition: none;
+    }
+  }
+}
