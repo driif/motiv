@@ -538,3 +538,35 @@ it('renders MultiSelect, DatePicker and FileUpload in drawn and matrix without a
   expect(D.putFile).toBe(K.putFile);
   expect(M.putFile).toBe(K.putFile);
 });
+
+it('renders Confirm, Toaster, Table and TableColumnsMenu in drawn and matrix without a DOM', () => {
+  const noop = () => {};
+  const columns = [{ id: 'name', label: 'Name', cell: (row: { name: string }) => row.name }];
+  const table = { caption: 'Documents', columns, rows: [{ name: 'Ada' }] };
+  const id = D.toast({ title: 'Server-only message' });
+  M.dismissToast(id);
+  const html = renderToStaticMarkup(
+    <>
+      <D.Confirm open title="Delete?" slug="d" onConfirm={noop} onCancel={noop} />
+      <M.Confirm open title="Delete?" slug="m" onConfirm={noop} onCancel={noop} />
+      <D.Toaster />
+      <M.Toaster />
+      <D.Table {...table} getRowKey={(row) => row.name} columnWidths={{ name: 240 }} />
+      <M.Table {...table} getRowKey={(row) => row.name} />
+      <D.TableColumnsMenu columns={columns} hiddenColumns={[]} onHiddenColumnsChange={noop} />
+      <M.TableColumnsMenu columns={columns} hiddenColumns={[]} onHiddenColumnsChange={noop} />
+    </>,
+  );
+  expect(html.match(/<dialog/g)).toHaveLength(2);
+  expect(html).not.toContain(' open=');
+  expect(html.match(/<h2 id="/g)).toHaveLength(2);
+  expect(html.match(/role="status"/g)).toHaveLength(2);
+  expect(html.match(/role="alert"/g)).toHaveLength(2);
+  expect(html).not.toContain('<li');
+  expect(html).not.toContain('Server-only message');
+  expect(html).toContain('<col style="width:240px"/>');
+  expect(html).toContain('<col style="width:200px"/>');
+  expect(html.match(/<fieldset[^>]*popover="auto"/g)).toHaveLength(2);
+  expect(D.toast).toBe(K.toast);
+  expect(M.dismissToast).toBe(K.dismissToast);
+});

@@ -3,12 +3,13 @@
     width: fit-content;
     max-width: 100%;
     overflow: auto;
-    color: var(--motiv-color-text);
+    color: var(--motiv-table-color, var(--motiv-color-text));
     font-family: var(--motiv-font-body);
     font-size: calc(var(--motiv-font-size) * 0.875);
-    background: var(--motiv-color-surface);
-    border: calc(var(--motiv-space) / 4) solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius);
+    background: var(--motiv-table-bg, var(--motiv-color-surface));
+    border: calc(var(--motiv-space) / 4) solid
+      var(--motiv-table-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-table-radius, var(--motiv-radius));
 
     &:focus-visible {
       outline: none;
@@ -32,14 +33,15 @@
   .motiv-table__cell {
     padding: calc(var(--motiv-space) * 2) calc(var(--motiv-space) * 3);
     text-align: start;
-    border-bottom: calc(var(--motiv-space) / 4) solid var(--motiv-color-border);
+    border-bottom: calc(var(--motiv-space) / 4) solid
+      var(--motiv-table-border-color, var(--motiv-color-border));
   }
 
   .motiv-table__header {
     position: relative;
     color: var(--motiv-color-text-muted);
     font-weight: 600;
-    background: var(--motiv-color-surface);
+    background: var(--motiv-table-bg, var(--motiv-color-surface));
   }
 
   .motiv-table__label,
@@ -74,7 +76,7 @@
     &::after {
       content: "";
       width: calc(var(--motiv-space) / 2);
-      background: var(--motiv-color-border);
+      background: var(--motiv-table-border-color, var(--motiv-color-border));
       opacity: 0;
       transition: opacity var(--motiv-duration) var(--motiv-ease);
     }
@@ -118,12 +120,13 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     overflow-wrap: anywhere;
-    color: var(--motiv-color-text);
+    color: var(--motiv-table-color, var(--motiv-color-text));
     font-family: var(--motiv-font-body);
     font-size: var(--motiv-font-size);
-    background: var(--motiv-color-surface);
-    border: calc(var(--motiv-space) / 4) solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius);
+    background: var(--motiv-table-bg, var(--motiv-color-surface));
+    border: calc(var(--motiv-space) / 4) solid
+      var(--motiv-table-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-table-radius, var(--motiv-radius));
     box-shadow: var(--motiv-shadow-md);
     opacity: 1;
     transition: opacity var(--motiv-duration) var(--motiv-ease);

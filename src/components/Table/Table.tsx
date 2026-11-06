@@ -1,7 +1,6 @@
-import { type ComponentProps, type Key, type ReactNode, useId, useState } from 'react';
+import { type ComponentProps, type Key, type ReactNode, useId } from 'react';
 import { cx } from '../../utils/cx';
-
-const MAX_WIDTH = 800;
+import { useColumnResize } from '../../utils/useColumnResize';
 
 export type TableColumn<Row> = {
   id: string;
@@ -34,25 +33,11 @@ export function Table<Row>({
   ...props
 }: TableProps<Row>) {
   const labelId = useId();
-  const [ownWidths, setOwnWidths] = useState<Record<string, number>>({});
-  const [draft, setDraft] = useState<{ id: string; x: number; base: number; width: number }>();
-  const widths = columnWidths ?? ownWidths;
-  // Column ids are app data, so `constructor` or `__proto__` must not hit Object.prototype.
-  const saved = (id: string) => Object.hasOwn(widths, id);
-  const clamp = (column: TableColumn<Row>, width: number) =>
-    Math.min(MAX_WIDTH, Math.max(column.minWidth ?? 80, Math.round(width)));
-  const widthOf = (column: TableColumn<Row>) => {
-    if (draft?.id === column.id) return draft.width;
-    return clamp(column, saved(column.id) ? widths[column.id] : (column.width ?? 200));
-  };
-
-  function commit(id: string, width?: number) {
-    const { [id]: _, ...rest } = widths;
-    const next = width === undefined ? rest : { ...rest, [id]: width };
-    setDraft(undefined);
-    if (!columnWidths) setOwnWidths(next);
-    onColumnWidthsChange?.(next);
-  }
+  const { widthOf, separatorProps } = useColumnResize({
+    columnWidths,
+    onColumnWidthsChange,
+    resizeLabel,
+  });
 
   return (
     <div
@@ -75,11 +60,7 @@ export function Table<Row>({
         <thead className="motiv-table__head">
           <tr>
             {columns.map((column, index) => {
-              const width = widthOf(column);
-              const dragging = draft?.id === column.id;
-              const reset = () => {
-                if (saved(column.id)) commit(column.id);
-              };
+              const separator = separatorProps(column);
               return (
                 // Named by the label alone: the separator's name and value would leak into it.
                 <th
@@ -92,45 +73,11 @@ export function Table<Row>({
                     {column.header ?? column.label}
                   </span>
                   <div
-                    role="separator"
-                    aria-orientation="vertical"
-                    aria-label={resizeLabel(column.label)}
-                    aria-valuenow={width}
-                    aria-valuemin={column.minWidth ?? 80}
-                    aria-valuemax={MAX_WIDTH}
-                    tabIndex={0}
+                    {...separator.props}
                     className={cx(
                       'motiv-table__resize',
-                      dragging && 'motiv-table__resize--dragging',
+                      separator.dragging && 'motiv-table__resize--dragging',
                     )}
-                    onPointerDown={(event) => {
-                      event.currentTarget.setPointerCapture(event.pointerId);
-                      setDraft({ id: column.id, x: event.clientX, base: width, width });
-                    }}
-                    onPointerMove={(event) => {
-                      if (dragging)
-                        setDraft({
-                          ...draft,
-                          width: clamp(column, draft.base + event.clientX - draft.x),
-                        });
-                    }}
-                    onPointerUp={(event) => {
-                      if (!dragging) return;
-                      const next = clamp(column, draft.base + event.clientX - draft.x);
-                      if (next === draft.base) setDraft(undefined);
-                      else commit(column.id, next);
-                    }}
-                    onPointerCancel={() => setDraft(undefined)}
-                    onLostPointerCapture={() => setDraft(undefined)}
-                    onDoubleClick={reset}
-                    onKeyDown={(event) => {
-                      if (event.key === 'Enter') reset();
-                      else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-                        event.preventDefault();
-                        const next = clamp(column, width + (event.key === 'ArrowLeft' ? -10 : 10));
-                        if (next !== width) commit(column.id, next);
-                      }
-                    }}
                   />
                 </th>
               );

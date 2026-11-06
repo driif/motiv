@@ -73,6 +73,32 @@ const checks = [
     kept: 'XMLHttpRequest',
     dropped: ['motiv-file-upload', 'motiv-matrix-file-upload', 'motiv-matrix-btn', 'useFileUpload'],
   },
+  {
+    input: 'test/fixtures/treeshake-drawn-toaster.js',
+    kept: 'motiv-sketch-toast',
+    dropped: ['motiv-toast', 'motiv-matrix-toast', 'useConfirm', 'useColumnResize'],
+  },
+  {
+    input: 'test/fixtures/treeshake-matrix-toast.js',
+    kept: 'Infinity',
+    dropped: [
+      'motiv-toast',
+      'motiv-sketch-toast',
+      'motiv-matrix-toast',
+      'useSyncExternalStore',
+      'useToastItem',
+    ],
+  },
+  {
+    input: 'test/fixtures/treeshake-drawn-table.js',
+    kept: 'motiv-sketch-table__resize',
+    dropped: ['motiv-table__', 'motiv-sketch-table-menu', 'motiv-checkbox', 'motiv-btn'],
+  },
+  {
+    input: 'test/fixtures/treeshake-matrix-confirm.js',
+    kept: 'motiv-matrix-confirm',
+    dropped: ['motiv-confirm', 'motiv-sketch-confirm', 'motiv-text-field', 'motiv-btn'],
+  },
 ];
 
 const problems = [];

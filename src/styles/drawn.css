@@ -33,6 +33,9 @@
 @import "../drawn/Accordion/Accordion.css";
 @import "../drawn/Stepper/Stepper.css";
 @import "../drawn/Carousel/Carousel.css";
+@import "../drawn/Confirm/Confirm.css";
+@import "../drawn/Toast/Toast.css";
+@import "../drawn/Table/Table.css";
 
 @layer motiv.tokens {
   /* tokens.css carries the kinetic palette; keep drawn's own ease, shadow and muted mix. */

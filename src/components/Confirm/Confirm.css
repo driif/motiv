@@ -9,10 +9,10 @@
     overflow: auto;
     overscroll-behavior: contain;
     overflow-wrap: anywhere;
-    color: var(--motiv-color-text);
-    background: var(--motiv-color-surface);
-    border: 1px solid var(--motiv-color-border);
-    border-radius: var(--motiv-radius-lg);
+    color: var(--motiv-confirm-color, var(--motiv-color-text));
+    background: var(--motiv-confirm-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-confirm-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-confirm-radius, var(--motiv-radius-lg));
     box-shadow: var(--motiv-shadow-lg);
     font-family: var(--motiv-font-body);
     font-size: var(--motiv-font-size);
