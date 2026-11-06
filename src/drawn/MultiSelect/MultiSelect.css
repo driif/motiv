@@ -1,0 +1,265 @@
+@layer motiv.components {
+  .motiv-sketch-multi-select {
+    --_pen: cubic-bezier(0.6, 0.05, 0.3, 1);
+    --_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --_accent: var(--motiv-select-accent, var(--motiv-color-primary));
+    --_ink: var(--motiv-select-border-color, var(--motiv-color-text));
+    --_bg: var(--motiv-select-bg, var(--motiv-color-surface));
+    --_stripes: repeating-linear-gradient(
+      -45deg,
+      color-mix(in oklch, var(--_accent) 16%, transparent) 0 2px,
+      transparent 2px 6px
+    );
+    --_hatch: var(--motiv-select-bg-hover, var(--_stripes));
+    /* A color override replaces the whole chip background; only the last layer may be a color. */
+    --_chip-bg: var(--motiv-select-bg-hover, var(--_stripes), var(--_bg));
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2);
+    min-width: 0;
+    color: var(--motiv-select-color, var(--motiv-color-text));
+  }
+
+  .motiv-sketch-multi-select__label {
+    flex-basis: 100%;
+    font-weight: 600;
+  }
+
+  .motiv-sketch-multi-select__trigger,
+  .motiv-sketch-multi-select__chip {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2);
+    min-width: 0;
+    max-width: 100%;
+    color: inherit;
+    font: inherit;
+    text-align: start;
+    background: var(--_bg);
+    cursor: pointer;
+    transition: rotate 0.3s var(--_spring);
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .motiv-sketch-multi-select__trigger {
+    width: 100%;
+    min-height: 56px;
+    padding: calc(var(--motiv-space) * 2) calc(var(--motiv-space) * 4);
+    font-size: 1.1875rem;
+    font-weight: 600;
+    border: 2px solid var(--_ink);
+    border-radius: var(--motiv-select-radius, 255px 14px 225px 14px / 14px 225px 14px 255px);
+
+    &[aria-expanded="true"] {
+      border-color: var(--_accent);
+    }
+  }
+
+  .motiv-sketch-multi-select__summary {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .motiv-sketch-multi-select__summary--empty {
+    color: var(--motiv-color-text-muted);
+  }
+
+  .motiv-sketch-multi-select__fan,
+  .motiv-sketch-multi-select__cross,
+  .motiv-sketch-multi-select__check {
+    flex-shrink: 0;
+    overflow: visible;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .motiv-sketch-multi-select__fan {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+    transition: rotate 0.4s var(--_spring);
+
+    [aria-expanded="true"] > & {
+      rotate: 90deg;
+    }
+  }
+
+  .motiv-sketch-multi-select__chip {
+    min-height: 36px;
+    padding: 0 10px 0 14px;
+    font-weight: 600;
+    background: var(--_chip-bg);
+    border: 1.5px solid var(--_accent);
+    border-radius: 22px 14px 20px 12px / 14px 20px 12px 22px;
+  }
+
+  .motiv-sketch-multi-select__cross {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2.4;
+  }
+
+  .motiv-sketch-multi-select__more {
+    font-family: "Caveat", "Segoe Print", cursive;
+    font-size: 1.2rem;
+    color: var(--motiv-color-text-muted);
+  }
+
+  /* A paper sheet with an offset ink shadow, held in the top layer under the trigger. */
+  .motiv-sketch-multi-select__panel {
+    position: fixed;
+    inset: auto;
+    z-index: 10;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--motiv-space) * 2);
+    max-height: 20rem;
+    margin: 0;
+    padding: 8px;
+    overflow: hidden;
+    color: var(--motiv-select-color, var(--motiv-color-text));
+    background: var(--_bg);
+    border: 2px solid var(--_ink);
+    border-radius: var(--motiv-select-radius, 14px 225px 14px 255px / 255px 14px 225px 14px);
+    box-shadow: 4px 5px 0 color-mix(in oklch, var(--motiv-color-text) 18%, transparent);
+    rotate: 0deg;
+    transform-origin: 50% calc(var(--_flip, 0) * 100%);
+    transition:
+      opacity 0.2s var(--motiv-ease),
+      rotate 0.35s var(--_pen);
+
+    &[hidden] {
+      display: none;
+    }
+
+    @starting-style {
+      opacity: 0;
+      rotate: -2deg;
+    }
+  }
+
+  .motiv-sketch-multi-select__search {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: calc(var(--motiv-space) * 2) calc(var(--motiv-space) * 1);
+    color: inherit;
+    font: inherit;
+    background: transparent;
+    border: 0;
+    border-bottom: 1.5px solid var(--motiv-color-text-muted);
+    border-radius: 0;
+
+    &:focus-visible {
+      outline: none;
+      border-bottom-color: var(--_accent);
+      box-shadow: 0 1.5px 0 var(--_accent);
+    }
+  }
+
+  .motiv-sketch-multi-select__list {
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    list-style: none;
+  }
+
+  .motiv-sketch-multi-select__option {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--motiv-space) * 2.5);
+    min-height: 44px;
+    padding: calc(var(--motiv-space) * 1.5) calc(var(--motiv-space) * 2.5);
+    overflow-wrap: anywhere;
+    border-radius: 12px 6px 14px 8px / 8px 14px 6px 12px;
+    cursor: pointer;
+
+    &[aria-selected="true"] {
+      font-weight: 600;
+    }
+  }
+
+  .motiv-sketch-multi-select__option--active {
+    background: var(--_hatch);
+    box-shadow: inset 0 0 0 1.5px var(--_accent);
+  }
+
+  .motiv-sketch-multi-select__check {
+    width: 20px;
+    height: 20px;
+    stroke: var(--_accent);
+    stroke-width: 2.6;
+
+    & path {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      transition: stroke-dashoffset 0.4s var(--_pen);
+    }
+
+    [aria-selected="true"] > & path {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .motiv-sketch-multi-select__hint,
+  .motiv-sketch-multi-select__empty {
+    color: var(--motiv-color-text-muted);
+    font-size: 0.875em;
+    font-weight: 400;
+  }
+
+  .motiv-sketch-multi-select__hint {
+    display: block;
+  }
+
+  .motiv-sketch-multi-select__empty {
+    margin: 0;
+    padding: calc(var(--motiv-space) * 3);
+    font-family: "Caveat", "Segoe Print", cursive;
+    font-size: 1.2rem;
+  }
+
+  @media (hover: hover) {
+    .motiv-sketch-multi-select__option:hover {
+      background: var(--_hatch);
+    }
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .motiv-sketch-multi-select__trigger:hover:not(:disabled),
+    .motiv-sketch-multi-select__chip:hover:not(:disabled) {
+      rotate: -1deg;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-sketch-multi-select__trigger,
+    .motiv-sketch-multi-select__chip,
+    .motiv-sketch-multi-select__fan,
+    .motiv-sketch-multi-select__panel,
+    .motiv-sketch-multi-select__check path {
+      transition: none;
+    }
+  }
+}

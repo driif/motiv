@@ -376,7 +376,7 @@ describe('MultiSelect', () => {
       left: 24,
       width: 240,
     } as DOMRect);
-    vi.spyOn(panel, 'getBoundingClientRect').mockReturnValue({ height: 200 } as DOMRect);
+    Object.defineProperty(panel, 'offsetHeight', { value: 200 });
     fireEvent.click(trigger());
     expect(panel.showPopover).toHaveBeenCalledOnce();
     expect(panel.style.top).toBe(`${window.innerHeight - 260}px`);

@@ -24,6 +24,9 @@ export const categories = [
   'Chips',
   'OtpInput',
   'CommandMenu',
+  'MultiSelect',
+  'DatePicker',
+  'FileUpload',
 ];
 
 // Every runtime export of a style's entry must be claimed by exactly one section;
@@ -269,6 +272,33 @@ export const catalog = {
       blurb:
         'A few slides in a sketched frame, changed by swipe, arrow keys, buttons or ink dots. Same props as the kinetic Carousel.',
     },
+    {
+      id: 'multi-select',
+      category: 'MultiSelect',
+      title: 'MultiSelect',
+      symbols: ['MultiSelect'],
+      demo: 'MultiSelect',
+      blurb:
+        'Search and tick several options on a paper sheet; picks are inked in as chips you can strike out. Same props as the kinetic MultiSelect.',
+    },
+    {
+      id: 'date-picker',
+      category: 'DatePicker',
+      title: 'DatePicker',
+      symbols: ['DatePicker'],
+      demo: 'DatePicker',
+      blurb:
+        'A native date or date-and-time field on the pencil line, its label penned above. A scribbled cross clears it in one click.',
+    },
+    {
+      id: 'file-upload',
+      category: 'FileUpload',
+      title: 'FileUpload',
+      symbols: ['FileUpload', 'putFile'],
+      demo: 'FileUpload',
+      blurb:
+        'Attached files and new uploads ruled off like notebook lines, with hatched progress, cancel and retry. Same props and putFile helper as the kinetic FileUpload.',
+    },
   ],
   kinetic: [
     {
@@ -326,7 +356,7 @@ export const catalog = {
     },
     {
       id: 'file-upload',
-      category: null,
+      category: 'FileUpload',
       title: 'FileUpload',
       symbols: ['FileUpload', 'putFile'],
       demo: 'FileUpload',
@@ -477,7 +507,7 @@ export const catalog = {
     },
     {
       id: 'date-picker',
-      category: null,
+      category: 'DatePicker',
       title: 'DatePicker',
       symbols: ['DatePicker'],
       demo: 'DatePicker',
@@ -709,7 +739,7 @@ export const catalog = {
     },
     {
       id: 'multi-select',
-      category: 'Select',
+      category: 'MultiSelect',
       title: 'MultiSelect',
       symbols: ['MultiSelect'],
       demo: 'MultiSelect',
@@ -995,6 +1025,33 @@ export const catalog = {
       demo: 'Carousel',
       blurb:
         'Slides in a HUD frame with segment indicators and an [01/03] counter; swipe, arrow keys, buttons or segments move it. Same props as the kinetic Carousel.',
+    },
+    {
+      id: 'multi-select',
+      category: 'MultiSelect',
+      title: 'MultiSelect',
+      symbols: ['MultiSelect'],
+      demo: 'MultiSelect',
+      blurb:
+        'A > prompt that opens a search over [ ] and [x] rows; picks show as bracketed chips. Same props as the kinetic MultiSelect.',
+    },
+    {
+      id: 'date-picker',
+      category: 'DatePicker',
+      title: 'DatePicker',
+      symbols: ['DatePicker'],
+      demo: 'DatePicker',
+      blurb:
+        'A native date or date-and-time field behind a > prompt, with a [×] that clears it. Values stay native strings.',
+    },
+    {
+      id: 'file-upload',
+      category: 'FileUpload',
+      title: 'FileUpload',
+      symbols: ['FileUpload', 'putFile'],
+      demo: 'FileUpload',
+      blurb:
+        'Uploads as log lines with a block progress bar, cancel and retry; failures print a ! line. Same props and putFile helper as the kinetic FileUpload.',
     },
   ],
 };

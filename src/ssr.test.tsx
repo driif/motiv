@@ -514,3 +514,27 @@ it('renders MultiSelect closed without a DOM and preserves all hidden form value
   expect(html).toContain('<input type="hidden" name="permissions" value="read"/>');
   expect(html).toContain('<input type="hidden" name="permissions" value="unknown"/>');
 });
+
+it('renders MultiSelect, DatePicker and FileUpload in drawn and matrix without a DOM', () => {
+  const noop = () => {};
+  const options = [{ value: 'read', label: 'Read' }];
+  const html = renderToStaticMarkup(
+    <>
+      <D.MultiSelect label="Roles" options={options} value={['read']} onChange={noop} name="d" />
+      <M.MultiSelect label="Roles" options={options} value={['read']} onChange={noop} name="m" />
+      <D.DatePicker label="Due" defaultValue="2026-11-13" />
+      <M.DatePicker label="Due" type="datetime-local" defaultValue="2026-11-13T09:30" />
+      <D.FileUpload upload={async () => {}} />
+      <M.FileUpload upload={async () => {}} />
+    </>,
+  );
+  expect(html.match(/popover="manual" hidden=""/g)).toHaveLength(2);
+  expect(html).toContain('<input type="hidden" name="d" value="read"/>');
+  expect(html).toContain('<input type="hidden" name="m" value="read"/>');
+  expect(html).toContain('value="2026-11-13"');
+  expect(html).toContain('type="datetime-local"');
+  expect(html.match(/Clear/g)).toHaveLength(2);
+  expect(html.match(/type="file"/g)).toHaveLength(2);
+  expect(D.putFile).toBe(K.putFile);
+  expect(M.putFile).toBe(K.putFile);
+});

@@ -1,11 +1,19 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { Select } from './Select';
 
 const options = [
   { value: 'oidc', label: 'OIDC', hint: 'Single sign-on' },
   { value: 'ldap', label: 'LDAP' },
 ];
+
+// jsdom has UA popover hiding but no popover API; mirror the open-list CSS.
+const style = document.createElement('style');
+beforeAll(() => {
+  style.textContent = '[popover]:not([hidden]) { display: block !important; }';
+  document.head.append(style);
+});
+afterAll(() => style.remove());
 
 describe('Select', () => {
   it('renders TerminalSelect with the drawn Select props', () => {

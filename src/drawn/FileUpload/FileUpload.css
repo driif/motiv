@@ -1,0 +1,61 @@
+@layer motiv.components {
+  .motiv-sketch-file-upload {
+    display: grid;
+    gap: calc(var(--motiv-space) * 4);
+    width: 100%;
+    min-width: 0;
+    color: var(--motiv-color-text);
+    overflow-wrap: anywhere;
+  }
+
+  .motiv-sketch-file-upload__picker {
+    justify-self: start;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .motiv-sketch-file-upload__input:focus-visible + .motiv-sketch-file-upload__picker {
+    box-shadow: var(--motiv-focus-ring);
+  }
+
+  .motiv-sketch-file-upload__list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Rows are ruled off like a notebook page. */
+  .motiv-sketch-file-upload__row {
+    display: grid;
+    gap: calc(var(--motiv-space) * 2);
+    min-width: 0;
+    padding: calc(var(--motiv-space) * 3) 0;
+    border-bottom: 1.5px dashed color-mix(in oklch, var(--motiv-color-text) 30%, transparent);
+  }
+
+  .motiv-sketch-file-upload__progress {
+    min-width: 0;
+  }
+
+  .motiv-sketch-file-upload__details,
+  .motiv-sketch-file-upload__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--motiv-space) * 2);
+  }
+
+  .motiv-sketch-file-upload__details {
+    justify-content: space-between;
+    font-family: "Caveat", "Segoe Print", cursive;
+    font-size: 1.2rem;
+    color: var(--motiv-color-text-muted);
+  }
+
+  .motiv-sketch-file-upload__error {
+    margin: 0;
+    color: var(--motiv-color-danger);
+    text-decoration: underline wavy 1px;
+    text-underline-offset: 4px;
+  }
+}

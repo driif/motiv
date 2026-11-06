@@ -1,6 +1,7 @@
-import { type CSSProperties, useCallback, useId, useLayoutEffect } from 'react';
+import { type CSSProperties, useId } from 'react';
 import type { SelectProps } from '../../drawn/Select';
 import { cx } from '../../utils/cx';
+import { useAnchoredPopover } from '../../utils/useAnchoredPopover';
 import { useListbox } from '../../utils/useListbox';
 import { useSelectOptions } from '../../utils/useSelectOptions';
 
@@ -27,47 +28,7 @@ export function Select({
   );
   const selected = items !== options && value === '' ? undefined : items[selectedIndex];
 
-  const position = useCallback(
-    (event?: Event) => {
-      const list = listRef.current;
-      const anchor = anchorRef.current;
-      if (!list || !anchor || (event?.target instanceof Node && list.contains(event.target)))
-        return;
-      const rect = anchor.getBoundingClientRect();
-      list.style.width = `${rect.width}px`;
-      const scrollTop = list.scrollTop;
-      list.style.maxHeight = '';
-      const height = list.offsetHeight;
-      const below = window.innerHeight - rect.bottom - 8;
-      const above = rect.top - 8;
-      const flip = height > below && above > below;
-      const available = Math.max(0, flip ? above : below);
-      list.style.maxHeight = `${Math.min(height, available)}px`;
-      list.scrollTop = scrollTop;
-      list.style.top = `${flip ? Math.max(0, rect.top - 8 - height) : rect.bottom + 8}px`;
-      list.style.left = `${rect.left}px`;
-    },
-    [anchorRef, listRef],
-  );
-
-  useLayoutEffect(() => {
-    if (!isOpen) return;
-    const list = listRef.current;
-    if (!list) return;
-    list.showPopover?.();
-    window.addEventListener('scroll', position, true);
-    window.addEventListener('resize', position);
-    return () => {
-      window.removeEventListener('scroll', position, true);
-      window.removeEventListener('resize', position);
-      list.hidePopover?.();
-    };
-  }, [isOpen, listRef, position]);
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: option content changes the list height.
-  useLayoutEffect(() => {
-    if (isOpen) position();
-  }, [isOpen, items, position]);
+  useAnchoredPopover(anchorRef, listRef, isOpen, 8, items);
 
   return (
     <div {...props} className={cx('motiv-picker', isOpen && 'motiv-picker--open', className)}>

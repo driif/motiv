@@ -44,3 +44,11 @@ export const Disabled: Story = { args: { disabled: true } };
 export const Themes: Story = {
   render: () => <ThemePair>{() => <Select />}</ThemePair>,
 };
+
+export const OverflowHidden: Story = {
+  render: () => (
+    <div style={{ overflow: 'hidden', height: '8rem', padding: '1rem' }}>
+      <Select />
+    </div>
+  ),
+};

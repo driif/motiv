@@ -2,8 +2,6 @@
   .motiv-select {
     --_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     --_mono: ui-monospace, SFMono-Regular, Menlo, monospace;
-    /* Matches the longest reverse-stagger delay plus the card transition. */
-    --_close: calc(min(var(--_count), 10) * 30ms + 0.35s);
 
     display: grid;
     gap: calc(var(--motiv-space) * 2);
@@ -94,26 +92,25 @@
   }
 
   .motiv-select__list {
-    position: absolute;
+    position: fixed;
+    inset: auto;
     z-index: 10;
-    top: 100%;
-    right: 0;
-    left: 0;
+    box-sizing: border-box;
     display: grid;
     gap: 6px;
     max-height: 18rem;
-    margin: calc(var(--motiv-space) * 2) 0 0;
+    margin: 0;
     padding: 4px 8px 8px 4px;
     overflow-y: auto;
     overscroll-behavior: contain;
     list-style: none;
-    visibility: hidden;
-    transition: visibility 0s var(--_close);
-  }
+    color: inherit;
+    background: transparent;
+    border: 0;
 
-  .motiv-select--open .motiv-select__list {
-    visibility: visible;
-    transition-delay: 0s;
+    &[hidden] {
+      display: none;
+    }
   }
 
   .motiv-select__option {
@@ -129,12 +126,16 @@
     border-radius: 12px 6px 14px 8px / 8px 14px 6px 12px;
     box-shadow: 3px 3px 0 color-mix(in oklch, var(--motiv-color-text) 16%, transparent);
     cursor: pointer;
-    opacity: 0;
-    transform: translateY(-44px) rotate(calc(var(--_tilt) * 3deg)) scale(0.92);
+    transform: rotate(calc(var(--_tilt) * 0.7deg));
     transition:
       transform 0.35s var(--_spring),
       opacity 0.2s;
-    transition-delay: calc(min(var(--_count) - var(--_i), 10) * 30ms);
+    transition-delay: calc(min(var(--_i), 10) * 50ms);
+
+    @starting-style {
+      opacity: 0;
+      transform: rotate(calc(var(--_tilt) * 3deg)) scale(0.92);
+    }
 
     &:hover,
     &.motiv-select__option--active {
@@ -155,12 +156,6 @@
     }
   }
 
-  .motiv-select--open .motiv-select__option {
-    opacity: 1;
-    transform: rotate(calc(var(--_tilt) * 0.7deg));
-    transition-delay: calc(min(var(--_i), 10) * 50ms);
-  }
-
   .motiv-select__hint {
     margin: 0;
     font-size: 0.9375rem;
@@ -168,10 +163,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .motiv-select {
-      --_close: 0s;
-    }
-
     .motiv-select__trigger,
     .motiv-select__fan,
     .motiv-select__option {

@@ -181,8 +181,8 @@ Read by `Card`, `SlipCard`, `DrillStack` · drawn `Card` · matrix `Card`.
 
 ### TextField
 
-Read by `TextField`, `FloatingField`, `DatePicker`, `CopyField`, `OtpInput`, `ExpandingSearch` · drawn `TextField`, `OtpInput`
-· matrix `TextField`, `DecodeSecretField`, `OtpInput`.
+Read by `TextField`, `FloatingField`, `DatePicker`, `CopyField`, `OtpInput`, `ExpandingSearch` · drawn `TextField`, `DatePicker`,
+`OtpInput` · matrix `TextField`, `DatePicker`, `DecodeSecretField`, `OtpInput`.
 
 | Token | Kinetic | Drawn | Matrix |
 |---|---|---|---|
@@ -208,7 +208,7 @@ Read by `Textarea` in all three styles.
 
 Read by `Select` in all three styles · matrix `TerminalSelect`.
 
-Kinetic `MultiSelect` uses the same `--motiv-select-*` tokens for its trigger, chips and popover.
+`MultiSelect` in all three styles uses the same `--motiv-select-*` tokens for its trigger, chips and popover.
 
 | Token | Kinetic | Drawn | Matrix |
 |---|---|---|---|
@@ -294,6 +294,12 @@ Read by `Progress`, `ProgressRing`, `StepProgress` · drawn `Progress` · matrix
 | `--motiv-progress-bg` | ✓ | ✓ | ✓ |
 | `--motiv-progress-border-color` | ✓ | ✓ | — |
 | `--motiv-progress-accent` | ✓ | ✓ | ✓ |
+
+### FileUpload
+
+`FileUpload` has no tokens of its own in any style. Its picker and row actions are the style's
+`Button` and read `--motiv-button-*`, its bars are the style's `Progress` and read
+`--motiv-progress-*`, and the rest uses the base tokens.
 
 ### Link
 

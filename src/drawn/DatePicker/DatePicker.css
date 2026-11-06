@@ -1,0 +1,61 @@
+@layer motiv.components {
+  .motiv-sketch-date-picker__input {
+    padding-right: calc(var(--motiv-space) * 10);
+
+    /* iOS Safari centers the date value. */
+    &::-webkit-date-and-time-value {
+      text-align: start;
+    }
+  }
+
+  .motiv-sketch-date-picker__clear {
+    position: absolute;
+    right: 0;
+    bottom: calc(var(--motiv-space) * 1.5);
+    display: grid;
+    place-items: center;
+    width: calc(var(--motiv-space) * 8);
+    height: calc(var(--motiv-space) * 8);
+    padding: 0;
+    color: var(--motiv-color-text-muted);
+    background: transparent;
+    border: 0;
+    border-radius: 12px 6px 14px 8px / 8px 14px 6px 12px;
+    cursor: pointer;
+    transition:
+      color var(--motiv-duration) var(--motiv-ease),
+      rotate 0.3s var(--_spring);
+
+    & svg {
+      width: calc(var(--motiv-space) * 4.5);
+      height: calc(var(--motiv-space) * 4.5);
+      overflow: visible;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+  }
+
+  @media (hover: hover) {
+    .motiv-sketch-date-picker__clear:hover {
+      color: var(--_accent);
+      rotate: -8deg;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-sketch-date-picker__clear {
+      transition: none;
+    }
+
+    .motiv-sketch-date-picker__clear:hover {
+      rotate: none;
+    }
+  }
+}

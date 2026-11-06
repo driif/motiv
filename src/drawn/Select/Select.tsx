@@ -1,5 +1,6 @@
 import { type ComponentProps, type CSSProperties, type ReactNode, useId } from 'react';
 import { cx } from '../../utils/cx';
+import { useAnchoredPopover } from '../../utils/useAnchoredPopover';
 import { useListbox } from '../../utils/useListbox';
 import { useSelectOptions } from '../../utils/useSelectOptions';
 
@@ -26,7 +27,6 @@ export function Select({
   disabled,
   name,
   className,
-  style,
   ...props
 }: SelectProps) {
   const id = useId();
@@ -38,13 +38,10 @@ export function Select({
     disabled,
   );
   const selected = items !== options && value === '' ? undefined : items[selectedIndex];
+  useAnchoredPopover(anchorRef, listRef, isOpen, 8, items);
 
   return (
-    <div
-      className={cx('motiv-select', isOpen && 'motiv-select--open', className)}
-      style={{ ...style, '--_count': items.length } as CSSProperties}
-      {...props}
-    >
+    <div className={cx('motiv-select', isOpen && 'motiv-select--open', className)} {...props}>
       <span id={`${id}-label`} className="motiv-select__label">
         {label}
       </span>
@@ -73,6 +70,8 @@ export function Select({
           ref={listRef}
           id={`${id}-list`}
           role="listbox"
+          popover="manual"
+          hidden={!isOpen}
           aria-labelledby={`${id}-label`}
           inert={!isOpen}
           className="motiv-select__list"

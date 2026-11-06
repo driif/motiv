@@ -48,3 +48,17 @@ export const LongList: Story = {
 export const Themes: Story = {
   render: () => <ThemePair>{() => <Demo />}</ThemePair>,
 };
+
+export const OverflowHidden: Story = {
+  render: () => {
+    function Example() {
+      const [value, setValue] = useState('');
+      return (
+        <div style={{ overflow: 'hidden', height: '8rem', padding: '1rem' }}>
+          <Select label="Language" options={options} value={value} onChange={setValue} />
+        </div>
+      );
+    }
+    return <Example />;
+  },
+};
