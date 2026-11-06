@@ -7,7 +7,7 @@ const pages = {
   'drawn/index.html': 205_000,
   'matrix/index.html': 215_000,
 };
-const totalCss = 346_000;
+const totalCss = 380_000;
 const largestJs = 245_000;
 
 const dist = new URL('../site/dist/', import.meta.url);

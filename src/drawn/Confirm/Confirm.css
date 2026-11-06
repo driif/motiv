@@ -1,0 +1,68 @@
+@layer motiv.components {
+  /* A paper sheet in a pencil outline with an offset ink shadow. */
+  .motiv-sketch-confirm {
+    --_shadow: 6px 7px 0 -1px color-mix(in oklch, var(--motiv-color-text) 16%, transparent);
+
+    box-sizing: border-box;
+    width: min(calc(var(--motiv-space) * 120), calc(100% - var(--motiv-space) * 8));
+    max-width: calc(100% - var(--motiv-space) * 8);
+    max-height: calc(100dvh - var(--motiv-space) * 8);
+    margin: auto;
+    padding: calc(var(--motiv-space) * 6);
+    overflow: auto;
+    overscroll-behavior: contain;
+    overflow-wrap: anywhere;
+    color: var(--motiv-confirm-color, var(--motiv-color-text));
+    background: var(--motiv-confirm-bg, var(--motiv-color-surface));
+    border: 2px solid var(--motiv-confirm-border-color, var(--motiv-color-text));
+    border-radius: var(--motiv-confirm-radius, 6px 18px 10px 24px / 22px 8px 16px 6px);
+    box-shadow: var(--_shadow);
+    font-family: var(--motiv-font-body);
+    font-size: var(--motiv-font-size);
+    line-height: 1.5;
+
+    &::backdrop {
+      background: color-mix(in oklch, var(--motiv-shadow-color) 40%, transparent);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring), var(--_shadow);
+    }
+  }
+
+  .motiv-sketch-confirm__content {
+    display: grid;
+    gap: calc(var(--motiv-space) * 4);
+    min-width: 0;
+
+    & > * {
+      min-width: 0;
+      margin-block: 0;
+    }
+  }
+
+  .motiv-sketch-confirm__title {
+    font-family: "Caveat", "Segoe Print", cursive;
+    font-size: 1.875rem;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  /* The actions sit under a dashed pencil rule. */
+  .motiv-sketch-confirm__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: calc(var(--motiv-space) * 3);
+    padding-top: calc(var(--motiv-space) * 4);
+    border-top: 1.5px dashed color-mix(in oklch, currentColor 30%, transparent);
+
+    & > .motiv-btn {
+      max-width: 100%;
+      padding-block: calc(var(--motiv-space) * 2);
+      white-space: normal;
+      line-height: 1.3;
+    }
+  }
+}

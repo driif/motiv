@@ -1,0 +1,181 @@
+@layer motiv.components {
+  /* A terminal readout: thin frame, uppercase phosphor header, dotted rules between rows. */
+  .motiv-matrix-table {
+    --_frame: var(
+      --motiv-table-border-color,
+      color-mix(in oklch, var(--motiv-color-primary) 40%, transparent)
+    );
+    --_rule: color-mix(in oklch, var(--_frame) 60%, transparent);
+
+    width: fit-content;
+    max-width: 100%;
+    overflow: auto;
+    color: var(--motiv-table-color, var(--motiv-color-text));
+    font-family: var(--motiv-font-body);
+    font-size: 0.8125rem;
+    background: var(--motiv-table-bg, var(--motiv-color-surface));
+    border: 1px solid var(--_frame);
+    border-radius: var(--motiv-table-radius, var(--motiv-radius-sm));
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 3px;
+    }
+  }
+
+  .motiv-matrix-table__table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .motiv-matrix-table__head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .motiv-matrix-table__header,
+  .motiv-matrix-table__cell {
+    padding: calc(var(--motiv-space) * 2) calc(var(--motiv-space) * 3);
+    text-align: start;
+  }
+
+  .motiv-matrix-table__header {
+    position: relative;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--motiv-color-primary);
+    background: color-mix(
+      in oklch,
+      var(--motiv-color-primary) 8%,
+      var(--motiv-table-bg, var(--motiv-color-surface))
+    );
+    border-bottom: 1px solid var(--_frame);
+
+    &:not(:last-child) {
+      border-inline-end: 1px solid var(--_rule);
+    }
+  }
+
+  .motiv-matrix-table__cell {
+    border-bottom: 1px dotted var(--_rule);
+  }
+
+  .motiv-matrix-table__label,
+  .motiv-matrix-table__cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .motiv-matrix-table__label {
+    display: block;
+  }
+
+  .motiv-matrix-table__row:last-child .motiv-matrix-table__cell {
+    border-bottom: 0;
+  }
+
+  /* The hit area straddles the column border and sits above the next header cell. */
+  .motiv-matrix-table__resize {
+    position: absolute;
+    top: 0;
+    right: calc(var(--motiv-space) * -3);
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: calc(var(--motiv-space) * 6);
+    cursor: col-resize;
+    touch-action: none;
+    user-select: none;
+
+    &::after {
+      content: "";
+      width: 2px;
+      background: var(--motiv-color-primary);
+      opacity: 0;
+      transition: opacity var(--motiv-duration) steps(2);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: -2px;
+    }
+
+    &:focus-visible::after {
+      opacity: 1;
+    }
+
+    .motiv-matrix-table__header:last-child > & {
+      right: 0;
+      justify-content: flex-end;
+    }
+  }
+
+  .motiv-matrix-table__resize--dragging::after {
+    opacity: 1;
+    box-shadow: 0 0 8px var(--motiv-color-primary);
+  }
+
+  .motiv-matrix-table-menu {
+    display: inline-flex;
+  }
+
+  .motiv-matrix-table-menu__panel {
+    position: fixed;
+    inset: auto;
+    min-width: calc(var(--motiv-space) * 48);
+    max-width: calc(var(--motiv-space) * 80);
+    max-height: min(
+      calc(var(--motiv-space) * 80),
+      calc(var(--_space, 100vh) - var(--motiv-space) * 3)
+    );
+    margin: calc(var(--motiv-space) * 1.5) 0;
+    padding: var(--motiv-space) calc(var(--motiv-space) * 4);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    overflow-wrap: anywhere;
+    color: var(--motiv-table-color, var(--motiv-color-text));
+    font-family: var(--motiv-font-body);
+    font-size: 0.875rem;
+    background: var(--motiv-table-bg, var(--motiv-color-surface));
+    border: 1px solid
+      var(
+        --motiv-table-border-color,
+        color-mix(in oklch, var(--motiv-color-primary) 55%, transparent)
+      );
+    border-radius: var(--motiv-table-radius, var(--motiv-radius-sm));
+    box-shadow: 0 0 32px -12px color-mix(in oklch, var(--motiv-color-primary) 55%, transparent);
+    opacity: 1;
+    transition: opacity var(--motiv-duration) steps(3);
+
+    &:popover-open {
+      display: grid;
+    }
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  @media (hover: hover) {
+    .motiv-matrix-table__row:hover {
+      background: var(--motiv-color-primary-subtle);
+    }
+
+    .motiv-matrix-table__header:hover > .motiv-matrix-table__resize::after {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-matrix-table__resize::after,
+    .motiv-matrix-table-menu__panel {
+      transition: none;
+    }
+  }
+}

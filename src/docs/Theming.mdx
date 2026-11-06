@@ -301,6 +301,43 @@ Read by `Progress`, `ProgressRing`, `StepProgress` · drawn `Progress` · matrix
 `Button` and read `--motiv-button-*`, its bars are the style's `Progress` and read
 `--motiv-progress-*`, and the rest uses the base tokens.
 
+### Confirm
+
+Read by `Confirm` in all three styles. Its actions are the style's `Button` and its slug field the
+style's `TextField`, so they read `--motiv-button-*` and `--motiv-text-field-*`.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-confirm-bg` | ✓ | ✓ | ✓ |
+| `--motiv-confirm-color` | ✓ | ✓ | ✓ |
+| `--motiv-confirm-border-color` | ✓ | ✓ | ✓ |
+| `--motiv-confirm-radius` | ✓ | ✓ | ✓ |
+
+### Toast
+
+Read by `Toaster` in all three styles. The tone colours stay `--motiv-color-success`,
+`--motiv-color-danger` and `--motiv-color-primary`; the kinetic toast has no outline, only its tone
+edge.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-toast-bg` | ✓ | ✓ | ✓ |
+| `--motiv-toast-color` | ✓ | ✓ | ✓ |
+| `--motiv-toast-border-color` | — | ✓ | ✓ |
+| `--motiv-toast-radius` | ✓ | ✓ | ✓ |
+
+### Table
+
+Read by `Table` and the panel of `TableColumnsMenu` in all three styles. The menu's trigger and
+checkboxes are the style's `Button` and `Checkbox` and read their tokens.
+
+| Token | Kinetic | Drawn | Matrix |
+|---|---|---|---|
+| `--motiv-table-bg` | ✓ | ✓ | ✓ |
+| `--motiv-table-color` | ✓ | ✓ | ✓ |
+| `--motiv-table-border-color` | ✓ | ✓ | ✓ |
+| `--motiv-table-radius` | ✓ | ✓ | ✓ |
+
 ### Link
 
 Read by `Link` in all three styles.

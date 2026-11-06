@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
+import { type CSSProperties, useState } from 'react';
 import { ThemePair } from '../../../.storybook/ThemePair';
 import { Table, type TableColumn } from './Table';
 import { TableColumnsMenu } from './TableColumnsMenu';
@@ -128,4 +128,21 @@ export const ControlledWithColumnsMenu: Story = { render: () => <WithMenu /> };
 
 export const Themes: Story = {
   render: (args) => <ThemePair>{() => <Table {...args} />}</ThemePair>,
+};
+
+export const Rethemed: Story = {
+  render: () => (
+    <div
+      style={
+        {
+          '--motiv-table-bg': '#eff6ff',
+          '--motiv-table-color': '#1e3a8a',
+          '--motiv-table-border-color': '#93c5fd',
+          '--motiv-table-radius': '0.25rem',
+        } as CSSProperties
+      }
+    >
+      <WithMenu />
+    </div>
+  ),
 };

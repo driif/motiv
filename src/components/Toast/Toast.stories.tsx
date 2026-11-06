@@ -94,7 +94,14 @@ export const Rethemed: Story = {
   render: (args) => (
     <div
       data-theme="light"
-      style={{ '--motiv-color-primary': '#2563eb', '--motiv-radius': '0.25rem' } as CSSProperties}
+      style={
+        {
+          '--motiv-color-primary': '#2563eb',
+          '--motiv-toast-bg': '#eff6ff',
+          '--motiv-toast-color': '#1e3a8a',
+          '--motiv-toast-radius': '0.25rem',
+        } as CSSProperties
+      }
     >
       <Example {...args} />
     </div>

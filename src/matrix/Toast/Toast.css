@@ -1,0 +1,159 @@
+@layer motiv.components {
+  .motiv-matrix-toast-stack {
+    position: fixed;
+    z-index: 1000;
+    right: calc(var(--motiv-space) * 4);
+    bottom: calc(var(--motiv-space) * 4);
+    width: min(calc(var(--motiv-space) * 96), calc(100% - var(--motiv-space) * 8));
+    pointer-events: none;
+    color: var(--motiv-toast-color, var(--motiv-color-text));
+    font-family: var(--motiv-font-body);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .motiv-matrix-toast-stack__list {
+    box-sizing: border-box;
+    display: grid;
+    gap: calc(var(--motiv-space) * 3);
+    max-height: calc(100dvh - var(--motiv-space) * 8);
+    margin: 0;
+    padding: calc(var(--motiv-space) * 2);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    list-style: none;
+    pointer-events: auto;
+  }
+
+  .motiv-matrix-toast-stack__list:empty {
+    display: none;
+  }
+
+  /* A log line in a HUD frame; the tone shows as the left rule and the [+] [!] [i] tag. */
+  .motiv-matrix-toast {
+    --_tone: var(--motiv-color-primary);
+    --_tag: "[i]";
+
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--motiv-space) * 3);
+    padding: calc(var(--motiv-space) * 3) calc(var(--motiv-space) * 3) calc(var(--motiv-space) * 3)
+      calc(var(--motiv-space) * 4);
+    background: var(
+      --motiv-toast-bg,
+      color-mix(in oklch, var(--motiv-color-primary) 6%, var(--motiv-color-surface))
+    );
+    border: 1px solid
+      var(
+        --motiv-toast-border-color,
+        color-mix(in oklch, var(--motiv-color-primary) 40%, transparent)
+      );
+    border-left: 3px solid var(--_tone);
+    border-radius: var(--motiv-toast-radius, var(--motiv-radius-sm));
+    box-shadow: 0 0 28px -14px color-mix(in oklch, var(--_tone) 70%, transparent);
+    opacity: 1;
+    transform: none;
+    transition-property: opacity, transform;
+    transition-duration: var(--motiv-duration);
+    transition-timing-function: steps(4);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateX(calc(var(--motiv-space) * 6));
+    }
+  }
+
+  .motiv-matrix-toast--success {
+    --_tone: var(--motiv-color-success);
+    --_tag: "[+]";
+  }
+
+  .motiv-matrix-toast--error {
+    --_tone: var(--motiv-color-danger);
+    --_tag: "[!]";
+  }
+
+  .motiv-matrix-toast[data-exiting] {
+    opacity: 0;
+    transform: translateX(calc(var(--motiv-space) * 6));
+    pointer-events: none;
+  }
+
+  .motiv-matrix-toast__tag {
+    flex-shrink: 0;
+    padding-block: calc(var(--motiv-space) * 2);
+    font-weight: 700;
+    color: var(--_tone);
+
+    &::before {
+      content: var(--_tag);
+    }
+  }
+
+  .motiv-matrix-toast__content {
+    flex: 1;
+    min-width: 0;
+    padding-block: calc(var(--motiv-space) * 2);
+    overflow-wrap: anywhere;
+  }
+
+  .motiv-matrix-toast__title {
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .motiv-matrix-toast__description {
+    margin-top: var(--motiv-space);
+    color: var(--motiv-color-text-muted);
+    font-size: 0.8125rem;
+  }
+
+  .motiv-matrix-toast__dismiss {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    min-width: calc(var(--motiv-space) * 10);
+    height: calc(var(--motiv-space) * 10);
+    padding: 0 var(--motiv-space);
+    font: inherit;
+    font-weight: 700;
+    color: var(--motiv-color-text-muted);
+    background: transparent;
+    border: 0;
+    border-radius: var(--motiv-radius);
+    cursor: pointer;
+
+    &::before {
+      content: "[×]" / "";
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: -2px;
+    }
+
+    &:active {
+      color: var(--motiv-color-on-primary);
+      background: var(--motiv-color-primary);
+    }
+  }
+
+  @media (hover: hover) {
+    .motiv-matrix-toast__dismiss:hover:not(:active) {
+      color: var(--motiv-color-primary);
+      background: var(--motiv-color-primary-subtle);
+    }
+  }
+
+  /* The li keeps its transition at 0s so the exit timer still reads a duration and completes. */
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-matrix-toast,
+    .motiv-matrix-toast[data-exiting] {
+      transition-duration: 0s;
+      transform: none;
+    }
+  }
+}

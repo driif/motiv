@@ -27,6 +27,9 @@ export const categories = [
   'MultiSelect',
   'DatePicker',
   'FileUpload',
+  'Confirm',
+  'Toast',
+  'Table',
 ];
 
 // Every runtime export of a style's entry must be claimed by exactly one section;
@@ -299,6 +302,33 @@ export const catalog = {
       blurb:
         'Attached files and new uploads ruled off like notebook lines, with hatched progress, cancel and retry. Same props and putFile helper as the kinetic FileUpload.',
     },
+    {
+      id: 'confirm',
+      category: 'Confirm',
+      title: 'Confirm',
+      symbols: ['Confirm'],
+      demo: 'Confirm',
+      blurb:
+        'A modal note in a pencil outline with an ink shadow; type the slug to arm the danger action. Same props as the kinetic Confirm.',
+    },
+    {
+      id: 'toast',
+      category: 'Toast',
+      title: 'Toast',
+      symbols: ['Toaster', 'toast', 'dismissToast'],
+      demo: 'Toast',
+      blurb:
+        'Notes pinned to the corner with a hatched tone strip and a scribbled cross. toast() from any entry shows here; same props as the kinetic Toaster.',
+    },
+    {
+      id: 'table',
+      category: 'Table',
+      title: 'Table & TableColumnsMenu',
+      symbols: ['Table', 'TableColumnsMenu'],
+      demo: 'Table',
+      blurb:
+        'A ruled sheet with a handwritten header; drag a pencil edge or use the arrow keys to resize. TableColumnsMenu ticks columns on a paper slip. Same props as the kinetic Table.',
+    },
   ],
   kinetic: [
     {
@@ -365,7 +395,7 @@ export const catalog = {
     },
     {
       id: 'confirm',
-      category: null,
+      category: 'Confirm',
       title: 'Confirm',
       symbols: ['Confirm'],
       demo: 'Confirm',
@@ -374,7 +404,7 @@ export const catalog = {
     },
     {
       id: 'toast',
-      category: null,
+      category: 'Toast',
       title: 'Toast',
       symbols: ['Toaster', 'toast', 'dismissToast'],
       demo: 'Toast',
@@ -748,7 +778,7 @@ export const catalog = {
     },
     {
       id: 'table',
-      category: null,
+      category: 'Table',
       title: 'Table & TableColumnsMenu',
       symbols: ['Table', 'TableColumnsMenu'],
       demo: 'Table',
@@ -1052,6 +1082,33 @@ export const catalog = {
       demo: 'FileUpload',
       blurb:
         'Uploads as log lines with a block progress bar, cancel and retry; failures print a ! line. Same props and putFile helper as the kinetic FileUpload.',
+    },
+    {
+      id: 'confirm',
+      category: 'Confirm',
+      title: 'Confirm',
+      symbols: ['Confirm'],
+      demo: 'Confirm',
+      blurb:
+        'A bracketed HUD panel over a scanline backdrop; the danger action arms once the slug is typed. Same props as the kinetic Confirm.',
+    },
+    {
+      id: 'toast',
+      category: 'Toast',
+      title: 'Toast',
+      symbols: ['Toaster', 'toast', 'dismissToast'],
+      demo: 'Toast',
+      blurb:
+        'Log lines tagged [+] [i] [!] that step in from the edge, with a [×] to dismiss. toast() from any entry shows here; same props as the kinetic Toaster.',
+    },
+    {
+      id: 'table',
+      category: 'Table',
+      title: 'Table & TableColumnsMenu',
+      symbols: ['Table', 'TableColumnsMenu'],
+      demo: 'Table',
+      blurb:
+        'A terminal readout with an uppercase phosphor header and resizable columns; TableColumnsMenu toggles them with [x] boxes. Same props as the kinetic Table.',
     },
   ],
 };

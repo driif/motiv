@@ -1,0 +1,166 @@
+@layer motiv.components {
+  .motiv-sketch-toast-stack {
+    position: fixed;
+    z-index: 1000;
+    right: calc(var(--motiv-space) * 4);
+    bottom: calc(var(--motiv-space) * 4);
+    width: min(calc(var(--motiv-space) * 96), calc(100% - var(--motiv-space) * 8));
+    pointer-events: none;
+    color: var(--motiv-toast-color, var(--motiv-color-text));
+    font-family: var(--motiv-font-body);
+    font-size: var(--motiv-font-size);
+    line-height: 1.5;
+  }
+
+  /* The padding leaves room for the ink shadows and the tilt inside the scroll box. */
+  .motiv-sketch-toast-stack__list {
+    box-sizing: border-box;
+    display: grid;
+    gap: calc(var(--motiv-space) * 4);
+    max-height: calc(100dvh - var(--motiv-space) * 8);
+    margin: 0;
+    padding: calc(var(--motiv-space) * 3);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    list-style: none;
+    pointer-events: auto;
+  }
+
+  .motiv-sketch-toast-stack__list:empty {
+    display: none;
+  }
+
+  /* A note pinned to the page: pencil outline, ink shadow, a hatched strip in the tone colour. */
+  .motiv-sketch-toast {
+    --_tone: var(--motiv-color-primary);
+
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--motiv-space) * 3);
+    padding: calc(var(--motiv-space) * 3) calc(var(--motiv-space) * 3) calc(var(--motiv-space) * 3)
+      calc(var(--motiv-space) * 6);
+    background: var(--motiv-toast-bg, var(--motiv-color-surface));
+    border: 2px solid var(--motiv-toast-border-color, var(--motiv-color-text));
+    border-radius: var(--motiv-toast-radius, 4px 16px 8px 18px / 16px 6px 14px 8px);
+    box-shadow: 4px 5px 0 -1px color-mix(in oklch, var(--motiv-color-text) 16%, transparent);
+    opacity: 1;
+    transform: none;
+    transition-property: opacity, transform;
+    transition-duration: var(--motiv-duration);
+    transition-timing-function: var(--motiv-ease);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: calc(var(--motiv-space) * 2) auto calc(var(--motiv-space) * 2)
+        calc(var(--motiv-space) * 2);
+      width: calc(var(--motiv-space) * 2);
+      border-radius: 2px 4px 3px 5px;
+      background: repeating-linear-gradient(-45deg, var(--_tone) 0 2px, transparent 2px 5px);
+    }
+
+    @starting-style {
+      opacity: 0;
+      transform: translateX(calc(var(--motiv-space) * 6)) rotate(2deg);
+    }
+  }
+
+  .motiv-sketch-toast--success {
+    --_tone: var(--motiv-color-success);
+  }
+
+  .motiv-sketch-toast--error {
+    --_tone: var(--motiv-color-danger);
+  }
+
+  .motiv-sketch-toast[data-exiting] {
+    opacity: 0;
+    transform: translateX(calc(var(--motiv-space) * 6)) rotate(2deg);
+    pointer-events: none;
+  }
+
+  .motiv-sketch-toast__icon {
+    flex-shrink: 0;
+    width: calc(var(--motiv-space) * 6);
+    height: calc(var(--motiv-space) * 6);
+    margin-top: calc(var(--motiv-space) * 2);
+    fill: none;
+    stroke: var(--_tone);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .motiv-sketch-toast__content {
+    flex: 1;
+    min-width: 0;
+    padding-block: calc(var(--motiv-space) * 1.5);
+    overflow-wrap: anywhere;
+  }
+
+  .motiv-sketch-toast__title {
+    font-family: "Caveat", "Segoe Print", cursive;
+    font-size: 1.375rem;
+    line-height: 1.15;
+  }
+
+  .motiv-sketch-toast__description {
+    margin-top: var(--motiv-space);
+    color: var(--motiv-color-text-muted);
+    font-size: calc(var(--motiv-font-size) * 0.875);
+  }
+
+  .motiv-sketch-toast__dismiss {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: calc(var(--motiv-space) * 10);
+    height: calc(var(--motiv-space) * 10);
+    padding: calc(var(--motiv-space) * 2.5);
+    border: 0;
+    border-radius: 12px 6px 14px 8px / 8px 14px 6px 12px;
+    color: inherit;
+    background: transparent;
+    cursor: pointer;
+
+    & > svg {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    &:active {
+      background: color-mix(in oklch, currentColor 16%, transparent);
+    }
+  }
+
+  @media (hover: hover) {
+    .motiv-sketch-toast__dismiss:hover:not(:active) {
+      background: repeating-linear-gradient(
+        -45deg,
+        color-mix(in oklch, currentColor 18%, transparent) 0 2px,
+        transparent 2px 6px
+      );
+    }
+  }
+
+  /* The li keeps its transition at 0s so the exit timer still reads a duration and completes. */
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-sketch-toast,
+    .motiv-sketch-toast[data-exiting] {
+      transition-duration: 0s;
+      transform: none;
+    }
+  }
+}

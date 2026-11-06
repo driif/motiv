@@ -32,6 +32,9 @@
 @import "../matrix/Accordion/Accordion.css";
 @import "../matrix/Stepper/Stepper.css";
 @import "../matrix/Carousel/Carousel.css";
+@import "../matrix/Confirm/Confirm.css";
+@import "../matrix/Toast/Toast.css";
+@import "../matrix/Table/Table.css";
 
 @layer motiv.tokens {
   /* tokens.css carries the kinetic palette; matrix is a monospace phosphor terminal. */

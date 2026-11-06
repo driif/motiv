@@ -102,6 +102,10 @@ export const Rethemed: Story = {
           '--motiv-color-danger': '#b91c1c',
           '--motiv-radius': '0.25rem',
           '--motiv-button-radius': '0.25rem',
+          '--motiv-confirm-bg': '#eff6ff',
+          '--motiv-confirm-color': '#1e3a8a',
+          '--motiv-confirm-border-color': '#2563eb',
+          '--motiv-confirm-radius': '0.25rem',
         } as CSSProperties
       }
     >

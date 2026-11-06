@@ -1,0 +1,183 @@
+@layer motiv.components {
+  /* A ruled sheet: pencil frame, ink underline under the header, dashed lines between rows. */
+  .motiv-sketch-table {
+    --_rule: color-mix(
+      in oklch,
+      var(--motiv-table-border-color, var(--motiv-color-text)) 35%,
+      transparent
+    );
+
+    width: fit-content;
+    max-width: 100%;
+    overflow: auto;
+    color: var(--motiv-table-color, var(--motiv-color-text));
+    font-family: var(--motiv-font-body);
+    font-size: calc(var(--motiv-font-size) * 0.875);
+    background: var(--motiv-table-bg, var(--motiv-color-surface));
+    border: 2px solid var(--motiv-table-border-color, var(--motiv-color-text));
+    border-radius: var(--motiv-table-radius, 6px 16px 8px 20px / 18px 6px 14px 8px);
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+  }
+
+  .motiv-sketch-table__table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .motiv-sketch-table__head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .motiv-sketch-table__header,
+  .motiv-sketch-table__cell {
+    padding: calc(var(--motiv-space) * 2) calc(var(--motiv-space) * 3);
+    text-align: start;
+  }
+
+  .motiv-sketch-table__header {
+    position: relative;
+    font-family: "Caveat", "Segoe Print", cursive;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.2;
+    background: var(--motiv-table-bg, var(--motiv-color-surface));
+    border-bottom: 2px solid var(--motiv-table-border-color, var(--motiv-color-text));
+  }
+
+  .motiv-sketch-table__cell {
+    border-bottom: 1.5px dashed var(--_rule);
+  }
+
+  .motiv-sketch-table__label,
+  .motiv-sketch-table__cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .motiv-sketch-table__label {
+    display: block;
+  }
+
+  .motiv-sketch-table__row:last-child .motiv-sketch-table__cell {
+    border-bottom: 0;
+  }
+
+  /* The hit area straddles the column border and sits above the next header cell. */
+  .motiv-sketch-table__resize {
+    position: absolute;
+    top: 0;
+    right: calc(var(--motiv-space) * -3);
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: calc(var(--motiv-space) * 6);
+    cursor: col-resize;
+    touch-action: none;
+    user-select: none;
+
+    /* A slightly crooked pencil stroke. */
+    &::after {
+      content: "";
+      width: 2px;
+      margin-block: calc(var(--motiv-space) * 1.5);
+      border-radius: 2px;
+      background: var(--_rule);
+      opacity: 0;
+      rotate: 2deg;
+      transition: opacity var(--motiv-duration) var(--motiv-ease);
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-radius: 10px 4px 12px 6px / 6px 12px 4px 10px;
+      box-shadow: inset 0 0 0 2px var(--motiv-color-primary);
+    }
+
+    &:focus-visible::after {
+      opacity: 1;
+      background: var(--motiv-color-primary);
+    }
+
+    .motiv-sketch-table__header:last-child > & {
+      right: 0;
+      justify-content: flex-end;
+    }
+  }
+
+  .motiv-sketch-table__resize--dragging::after {
+    opacity: 1;
+    background: var(--motiv-color-primary);
+  }
+
+  .motiv-sketch-table-menu {
+    display: inline-flex;
+  }
+
+  /* A paper slip with an ink shadow, opened by the native popover. */
+  .motiv-sketch-table-menu__panel {
+    position: fixed;
+    inset: auto;
+    min-width: calc(var(--motiv-space) * 48);
+    max-width: calc(var(--motiv-space) * 80);
+    max-height: min(
+      calc(var(--motiv-space) * 80),
+      calc(var(--_space, 100vh) - var(--motiv-space) * 3)
+    );
+    margin: calc(var(--motiv-space) * 1.5) 0;
+    padding: var(--motiv-space) calc(var(--motiv-space) * 4);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    overflow-wrap: anywhere;
+    color: var(--motiv-table-color, var(--motiv-color-text));
+    font-family: var(--motiv-font-body);
+    font-size: var(--motiv-font-size);
+    background: var(--motiv-table-bg, var(--motiv-color-surface));
+    border: 2px solid var(--motiv-table-border-color, var(--motiv-color-text));
+    border-radius: var(--motiv-table-radius, 14px 6px 16px 8px / 8px 16px 6px 14px);
+    box-shadow: 4px 5px 0 -1px color-mix(in oklch, var(--motiv-color-text) 16%, transparent);
+    opacity: 1;
+    transition: opacity var(--motiv-duration) var(--motiv-ease);
+
+    &:popover-open {
+      display: grid;
+    }
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  @media (hover: hover) {
+    .motiv-sketch-table__row:hover {
+      background: repeating-linear-gradient(
+        -45deg,
+        color-mix(in oklch, var(--motiv-color-primary) 10%, transparent) 0 2px,
+        transparent 2px 6px
+      );
+    }
+
+    .motiv-sketch-table__header:hover > .motiv-sketch-table__resize::after {
+      opacity: 1;
+    }
+
+    .motiv-sketch-table__resize:hover::after {
+      background: var(--motiv-color-primary);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-sketch-table__resize::after,
+    .motiv-sketch-table-menu__panel {
+      transition: none;
+    }
+  }
+}

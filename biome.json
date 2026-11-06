@@ -55,7 +55,9 @@
       "includes": [
         "src/drawn/Tabs/Tabs.tsx",
         "src/matrix/HudTabs/HudTabs.tsx",
-        "src/components/Table/Table.tsx"
+        "src/components/Table/Table.tsx",
+        "src/drawn/Table/Table.tsx",
+        "src/matrix/Table/Table.tsx"
       ],
       "linter": {
         "rules": {
@@ -79,7 +81,9 @@
         "src/drawn/Chips/Chips.tsx",
         "src/matrix/Chips/Chips.tsx",
         "src/components/IconButton/IconButton.tsx",
-        "src/components/Table/Table.tsx"
+        "src/components/Table/Table.tsx",
+        "src/drawn/Table/Table.tsx",
+        "src/matrix/Table/Table.tsx"
       ],
       "linter": {
         "rules": {

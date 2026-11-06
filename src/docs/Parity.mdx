@@ -27,8 +27,11 @@ the `GlideNav` props. Kinetic and matrix `Select` and `Tooltip` take the drawn p
 wraps `TerminalSelect`, whose field shows an option's `code`, falling back to its `label`, as its own
 look. Drawn and matrix `Accordion`, `Stepper` and `Carousel` take the kinetic props. Kinetic `Chips`
 is `FilterChips` under the generic name; drawn and matrix `Chips`, `OtpInput`, `CommandMenu`,
-`MultiSelect`, `DatePicker` and `FileUpload` and matrix `SegmentedControl` take the kinetic props, and
-kinetic `Link` takes the drawn props. Drawn and matrix also export the kinetic `putFile` helper.
+`MultiSelect`, `DatePicker`, `FileUpload`, `Confirm`, `Toaster`, `Table` and `TableColumnsMenu` and
+matrix `SegmentedControl` take the kinetic props, and kinetic `Link` takes the drawn props. Drawn and
+matrix also export the kinetic `putFile` helper, and the kinetic `toast` and `dismissToast`: all
+three entries share one queue, so a toast fired from any entry shows in whichever `Toaster` is
+mounted.
 
 | Category | Kinetic | Drawn | Matrix |
 |---|---|---|---|
@@ -59,6 +62,9 @@ kinetic `Link` takes the drawn props. Drawn and matrix also export the kinetic `
 | MultiSelect | `MultiSelect` | `MultiSelect` | `MultiSelect` |
 | DatePicker | `DatePicker` | `DatePicker` | `DatePicker` |
 | FileUpload | `FileUpload` | `FileUpload` | `FileUpload` |
+| Confirm | `Confirm` | `Confirm` | `Confirm` |
+| Toast | `Toaster`, `toast`, `dismissToast` | `Toaster`, `toast`, `dismissToast` | `Toaster`, `toast`, `dismissToast` |
+| Table | `Table`, `TableColumnsMenu` | `Table`, `TableColumnsMenu` | `Table`, `TableColumnsMenu` |
 
 Style-specific, outside the categories: kinetic `MagneticButton`, `MorphSubmitButton`,
 `LikeButton`, `BellButton`, `MuteToggle`, `BadgeButton`, `CopyField`, `ExpandingSearch`,
