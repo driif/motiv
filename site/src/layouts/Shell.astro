@@ -1,7 +1,9 @@
 ---
 import '@driif/motiv/styles.css';
+import { MenuButton } from '@driif/motiv';
 import pkg from '@driif/motiv/package.json';
-import { catalog } from '../catalog.mjs';
+import { pages, styles } from '../catalog.mjs';
+import Sidebar from '../components/Sidebar.astro';
 import { ThemeToggleDemo } from '../demos/kinetic/ThemeToggle';
 import '../styles/site.css';
 
@@ -9,10 +11,26 @@ interface Props {
   title: string;
   description: string;
   current?: 'drawn' | 'matrix' | 'kinetic';
+  // The component page shown; the style switch then points at the same page in each style.
+  slug?: string;
 }
 
-const { title, description, current } = Astro.props;
-const styles = ['drawn', 'matrix', 'kinetic'] as const;
+const { title, description, current, slug } = Astro.props;
+// Style overview pages used to list every component; old #section links (also same-page ones
+// from the showcase) land on the component page now.
+const moved =
+  current && !slug
+    ? Object.fromEntries(
+        pages(current).flatMap((page) =>
+          page.sections.map((section) => [section.id, `/${current}/${page.slug}/`]),
+        ),
+      )
+    : null;
+const switchLinks = styles.map((style) => ({
+  style,
+  href:
+    slug && pages(style).some((page) => page.slug === slug) ? `/${style}/${slug}/` : `/${style}/`,
+}));
 ---
 
 <!doctype html>
@@ -24,6 +42,18 @@ const styles = ['drawn', 'matrix', 'kinetic'] as const;
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    {
+      moved && (
+        <script is:inline define:vars={{ moved }}>
+          const follow = () => {
+            const page = moved[location.hash.slice(1)];
+            if (page) location.replace(page + location.hash);
+          };
+          follow();
+          addEventListener('hashchange', follow);
+        </script>
+      )
+    }
     <script is:inline>
       (() => {
         let theme;
@@ -37,19 +67,29 @@ const styles = ['drawn', 'matrix', 'kinetic'] as const;
       })();
     </script>
   </head>
-  <body class="site-body">
+  <body class="site-body" data-current={current}>
     <header class="site-top">
+      {
+        current && (
+          <MenuButton
+            className="site-top__menu"
+            open={false}
+            onToggle={() => {}}
+            label="Components"
+            aria-controls="site-nav"
+          />
+        )
+      }
       <a class="site-top__mark" href="/">
         motiv <span class="site-top__version">v{pkg.version}</span>
       </a>
       <nav class="site-switch" aria-label="Style">
         {
-          styles.map((style) => (
+          switchLinks.map(({ style, href }) => (
             <a
               class="site-switch__link"
-              href={`/${style}/`}
+              href={href}
               aria-current={style === current ? 'page' : undefined}
-              data-anchors={catalog[style].map((section) => section.id).join(' ')}
             >
               {style}
             </a>
@@ -58,7 +98,8 @@ const styles = ['drawn', 'matrix', 'kinetic'] as const;
       </nav>
       <ThemeToggleDemo client:idle />
     </header>
-    <div class="site-page" data-style={current}>
+    <div class:list={['site-page', current && 'site-page--docs']} data-style={current}>
+      {current && <Sidebar style={current} slug={slug} />}
       <main class="site-main">
         <slot />
       </main>
@@ -69,21 +110,108 @@ const styles = ['drawn', 'matrix', 'kinetic'] as const;
       <a class="site-foot__link" href="https://www.npmjs.com/package/@driif/motiv">npm</a>
     </footer>
     <script>
-      // Point each style link at the section in view when that style documents it too.
-      const links = document.querySelectorAll<HTMLAnchorElement>('.site-switch__link');
-      const follow = (id: string) => {
-        for (const link of links) {
-          link.hash = link.dataset.anchors?.split(' ').includes(id) ? id : '';
-        }
+      const style = document.body.dataset.current;
+      if (style) {
+        try {
+          localStorage.setItem('motiv-site-style', style);
+        } catch {}
+      }
+
+      // Mobile: the sidebar is an in-flow disclosure under the top bar.
+      const menu = document.querySelector<HTMLButtonElement>('.site-top__menu');
+      const nav = document.getElementById('site-nav');
+      const setMenu = (open: boolean) => {
+        menu?.setAttribute('aria-expanded', String(open));
+        nav?.toggleAttribute('data-open', open);
       };
-      const observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) if (entry.isIntersecting) follow(entry.target.id);
-        },
-        { rootMargin: '-40% 0px -55% 0px' },
-      );
-      for (const section of document.querySelectorAll('.site-section')) observer.observe(section);
-      follow(location.hash.slice(1));
+      menu?.addEventListener('click', () => setMenu(menu.getAttribute('aria-expanded') !== 'true'));
+
+      // Search filters the sidebar; ⌘K / Ctrl+K focuses it, Enter opens the first match.
+      const search = document.querySelector<HTMLInputElement>('#site-search');
+      const status = document.querySelector('#site-search-status');
+      const items = [...document.querySelectorAll<HTMLElement>('.site-nav__item')];
+      search?.addEventListener('input', () => {
+        const words = search.value.toLowerCase().split(/\s+/).filter(Boolean);
+        let shown = 0;
+        for (const item of items) {
+          const match = words.every((word) => item.dataset.search?.includes(word));
+          item.hidden = !match;
+          if (match) shown++;
+        }
+        for (const group of document.querySelectorAll<HTMLElement>('.site-nav__group')) {
+          group.hidden = !group.querySelector('.site-nav__item:not([hidden])');
+        }
+        if (status) {
+          status.textContent = !words.length ? '' : shown ? `${shown} of ${items.length}` : 'No matches';
+        }
+      });
+      search?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          items.find((item) => !item.hidden)?.querySelector('a')?.click();
+        } else if (event.key === 'Escape' && search.value) {
+          search.value = '';
+          search.dispatchEvent(new Event('input'));
+        }
+      });
+      const openSearch = () => {
+        if (!search) return;
+        setMenu(true);
+        search.focus();
+        search.select();
+      };
+      addEventListener('keydown', (event) => {
+        if (event.key.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey)) {
+          event.preventDefault();
+          openSearch();
+        }
+      });
+
+      // Preview | Code tabs: the WAI-ARIA tabs pattern with automatic activation.
+      for (const list of document.querySelectorAll<HTMLElement>('.site-tabs')) {
+        const tabs = [...list.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+        const select = (next: HTMLButtonElement) => {
+          for (const tab of tabs) {
+            const on = tab === next;
+            tab.setAttribute('aria-selected', String(on));
+            tab.tabIndex = on ? 0 : -1;
+            const panel = document.getElementById(tab.getAttribute('aria-controls') ?? '');
+            if (panel) panel.hidden = !on;
+          }
+        };
+        list.addEventListener('click', (event) => {
+          const tab = (event.target as Element).closest<HTMLButtonElement>('[role="tab"]');
+          if (tab) select(tab);
+        });
+        list.addEventListener('keydown', (event) => {
+          const index = tabs.indexOf(document.activeElement as HTMLButtonElement);
+          const to = { ArrowRight: index + 1, ArrowLeft: index - 1, Home: 0, End: tabs.length - 1 }[
+            event.key
+          ];
+          if (to === undefined || index < 0) return;
+          event.preventDefault();
+          const next = tabs[(to + tabs.length) % tabs.length];
+          next.focus();
+          select(next);
+        });
+      }
+
+      for (const button of document.querySelectorAll<HTMLButtonElement>('.site-copy')) {
+        const label = button.textContent;
+        let timer = 0;
+        button.addEventListener('click', async () => {
+          const code = document.getElementById(button.dataset.copy ?? '')?.querySelector('pre');
+          try {
+            await navigator.clipboard.writeText(code?.textContent ?? '');
+            button.textContent = 'Copied';
+          } catch {
+            button.textContent = 'Copy failed';
+          }
+          clearTimeout(timer);
+          timer = window.setTimeout(() => {
+            button.textContent = label;
+          }, 2000);
+        });
+      }
 
       const frames = document.querySelectorAll<HTMLIFrameElement>('.site-preview');
       for (const frame of frames) {
@@ -96,7 +224,9 @@ const styles = ['drawn', 'matrix', 'kinetic'] as const;
       }
 
       addEventListener('message', (event) => {
-        if (event.origin !== location.origin || event.data?.type !== 'motiv-preview-height') return;
+        if (event.origin !== location.origin) return;
+        if (event.data?.type === 'motiv-preview-search') return openSearch();
+        if (event.data?.type !== 'motiv-preview-height') return;
         if (!Number.isFinite(event.data.height) || event.data.height <= 0) return;
         for (const frame of frames) {
           if (frame.contentWindow === event.source) frame.style.height = `${event.data.height}px`;

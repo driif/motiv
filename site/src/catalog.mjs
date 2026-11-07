@@ -1,35 +1,48 @@
-// Parity categories in src/docs/Parity.mdx table order; the style pages render one row each.
+export const styles = /** @type {const} */ (['kinetic', 'drawn', 'matrix']);
+
+// Use-case groups, in sidebar order. Every category and style-specific section names one.
+export const groups = [
+  { name: 'Actions', blurb: 'Buttons, links and toggles that do something.' },
+  { name: 'Forms', blurb: 'Fields people type into, or attach files to.' },
+  { name: 'Selection', blurb: 'Pick one or many from a set of choices.' },
+  { name: 'Navigation', blurb: 'Move between pages, steps and commands.' },
+  { name: 'Feedback', blurb: 'Say what happened, what is loading, or ask first.' },
+  { name: 'Data & layout', blurb: 'Show records, cards and content that folds or slides.' },
+];
+
+// Parity categories (src/docs/Parity.mdx): every style covers each one, on a page of the same slug.
+// keywords only where the name and blurbs miss an obvious search.
 export const categories = [
-  'Button',
-  'IconButton',
-  'Card',
-  'TextField',
-  'Textarea',
-  'Select',
-  'Checkbox',
-  'Radio',
-  'Switch',
-  'Slider',
-  'Tabs',
-  'SegmentedControl',
-  'Progress',
-  'Link',
-  'Tooltip',
-  'Accordion',
-  'Nav',
-  'ThemeToggle',
-  'MenuButton',
-  'Stepper',
-  'Carousel',
-  'Chips',
-  'OtpInput',
-  'CommandMenu',
-  'MultiSelect',
-  'DatePicker',
-  'FileUpload',
-  'Confirm',
-  'Toast',
-  'Table',
+  { name: 'Button', group: 'Actions' },
+  { name: 'IconButton', group: 'Actions' },
+  { name: 'Link', group: 'Actions' },
+  { name: 'ThemeToggle', group: 'Actions', keywords: 'dark mode light' },
+  { name: 'TextField', group: 'Forms', keywords: 'input' },
+  { name: 'Textarea', group: 'Forms', keywords: 'multiline' },
+  { name: 'DatePicker', group: 'Forms', keywords: 'calendar time' },
+  { name: 'OtpInput', group: 'Forms', keywords: 'code pin 2fa' },
+  { name: 'FileUpload', group: 'Forms', keywords: 'attachment drop' },
+  { name: 'Select', group: 'Selection', keywords: 'dropdown combobox' },
+  { name: 'MultiSelect', group: 'Selection', keywords: 'dropdown tags' },
+  { name: 'Checkbox', group: 'Selection' },
+  { name: 'Radio', group: 'Selection' },
+  { name: 'Switch', group: 'Selection', keywords: 'toggle' },
+  { name: 'Slider', group: 'Selection', keywords: 'range' },
+  { name: 'SegmentedControl', group: 'Selection', keywords: 'toggle group' },
+  { name: 'Chips', group: 'Selection', keywords: 'tags filter' },
+  { name: 'Nav', group: 'Navigation', keywords: 'sidebar menu' },
+  { name: 'Tabs', group: 'Navigation' },
+  { name: 'MenuButton', group: 'Navigation', keywords: 'hamburger burger' },
+  { name: 'Stepper', group: 'Navigation', keywords: 'wizard steps' },
+  { name: 'CommandMenu', group: 'Navigation', keywords: 'palette shortcut' },
+  { name: 'Toast', group: 'Feedback', keywords: 'notification snackbar alert' },
+  { name: 'Confirm', group: 'Feedback', keywords: 'dialog modal delete' },
+  { name: 'Progress', group: 'Feedback', keywords: 'loading bar' },
+  { name: 'Tooltip', group: 'Feedback', keywords: 'hint popover' },
+  { name: 'Table', group: 'Data & layout', keywords: 'grid columns' },
+  { name: 'Card', group: 'Data & layout', keywords: 'panel' },
+  { name: 'Accordion', group: 'Data & layout', keywords: 'collapse disclosure' },
+  { name: 'Carousel', group: 'Data & layout', keywords: 'slides' },
 ];
 
 // Every runtime export of a style's entry must be claimed by exactly one section;
@@ -48,6 +61,7 @@ export const catalog = {
     {
       id: 'ink-splatter-button',
       category: null,
+      group: 'Actions',
       title: 'InkSplatterButton',
       symbols: ['InkSplatterButton'],
       demo: 'InkSplatterButton',
@@ -57,6 +71,7 @@ export const catalog = {
     {
       id: 'hold-to-confirm-button',
       category: null,
+      group: 'Actions',
       title: 'HoldToConfirmButton',
       symbols: ['HoldToConfirmButton'],
       demo: 'HoldToConfirmButton',
@@ -186,6 +201,7 @@ export const catalog = {
     {
       id: 'nav-item',
       category: null,
+      group: 'Navigation',
       title: 'NavItem',
       symbols: ['NavItem'],
       demo: 'NavItem',
@@ -243,6 +259,7 @@ export const catalog = {
     {
       id: 'orbital-theme-toggle',
       category: null,
+      group: 'Actions',
       title: 'OrbitalThemeToggle',
       symbols: ['OrbitalThemeToggle'],
       demo: 'OrbitalThemeToggle',
@@ -343,6 +360,7 @@ export const catalog = {
     {
       id: 'magnetic-button',
       category: null,
+      group: 'Actions',
       title: 'MagneticButton',
       symbols: ['MagneticButton'],
       demo: 'MagneticButton',
@@ -352,6 +370,7 @@ export const catalog = {
     {
       id: 'morph-submit-button',
       category: null,
+      group: 'Actions',
       title: 'MorphSubmitButton',
       symbols: ['MorphSubmitButton'],
       demo: 'MorphSubmitButton',
@@ -361,6 +380,7 @@ export const catalog = {
     {
       id: 'bell-button',
       category: null,
+      group: 'Actions',
       title: 'BellButton',
       symbols: ['BellButton'],
       demo: 'BellButton',
@@ -369,6 +389,7 @@ export const catalog = {
     {
       id: 'badge-button',
       category: null,
+      group: 'Actions',
       title: 'BadgeButton',
       symbols: ['BadgeButton'],
       demo: 'BadgeButton',
@@ -378,6 +399,7 @@ export const catalog = {
     {
       id: 'copy-field',
       category: null,
+      group: 'Forms',
       title: 'CopyField',
       symbols: ['CopyField'],
       demo: 'CopyField',
@@ -414,6 +436,7 @@ export const catalog = {
     {
       id: 'radial-menu',
       category: null,
+      group: 'Navigation',
       title: 'RadialMenu',
       symbols: ['RadialMenu'],
       demo: 'RadialMenu',
@@ -565,6 +588,7 @@ export const catalog = {
     {
       id: 'expanding-search',
       category: null,
+      group: 'Forms',
       title: 'ExpandingSearch',
       symbols: ['ExpandingSearch'],
       demo: 'ExpandingSearch',
@@ -646,6 +670,7 @@ export const catalog = {
     {
       id: 'like-button',
       category: null,
+      group: 'Actions',
       title: 'LikeButton',
       symbols: ['LikeButton'],
       demo: 'LikeButton',
@@ -654,6 +679,7 @@ export const catalog = {
     {
       id: 'mute-toggle',
       category: null,
+      group: 'Actions',
       title: 'MuteToggle',
       symbols: ['MuteToggle'],
       demo: 'MuteToggle',
@@ -672,6 +698,7 @@ export const catalog = {
     {
       id: 'slip-card',
       category: null,
+      group: 'Data & layout',
       title: 'SlipCard',
       symbols: ['SlipCard'],
       demo: 'SlipCard',
@@ -752,6 +779,7 @@ export const catalog = {
     {
       id: 'odometer',
       category: null,
+      group: 'Data & layout',
       title: 'Odometer',
       symbols: ['Odometer'],
       demo: 'Odometer',
@@ -790,6 +818,7 @@ export const catalog = {
     {
       id: 'scan-button',
       category: null,
+      group: 'Actions',
       title: 'ScanButton',
       symbols: ['ScanButton'],
       demo: 'ScanButton',
@@ -878,6 +907,7 @@ export const catalog = {
     {
       id: 'decode-secret-field',
       category: null,
+      group: 'Forms',
       title: 'DecodeSecretField',
       symbols: ['DecodeSecretField'],
       demo: 'DecodeSecretField',
@@ -1112,3 +1142,35 @@ export const catalog = {
     },
   ],
 };
+
+const slugOf = (name) => name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+
+// One page per category (its sections stacked as variants) plus one per style-specific section,
+// in sidebar order: by group, then category order.
+export function pages(style) {
+  const sections = catalog[style];
+  return groups.flatMap(({ name: group }) => [
+    ...categories
+      .filter((category) => category.group === group)
+      .map((category) => ({
+        slug: slugOf(category.name),
+        title: category.name,
+        group,
+        keywords: category.keywords ?? '',
+        // The generic name first, flavored variants after it.
+        sections: sections
+          .filter((section) => section.category === category.name)
+          .sort((a, b) => Number(b.title === category.name) - Number(a.title === category.name)),
+      }))
+      .filter((page) => page.sections.length),
+    ...sections
+      .filter((section) => section.category === null && section.group === group)
+      .map((section) => ({
+        slug: section.id,
+        title: section.title,
+        group,
+        keywords: '',
+        sections: [section],
+      })),
+  ]);
+}

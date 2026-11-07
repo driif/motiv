@@ -17,7 +17,9 @@ export function useTheme() {
   const toggle = () => {
     const theme = dark ? 'light' : 'dark';
     document.documentElement.dataset.theme = theme;
-    localStorage.setItem('motiv-site-theme', theme);
+    try {
+      localStorage.setItem('motiv-site-theme', theme);
+    } catch {}
   };
   return { dark, toggle };
 }

@@ -151,14 +151,17 @@ Review in Storybook before calling a visual change done (`pnpm build-storybook` 
 
 ## The Site Shows It to Users
 
-`site/` (motiv.fedorchuk.me) demos every public export, one page per style. A new or changed
-component updates it in the same change:
+`site/` (motiv.fedorchuk.me) demos every public export on its own page, `/<style>/<slug>/`, found
+through a use-case sidebar with search. A new or changed component updates it in the same change:
 
 - `site/src/demos/<style>/<Name>.tsx` — a short, copyable demo; the page shows this file as the
   snippet, so keep scaffolding out of it and use only props the component really has.
-- `site/src/catalog.mjs` — its section: `id`, `title`, every exported `symbols` it covers, `demo`,
-  a one-line `blurb` in consumer wording. `pnpm check:site` fails on an export without a section.
-- `site/src/pages/<style>/index.astro` — `<Section style id>` with the demo `client:visible`.
+- `site/src/catalog.mjs` — its section: `id`, `category` (or `null` plus a use-case `group` for a
+  style-specific component), `title`, every exported `symbols` it covers, `demo`, a one-line
+  `blurb` in consumer wording. The page and sidebar entry come from it; `pnpm check:site` fails on
+  an export without a section.
+- `site/src/pages/preview/<style>/<id>.astro` — renders the demo with `client:load` in the style's
+  stylesheet; the component page shows it in an iframe.
 - If the change alters what the style's use-case screen (`site/src/showcase/`) would use, update
   it too. Check the page in light and dark (`pnpm build && pnpm build:site`).
 

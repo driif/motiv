@@ -40,9 +40,10 @@ this repo cannot see. Current spec: `docs/specs/2026-10-05-motiv-foundation-desi
   for subtle mechanisms or external constraints, ≤2 lines inline
   (`.claude/skills/writing-simple-code/references/comments.md`).
 - Every component ships `.css`, tests, stories, entries in `src/index.ts` (or subpath entry)
-  and `src/styles/index.css`, and a site demo: `site/src/demos/<style>/<Name>.tsx`, its section in
-  `site/src/catalog.mjs` and on `site/src/pages/<style>/index.astro`. Changed props or behaviour
-  update that demo and its blurb; removed exports leave the site.
+  and `src/styles/index.css`, and a site demo: `site/src/demos/<style>/<Name>.tsx`, its preview
+  `site/src/pages/preview/<style>/<id>.astro` and its section in `site/src/catalog.mjs` (which
+  generates its page and sidebar entry). Changed props or behaviour update that demo and its blurb;
+  removed exports leave the site.
 - Never credit any AI agent (Claude, Anthropic, Codex, OpenAI) in commits, PRs, reviews or
   comments — no co-author trailers, no "generated with".
 

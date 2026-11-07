@@ -332,6 +332,17 @@ const css = { kinetic: kineticCss, matrix: matrixCss, drawn: drawnCss }[style];
         );
       };
       new ResizeObserver(reportHeight).observe(document.body);
+
+      // Keys typed inside a demo stay in the frame, so forward the site's search shortcut, unless
+      // the demo took it (CommandMenu's ⌘K); checked after dispatch, as its listener comes later.
+      addEventListener('keydown', (event) => {
+        if (event.key.toLowerCase() !== 'k' || !(event.metaKey || event.ctrlKey)) return;
+        setTimeout(() => {
+          if (!event.defaultPrevented) {
+            parent.postMessage({ type: 'motiv-preview-search' }, location.origin);
+          }
+        });
+      });
       reportHeight();
     </script>
   </body>
