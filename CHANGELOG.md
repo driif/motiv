@@ -1,5 +1,16 @@
 # @driif/motiv
 
+## 0.24.0
+
+### Minor Changes
+
+- fde16d3: Add `MultiSelect`, `DatePicker` and `FileUpload` (with `putFile`) to `@driif/motiv/drawn` and `@driif/motiv/matrix`, with the kinetic props.
+- 2c8022c: Add `Confirm`, `Toaster`, `toast`, `dismissToast`, `Table` and `TableColumnsMenu` to `@driif/motiv/drawn` and `@driif/motiv/matrix` with the kinetic props (one toast queue shared by all entries), plus `--motiv-confirm-*`, `--motiv-toast-*` and `--motiv-table-*` bg, color, border-color and radius tokens.
+
+### Patch Changes
+
+- fde16d3: Drawn `Select` and matrix `Select` and `TerminalSelect` now show their options above clipped or scrolling containers, flipping above the field near the bottom of the viewport.
+
 ## 0.23.0
 
 ### Minor Changes
