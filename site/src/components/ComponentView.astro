@@ -1,0 +1,70 @@
+---
+import { Code } from 'astro:components';
+
+interface Props {
+  style: 'drawn' | 'matrix' | 'kinetic';
+  section: { id: string; title: string; demo: string; blurb: string };
+  // Pages with several variants title each one; a single section shares the page heading.
+  titled: boolean;
+}
+
+const { style, section, titled } = Astro.props;
+const { id } = section;
+
+const sources = import.meta.glob<string>('../demos/*/*.tsx', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+const source = sources[`../demos/${style}/${section.demo}.tsx`];
+---
+
+<section class="site-view" id={id} aria-label={titled ? undefined : `${section.title} demo`} aria-labelledby={titled ? `${id}-title` : undefined}>
+  {
+    titled ? (
+      <h2 class="site-view__title" id={`${id}-title`}>
+        <a class="site-view__anchor" href={`#${id}`}>{section.title}</a>
+      </h2>
+    ) : null
+  }
+  <p class="site-view__blurb">{section.blurb}</p>
+  <div class="site-view__panel">
+    <div class="site-view__bar">
+      <div class="site-tabs" role="tablist" aria-label={`${section.title} view`}>
+        <button class="site-tabs__tab" type="button" role="tab" id={`${id}-tab-preview`} aria-controls={`${id}-preview`} aria-selected="true">Preview</button>
+        <button class="site-tabs__tab" type="button" role="tab" id={`${id}-tab-code`} aria-controls={`${id}-code`} aria-selected="false" tabindex="-1">Code</button>
+      </div>
+      <button class="site-copy" type="button" data-copy={`${id}-code`} aria-live="polite">Copy code</button>
+    </div>
+    <div class="site-view__stage" role="tabpanel" id={`${id}-preview`} aria-labelledby={`${id}-tab-preview`}>
+      <iframe
+        class="site-preview"
+        src={`/preview/${style}/${id}/`}
+        title={`${section.title} preview`}
+        loading="lazy"
+      />
+    </div>
+    <div class="site-view__code" role="tabpanel" id={`${id}-code`} aria-labelledby={`${id}-tab-code`} hidden>
+      <Code
+        class="site-code"
+        code={source}
+        lang="tsx"
+        theme="github-dark-default"
+        transformers={[{
+          span(node) {
+            const color = node.properties.style;
+            const parentStyle = this.pre.properties.style;
+            if (
+              typeof color === 'string' &&
+              color.startsWith('color:') &&
+              typeof parentStyle === 'string' &&
+              parentStyle.toLowerCase().split(';').includes(color.toLowerCase())
+            ) {
+              delete node.properties.style;
+            }
+          },
+        }]}
+      />
+    </div>
+  </div>
+</section>

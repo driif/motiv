@@ -1,12 +1,15 @@
 import { readdirSync, statSync } from 'node:fs';
+import { pages as componentPages, styles } from '../site/src/catalog.mjs';
 
 // Bytes, about 15% above the sizes measured when the budget was set; raise them on purpose.
 const pages = {
-  'index.html': 13_000,
-  'kinetic/index.html': 273_000,
-  'drawn/index.html': 205_000,
-  'matrix/index.html': 215_000,
+  'index.html': 23_000,
+  'kinetic/index.html': 54_000,
+  'drawn/index.html': 82_000,
+  'matrix/index.html': 83_000,
 };
+// Every generated component page, /<style>/<slug>/; the largest measured 42_123 (kinetic progress).
+const componentPage = 48_500;
 const totalCss = 380_000;
 const largestJs = 245_000;
 
@@ -22,6 +25,12 @@ const check = (label, actual, budget) => {
   if (actual > budget) problems.push(`${label} is ${actual} bytes, over the ${budget} byte budget`);
 };
 for (const [path, budget] of Object.entries(pages)) check(path, size(path), budget);
+for (const style of styles) {
+  for (const { slug } of componentPages(style)) {
+    const path = `${style}/${slug}/index.html`;
+    check(path, size(path), componentPage);
+  }
+}
 const cssBytes = assets
   .filter(({ name }) => name.endsWith('.css'))
   .reduce((sum, { size }) => sum + size, 0);

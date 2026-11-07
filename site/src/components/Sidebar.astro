@@ -1,0 +1,65 @@
+---
+import { groups, pages } from '../catalog.mjs';
+
+interface Props {
+  style: 'drawn' | 'matrix' | 'kinetic';
+  slug?: string;
+}
+
+const { style, slug } = Astro.props;
+const list = pages(style);
+const searchText = (page: ReturnType<typeof pages>[number]) =>
+  [
+    page.title,
+    page.group,
+    page.keywords,
+    ...page.sections.flatMap((section) => [section.title, section.blurb, ...section.symbols]),
+  ]
+    .join(' ')
+    .toLowerCase();
+---
+
+<nav class="site-nav" id="site-nav" aria-label={`${style} components`}>
+  <div class="site-search">
+    <label class="site-search__label" for="site-search">Find a component</label>
+    <input
+      class="site-search__input"
+      id="site-search"
+      type="search"
+      placeholder="Search"
+      autocomplete="off"
+      spellcheck="false"
+      aria-describedby="site-search-status"
+    />
+    <kbd class="site-search__key" aria-hidden="true">⌘K</kbd>
+  </div>
+  <p class="site-search__status" id="site-search-status" role="status"></p>
+  {
+    groups.map(({ name }) => {
+      const items = list.filter((page) => page.group === name);
+      return items.length ? (
+        <div class="site-nav__group">
+          <h2 class="site-nav__title">{name}</h2>
+          <ul class="site-nav__list">
+            {items.map((page) => (
+              <li class="site-nav__item" data-search={searchText(page)}>
+                <a
+                  class="site-nav__link"
+                  href={`/${style}/${page.slug}/`}
+                  aria-current={page.slug === slug ? 'page' : undefined}
+                >
+                  {page.title}
+                  {page.sections.length > 1 && (
+                    <span class="site-nav__badge" aria-label={`${page.sections.length} variants`}>
+                      {page.sections.length}
+                    </span>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null;
+    })
+  }
+</nav>

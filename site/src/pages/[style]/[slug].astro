@@ -1,0 +1,51 @@
+---
+import { pages, styles } from '../../catalog.mjs';
+import ComponentView from '../../components/ComponentView.astro';
+import Shell from '../../layouts/Shell.astro';
+
+export function getStaticPaths() {
+  return styles.flatMap((style) =>
+    pages(style).map((page) => ({ params: { style, slug: page.slug }, props: { page } })),
+  );
+}
+
+const { style, slug } = Astro.params as { style: (typeof styles)[number]; slug: string };
+const { page } = Astro.props;
+const others = styles.filter(
+  (other) => other !== style && pages(other).some((p) => p.slug === slug),
+);
+const entry = style === 'kinetic' ? '@driif/motiv' : `@driif/motiv/${style}`;
+---
+
+<Shell
+  current={style}
+  slug={slug}
+  title={`${page.title} · ${style} · motiv`}
+  description={page.sections[0].blurb}
+>
+  <header class="site-doc">
+    <p class="site-kicker">{page.group}</p>
+    <h1 class="site-doc__title">{page.title}</h1>
+    <p class="site-doc__meta">
+      <code class="site-inline">{entry}</code>
+      {
+        others.length ? (
+          <span>
+            Also in{' '}
+            {others.map((other, index) => (
+              <>
+                {index > 0 && ' · '}
+                <a class="site-doc__link" href={`/${other}/${slug}/`}>{other}</a>
+              </>
+            ))}
+          </span>
+        ) : (
+          <span>Only in {style}</span>
+        )
+      }
+    </p>
+  </header>
+  {page.sections.map((section) => (
+    <ComponentView style={style} section={section} titled={page.sections.length > 1} />
+  ))}
+</Shell>

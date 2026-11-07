@@ -1,5 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { catalog, categories } from '../site/src/catalog.mjs';
+import { catalog, categories, groups, pages } from '../site/src/catalog.mjs';
 
 const entries = {
   kinetic: '../dist/index.js',
@@ -8,6 +8,11 @@ const entries = {
 };
 
 const problems = [];
+for (const { name, group } of categories) {
+  if (!groups.some((known) => known.name === group)) {
+    problems.push(`category ${name} has unknown group ${group}`);
+  }
+}
 for (const [style, entry] of Object.entries(entries)) {
   const exported = Object.keys(await import(entry));
   const sections = catalog[style];
@@ -26,18 +31,27 @@ for (const [style, entry] of Object.entries(entries)) {
   if (style === 'kinetic' && !String(page).includes('cx(')) {
     problems.push('kinetic: cx is neither on the site nor in the getting-started snippet');
   }
-  // The page renders the catalog by category, so every section is on it.
-  if (!page.includes(`<Sections style="${style}" />`)) {
-    problems.push(`${style}: the page does not render <Sections style="${style}" />`);
+  // Component pages and the sidebar come from pages(): every section on exactly one page.
+  const placed = pages(style).flatMap((page) => page.sections.map((section) => section.id));
+  for (const { id } of sections) {
+    const count = placed.filter((placedId) => placedId === id).length;
+    if (count !== 1) problems.push(`${style}: section #${id} is on ${count} pages`);
   }
-  for (const category of categories) {
-    if (!sections.some((section) => section.category === category)) {
-      problems.push(`${style}: no section for category ${category}`);
+  const slugs = pages(style).map((page) => page.slug);
+  for (const [index, slug] of slugs.entries()) {
+    if (slugs.indexOf(slug) !== index) problems.push(`${style}: two pages share the slug ${slug}`);
+  }
+  for (const { name } of categories) {
+    if (!sections.some((section) => section.category === name)) {
+      problems.push(`${style}: no section for category ${name}`);
     }
   }
-  for (const { id, demo, category } of sections) {
-    if (category !== null && !categories.includes(category)) {
+  for (const { id, demo, category, group } of sections) {
+    if (category !== null && !categories.some(({ name }) => name === category)) {
       problems.push(`${style}: section #${id} has unknown category ${category}`);
+    }
+    if (category === null && !groups.some(({ name }) => name === group)) {
+      problems.push(`${style}: style-specific section #${id} has unknown group ${group}`);
     }
     if (!existsSync(new URL(`../site/src/demos/${style}/${demo}.tsx`, import.meta.url))) {
       problems.push(`${style}: demo site/src/demos/${style}/${demo}.tsx is missing`);

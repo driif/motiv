@@ -1,13 +1,20 @@
 ---
-import { buttonClassName, Card, CardFooter, CardHeader } from '@driif/motiv';
-import { catalog } from '../catalog.mjs';
+import { buttonClassName, Card, CardBody, CardFooter, CardHeader } from '@driif/motiv';
+import { catalog, groups, pages, styles } from '../catalog.mjs';
 import Shell from '../layouts/Shell.astro';
 
-const styles = [
-  { id: 'kinetic', pitch: 'The default. Quiet, minimal, soft springs.' },
-  { id: 'drawn', pitch: 'Lightweight components, drawn by hand.' },
-  { id: 'matrix', pitch: 'Phosphor terminal for consoles and dashboards.' },
-] as const;
+const pitches = {
+  kinetic: 'The default. Quiet, minimal, soft springs.',
+  drawn: 'Lightweight components, drawn by hand.',
+  matrix: 'Phosphor terminal for consoles and dashboards.',
+};
+// Every page of every style once; links open the first style that has it, and a script sends them
+// to the style the visitor last opened when that style has the page too.
+const gallery = styles
+  .flatMap((style) => pages(style))
+  .filter((page, index, all) => all.findIndex((other) => other.slug === page.slug) === index);
+const stylesOf = (slug: string) =>
+  styles.filter((style) => pages(style).some((page) => page.slug === slug));
 ---
 
 <Shell
@@ -17,22 +24,71 @@ const styles = [
   <section class="site-hero">
     <h1 class="site-hero__title">motiv — UI/UX components</h1>
     <p class="site-hero__lede">
-      Plain CSS, server-render safe, no provider. Components grouped by style for a quick
-      bootstrap.
+      Plain CSS, server-render safe, no provider. Pick what you are building, open a component,
+      copy its code.
     </p>
   </section>
-  <ul class="site-choose">
-    {
-      styles.map((style) => (
-        <Card as="li" className="site-choose__card" data-style={style.id}>
-          <CardHeader titleAs="h2" title={style.id} description={style.pitch} />
-          <CardFooter>
-            <a class={buttonClassName({ variant: 'outline', size: 'sm' })} href={`/${style.id}/`}>
-              {catalog[style.id].length} components
-            </a>
-          </CardFooter>
-        </Card>
-      ))
+
+  <section class="site-gallery" aria-labelledby="by-use-case">
+    <h2 class="site-kicker" id="by-use-case">By use case</h2>
+    <ul class="site-gallery__grid">
+      {
+        groups.map((group) => (
+          <Card as="li" className="site-gallery__card">
+            <CardHeader titleAs="h3" title={group.name} description={group.blurb} />
+            <CardBody>
+              <ul class="site-gallery__links">
+                {gallery
+                  .filter((page) => page.group === group.name)
+                  .map((page) => (
+                    <li>
+                      <a
+                        class="site-gallery__link"
+                        href={`/${stylesOf(page.slug)[0]}/${page.slug}/`}
+                        data-slug={page.slug}
+                        data-styles={stylesOf(page.slug).join(' ')}
+                      >
+                        {page.title}
+                      </a>
+                    </li>
+                  ))}
+              </ul>
+            </CardBody>
+          </Card>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="site-gallery" aria-labelledby="by-style">
+    <h2 class="site-kicker" id="by-style">By style</h2>
+    <ul class="site-choose">
+      {
+        styles.map((style) => (
+          <Card as="li" className="site-choose__card" data-style={style}>
+            <CardHeader titleAs="h3" title={style} description={pitches[style]} />
+            <CardFooter>
+              <a class={buttonClassName({ variant: 'outline', size: 'sm' })} href={`/${style}/`}>
+                {catalog[style].length} components
+              </a>
+            </CardFooter>
+          </Card>
+        ))
+      }
+    </ul>
+  </section>
+
+  <script>
+    let style: string | null = null;
+    try {
+      style = localStorage.getItem('motiv-site-style');
+    } catch {}
+    if (style) {
+      for (const link of document.querySelectorAll<HTMLAnchorElement>('.site-gallery__link')) {
+        if (link.dataset.styles?.split(' ').includes(style)) {
+          link.href = `/${style}/${link.dataset.slug}/`;
+        }
+      }
     }
-  </ul>
+  </script>
 </Shell>
