@@ -470,7 +470,7 @@ export const catalog = {
       symbols: ['IconButton', 'IconButtonGroup'],
       demo: 'IconButton',
       blurb:
-        'A toolbar of line icons; hover blooms a soft lilac fill and tips the icon up. Each has a label for screen readers.',
+        'A toolbar of line icons; hover blooms a soft lilac fill and tips the icon up. Each has a label for screen readers. size="sm" gives a 32px button for table and list rows.',
     },
     {
       id: 'menu-button',

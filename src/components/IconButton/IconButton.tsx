@@ -4,16 +4,17 @@ import { cx } from '../../utils/cx';
 export interface IconButtonProps extends Omit<ComponentProps<'button'>, 'children'> {
   icon: ReactNode;
   label: string;
+  size?: 'sm' | 'md';
 }
 
-export function IconButton({ icon, label, className, ...props }: IconButtonProps) {
+export function IconButton({ icon, label, size = 'md', className, ...props }: IconButtonProps) {
   return (
     <button
       type="button"
       {...props}
       aria-label={label}
       title={label}
-      className={cx('motiv-icon-button', className)}
+      className={cx('motiv-icon-button', size === 'sm' && 'motiv-icon-button--sm', className)}
     >
       <span className="motiv-icon-button__icon" aria-hidden="true">
         {icon}

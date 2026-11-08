@@ -33,6 +33,44 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
+export const Small: Story = { args: { size: 'sm' } };
+
+export const InRow: Story = {
+  render: () => (
+    <table>
+      <tbody>
+        {(['sm', 'md'] as const).map((size) => (
+          <tr key={size}>
+            <td>Quarterly report ({size})</td>
+            <td>
+              <IconButton size={size} icon={edit} label="Edit" />
+              <IconButton
+                size={size}
+                icon={<Icon d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13" />}
+                label="Delete"
+              />
+              <IconButton size={size} icon={edit} label="Locked" disabled />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  ),
+};
+
+export const SmallInGroup: Story = {
+  render: () => (
+    <ThemePair>
+      {() => (
+        <IconButtonGroup label="Tools">
+          <IconButton size="sm" icon={edit} label="Edit" />
+          <IconButton size="sm" icon={<Icon d="M12 5v14M5 12h14" />} label="Add" />
+        </IconButtonGroup>
+      )}
+    </ThemePair>
+  ),
+};
+
 export const InGroup: Story = { render: () => <Group /> };
 
 export const Themes: Story = {

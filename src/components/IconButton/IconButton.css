@@ -8,11 +8,13 @@
   }
 
   .motiv-icon-button {
+    --_size: 48px;
+    --_icon-size: 24px;
     position: relative;
     display: inline-grid;
     place-items: center;
-    width: 48px;
-    height: 48px;
+    width: var(--_size);
+    height: var(--_size);
     padding: 0;
     color: var(--motiv-icon-button-color, var(--motiv-color-text));
     background: var(--motiv-icon-button-bg, transparent);
@@ -52,6 +54,11 @@
     }
   }
 
+  .motiv-icon-button--sm {
+    --_size: calc(var(--motiv-space) * 8);
+    --_icon-size: calc(var(--motiv-space) * 4);
+  }
+
   .motiv-icon-button-group > .motiv-icon-button + .motiv-icon-button::before {
     content: "";
     position: absolute;
@@ -66,8 +73,8 @@
     position: relative;
     z-index: 1;
     display: inline-grid;
-    width: 24px;
-    height: 24px;
+    width: var(--_icon-size);
+    height: var(--_icon-size);
     transition:
       translate 0.45s var(--motiv-ease-spring),
       rotate 0.45s var(--motiv-ease-spring),

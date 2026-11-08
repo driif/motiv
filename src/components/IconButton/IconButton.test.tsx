@@ -26,6 +26,17 @@ describe('IconButton', () => {
     expect(button).toHaveAttribute('type', 'submit');
     expect(ref.current).toBe(button);
   });
+
+  it('adds the sm modifier only for size sm and keeps size off the DOM', () => {
+    const { rerender } = render(<IconButton icon="✎" label="Edit" size="sm" />);
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass('motiv-icon-button--sm');
+    expect(button).not.toHaveAttribute('size');
+    rerender(<IconButton icon="✎" label="Edit" size="md" />);
+    expect(button).not.toHaveClass('motiv-icon-button--sm');
+    rerender(<IconButton icon="✎" label="Edit" />);
+    expect(button).not.toHaveClass('motiv-icon-button--sm');
+  });
 });
 
 describe('IconButtonGroup', () => {
