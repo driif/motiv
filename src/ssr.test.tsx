@@ -90,6 +90,19 @@ describe('server rendering', () => {
     expect(after).not.toContain('Request-specific error');
   });
 
+  it.each([false, true])('renders Dialog without opening a non-modal dialog (open=%s)', (open) => {
+    const html = renderToStaticMarkup(
+      <K.Dialog open={open} title="Edit question" onClose={() => {}}>
+        <p>Body</p>
+      </K.Dialog>,
+    );
+    expect(html).toContain('<dialog');
+    expect(html).not.toContain(' open=');
+    expect(html).toContain('<p>Body</p>');
+    expect(html).toContain('aria-label="Close"');
+    expect(html).toMatch(/aria-labelledby="([^"]+)".*?<h2 id="\1"/);
+  });
+
   it.each([false, true])('renders Confirm without opening a non-modal dialog (open=%s)', (open) => {
     const html = renderToStaticMarkup(
       <K.Confirm

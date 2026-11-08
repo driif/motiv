@@ -111,6 +111,16 @@
       }
     },
     {
+      "includes": ["src/components/Dialog/Dialog.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useKeyWithClickEvents": "off"
+          }
+        }
+      }
+    },
+    {
       "includes": ["src/styles/kinetic.css"],
       "linter": {
         "rules": {

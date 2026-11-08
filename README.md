@@ -65,7 +65,7 @@ Besides `Button` and `Card`, the root entry ships the kinetic set: `MagneticButt
 `Radio`, `RadioGroup`, `Stepper`, `CommandMenu`, `FloatingField`, `OtpInput`, `ExpandingSearch`,
 `FrequencySlider`, `MomentumSlider`, `LiquidSwitch`, `SpringCheckbox`, `LikeButton`, `MuteToggle`,
 `SlipCard`, `Accordion`, `Carousel`, `GlideNav`, `StepProgress`, `DrillStack`, `ProgressRing` and
-`Odometer`, plus the native `Confirm` dialog, `FileUpload`, `DatePicker`, `Table` with
+`Odometer`, plus the native `Confirm` and `Dialog` modals, `FileUpload`, `DatePicker`, `Table` with
 `TableColumnsMenu`, and `MultiSelect`, a searchable multiple choice whose `name` posts one hidden
 input per value. Every animation moves only `transform` and `opacity`; `prefers-reduced-motion` stills
 them. `IconButton`, `MenuButton`, `ThemeToggle`, `Radio`, `RadioGroup` and `SegmentedControl` take
@@ -141,6 +141,31 @@ hint. `confirmLabel` (`Delete`), `cancelLabel` (`Cancel`) and `slugLabel`
 Escape. The dialog never closes itself: Cancel and Escape call `onCancel`, the backdrop does
 nothing, and your app sets `open={false}`. Focus starts on Cancel or the field and returns to the
 opener on close.
+
+## Dialog
+
+`Dialog` is a controlled native modal `<dialog>` for free content: a title, a close button and your
+children. Escape, the close button and a click on the backdrop call `onClose`; the dialog never
+closes itself. Focus returns to the opener, the page behind does not scroll, and the body scrolls
+within 90vh. `size="wide"` raises the width cap from 48rem to 60rem; `closeLabel` defaults to
+`Close`. Theme the backdrop with `--motiv-dialog-backdrop`.
+
+```tsx
+import { Button, Dialog } from '@driif/motiv';
+import { useState } from 'react';
+
+function EditQuestion() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Edit question</Button>
+      <Dialog open={open} title="Edit question" onClose={() => setOpen(false)}>
+        <QuestionEditor onSaved={() => setOpen(false)} />
+      </Dialog>
+    </>
+  );
+}
+```
 
 ## Toast
 
