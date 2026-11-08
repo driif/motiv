@@ -60,7 +60,7 @@ import { Link } from 'react-router';
 ## Kinetic components
 
 Besides `Button` and `Card`, the root entry ships the kinetic set: `MagneticButton`,
-`MorphSubmitButton`, `BellButton`, `BadgeButton`, `CopyField`, `RadialMenu`, `IconButton`,
+`MorphSubmitButton`, `BellButton`, `Badge`, `BadgeButton`, `CopyField`, `RadialMenu`, `IconButton`,
 `IconButtonGroup`, `MenuButton`, `ThemeToggle`, `SegmentedControl`, `ElasticTabs`, `FilterChips`,
 `Radio`, `RadioGroup`, `Stepper`, `CommandMenu`, `FloatingField`, `OtpInput`, `ExpandingSearch`,
 `FrequencySlider`, `MomentumSlider`, `LiquidSwitch`, `SpringCheckbox`, `LikeButton`, `MuteToggle`,

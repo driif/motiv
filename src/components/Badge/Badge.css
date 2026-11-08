@@ -1,0 +1,45 @@
+@layer motiv.components {
+  .motiv-status-badge {
+    --_mix: 20%;
+    --_border: var(--_tone);
+
+    display: inline-flex;
+    align-items: center;
+    padding: calc(var(--motiv-space) * 0.5) calc(var(--motiv-space) * 2);
+    font-size: calc(var(--motiv-font-size) * 0.75);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.075em;
+    white-space: nowrap;
+    color: var(--motiv-badge-color, var(--motiv-color-text));
+    background: var(
+      --motiv-badge-bg,
+      color-mix(in oklab, var(--_tone) var(--_mix), var(--motiv-color-surface))
+    );
+    border: 1px solid var(--motiv-badge-border-color, var(--_border));
+    border-radius: var(--motiv-badge-radius, var(--motiv-radius-full));
+  }
+
+  .motiv-status-badge--neutral {
+    --_tone: var(--motiv-color-secondary);
+    --_mix: 10%;
+    --_border: transparent;
+  }
+
+  .motiv-status-badge--success {
+    --_tone: var(--motiv-color-success);
+  }
+
+  .motiv-status-badge--warning {
+    --_tone: var(--motiv-color-warning);
+  }
+
+  .motiv-status-badge--danger {
+    --_tone: var(--motiv-color-danger);
+  }
+
+  .motiv-status-badge--md {
+    padding: var(--motiv-space) calc(var(--motiv-space) * 3);
+    font-size: calc(var(--motiv-font-size) * 0.85);
+  }
+}

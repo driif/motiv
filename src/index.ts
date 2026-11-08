@@ -1,4 +1,5 @@
 export * from './components/Accordion';
+export * from './components/Badge';
 export * from './components/BadgeButton';
 export * from './components/BellButton';
 export * from './components/Button';
