@@ -244,6 +244,9 @@ describe('server rendering', () => {
         <K.MorphSubmitButton onAction={noop} />
         <K.BellButton count={3} />
         <K.BadgeButton count={120} label="Inbox" />
+        <K.Badge tone="success" size="md">
+          Live
+        </K.Badge>
         <K.CopyField value="token" />
         <K.RadialMenu actions={[{ id: 'a', label: 'Add', icon: '+', onSelect: noop }]} />
         <K.IconButtonGroup label="Tools">
@@ -307,6 +310,9 @@ describe('server rendering', () => {
     expect(html).toContain('aria-current="step"');
     expect(html).toMatch(/aria-describedby="err [^"]+-hint"/);
     expect(html).toContain('class="motiv-bar"');
+    expect(html).toContain(
+      '<span class="motiv-status-badge motiv-status-badge--success motiv-status-badge--md">Live</span>',
+    );
   });
 
   it('renders GlideNav links with the static active bar hook', () => {

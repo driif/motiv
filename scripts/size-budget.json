@@ -1,6 +1,7 @@
 {
   "base.css": 250,
   "components/Accordion/Accordion.js": 800,
+  "components/Badge/Badge.js": 300,
   "components/BadgeButton/BadgeButton.js": 950,
   "components/BellButton/BellButton.js": 950,
   "components/Button/Button.js": 550,
@@ -124,7 +125,7 @@
   "matrix/Toast/Toast.js": 950,
   "matrix/Tooltip/Tooltip.js": 550,
   "matrix/index.js": 700,
-  "styles.css": 14100,
+  "styles.css": 15600,
   "tokens.css": 800,
   "utils/Icon.js": 300,
   "utils/ToastLiveRegions.js": 500,

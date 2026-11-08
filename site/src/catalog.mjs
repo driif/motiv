@@ -397,6 +397,16 @@ export const catalog = {
         'An icon button with an unread counter that bumps and rolls its digits, and shrinks away at zero.',
     },
     {
+      id: 'badge',
+      category: null,
+      group: 'Feedback',
+      title: 'Badge',
+      symbols: ['Badge'],
+      demo: 'Badge',
+      blurb:
+        'A short status label in a neutral, success, warning or danger tone, in two sizes. It is plain text, so the words carry the meaning.',
+    },
+    {
       id: 'copy-field',
       category: null,
       group: 'Forms',
