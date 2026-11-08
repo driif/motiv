@@ -2,6 +2,11 @@
   .motiv-btn {
     --_ink: var(--motiv-color-primary);
     --_border: var(--motiv-button-border-color, var(--_ink));
+    --_border-hover: color-mix(
+      in oklch,
+      var(--motiv-button-border-color, var(--motiv-color-text)) 55%,
+      transparent
+    );
     --_text: var(--motiv-button-color, var(--_ink));
     --_shape: var(--motiv-button-radius, 18px 7px 20px 6px / 7px 16px 6px 20px);
 
@@ -41,14 +46,7 @@
     }
 
     &::after {
-      border-color: var(
-        --motiv-button-border-color-hover,
-        color-mix(
-          in oklch,
-          var(--motiv-button-border-color, var(--motiv-color-text)) 55%,
-          transparent
-        )
-      );
+      border-color: var(--motiv-button-border-color-hover, var(--_border-hover));
       border-radius: var(--motiv-button-radius, 7px 20px 6px 18px / 18px 6px 20px 7px);
       opacity: 0;
       transform: rotate(-1.2deg) translate(2px, 2px);
@@ -119,6 +117,11 @@
 
   .motiv-btn--outline {
     --_ink: var(--motiv-color-text);
+    --_border: var(
+      --motiv-button-outline-border-color,
+      var(--motiv-button-border-color, var(--_ink))
+    );
+    --_border-hover: color-mix(in oklch, var(--_border) 55%, transparent);
   }
 
   .motiv-btn--ghost {

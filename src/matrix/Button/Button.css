@@ -124,6 +124,14 @@
     }
   }
 
+  .motiv-matrix-btn--outline {
+    --_border: var(
+      --motiv-button-outline-border-color,
+      var(--motiv-button-border-color, var(--_accent))
+    );
+    --_corner: var(--_border);
+  }
+
   .motiv-matrix-btn--ghost {
     --_border: var(--motiv-button-border-color, transparent);
     --_corners: 0;

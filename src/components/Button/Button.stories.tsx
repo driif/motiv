@@ -114,3 +114,22 @@ export const SubtreeOverride: Story = {
     </div>
   ),
 };
+
+export const OutlineBorderColor: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gap: '0.75rem' }}>
+      <div style={row}>
+        <Button>Default</Button>
+        <Button variant="outline">Outline</Button>
+      </div>
+      <div style={{ ...row, '--motiv-button-border-color': '#16a34a' } as CSSProperties}>
+        <Button>Generic border</Button>
+        <Button variant="outline">Outline</Button>
+      </div>
+      <div style={{ ...row, '--motiv-button-outline-border-color': '#16a34a' } as CSSProperties}>
+        <Button>Outline token</Button>
+        <Button variant="outline">Outline</Button>
+      </div>
+    </div>
+  ),
+};
