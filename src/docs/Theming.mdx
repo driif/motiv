@@ -124,7 +124,8 @@ Every category uses the same suffixes, and only where a component paints that pr
 | `-accent` | the checked, selected, active, focused or filled state |
 
 A component token overrides every variant at once: `--motiv-button-bg` fills primary, secondary,
-danger, outline and ghost buttons alike. Hover fills and borders derive from the overridden `-bg`
+danger, outline and ghost buttons alike. The one exception is `--motiv-button-outline-border-color`,
+which overrides the outline variant only. Hover fills and borders derive from the overridden `-bg`
 and `-border-color` unless `-bg-hover` or `-border-color-hover` is set. Drawn's sketched corners and matrix's square ones are only
 the `-radius` fallbacks, so setting a radius replaces them.
 
@@ -144,12 +145,23 @@ color, border and radius tokens; their size is part of the effect.
 | `--motiv-button-bg-hover` | ✓ | ✓ | ✓ |
 | `--motiv-button-color` | ✓ | ✓ | ✓ |
 | `--motiv-button-border-color` | ✓ | ✓ | ✓ |
+| `--motiv-button-outline-border-color` | ✓ | ✓ | ✓ |
 | `--motiv-button-border-color-hover` | ✓ | ✓ | ✓ |
 | `--motiv-button-border-width` | ✓ | ✓ | ✓ |
 | `--motiv-button-radius` | ✓ | ✓ | ✓ |
 | `--motiv-button-height` | ✓ | ✓ | ✓ |
 | `--motiv-button-px` | ✓ | ✓ | ✓ |
 | `--motiv-button-font` | ✓ | ✓ | ✓ |
+
+`--motiv-button-outline-border-color` paints the border of outline `Button`s only and falls back to
+`--motiv-button-border-color`. Their hover border follows it unless
+`--motiv-button-border-color-hover` is set:
+
+```css
+:root {
+  --motiv-button-outline-border-color: var(--motiv-color-border);
+}
+```
 
 ### IconButton
 

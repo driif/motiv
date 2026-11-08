@@ -85,7 +85,10 @@
   .motiv-btn--outline {
     --_bg: var(--motiv-button-bg, transparent);
     --_color: var(--motiv-button-color, var(--motiv-color-text));
-    --_border: var(--motiv-button-border-color, var(--motiv-color-primary));
+    --_border: var(
+      --motiv-button-outline-border-color,
+      var(--motiv-button-border-color, var(--motiv-color-primary))
+    );
     --_bg-hover: color-mix(
       in oklch,
       var(--motiv-button-bg, transparent),
