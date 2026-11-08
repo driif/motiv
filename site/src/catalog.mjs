@@ -435,6 +435,16 @@ export const catalog = {
         'A modal confirm with a danger action by default. Use a primary action for non-destructive work.',
     },
     {
+      id: 'dialog',
+      category: null,
+      group: 'Feedback',
+      title: 'Dialog',
+      symbols: ['Dialog'],
+      demo: 'Dialog',
+      blurb:
+        'A modal for free content with a title and a close button. Escape, the close button and a backdrop click ask you to close it; wide fits whole editors and long bodies scroll.',
+    },
+    {
       id: 'toast',
       category: 'Toast',
       title: 'Toast',

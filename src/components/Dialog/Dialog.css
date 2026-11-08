@@ -1,0 +1,104 @@
+@layer motiv.components {
+  .motiv-dialog {
+    --_width: 48rem;
+    --_pad: calc(var(--motiv-space) * 8);
+
+    box-sizing: border-box;
+    width: min(var(--_width), calc(100% - var(--motiv-space) * 8));
+    max-width: calc(100% - var(--motiv-space) * 8);
+    max-height: 90vh;
+    margin: auto;
+    padding: 0;
+    overflow-wrap: anywhere;
+    color: var(--motiv-color-text);
+    background: var(--motiv-color-surface);
+    border: 1px solid var(--motiv-color-border);
+    border-radius: var(--motiv-radius-lg);
+    box-shadow: var(--motiv-shadow-lg);
+    font-family: var(--motiv-font-body);
+    font-size: var(--motiv-font-size);
+    line-height: 1.5;
+
+    &[open] {
+      display: flex;
+      flex-direction: column;
+      animation: motiv-dialog-in var(--motiv-duration) var(--motiv-ease);
+    }
+
+    &::backdrop {
+      background: var(
+        --motiv-dialog-backdrop,
+        color-mix(in oklch, var(--motiv-shadow-color) 45%, transparent)
+      );
+      backdrop-filter: blur(calc(var(--motiv-space) * 1));
+    }
+
+    &[open]::backdrop {
+      animation: motiv-dialog-fade var(--motiv-duration) var(--motiv-ease);
+    }
+  }
+
+  .motiv-dialog--wide {
+    --_width: 60rem;
+  }
+
+  .motiv-dialog__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--motiv-space) * 4);
+    padding: calc(var(--motiv-space) * 2) calc(var(--motiv-space) * 2) calc(var(--motiv-space) * 2)
+      var(--_pad);
+    background: var(--motiv-color-surface-hover);
+    border-bottom: 1px solid var(--motiv-color-border);
+  }
+
+  .motiv-dialog__title {
+    min-width: 0;
+    margin: 0;
+    font-family: var(--motiv-font-title);
+    font-size: calc(var(--motiv-font-size) * 1.25);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .motiv-dialog__body {
+    flex: 1;
+    min-height: 0;
+    padding: var(--_pad);
+    overflow: auto;
+    overscroll-behavior: contain;
+
+    & > :first-child {
+      margin-block-start: 0;
+    }
+
+    & > :last-child {
+      margin-block-end: 0;
+    }
+  }
+
+  html:has(.motiv-dialog[open]) {
+    overflow: hidden;
+  }
+
+  @keyframes motiv-dialog-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+
+  @keyframes motiv-dialog-fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-dialog[open],
+    .motiv-dialog[open]::backdrop {
+      animation: none;
+    }
+  }
+}
