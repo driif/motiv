@@ -1,5 +1,18 @@
 # @driif/motiv
 
+## 0.25.0
+
+### Minor Changes
+
+- 54e4145: Add Badge, a short status label in four tones.
+- dbd46b6: Add Dialog, a modal dialog for free content.
+- a22b965: IconButton takes size sm for a 32 px button.
+- 6b9fec0: Outline buttons take their border from --motiv-button-outline-border-color.
+
+### Patch Changes
+
+- 1d996e9: Long TextField, FloatingField and DatePicker labels now wrap above the value instead of overlapping it; CSS that targeted the input's border, background or radius must now target `.motiv-float__control`.
+
 ## 0.24.0
 
 ### Minor Changes
