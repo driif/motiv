@@ -39,9 +39,38 @@
     transition: transform 0.5s steps(8);
   }
 
+  /* A 3-segment block repeating every 30 segments; each step moves one 11px segment. */
+  .motiv-matrix-progress[data-indeterminate] .motiv-matrix-progress__fill {
+    transform: none;
+    transition: none;
+    background:
+      linear-gradient(
+        90deg,
+        var(--motiv-progress-accent, var(--motiv-color-primary)) 33px,
+        transparent 33px
+      )
+      0 / 330px 100%;
+    animation: motiv-matrix-progress-sweep 1.5s steps(30) infinite;
+  }
+
+  @keyframes motiv-matrix-progress-sweep {
+    to {
+      background-position-x: 330px;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .motiv-matrix-progress__fill {
       transition: none;
+    }
+
+    .motiv-matrix-progress[data-indeterminate] .motiv-matrix-progress__fill {
+      background: color-mix(
+        in oklch,
+        var(--motiv-progress-accent, var(--motiv-color-primary)) 40%,
+        transparent
+      );
+      animation: none;
     }
   }
 }

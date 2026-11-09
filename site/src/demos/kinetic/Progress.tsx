@@ -5,6 +5,7 @@ export function ProgressDemo() {
   const [uploaded, setUploaded] = useState(35);
   return (
     <>
+      <Progress label="Preparing import" />
       <Progress value={uploaded} label="Uploading" />
       <Button
         variant="outline"

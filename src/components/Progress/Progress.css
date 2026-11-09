@@ -39,9 +39,32 @@
     transition: scale 0.6s var(--motiv-ease-spring);
   }
 
+  .motiv-bar[data-indeterminate] .motiv-bar__fill {
+    width: 40%;
+    scale: 1;
+    transition: none;
+    animation: motiv-bar-indeterminate 1.4s ease-in-out infinite;
+  }
+
+  @keyframes motiv-bar-indeterminate {
+    from {
+      translate: -100% 0;
+    }
+
+    to {
+      translate: 250% 0;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .motiv-bar__fill {
       transition: none;
+    }
+
+    .motiv-bar[data-indeterminate] .motiv-bar__fill {
+      width: auto;
+      background: color-mix(in oklch, var(--_accent) 40%, transparent);
+      animation: none;
     }
   }
 }

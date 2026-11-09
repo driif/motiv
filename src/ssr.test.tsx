@@ -190,6 +190,7 @@ describe('server rendering', () => {
         <MenuButton open onToggle={() => {}} />
         <ThemeToggle dark onToggle={() => {}} />
         <Progress value={40} label="Upload" />
+        <Progress label="Preparing" />
       </>,
     );
     expect(html).toContain('aria-current="page"');
@@ -291,6 +292,7 @@ describe('server rendering', () => {
         <K.Checkbox label="Subscribe" defaultChecked />
         <K.TextField label="Name" hint="Hint" aria-describedby="err" />
         <K.Progress value={40} label="Upload" />
+        <K.Progress label="Preparing" />
         <K.LikeButton liked count={12} onToggle={noop} />
         <K.MuteToggle muted onChange={noop} />
         <K.SlipCard title="T" description="D" note="N" />
@@ -368,6 +370,7 @@ describe('server rendering', () => {
         <M.Checkbox label="Subscribe" defaultChecked />
         <M.RadioGroup name="d" legend="Drink" options={options} value="oidc" onChange={noop} />
         <M.Progress value={40} label="Upload" />
+        <M.Progress label="Preparing" />
         <M.Link href="https://example.com" external>
           Example
         </M.Link>
