@@ -1,5 +1,13 @@
 # @driif/motiv
 
+## 0.26.0
+
+### Minor Changes
+
+- 6bbf065: Add `ActionMenu`, a button that opens a keyboard-accessible menu of actions, imported from `@driif/motiv/action-menu`.
+- 9a5fc47: Progress (default, drawn and matrix) shows an indeterminate bar when `value` is omitted.
+- fbd4946: Add `Markdown` and `MarkdownEditor` at `@driif/motiv/markdown` for safe CommonMark rendering and editing with an always-visible preview.
+
 ## 0.25.0
 
 ### Minor Changes
