@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { CSSProperties } from 'react';
+import { assertFieldLayout, longLabel } from '../../../.storybook/assertFieldLayout';
 import { ThemePair } from '../../../.storybook/ThemePair';
 import { withDrawn } from '../../../.storybook/withDrawn';
 import { DatePicker } from './DatePicker';
@@ -39,6 +40,17 @@ export const Narrow: Story = {
       </div>
     ),
   ],
+};
+
+export const LongLabel: Story = {
+  args: { label: longLabel },
+  render: (args) => (
+    <div style={{ display: 'grid', gap: '1rem' }}>
+      <DatePicker {...args} />
+      <DatePicker {...args} defaultValue="2026-11-13" />
+    </div>
+  ),
+  play: ({ canvasElement }) => assertFieldLayout(canvasElement),
 };
 
 export const Themes: Story = {

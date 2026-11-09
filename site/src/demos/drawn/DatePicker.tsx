@@ -12,7 +12,7 @@ export function DatePickerDemo() {
         hint={`Value: "${due}"`}
       />
       <DatePicker
-        label="Meeting"
+        label="First meeting with the whole project team"
         type="datetime-local"
         min="2026-11-02T09:00"
         hint="Not before 2 November 2026, 9:00."

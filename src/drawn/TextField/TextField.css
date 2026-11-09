@@ -13,12 +13,16 @@
     }
   }
 
+  /* The label sits in row 1 above the input, so a long label wraps above the value. The -2deg
+     floated label lifts its end by up to 4% of the width (with spring overshoot): the top padding. */
   .motiv-text-field__control {
     position: relative;
-    padding-top: calc(var(--motiv-space) * 7);
+    display: grid;
+    padding-top: calc(4% + var(--motiv-space) * 2);
   }
 
   .motiv-text-field__input {
+    grid-row: 2;
     box-sizing: border-box;
     width: 100%;
     padding: calc(var(--motiv-space) * 2) 0;
@@ -33,14 +37,16 @@
     outline: none;
   }
 
+  /* At rest the label is moved down onto the value line; both states keep a 1.5em line box. */
   .motiv-text-field__label {
-    position: absolute;
-    left: 0;
-    bottom: calc(var(--motiv-space) * 2);
+    grid-row: 1;
+    justify-self: start;
+    margin-inline-end: var(--motiv-space);
     line-height: 1.5;
     color: var(--motiv-color-text-muted);
-    pointer-events: none;
-    transform-origin: left bottom;
+    overflow-wrap: anywhere;
+    transform: translateY(calc(1.5em + var(--motiv-space) * 2));
+    transform-origin: left top;
     transition:
       transform 0.5s var(--_spring),
       color var(--motiv-duration) var(--motiv-ease);
@@ -50,8 +56,9 @@
     + .motiv-text-field__label {
     font-family: var(--_hand-font);
     font-size: 1.5em;
+    line-height: 1;
     color: var(--_accent);
-    transform: translateY(-36px) rotate(-2deg);
+    transform: rotate(-2deg);
   }
 
   .motiv-text-field__line {

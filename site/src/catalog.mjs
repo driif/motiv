@@ -94,7 +94,7 @@ export const catalog = {
       symbols: ['TextField'],
       demo: 'TextField',
       blurb:
-        'A pencil line to write on. Focus draws it in ink, the label floats, the hint stays put.',
+        'A pencil line to write on. Focus draws it in ink, the label floats, the hint stays put. A long label wraps above the value.',
     },
     {
       id: 'textarea',
@@ -308,7 +308,7 @@ export const catalog = {
       symbols: ['DatePicker'],
       demo: 'DatePicker',
       blurb:
-        'A native date or date-and-time field on the pencil line, its label penned above. A scribbled cross clears it in one click.',
+        'A native date or date-and-time field on the pencil line, its label penned above and wrapped when long. A scribbled cross clears it in one click.',
     },
     {
       id: 'file-upload',
@@ -567,7 +567,7 @@ export const catalog = {
       symbols: ['FloatingField'],
       demo: 'FloatingField',
       blurb:
-        'A text field whose label lifts on focus; a check pops in once the browser calls the value valid. Also exported as TextField, without the check.',
+        'A text field whose label lifts on focus and wraps above the value when long; a check pops in once the browser calls the value valid. Also exported as TextField, without the check.',
     },
     {
       id: 'text-field',
@@ -576,7 +576,7 @@ export const catalog = {
       symbols: ['TextField'],
       demo: 'TextField',
       blurb:
-        'The FloatingField look under the generic name, without the check. Same props as the drawn and matrix TextField.',
+        'The FloatingField look under the generic name, without the check; a long label wraps above the value. Same props as the drawn and matrix TextField.',
     },
     {
       id: 'date-picker',
@@ -585,7 +585,7 @@ export const catalog = {
       symbols: ['DatePicker'],
       demo: 'DatePicker',
       blurb:
-        'A native date or date-and-time field in the TextField look. Values stay native strings such as 2026-11-13, and a clear button empties the field in one click.',
+        'A native date or date-and-time field in the TextField look, its label wrapped above the value when long. Values stay native strings such as 2026-11-13, and a clear button empties the field in one click.',
     },
     {
       id: 'textarea',

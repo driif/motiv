@@ -1,4 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import {
+  assertFieldLayout,
+  longLabel,
+  longValue,
+  wideLabel,
+} from '../../../.storybook/assertFieldLayout';
 import { ThemePair } from '../../../.storybook/ThemePair';
 import { withDrawn } from '../../../.storybook/withDrawn';
 import { TextField } from './TextField';
@@ -22,6 +28,17 @@ export const WithHint: Story = {
 export const Filled: Story = { args: { defaultValue: 'Ada Lovelace' } };
 
 export const Disabled: Story = { args: { disabled: true, defaultValue: 'Read only' } };
+
+export const LongLabel: Story = {
+  args: { label: longLabel },
+  render: (args) => (
+    <div style={{ display: 'grid', gap: '1rem' }}>
+      <TextField {...args} />
+      <TextField {...args} label={wideLabel} />
+    </div>
+  ),
+  play: ({ canvasElement }) => assertFieldLayout(canvasElement, longValue),
+};
 
 export const Themes: Story = {
   render: (args) => (
