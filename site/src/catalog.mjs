@@ -350,6 +350,28 @@ export const catalog = {
   ],
   kinetic: [
     {
+      id: 'markdown',
+      category: null,
+      group: 'Data & layout',
+      title: 'Markdown',
+      entry: '@driif/motiv/markdown',
+      symbols: ['Markdown'],
+      demo: 'Markdown',
+      blurb:
+        'CommonMark prose with safe links, lists and code blocks. Raw HTML stays text; import from @driif/motiv/markdown.',
+    },
+    {
+      id: 'markdown-editor',
+      category: null,
+      group: 'Forms',
+      title: 'MarkdownEditor',
+      entry: '@driif/motiv/markdown',
+      symbols: ['MarkdownEditor'],
+      demo: 'MarkdownEditor',
+      blurb:
+        'A textarea with an always-visible Markdown preview that follows typing and form resets. Import from @driif/motiv/markdown.',
+    },
+    {
       id: 'button',
       category: 'Button',
       title: 'Button',
@@ -383,6 +405,7 @@ export const catalog = {
       category: null,
       group: 'Actions',
       title: 'ActionMenu',
+      entry: '@driif/motiv/action-menu',
       symbols: ['ActionMenu'],
       demo: 'ActionMenu',
       blurb:

@@ -2,9 +2,13 @@ import { existsSync, readFileSync } from 'node:fs';
 import { catalog, categories, groups, pages } from '../site/src/catalog.mjs';
 
 const entries = {
-  kinetic: ['../dist/index.js', '../dist/action-menu/index.js'],
-  drawn: ['../dist/drawn/index.js'],
-  matrix: ['../dist/matrix/index.js'],
+  kinetic: {
+    '@driif/motiv': '../dist/index.js',
+    '@driif/motiv/action-menu': '../dist/action-menu/index.js',
+    '@driif/motiv/markdown': '../dist/markdown/index.js',
+  },
+  drawn: { '@driif/motiv/drawn': '../dist/drawn/index.js' },
+  matrix: { '@driif/motiv/matrix': '../dist/matrix/index.js' },
 };
 
 const problems = [];
@@ -13,20 +17,35 @@ for (const { name, group } of categories) {
     problems.push(`category ${name} has unknown group ${group}`);
   }
 }
-for (const [style, paths] of Object.entries(entries)) {
-  const modules = await Promise.all(paths.map((path) => import(path)));
-  const exported = modules.flatMap((module) => Object.keys(module));
+for (const [style, styleEntries] of Object.entries(entries)) {
   const sections = catalog[style];
+  const defaultEntry = style === 'kinetic' ? '@driif/motiv' : `@driif/motiv/${style}`;
   const claimed = sections.flatMap((section) => section.symbols);
-  for (const name of exported) {
-    // cx is a helper, shown in the kinetic getting-started steps instead of a demo.
-    if (!claimed.includes(name) && !(style === 'kinetic' && name === 'cx'))
-      problems.push(`${style}: ${name} is exported but not on the site`);
-  }
   for (const [index, name] of claimed.entries()) {
     if (claimed.indexOf(name) !== index) problems.push(`${style}: ${name} is claimed twice`);
-    if (!exported.includes(name))
-      problems.push(`${style}: ${name} is on the site but not exported`);
+  }
+  for (const section of sections) {
+    const entry = section.entry ?? defaultEntry;
+    if (!(entry in styleEntries)) problems.push(`${style}: unknown entry ${entry}`);
+  }
+  const owners = new Map();
+  for (const [entry, path] of Object.entries(styleEntries)) {
+    const exported = Object.keys(await import(path));
+    const entryClaims = sections
+      .filter((section) => (section.entry ?? defaultEntry) === entry)
+      .flatMap((section) => section.symbols);
+    for (const name of exported) {
+      if (owners.has(name))
+        problems.push(`${name} is exported by both ${owners.get(name)} and ${entry}`);
+      owners.set(name, entry);
+      // cx is a helper, shown in the kinetic getting-started steps instead of a demo.
+      if (!entryClaims.includes(name) && !(entry === '@driif/motiv' && name === 'cx'))
+        problems.push(`${entry}: ${name} is exported but not on the site`);
+    }
+    for (const name of entryClaims) {
+      if (!exported.includes(name))
+        problems.push(`${entry}: ${name} is on the site but not exported`);
+    }
   }
   const page = readFileSync(new URL(`../site/src/pages/${style}/index.astro`, import.meta.url));
   if (style === 'kinetic' && !String(page).includes('cx(')) {

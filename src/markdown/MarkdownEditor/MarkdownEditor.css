@@ -1,0 +1,19 @@
+@layer motiv.components {
+  .motiv-markdown-editor {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: calc(var(--motiv-space) * 6);
+    width: 100%;
+
+    & > * {
+      flex: 1 1 calc(var(--motiv-space) * 72);
+      min-width: 0;
+    }
+  }
+
+  .motiv-markdown-editor__preview {
+    display: grid;
+    gap: calc(var(--motiv-space) * 2);
+  }
+}

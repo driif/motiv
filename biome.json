@@ -22,6 +22,14 @@
   },
   "overrides": [
     {
+      "includes": ["src/markdown/Markdown/Markdown.tsx"],
+      "linter": {
+        "rules": {
+          "security": { "noDangerouslySetInnerHtml": "off" }
+        }
+      }
+    },
+    {
       "includes": ["**/*.astro"],
       "linter": {
         "rules": {

@@ -2,6 +2,17 @@ import { rolldown } from 'rolldown';
 
 const checks = [
   {
+    input: 'dist/index.js',
+    kept: 'motiv-btn',
+    dropped: ['motiv-markdown'],
+    droppedModules: /node_modules\/(?:micromark[^/]*|hast-util-[^/]+|parse5)\//,
+  },
+  {
+    input: 'test/fixtures/treeshake-markdown.js',
+    kept: 'motiv-markdown',
+    dropped: ['motiv-markdown-editor', 'motiv-textarea', 'fitHeight', 'useState'],
+  },
+  {
     input: 'test/fixtures/treeshake-multi-select.js',
     kept: 'motiv-multi-select',
     dropped: ['motiv-picker', 'motiv-filter-chips', 'useListbox', 'useChips', 'useCommandMenu'],
@@ -113,10 +124,16 @@ const checks = [
 ];
 
 const problems = [];
-for (const { input, kept, dropped } of checks) {
+for (const { input, kept, dropped, droppedModules } of checks) {
   const bundle = await rolldown({ input, external: [/^react/, /^@radix-ui\//] });
   const { output } = await bundle.generate({ format: 'esm' });
   const code = output.map((chunk) => chunk.code ?? '').join('\n');
+  for (const chunk of output) {
+    if (chunk.type !== 'chunk') continue;
+    for (const id of chunk.moduleIds) {
+      if (droppedModules?.test(id)) problems.push(`${input}: ${id} leaked into the bundle`);
+    }
+  }
   if (!code.includes(kept)) problems.push(`${input}: ${kept} missing from bundle`);
   for (const name of dropped) {
     if (code.includes(name)) problems.push(`${input}: ${name} leaked into the bundle`);

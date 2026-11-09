@@ -328,6 +328,35 @@ import { Table, TableColumnsMenu } from '@driif/motiv';
 The table scrolls inside its wrapper. The header row only sticks once the wrapper has a `height`
 or `max-height`, as above. Cells stay on one line and end in an ellipsis.
 
+## Markdown
+
+Import `Markdown` and `MarkdownEditor` from `@driif/motiv/markdown`, with
+`@driif/motiv/styles.css`. The parser dependencies stay out of the root JavaScript entry;
+importing only `Markdown` also leaves the editor out of the bundle.
+
+```tsx
+import { Markdown, MarkdownEditor } from '@driif/motiv/markdown';
+import '@driif/motiv/styles.css';
+
+<Markdown>{'# Notes\n\nA **clear update** with [a link](/guide).'}</Markdown>;
+<MarkdownEditor label="Notes" name="notes" defaultValue="## Draft" />;
+```
+
+`Markdown` renders CommonMark headings, lists, emphasis, quotes, links, images and code.
+Raw HTML stays text, and the generated HTML is sanitized. Links allow `http`, `https`,
+`mailto`, `xmpp` and relative destinations; unsafe protocols, including `irc` and `ircs`,
+are removed. Fenced code retains its `language-*` class without syntax highlighting.
+`children` defaults to an empty string; native div props and `ref` pass through, except
+`dangerouslySetInnerHTML`.
+
+`MarkdownEditor` wraps `Textarea` with an always-visible preview. Use string `value` and
+native `onChange` for controlled editing, or `defaultValue` for uncontrolled editing with
+native form reset support. `label` defaults to `Markdown` and `previewLabel` to `Preview`;
+the preview does not announce each keystroke. Textarea props, including `hint`, `rows`,
+`maxRows`, `name`, `disabled`, `readOnly` and the textarea `ref`, pass through. `className`
+and `style` apply to the editor wrapper. The editor and preview stack in narrow containers.
+In Astro, add `client:load` to an editor island; `Markdown` can render as static HTML.
+
 ## Drawn style
 
 `@driif/motiv/drawn` is a hand-drawn style: `Link`, `TextField`, `Checkbox`, `Radio`,
