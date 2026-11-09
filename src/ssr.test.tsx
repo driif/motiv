@@ -1,6 +1,7 @@
 // @vitest-environment node
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
+import { ActionMenu } from './action-menu';
 import * as D from './drawn';
 import {
   Checkbox,
@@ -591,4 +592,14 @@ it('renders Confirm, Toaster, Table and TableColumnsMenu in drawn and matrix wit
   expect(html.match(/<fieldset[^>]*popover="auto"/g)).toHaveLength(2);
   expect(D.toast).toBe(K.toast);
   expect(M.dismissToast).toBe(K.dismissToast);
+});
+
+it('renders ActionMenu as a closed trigger without a DOM', () => {
+  const html = renderToStaticMarkup(
+    <ActionMenu label="Export" items={[{ label: 'CSV', onSelect: () => {} }]} />,
+  );
+  expect(html).toContain('aria-haspopup="menu"');
+  expect(html).toContain('aria-expanded="false"');
+  expect(html).toContain('<span class="motiv-btn__label">Export</span>');
+  expect(html).not.toContain('CSV');
 });

@@ -379,6 +379,16 @@ export const catalog = {
         'Runs your async action: the pill folds around a spinner, then confirms. A rejected promise shakes it back.',
     },
     {
+      id: 'action-menu',
+      category: null,
+      group: 'Actions',
+      title: 'ActionMenu',
+      symbols: ['ActionMenu'],
+      demo: 'ActionMenu',
+      blurb:
+        'A button that opens a short list of actions. Arrow keys, typeahead and Escape work; disabled items are skipped. Import it from @driif/motiv/action-menu.',
+    },
+    {
       id: 'bell-button',
       category: null,
       group: 'Actions',

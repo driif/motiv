@@ -121,6 +121,16 @@
       }
     },
     {
+      "includes": ["src/components/ActionMenu/ActionMenu.tsx"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noArrayIndexKey": "off"
+          }
+        }
+      }
+    },
+    {
       "includes": ["src/styles/kinetic.css"],
       "linter": {
         "rules": {
