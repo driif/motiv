@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsdown';
 
 export default defineConfig({
-  entry: ['src/index.ts', 'src/drawn/index.ts', 'src/matrix/index.ts', 'src/action-menu/index.ts'],
+  entry: ['src/index.ts', 'src/drawn/index.ts', 'src/matrix/index.ts', 'src/action-menu/index.ts', 'src/markdown/index.ts'],
   format: 'esm',
   platform: 'neutral',
   unbundle: true,

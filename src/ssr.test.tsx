@@ -1,5 +1,5 @@
 // @vitest-environment node
-import { renderToStaticMarkup } from 'react-dom/server';
+import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { ActionMenu } from './action-menu';
 import * as D from './drawn';
@@ -31,7 +31,24 @@ import {
 } from './drawn';
 import * as K from './index';
 import { Button, Card, CardBody, CardHeader } from './index';
+import { Markdown, MarkdownEditor } from './markdown';
 import * as M from './matrix';
+
+it('renders Markdown and its editor without a DOM', () => {
+  const html = renderToString(
+    <>
+      <Markdown>{'# Safe\n\n<script>alert(1)</script>'}</Markdown>
+      <MarkdownEditor defaultValue="**Draft**" />
+      <MarkdownEditor value="*Controlled*" readOnly />
+    </>,
+  );
+  expect(html).toContain('<h1>Safe</h1>');
+  expect(html).not.toContain('<script>');
+  expect(html).toContain('<strong>Draft</strong>');
+  expect(html).toContain('<em>Controlled</em>');
+  expect(html).toContain('<textarea');
+  expect(html).toContain('Preview');
+});
 
 it('renders FileUpload and imports putFile without a DOM or XHR', () => {
   const html = renderToStaticMarkup(<K.FileUpload upload={async () => {}} />);

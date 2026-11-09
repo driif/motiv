@@ -14,7 +14,8 @@ const { page } = Astro.props;
 const others = styles.filter(
   (other) => other !== style && pages(other).some((p) => p.slug === slug),
 );
-const entry = style === 'kinetic' ? '@driif/motiv' : `@driif/motiv/${style}`;
+const entry =
+  page.sections[0].entry ?? (style === 'kinetic' ? '@driif/motiv' : `@driif/motiv/${style}`);
 ---
 
 <Shell

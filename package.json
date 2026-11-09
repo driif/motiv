@@ -31,6 +31,10 @@
       "types": "./dist/action-menu/index.d.ts",
       "default": "./dist/action-menu/index.js"
     },
+    "./markdown": {
+      "types": "./dist/markdown/index.d.ts",
+      "default": "./dist/markdown/index.js"
+    },
     "./styles.css": "./dist/styles.css",
     "./tokens.css": "./dist/tokens.css",
     "./base.css": "./dist/base.css",
