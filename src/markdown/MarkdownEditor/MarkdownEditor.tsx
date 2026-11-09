@@ -34,13 +34,13 @@ export function MarkdownEditor({
     const form = node?.form;
     if (value !== undefined || !node || !form) return;
     const reset = (event: Event) => {
-      // Wait for the native reset and cancellation, then bring React's value tracker into step.
-      queueMicrotask(() => {
+      // A task, not a microtask: a user's reset click runs microtasks before the form is restored.
+      setTimeout(() => {
         if (event.defaultPrevented) return;
         const restored = node.value;
         node.value = restored;
         setDraft(restored);
-      });
+      }, 0);
     };
     form.addEventListener('reset', reset);
     return () => form.removeEventListener('reset', reset);

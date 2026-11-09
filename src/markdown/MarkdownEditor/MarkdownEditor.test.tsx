@@ -88,7 +88,10 @@ describe('MarkdownEditor', () => {
       );
       const input = screen.getByRole('textbox');
       fireEvent.change(input, { target: { value: '# Typed' } });
-      await act(async () => (container.querySelector('form') as HTMLFormElement).reset());
+      await act(async () => {
+        (container.querySelector('form') as HTMLFormElement).reset();
+        await new Promise((resolve) => setTimeout(resolve));
+      });
       expect(input).toHaveValue(defaultValue);
       const preview = screen.getByRole('region');
       if (defaultValue) expect(within(preview).getByRole('heading')).toHaveTextContent('Default');
@@ -107,7 +110,10 @@ describe('MarkdownEditor', () => {
       </>,
     );
     fireEvent.change(screen.getByRole('textbox'), { target: { value: '# Typed' } });
-    await act(async () => (document.getElementById('external') as HTMLFormElement).reset());
+    await act(async () => {
+      (document.getElementById('external') as HTMLFormElement).reset();
+      await new Promise((resolve) => setTimeout(resolve));
+    });
     expect(screen.getByRole('heading')).toHaveTextContent('Default');
     rerender(
       <>
@@ -116,7 +122,10 @@ describe('MarkdownEditor', () => {
       </>,
     );
     fireEvent.change(screen.getByRole('textbox'), { target: { value: '# Kept' } });
-    await act(async () => (document.getElementById('external') as HTMLFormElement).reset());
+    await act(async () => {
+      (document.getElementById('external') as HTMLFormElement).reset();
+      await new Promise((resolve) => setTimeout(resolve));
+    });
     expect(screen.getByRole('textbox')).toHaveValue('# Kept');
     expect(screen.getByRole('heading')).toHaveTextContent('Kept');
   });
@@ -132,7 +141,10 @@ describe('MarkdownEditor', () => {
         <MarkdownEditor value="# Current" readOnly />
       </form>,
     );
-    await act(async () => (container.querySelector('form') as HTMLFormElement).reset());
+    await act(async () => {
+      (container.querySelector('form') as HTMLFormElement).reset();
+      await new Promise((resolve) => setTimeout(resolve));
+    });
     expect(screen.getByRole('textbox')).toHaveValue('# Current');
     expect(screen.getByRole('heading')).toHaveTextContent('Current');
   });
