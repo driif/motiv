@@ -5,6 +5,7 @@ export function ProgressDemo() {
     <>
       <Progress value={62} label="Uploading" />
       <Progress value={100} label="Done" />
+      <Progress label="Preparing import" />
     </>
   );
 }

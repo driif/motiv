@@ -15,6 +15,8 @@ export const Default: Story = {};
 
 export const Complete: Story = { args: { value: 100, label: 'Done' } };
 
+export const Indeterminate: Story = { args: { value: undefined, label: 'Preparing import' } };
+
 export const WithoutValue: Story = { args: { showValue: false } };
 
 export const Themes: Story = {

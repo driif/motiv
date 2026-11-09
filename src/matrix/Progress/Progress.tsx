@@ -10,16 +10,17 @@ export function Progress({
   style,
   ...props
 }: ProgressProps) {
-  const rounded = Math.round(Math.min(100, Math.max(0, value)));
+  const rounded = value === undefined ? undefined : Math.round(Math.min(100, Math.max(0, value)));
   return (
     <div
       {...props}
       className={cx('motiv-matrix-progress', className)}
       style={{ ...style, '--_value': rounded } as CSSProperties}
+      data-indeterminate={rounded === undefined || undefined}
     >
       <div className="motiv-matrix-progress__head">
         <span>{label}</span>
-        {showValue && (
+        {showValue && rounded !== undefined && (
           <span className="motiv-matrix-progress__value" aria-hidden="true">
             {rounded}%
           </span>
@@ -29,8 +30,8 @@ export function Progress({
         className="motiv-matrix-progress__track"
         role="progressbar"
         aria-label={label}
-        aria-valuemin={0}
-        aria-valuemax={100}
+        aria-valuemin={rounded === undefined ? undefined : 0}
+        aria-valuemax={rounded === undefined ? undefined : 100}
         aria-valuenow={rounded}
       >
         <div className="motiv-matrix-progress__fill" />

@@ -246,7 +246,8 @@ export const catalog = {
       title: 'Progress',
       symbols: ['Progress'],
       demo: 'Progress',
-      blurb: 'How far along something is, filled in with a marker.',
+      blurb:
+        'How far along something is, filled in with a marker. Without a value the hatch fills the track and keeps moving.',
     },
     {
       id: 'theme-toggle',
@@ -767,7 +768,7 @@ export const catalog = {
       symbols: ['Progress'],
       demo: 'Progress',
       blurb:
-        'A labelled bar whose fill springs to the value. Same props as the drawn and matrix Progress.',
+        'A labelled bar whose fill springs to the value; without a value a segment slides through. Same props as the drawn and matrix Progress.',
     },
     {
       id: 'step-progress',
@@ -1060,7 +1061,8 @@ export const catalog = {
       title: 'Progress',
       symbols: ['Progress'],
       demo: 'Progress',
-      blurb: 'A labelled progress bar cut into blocks, filling in steps.',
+      blurb:
+        'A labelled progress bar cut into blocks, filling in steps. Without a value a block sweeps across.',
     },
     {
       id: 'link',

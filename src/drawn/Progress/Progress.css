@@ -57,6 +57,14 @@
     box-shadow: 0 0 10px 2px var(--_accent);
   }
 
+  .motiv-progress[data-indeterminate] .motiv-progress__fill {
+    transform: none;
+  }
+
+  .motiv-progress[data-indeterminate] .motiv-progress__tip {
+    display: none;
+  }
+
   @keyframes motiv-progress-hatch {
     to {
       transform: translateX(9.9px);
