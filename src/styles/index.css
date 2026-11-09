@@ -3,6 +3,7 @@
 @import "./tokens.css";
 @import "./kinetic.css";
 @import "../components/Button/Button.css";
+@import "../components/ActionMenu/ActionMenu.css";
 @import "../components/Card/Card.css";
 @import "../components/Accordion/Accordion.css";
 @import "../components/Badge/Badge.css";

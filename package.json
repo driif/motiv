@@ -27,6 +27,10 @@
       "types": "./dist/matrix/index.d.ts",
       "default": "./dist/matrix/index.js"
     },
+    "./action-menu": {
+      "types": "./dist/action-menu/index.d.ts",
+      "default": "./dist/action-menu/index.js"
+    },
     "./styles.css": "./dist/styles.css",
     "./tokens.css": "./dist/tokens.css",
     "./base.css": "./dist/base.css",

@@ -14,7 +14,18 @@ const checks = [
   {
     input: 'test/fixtures/treeshake-button.js',
     kept: 'motiv-btn',
-    dropped: ['motiv-card', 'motiv-toast', 'useSyncExternalStore'],
+    dropped: [
+      'motiv-card',
+      'motiv-toast',
+      'useSyncExternalStore',
+      'motiv-action-menu',
+      '@radix-ui',
+    ],
+  },
+  {
+    input: 'test/fixtures/treeshake-action-menu.js',
+    kept: 'motiv-action-menu__item',
+    dropped: ['motiv-card', 'motiv-toast', 'motiv-picker', 'useListbox'],
   },
   {
     input: 'test/fixtures/treeshake-drawn-link.js',
@@ -103,7 +114,7 @@ const checks = [
 
 const problems = [];
 for (const { input, kept, dropped } of checks) {
-  const bundle = await rolldown({ input, external: [/^react/] });
+  const bundle = await rolldown({ input, external: [/^react/, /^@radix-ui\//] });
   const { output } = await bundle.generate({ format: 'esm' });
   const code = output.map((chunk) => chunk.code ?? '').join('\n');
   if (!code.includes(kept)) problems.push(`${input}: ${kept} missing from bundle`);

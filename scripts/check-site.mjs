@@ -2,9 +2,9 @@ import { existsSync, readFileSync } from 'node:fs';
 import { catalog, categories, groups, pages } from '../site/src/catalog.mjs';
 
 const entries = {
-  kinetic: '../dist/index.js',
-  drawn: '../dist/drawn/index.js',
-  matrix: '../dist/matrix/index.js',
+  kinetic: ['../dist/index.js', '../dist/action-menu/index.js'],
+  drawn: ['../dist/drawn/index.js'],
+  matrix: ['../dist/matrix/index.js'],
 };
 
 const problems = [];
@@ -13,8 +13,9 @@ for (const { name, group } of categories) {
     problems.push(`category ${name} has unknown group ${group}`);
   }
 }
-for (const [style, entry] of Object.entries(entries)) {
-  const exported = Object.keys(await import(entry));
+for (const [style, paths] of Object.entries(entries)) {
+  const modules = await Promise.all(paths.map((path) => import(path)));
+  const exported = modules.flatMap((module) => Object.keys(module));
   const sections = catalog[style];
   const claimed = sections.flatMap((section) => section.symbols);
   for (const name of exported) {

@@ -80,6 +80,30 @@ import { LiquidSwitch, SegmentedControl } from '@driif/motiv';
 <LiquidSwitch label="Wi-Fi" checked={wifi} onChange={setWifi} />;
 ```
 
+## Action menu
+
+`ActionMenu` is a button that opens a menu of actions. It is built on Radix's dropdown menu, so it
+lives in its own entry and the root import never loads Radix. Its styles are already in
+`@driif/motiv/styles.css`:
+
+```tsx
+import { ActionMenu } from '@driif/motiv/action-menu';
+
+<ActionMenu
+  label="Export"
+  variant="outline"
+  items={[
+    { label: 'CSV', onSelect: exportCsv },
+    { label: 'XLSX', onSelect: exportXlsx, disabled: true },
+  ]}
+/>;
+```
+
+`label` defaults to `Actions`. Every other prop (`variant`, `size`, `loading`, `disabled`, `ref`,
+native attributes) goes to the trigger `Button`. The trigger is disabled while `loading`,
+`disabled` or `items` is empty. The menu renders next to the trigger, not in a portal, so subtree
+themes and token overrides reach it.
+
 ## Select
 
 `Select` and `TerminalSelect` accept `clearable` to add a clear option. It calls `onChange('')`.
