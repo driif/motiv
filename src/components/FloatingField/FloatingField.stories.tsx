@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { assertFieldLayout, longLabel, longValue } from '../../../.storybook/assertFieldLayout';
 import { ThemePair } from '../../../.storybook/ThemePair';
 import { FloatingField } from './FloatingField';
 
@@ -20,6 +21,11 @@ export const WithoutValidity: Story = {
 };
 
 export const Disabled: Story = { args: { disabled: true } };
+
+export const LongLabel: Story = {
+  args: { label: longLabel, type: 'text', hint: undefined },
+  play: ({ canvasElement }) => assertFieldLayout(canvasElement, longValue),
+};
 
 export const Themes: Story = {
   render: (args) => <ThemePair>{() => <FloatingField {...args} />}</ThemePair>,

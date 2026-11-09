@@ -1,13 +1,13 @@
 @layer motiv.components {
   .motiv-date-picker__clear {
     position: absolute;
-    inset-block: 0;
     right: calc(var(--motiv-space) * 1.5);
+    /* Bottom-anchored, so it stays on the value row when a wrapped label grows the box. */
+    bottom: calc(var(--motiv-space) * 3);
     display: grid;
     place-items: center;
     width: calc(var(--motiv-space) * 8);
     height: calc(var(--motiv-space) * 8);
-    margin-block: auto;
     padding: 0;
     color: var(--motiv-color-text-muted);
     background: transparent;

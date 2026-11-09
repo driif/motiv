@@ -10,14 +10,35 @@
     color: var(--motiv-color-text);
   }
 
+  /* The box is a grid: the label in row 1, the value in row 2, so a long label wraps above the value. */
   .motiv-float__control {
     position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 58px;
+    background: var(--motiv-text-field-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-text-field-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-text-field-radius, var(--motiv-radius));
+
+    &:focus-within {
+      border-color: var(--_accent);
+    }
+
+    /* Date inputs never show a placeholder, so they wait for user interaction instead. */
+    &:has(> .motiv-float__input:not(:focus, :placeholder-shown, [type^="date"]):invalid),
+    &:has(> .motiv-float__input[type^="date"]:not(:focus):user-invalid) {
+      border-color: var(--motiv-color-danger);
+    }
+
+    &:has(> .motiv-float__input:disabled) {
+      opacity: 0.5;
+    }
 
     /* The focus bloom: a ring that fades and scales in, instead of a box-shadow transition. */
     &::after {
       content: "";
       position: absolute;
-      inset: -4px;
+      inset: -5px;
       border: 3px solid var(--motiv-color-primary-subtle);
       border-radius: calc(var(--motiv-text-field-radius, var(--motiv-radius)) + 4px);
       opacity: 0;
@@ -35,29 +56,19 @@
   }
 
   .motiv-float__input {
+    grid-row: 2;
+    grid-column: 1;
     width: 100%;
-    height: 58px;
-    padding: 22px 44px 6px 14px;
+    min-width: 0;
+    padding: 1px 44px 8px 14px;
     color: var(--motiv-text-field-color, var(--motiv-color-text));
     font: inherit;
     font-size: 1rem;
-    background: var(--motiv-text-field-bg, var(--motiv-color-surface));
-    border: 1px solid var(--motiv-text-field-border-color, var(--motiv-color-border));
-    border-radius: var(--motiv-text-field-radius, var(--motiv-radius));
+    line-height: 1.25;
+    background: transparent;
+    border: 0;
+    border-radius: inherit;
     outline: none;
-
-    &:focus {
-      border-color: var(--_accent);
-    }
-
-    /* Date inputs never show a placeholder, so they wait for user interaction instead. */
-    &:not(:focus, :placeholder-shown, [type^="date"]):invalid {
-      border-color: var(--motiv-color-danger);
-    }
-
-    &[type^="date"]:not(:focus):user-invalid {
-      border-color: var(--motiv-color-danger);
-    }
 
     /* iOS Safari centers the date value. */
     &::-webkit-date-and-time-value {
@@ -65,27 +76,30 @@
     }
 
     &:disabled {
-      opacity: 0.5;
       cursor: not-allowed;
     }
   }
 
+  /* At rest the label is pushed onto the empty value row with padding, not translate, so the
+     whole box stays clickable; a negative margin keeps the row from growing. */
   .motiv-float__label {
-    position: absolute;
-    top: 18px;
-    left: 15px;
+    grid-row: 1;
+    grid-column: 1;
+    margin-bottom: -10px;
+    padding: 17px 44px 0 14px;
     color: var(--motiv-color-text-muted);
     font-size: 1rem;
     line-height: 1.25;
-    pointer-events: none;
-    transform-origin: left top;
+    overflow-wrap: anywhere;
     transition:
-      translate 0.4s var(--motiv-ease-spring),
-      scale 0.4s var(--motiv-ease-spring);
+      padding 0.4s var(--motiv-ease-spring),
+      margin 0.4s var(--motiv-ease-spring),
+      font-size 0.4s var(--motiv-ease-spring);
 
     :is(:focus, :not(:placeholder-shown)) + & {
-      translate: 0 -10px;
-      scale: 0.78;
+      margin-bottom: 0;
+      padding-top: 7px;
+      font-size: 0.78rem;
     }
 
     :focus + & {
@@ -93,10 +107,11 @@
     }
   }
 
+  /* Anchored to the bottom, so it stays on the value row when a wrapped label grows the box. */
   .motiv-float__ok {
     position: absolute;
-    top: calc(50% - 10px);
     right: 14px;
+    bottom: 18px;
     width: 20px;
     height: 20px;
     color: var(--_accent);
