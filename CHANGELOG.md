@@ -1,5 +1,15 @@
 # @driif/motiv
 
+## 0.28.0
+
+### Minor Changes
+
+- cc747b7: New `@driif/motiv/data-table` subpath with `DataTable`: the `Table` props plus `maxHeight` and `estimateRowHeight`. It mounts only the rows in view, keeps a focused row mounted and sets row counts for assistive technology.
+
+### Patch Changes
+
+- 2e90f1f: StepProgress keeps long first and last step labels inside its track, so a narrow screen does not scroll sideways.
+
 ## 0.27.0
 
 ### Minor Changes
