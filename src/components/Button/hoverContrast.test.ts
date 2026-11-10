@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 import { describe, expect, it } from 'vitest';
 import tokens from '../../styles/tokens.css?raw';
+import button from './Button.css?raw';
 
 function block(selector: string) {
   const start = tokens.indexOf(`${selector} {`);
@@ -54,6 +55,7 @@ function luminance(rgb: number[]) {
 // color-mix(in oklch, fill, mix 15%): white and black have no hue, so the fill keeps its own.
 function hover(fill: string, mix: string) {
   const f = oklch(fill);
+  if (mix !== 'white' && mix !== 'black') throw new Error(`unsupported hover mix ${mix}`);
   const target = mix === 'white' ? 1 : 0;
   return toLinear({ L: f.L * 0.85 + target * 0.15, C: f.C * 0.85, H: f.H });
 }
@@ -75,4 +77,9 @@ describe.each([
       4.5,
     );
   });
+});
+
+it('uses the theme hover-mix tokens for primary and danger', () => {
+  expect(button).toContain('--_hover-mix: var(--motiv-color-primary-hover-mix)');
+  expect(button).toContain('--_hover-mix: var(--motiv-color-danger-hover-mix)');
 });
