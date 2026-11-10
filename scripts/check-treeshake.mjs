@@ -4,8 +4,13 @@ const checks = [
   {
     input: 'dist/index.js',
     kept: 'motiv-btn',
-    dropped: ['motiv-markdown'],
-    droppedModules: /node_modules\/(?:micromark[^/]*|hast-util-[^/]+|parse5)\//,
+    dropped: ['motiv-markdown', 'motiv-data-table'],
+    droppedModules: /node_modules\/(?:micromark[^/]*|hast-util-[^/]+|parse5|@tanstack)\//,
+  },
+  {
+    input: 'test/fixtures/treeshake-data-table.js',
+    kept: 'motiv-data-table',
+    dropped: ['motiv-markdown', 'motiv-btn'],
   },
   {
     input: 'test/fixtures/treeshake-markdown.js',

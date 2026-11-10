@@ -50,5 +50,6 @@
 @import "../components/MultiSelect/MultiSelect.css";
 @import "../components/DatePicker/DatePicker.css";
 @import "../components/Table/Table.css";
+@import "../data-table/DataTable/DataTable.css";
 @import "../markdown/Markdown/Markdown.css";
 @import "../markdown/MarkdownEditor/MarkdownEditor.css";

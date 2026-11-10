@@ -6,6 +6,7 @@ const entries = {
     '@driif/motiv': '../dist/index.js',
     '@driif/motiv/action-menu': '../dist/action-menu/index.js',
     '@driif/motiv/markdown': '../dist/markdown/index.js',
+    '@driif/motiv/data-table': '../dist/data-table/index.js',
   },
   drawn: { '@driif/motiv/drawn': '../dist/drawn/index.js' },
   matrix: { '@driif/motiv/matrix': '../dist/matrix/index.js' },

@@ -350,6 +350,16 @@ export const catalog = {
   ],
   kinetic: [
     {
+      id: 'data-table',
+      category: 'Table',
+      title: 'DataTable',
+      entry: '@driif/motiv/data-table',
+      symbols: ['DataTable'],
+      demo: 'DataTable',
+      blurb:
+        'The Table for long lists: it mounts only the rows in view and keeps a focused row. Same columns as Table; import from @driif/motiv/data-table.',
+    },
+    {
       id: 'markdown',
       category: null,
       group: 'Data & layout',

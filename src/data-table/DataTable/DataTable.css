@@ -1,0 +1,11 @@
+@layer motiv.components {
+  .motiv-data-table {
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+
+  .motiv-data-table__spacer > td {
+    padding: 0;
+    border: 0;
+  }
+}

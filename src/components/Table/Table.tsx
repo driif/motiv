@@ -32,7 +32,6 @@ export function Table<Row>({
   className,
   ...props
 }: TableProps<Row>) {
-  const labelId = useId();
   const { widthOf, separatorProps } = useColumnResize({
     columnWidths,
     onColumnWidthsChange,
@@ -52,38 +51,7 @@ export function Table<Row>({
         style={{ width: columns.reduce((sum, column) => sum + widthOf(column), 0) }}
       >
         <caption className="motiv-visually-hidden">{caption}</caption>
-        <colgroup>
-          {columns.map((column) => (
-            <col key={column.id} style={{ width: widthOf(column) }} />
-          ))}
-        </colgroup>
-        <thead className="motiv-table__head">
-          <tr>
-            {columns.map((column, index) => {
-              const separator = separatorProps(column);
-              return (
-                // Named by the label alone: the separator's name and value would leak into it.
-                <th
-                  key={column.id}
-                  scope="col"
-                  aria-labelledby={`${labelId}-${index}`}
-                  className="motiv-table__header"
-                >
-                  <span id={`${labelId}-${index}`} className="motiv-table__label">
-                    {column.header ?? column.label}
-                  </span>
-                  <div
-                    {...separator.props}
-                    className={cx(
-                      'motiv-table__resize',
-                      separator.dragging && 'motiv-table__resize--dragging',
-                    )}
-                  />
-                </th>
-              );
-            })}
-          </tr>
-        </thead>
+        <TableHead columns={columns} widthOf={widthOf} separatorProps={separatorProps} />
         <tbody>
           {rows.map((row) => (
             <tr key={getRowKey(row)} className="motiv-table__row">
@@ -97,5 +65,58 @@ export function Table<Row>({
         </tbody>
       </table>
     </div>
+  );
+}
+
+type Resize = ReturnType<typeof useColumnResize>;
+
+/** Column widths and the header row, shared with `DataTable`. */
+export function TableHead<Row>({
+  columns,
+  widthOf,
+  separatorProps,
+  rowIndex,
+}: {
+  columns: TableColumn<Row>[];
+  widthOf: Resize['widthOf'];
+  separatorProps: Resize['separatorProps'];
+  rowIndex?: number;
+}) {
+  const labelId = useId();
+  return (
+    <>
+      <colgroup>
+        {columns.map((column) => (
+          <col key={column.id} style={{ width: widthOf(column) }} />
+        ))}
+      </colgroup>
+      <thead className="motiv-table__head">
+        <tr aria-rowindex={rowIndex}>
+          {columns.map((column, index) => {
+            const separator = separatorProps(column);
+            return (
+              // Named by the label alone: the separator's name and value would leak into it.
+              <th
+                key={column.id}
+                scope="col"
+                aria-labelledby={`${labelId}-${index}`}
+                className="motiv-table__header"
+              >
+                <span id={`${labelId}-${index}`} className="motiv-table__label">
+                  {column.header ?? column.label}
+                </span>
+                <div
+                  {...separator.props}
+                  className={cx(
+                    'motiv-table__resize',
+                    separator.dragging && 'motiv-table__resize--dragging',
+                  )}
+                />
+              </th>
+            );
+          })}
+        </tr>
+      </thead>
+    </>
   );
 }
