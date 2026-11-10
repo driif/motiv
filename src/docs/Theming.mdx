@@ -30,6 +30,8 @@ Base tokens are the only inputs. Override them on `:root` to rebrand every compo
 | `--motiv-color-on-secondary` | `#3a2618` | `#2e1f14` |
 | `--motiv-color-danger` | `#a54c5c` | `#efadb7` |
 | `--motiv-color-on-danger` | `#ffffff` | `#3a1219` |
+| `--motiv-color-primary-hover-mix` | `black` | `white` |
+| `--motiv-color-danger-hover-mix` | `black` | `white` |
 | `--motiv-color-success` | `#4f8a69` | — |
 | `--motiv-color-warning` | `#b9793f` | — |
 | `--motiv-color-bg` | `#f2f1f5` | `#28232f` |
@@ -45,6 +47,9 @@ Base tokens are the only inputs. Override them on `:root` to rebrand every compo
 | `--motiv-duration` | `200ms` | — |
 | `--motiv-ease` | `cubic-bezier(0.2, 0.8, 0.2, 1)` | — |
 | `--motiv-ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` | — |
+
+A hover-mix token sets the colour that a filled button mixes toward on hover. Use `black` for a light
+label and `white` for a dark label. When you change `on-primary` or `on-danger`, set its hover-mix too.
 
 ## 2. Derived tokens
 

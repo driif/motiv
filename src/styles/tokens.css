@@ -22,6 +22,8 @@
     --motiv-color-on-secondary: #3a2618;
     --motiv-color-danger: #a54c5c;
     --motiv-color-on-danger: #ffffff;
+    --motiv-color-primary-hover-mix: black;
+    --motiv-color-danger-hover-mix: black;
     --motiv-color-bg: #f2f1f5;
     --motiv-color-surface: #ffffff;
     --motiv-color-text: #4d4258;
@@ -37,6 +39,8 @@
     --motiv-color-on-secondary: #2e1f14;
     --motiv-color-danger: #efadb7;
     --motiv-color-on-danger: #3a1219;
+    --motiv-color-primary-hover-mix: white;
+    --motiv-color-danger-hover-mix: white;
     --motiv-color-bg: #28232f;
     --motiv-color-surface: #302938;
     --motiv-color-text: #e9e0ef;
@@ -53,6 +57,8 @@
       --motiv-color-on-secondary: #2e1f14;
       --motiv-color-danger: #efadb7;
       --motiv-color-on-danger: #3a1219;
+      --motiv-color-primary-hover-mix: white;
+      --motiv-color-danger-hover-mix: white;
       --motiv-color-bg: #28232f;
       --motiv-color-surface: #302938;
       --motiv-color-text: #e9e0ef;

@@ -106,6 +106,7 @@ export const SubtreeOverride: Story = {
           ...row,
           '--motiv-color-primary': '#a78bfa',
           '--motiv-color-on-primary': '#1e1b4b',
+          '--motiv-color-primary-hover-mix': 'white',
         } as CSSProperties
       }
     >

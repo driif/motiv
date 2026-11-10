@@ -7,6 +7,7 @@ export default defineConfig({
     exclude: [...configDefaults.exclude, '.claude/worktrees/**'],
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],
+    css: { include: [/tokens\.css/, /Button\/Button\.css/] },
     benchmark: { include: ['test/benchmarks/**/*.bench.tsx'] },
   },
 });
