@@ -3,9 +3,8 @@
     --_bg: var(--motiv-button-bg, var(--motiv-color-primary));
     --_color: var(--motiv-button-color, var(--motiv-color-on-primary));
     --_border: var(--motiv-button-border-color, var(--_bg));
-    /* Hover moves the fill away from its label color, so contrast never drops in either theme:
-       dark labels (primary, secondary) lighten, light labels (danger) darken. */
-    --_hover-mix: white;
+    /* Hover moves the fill away from its label color, so each theme sets the mix per label. */
+    --_hover-mix: var(--motiv-color-primary-hover-mix);
     --_bg-hover: color-mix(in oklch, var(--_bg), var(--_hover-mix) 15%);
     --_border-hover: var(--motiv-button-border-color, var(--_bg-hover));
 
@@ -74,12 +73,13 @@
   .motiv-btn--secondary {
     --_bg: var(--motiv-button-bg, var(--motiv-color-secondary));
     --_color: var(--motiv-button-color, var(--motiv-color-on-secondary));
+    --_hover-mix: white;
   }
 
   .motiv-btn--danger {
     --_bg: var(--motiv-button-bg, var(--motiv-color-danger));
     --_color: var(--motiv-button-color, var(--motiv-color-on-danger));
-    --_hover-mix: black;
+    --_hover-mix: var(--motiv-color-danger-hover-mix);
   }
 
   .motiv-btn--outline {
