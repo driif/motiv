@@ -51,6 +51,15 @@
     width: 30px;
   }
 
+  /* Edge labels grow inward, so a long label never leaves the track. */
+  .motiv-steps__step:first-child {
+    align-items: flex-start;
+  }
+
+  .motiv-steps__step:last-child {
+    align-items: flex-end;
+  }
+
   .motiv-steps__dot {
     position: relative;
     display: grid;
