@@ -328,6 +328,18 @@ import { Table, TableColumnsMenu } from '@driif/motiv';
 The table scrolls inside its wrapper. The header row only sticks once the wrapper has a `height`
 or `max-height`, as above. Cells stay on one line and end in an ellipsis.
 
+For long lists, import `DataTable` from `@driif/motiv/data-table`. It takes the same props as
+`Table` plus `maxHeight` (default `70vh`) and `estimateRowHeight` (default 40px). It mounts only the
+rows in view, measures each mounted row, and keeps a row with focus mounted when it scrolls out of
+view. Screen readers get the full count through `aria-rowcount` and `aria-rowindex`. Sorting,
+filtering and selection stay with the app, as with `Table`.
+
+```tsx
+import { DataTable } from '@driif/motiv/data-table';
+
+<DataTable caption="Rows" columns={columns} rows={rows} getRowKey={(row) => row.id} maxHeight="32rem" />;
+```
+
 ## Markdown
 
 Import `Markdown` and `MarkdownEditor` from `@driif/motiv/markdown`, with

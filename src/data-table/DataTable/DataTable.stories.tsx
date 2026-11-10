@@ -22,7 +22,13 @@ const columns: TableColumn<Row>[] = [
 const meta = {
   title: 'Data table/DataTable',
   component: DataTable<Row>,
-  args: { caption: '10,000 records', columns, rows, getRowKey: (row) => row.id, height: '24rem' },
+  args: {
+    caption: '10,000 records',
+    columns,
+    rows,
+    getRowKey: (row) => row.id,
+    maxHeight: '24rem',
+  },
 } satisfies Meta<typeof DataTable<Row>>;
 
 export default meta;

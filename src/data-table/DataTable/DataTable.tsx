@@ -1,11 +1,11 @@
 import { defaultRangeExtractor, useVirtualizer } from '@tanstack/react-virtual';
-import { type CSSProperties, type Key, useRef, useState } from 'react';
+import { type CSSProperties, type Key, useCallback, useRef, useState } from 'react';
 import { TableHead, type TableProps } from '../../components/Table/Table';
 import { cx } from '../../utils/cx';
 import { useColumnResize } from '../../utils/useColumnResize';
 
 export type DataTableProps<Row> = TableProps<Row> & {
-  height?: CSSProperties['height'];
+  maxHeight?: CSSProperties['maxHeight'];
   estimateRowHeight?: number;
 };
 
@@ -17,7 +17,7 @@ export function DataTable<Row>({
   columnWidths,
   onColumnWidthsChange,
   resizeLabel = (label) => `Resize ${label}`,
-  height = '70vh',
+  maxHeight = '70vh',
   estimateRowHeight = 40,
   className,
   style,
@@ -30,12 +30,18 @@ export function DataTable<Row>({
   });
   const scroller = useRef<HTMLDivElement>(null);
   const [focused, setFocused] = useState<Key>();
-  const focusedIndex = rows.findIndex((row) => getRowKey(row) === focused);
+  const focusedIndex =
+    focused === undefined ? -1 : rows.findIndex((row) => getRowKey(row) === focused);
+  if (focused !== undefined && focusedIndex < 0) setFocused(undefined);
+  // The virtualizer rebuilds every row measurement when this function changes.
+  const keyOf = useRef(getRowKey);
+  keyOf.current = getRowKey;
+  const getItemKey = useCallback((index: number) => keyOf.current(rows[index]), [rows]);
   const virtualizer = useVirtualizer({
     count: rows.length,
     getScrollElement: () => scroller.current,
     estimateSize: () => estimateRowHeight,
-    getItemKey: (index) => getRowKey(rows[index]),
+    getItemKey,
     overscan: 8,
     // A focused row stays mounted outside the window, so focus never lands on a reused row.
     rangeExtractor: (range) => {
@@ -44,7 +50,6 @@ export function DataTable<Row>({
       return [...indexes, focusedIndex].sort((a, b) => a - b);
     },
   });
-  const items = virtualizer.getVirtualItems();
   const spacer = (key: string, size: number) =>
     size > 0 && (
       // biome-ignore lint/a11y/noAriaHiddenOnFocusable: a spacer row holds no focusable content.
@@ -61,7 +66,7 @@ export function DataTable<Row>({
       aria-label={caption}
       tabIndex={0}
       {...props}
-      style={{ height, ...style }}
+      style={{ maxHeight, ...style }}
       className={cx('motiv-table', 'motiv-data-table', className)}
     >
       <table
@@ -70,18 +75,24 @@ export function DataTable<Row>({
         style={{ width: columns.reduce((sum, column) => sum + widthOf(column), 0) }}
       >
         <caption className="motiv-visually-hidden">{caption}</caption>
-        <TableHead columns={columns} widthOf={widthOf} separatorProps={separatorProps} />
+        <TableHead
+          columns={columns}
+          widthOf={widthOf}
+          separatorProps={separatorProps}
+          rowIndex={1}
+        />
         <tbody
           onFocus={(event) => {
             const index = (event.target as Element).closest('tr')?.dataset.index;
             setFocused(index === undefined ? undefined : getRowKey(rows[Number(index)]));
           }}
           onBlur={(event) => {
+            // Leaving the window blurs without moving focus; the row must stay for the return.
+            if (document.activeElement === event.target) return;
             if (!event.currentTarget.contains(event.relatedTarget)) setFocused(undefined);
           }}
         >
-          {items.flatMap((item) => {
-            const row = rows[item.index];
+          {virtualizer.getVirtualItems().flatMap((item) => {
             const gap = spacer(`gap-${item.key}`, item.start - end);
             end = item.end;
             return [
@@ -95,7 +106,7 @@ export function DataTable<Row>({
               >
                 {columns.map((column) => (
                   <td key={column.id} className="motiv-table__cell">
-                    {column.cell(row)}
+                    {column.cell(rows[item.index])}
                   </td>
                 ))}
               </tr>,

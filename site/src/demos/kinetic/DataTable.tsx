@@ -22,7 +22,7 @@ export function DataTableDemo() {
       columns={columns}
       rows={rows}
       getRowKey={(row) => row.id}
-      height="20rem"
+      maxHeight="20rem"
     />
   );
 }

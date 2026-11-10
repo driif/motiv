@@ -75,10 +75,12 @@ export function TableHead<Row>({
   columns,
   widthOf,
   separatorProps,
+  rowIndex,
 }: {
   columns: TableColumn<Row>[];
   widthOf: Resize['widthOf'];
   separatorProps: Resize['separatorProps'];
+  rowIndex?: number;
 }) {
   const labelId = useId();
   return (
@@ -89,7 +91,7 @@ export function TableHead<Row>({
         ))}
       </colgroup>
       <thead className="motiv-table__head">
-        <tr>
+        <tr aria-rowindex={rowIndex}>
           {columns.map((column, index) => {
             const separator = separatorProps(column);
             return (
