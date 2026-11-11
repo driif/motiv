@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.28.2
+
+### Patch Changes
+
+- 7c1fe72: SpringCheckbox shows a dash mark when the native input is indeterminate.
+
 ## 0.28.1
 
 ### Patch Changes
