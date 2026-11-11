@@ -166,25 +166,29 @@ describe('DataTable', () => {
       fireEvent.scroll(this);
     });
     Element.prototype.scrollTo = scrollTo as unknown as Element['scrollTo'];
-    renderTable();
-    scrollTo.mockClear();
-    await act(async () => {
-      fireEvent.keyDown(screen.getByRole('button', { name: 'Record 1' }), { key: 'End' });
-    });
-    expect(scrollTo).not.toHaveBeenCalled();
-    await act(async () => {
-      fireEvent.keyDown(region(), { key: 'End' });
-    });
-    await vi.waitFor(() =>
-      expect(screen.getByRole('button', { name: 'Record 10000' })).toBeInTheDocument(),
-    );
-    await act(async () => {
-      fireEvent.keyDown(region(), { key: 'Home' });
-    });
-    await vi.waitFor(() =>
-      expect(screen.getByRole('button', { name: 'Record 1' })).toBeInTheDocument(),
-    );
-    delete (Element.prototype as Partial<Element>).scrollTo;
+    try {
+      renderTable();
+      scrollTo.mockClear();
+      await act(async () => {
+        fireEvent.keyDown(screen.getByRole('button', { name: 'Record 1' }), { key: 'End' });
+        fireEvent.keyDown(region(), { key: 'Home', altKey: true });
+      });
+      expect(scrollTo).not.toHaveBeenCalled();
+      await act(async () => {
+        fireEvent.keyDown(region(), { key: 'End' });
+      });
+      await vi.waitFor(() =>
+        expect(screen.getByRole('button', { name: 'Record 10000' })).toBeInTheDocument(),
+      );
+      await act(async () => {
+        fireEvent.keyDown(region(), { key: 'Home' });
+      });
+      await vi.waitFor(() =>
+        expect(screen.getByRole('button', { name: 'Record 1' })).toBeInTheDocument(),
+      );
+    } finally {
+      delete (Element.prototype as Partial<Element>).scrollTo;
+    }
   });
 
   it('keeps the Table column resize contract', () => {

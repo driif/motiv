@@ -71,7 +71,13 @@ export function DataTable<Row>({
       // Native End/Home scrolling animates and a re-render can cancel it; the virtualizer settles the target.
       onKeyDown={(event) => {
         onKeyDown?.(event);
-        if (event.defaultPrevented || event.target !== event.currentTarget || rows.length === 0)
+        if (
+          event.defaultPrevented ||
+          event.altKey ||
+          event.metaKey ||
+          event.target !== event.currentTarget ||
+          rows.length === 0
+        )
           return;
         if (event.key === 'End') virtualizer.scrollToIndex(rows.length - 1, { align: 'end' });
         else if (event.key === 'Home') virtualizer.scrollToOffset(0);
