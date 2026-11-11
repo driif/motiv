@@ -17,7 +17,6 @@ export const Checked: Story = { args: { defaultChecked: true } };
 
 export const Mixed: Story = {
   args: {
-    'aria-checked': 'mixed',
     ref: (input: HTMLInputElement | null) => {
       if (input) input.indeterminate = true;
     },
