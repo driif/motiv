@@ -15,8 +15,26 @@ export const Default: Story = {};
 
 export const Checked: Story = { args: { defaultChecked: true } };
 
+export const Mixed: Story = {
+  args: {
+    'aria-checked': 'mixed',
+    ref: (input: HTMLInputElement | null) => {
+      if (input) input.indeterminate = true;
+    },
+  },
+};
+
 export const Disabled: Story = { args: { disabled: true, defaultChecked: true } };
 
 export const Themes: Story = {
-  render: (args) => <ThemePair>{() => <SpringCheckbox {...args} />}</ThemePair>,
+  render: (args) => (
+    <ThemePair>
+      {() => (
+        <>
+          <SpringCheckbox {...args} />
+          <SpringCheckbox {...args} {...Mixed.args} />
+        </>
+      )}
+    </ThemePair>
+  ),
 };

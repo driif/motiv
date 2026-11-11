@@ -34,6 +34,10 @@
       rotate: 0deg;
       transition-delay: 0.1s;
     }
+
+    :indeterminate + .motiv-check__box & {
+      opacity: 0;
+    }
   }
 
   .motiv-check__box {
@@ -57,12 +61,33 @@
       transition: scale 0.35s var(--motiv-ease-spring);
     }
 
-    :checked + & {
+    &::after {
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 2.6px;
+      background: var(--motiv-color-on-primary);
+      border-radius: 2px;
+      opacity: 0;
+      scale: 0.3 1;
+      transition:
+        opacity 0.2s,
+        scale 0.4s var(--motiv-ease-spring);
+    }
+
+    :checked + &,
+    :indeterminate + & {
       border-color: var(--motiv-checkbox-accent, var(--motiv-color-primary));
 
       &::before {
         scale: 1;
       }
+    }
+
+    :indeterminate + &::after {
+      opacity: 1;
+      scale: 1;
+      transition-delay: 0.1s;
     }
 
     :focus-visible + & {
@@ -78,7 +103,8 @@
   @media (prefers-reduced-motion: reduce) {
     .motiv-check__tick,
     .motiv-check__box,
-    .motiv-check__box::before {
+    .motiv-check__box::before,
+    .motiv-check__box::after {
       transition: none;
     }
   }
