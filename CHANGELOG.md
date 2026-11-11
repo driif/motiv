@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.28.1
+
+### Patch Changes
+
+- a8f7b7f: DataTable End and Home on the focused table always reach the last and first row, also when a re-render interrupts the browser's scroll animation.
+
 ## 0.28.0
 
 ### Minor Changes
