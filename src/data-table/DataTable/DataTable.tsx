@@ -21,6 +21,7 @@ export function DataTable<Row>({
   estimateRowHeight = 40,
   className,
   style,
+  onKeyDown,
   ...props
 }: DataTableProps<Row>) {
   const { widthOf, separatorProps } = useColumnResize({
@@ -67,6 +68,16 @@ export function DataTable<Row>({
       tabIndex={0}
       {...props}
       style={{ maxHeight, ...style }}
+      // Native End/Home scrolling animates and a re-render can cancel it; the virtualizer settles the target.
+      onKeyDown={(event) => {
+        onKeyDown?.(event);
+        if (event.defaultPrevented || event.target !== event.currentTarget || rows.length === 0)
+          return;
+        if (event.key === 'End') virtualizer.scrollToIndex(rows.length - 1, { align: 'end' });
+        else if (event.key === 'Home') virtualizer.scrollToOffset(0);
+        else return;
+        event.preventDefault();
+      }}
       className={cx('motiv-table', 'motiv-data-table', className)}
     >
       <table
