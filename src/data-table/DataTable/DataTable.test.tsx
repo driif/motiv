@@ -27,6 +27,9 @@ beforeAll(() => {
     return size(this as HTMLElement);
   });
   vi.spyOn(Element.prototype, 'clientWidth', 'get').mockReturnValue(400);
+  vi.spyOn(Element.prototype, 'scrollHeight', 'get').mockImplementation(function (this: Element) {
+    return this.classList.contains('motiv-data-table') ? 40 * 10_000 : 40;
+  });
   vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function (this: Element) {
     const height = size(this as HTMLElement);
     return {
@@ -155,6 +158,37 @@ describe('DataTable', () => {
     rerender(table(rows));
     await scrollTo(40 * 5_000);
     expect(screen.queryByRole('button', { name: 'Record 2' })).not.toBeInTheDocument();
+  });
+
+  it('scrolls to the last and first row with End and Home on the region', async () => {
+    const scrollTo = vi.fn(function (this: HTMLElement, options: ScrollToOptions) {
+      Object.defineProperty(this, 'scrollTop', { value: options.top, configurable: true });
+      fireEvent.scroll(this);
+    });
+    Element.prototype.scrollTo = scrollTo as unknown as Element['scrollTo'];
+    try {
+      renderTable();
+      scrollTo.mockClear();
+      await act(async () => {
+        fireEvent.keyDown(screen.getByRole('button', { name: 'Record 1' }), { key: 'End' });
+        fireEvent.keyDown(region(), { key: 'Home', altKey: true });
+      });
+      expect(scrollTo).not.toHaveBeenCalled();
+      await act(async () => {
+        fireEvent.keyDown(region(), { key: 'End' });
+      });
+      await vi.waitFor(() =>
+        expect(screen.getByRole('button', { name: 'Record 10000' })).toBeInTheDocument(),
+      );
+      await act(async () => {
+        fireEvent.keyDown(region(), { key: 'Home' });
+      });
+      await vi.waitFor(() =>
+        expect(screen.getByRole('button', { name: 'Record 1' })).toBeInTheDocument(),
+      );
+    } finally {
+      delete (Element.prototype as Partial<Element>).scrollTo;
+    }
   });
 
   it('keeps the Table column resize contract', () => {
