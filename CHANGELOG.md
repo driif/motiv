@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.29.0
+
+### Minor Changes
+
+- 365f109: IconButton takes `shape="round"` for a circular button in the default, drawn and matrix styles.
+
 ## 0.28.2
 
 ### Patch Changes
