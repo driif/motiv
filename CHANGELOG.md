@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.30.0
+
+### Minor Changes
+
+- 4ce9ea9: Add `NotificationList`: a bell that opens a popover panel of notifications, each one openable and dismissable, with Dismiss all and an empty state.
+
 ## 0.29.0
 
 ### Minor Changes
