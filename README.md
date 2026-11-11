@@ -60,7 +60,7 @@ import { Link } from 'react-router';
 ## Kinetic components
 
 Besides `Button` and `Card`, the root entry ships the kinetic set: `MagneticButton`,
-`MorphSubmitButton`, `BellButton`, `Badge`, `BadgeButton`, `CopyField`, `RadialMenu`, `IconButton`,
+`MorphSubmitButton`, `BellButton`, `NotificationList`, `Badge`, `BadgeButton`, `CopyField`, `RadialMenu`, `IconButton`,
 `IconButtonGroup`, `MenuButton`, `ThemeToggle`, `SegmentedControl`, `ElasticTabs`, `FilterChips`,
 `Radio`, `RadioGroup`, `Stepper`, `CommandMenu`, `FloatingField`, `OtpInput`, `ExpandingSearch`,
 `FrequencySlider`, `MomentumSlider`, `LiquidSwitch`, `SpringCheckbox`, `LikeButton`, `MuteToggle`,
@@ -79,6 +79,32 @@ import { LiquidSwitch, SegmentedControl } from '@driif/motiv';
 <SegmentedControl label="Range" options={ranges} value={range} onChange={setRange} />;
 <LiquidSwitch label="Wi-Fi" checked={wifi} onChange={setWifi} />;
 ```
+
+## Notifications
+
+`NotificationList` is a `BellButton` that opens a panel of notifications in a native
+`popover="auto"`: click, Enter and Space toggle it, Escape and outside clicks close it, and focus
+returns to the bell. The app owns the items, their persistence and the unread count:
+
+```tsx
+import { NotificationList } from '@driif/motiv';
+
+<NotificationList
+  items={items}
+  count={unread}
+  onDismiss={(id) => remove(id)}
+  onDismissAll={clear}
+  onOpen={(id) => navigate(`/inbox/${id}`)}
+/>;
+```
+
+Each item takes `id`, `title`, `time`, optional `text`, `tone` (`info`, `success`, `warning`,
+`danger`; a decorative edge) and `href`. The title is a link when `href` is set, otherwise a
+button when `onOpen` is set; opening an item closes the panel. `count` defaults to
+`items.length`. `label` (`Notifications`, also the panel heading), `newText`, `emptyText`,
+`dismissLabel` and `dismissAllLabel` accept translated strings. Other button props and `ref` go to
+the bell. When a focused item is dismissed, focus moves to the next item, the previous one, or the
+heading. The panel does not announce new items; add your own live region or `toast()` for that.
 
 ## Action menu
 

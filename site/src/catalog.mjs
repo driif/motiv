@@ -431,6 +431,16 @@ export const catalog = {
       blurb: 'A notification bell that rings and ripples whenever the count goes up.',
     },
     {
+      id: 'notification-list',
+      category: null,
+      group: 'Actions',
+      title: 'NotificationList',
+      symbols: ['NotificationList'],
+      demo: 'NotificationList',
+      blurb:
+        'The bell opens a panel of your notifications. Open or dismiss one, or clear them all; focus never gets lost.',
+    },
+    {
       id: 'badge-button',
       category: null,
       group: 'Actions',

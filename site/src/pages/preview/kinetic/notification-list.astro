@@ -1,0 +1,9 @@
+---
+import { NotificationListDemo } from '../../../demos/kinetic/NotificationList';
+import Preview from '../../../layouts/Preview.astro';
+// The open panel is fixed under the bell, so the preview reserves room for it.
+---
+
+<Preview title="NotificationList">
+  <div style="min-height: 26rem; width: 100%"><NotificationListDemo client:load /></div>
+</Preview>

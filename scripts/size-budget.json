@@ -33,6 +33,7 @@
   "components/MorphSubmitButton/MorphSubmitButton.js": 1000,
   "components/MultiSelect/MultiSelect.js": 1550,
   "components/MuteToggle/MuteToggle.js": 900,
+  "components/NotificationList/NotificationList.js": 1850,
   "components/Odometer/Odometer.js": 850,
   "components/OtpInput/OtpInput.js": 800,
   "components/Progress/Progress.js": 550,

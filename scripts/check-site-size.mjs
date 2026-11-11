@@ -10,7 +10,7 @@ const pages = {
 };
 // Every generated component page, /<style>/<slug>/; the largest measured 42_123 (kinetic progress).
 const componentPage = 48_500;
-const totalCss = 390_000;
+const totalCss = 400_000;
 const largestJs = 245_000;
 
 const dist = new URL('../site/dist/', import.meta.url);
