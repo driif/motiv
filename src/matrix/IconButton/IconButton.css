@@ -99,7 +99,11 @@
 
   .motiv-matrix-icon-button--round {
     border-radius: 50%;
-    --_corner: -2px;
+    --_corner: 0px;
+  }
+
+  .motiv-matrix-icon-button-group > .motiv-matrix-icon-button + .motiv-matrix-icon-button--round {
+    border-left: 0;
   }
 
   @media (prefers-reduced-motion: reduce) {
