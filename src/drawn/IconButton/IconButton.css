@@ -34,6 +34,10 @@
     }
   }
 
+  .motiv-icon-button--round {
+    border-radius: 50%;
+  }
+
   /* Dashed divider between neighbours, centred in the group gap. */
   .motiv-icon-button-group > .motiv-icon-button + .motiv-icon-button::before {
     content: "";

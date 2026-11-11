@@ -77,6 +77,20 @@
     }
   }
 
+  .motiv-matrix-icon-button--round {
+    border-radius: 50%;
+
+    &::before {
+      top: -2px;
+      left: -2px;
+    }
+
+    &::after {
+      right: -2px;
+      bottom: -2px;
+    }
+  }
+
   /* Dotted divider between neighbours. */
   .motiv-matrix-icon-button-group > .motiv-matrix-icon-button + .motiv-matrix-icon-button {
     border-left: 1px dashed

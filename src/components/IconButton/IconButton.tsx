@@ -5,16 +5,29 @@ export interface IconButtonProps extends Omit<ComponentProps<'button'>, 'childre
   icon: ReactNode;
   label: string;
   size?: 'sm' | 'md';
+  shape?: 'square' | 'round';
 }
 
-export function IconButton({ icon, label, size = 'md', className, ...props }: IconButtonProps) {
+export function IconButton({
+  icon,
+  label,
+  size = 'md',
+  shape = 'square',
+  className,
+  ...props
+}: IconButtonProps) {
   return (
     <button
       type="button"
       {...props}
       aria-label={label}
       title={label}
-      className={cx('motiv-icon-button', size === 'sm' && 'motiv-icon-button--sm', className)}
+      className={cx(
+        'motiv-icon-button',
+        size === 'sm' && 'motiv-icon-button--sm',
+        shape === 'round' && 'motiv-icon-button--round',
+        className,
+      )}
     >
       <span className="motiv-icon-button__icon" aria-hidden="true">
         {icon}

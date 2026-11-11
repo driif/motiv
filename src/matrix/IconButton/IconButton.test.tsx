@@ -39,4 +39,13 @@ describe('IconButtonGroup', () => {
     expect(group).toHaveClass('motiv-matrix-icon-button-group', 'x');
     expect(group).toContainElement(screen.getByRole('button', { name: 'Edit' }));
   });
+
+  it('adds the round modifier only for shape round', () => {
+    const { rerender } = render(<IconButton icon="✎" label="Edit" shape="round" />);
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass('motiv-matrix-icon-button--round');
+    expect(button).not.toHaveAttribute('shape');
+    rerender(<IconButton icon="✎" label="Edit" />);
+    expect(button).not.toHaveClass('motiv-matrix-icon-button--round');
+  });
 });

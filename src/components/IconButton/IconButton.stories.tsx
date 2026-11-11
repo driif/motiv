@@ -58,6 +58,8 @@ export const InRow: Story = {
   ),
 };
 
+export const RoundSmall: Story = { args: { shape: 'round', size: 'sm' } };
+
 export const SmallInGroup: Story = {
   render: () => (
     <ThemePair>
@@ -70,6 +72,8 @@ export const SmallInGroup: Story = {
     </ThemePair>
   ),
 };
+
+export const Round: Story = { args: { shape: 'round' } };
 
 export const InGroup: Story = { render: () => <Group /> };
 

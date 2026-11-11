@@ -59,6 +59,10 @@
     --_icon-size: calc(var(--motiv-space) * 4);
   }
 
+  .motiv-icon-button--round {
+    border-radius: 50%;
+  }
+
   .motiv-icon-button-group > .motiv-icon-button + .motiv-icon-button::before {
     content: "";
     position: absolute;
@@ -97,6 +101,12 @@
       rotate: -8deg;
       scale: 1.06;
     }
+  }
+
+  .motiv-icon-button--round:is(:hover, :focus-visible):not(:disabled) .motiv-icon-button__icon {
+    translate: none;
+    rotate: none;
+    scale: 1.12;
   }
 
   @media (prefers-reduced-motion: reduce) {

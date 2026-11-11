@@ -35,6 +35,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
+export const Round: Story = { args: { shape: 'round' } };
+
 export const InGroup: Story = { render: () => <Group /> };
 
 export const Themes: Story = {
