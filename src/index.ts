@@ -28,6 +28,7 @@ export * from './components/MomentumSlider';
 export * from './components/MorphSubmitButton';
 export * from './components/MultiSelect';
 export * from './components/MuteToggle';
+export * from './components/NotificationList';
 export * from './components/Odometer';
 export * from './components/OtpInput';
 export * from './components/Progress';

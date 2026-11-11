@@ -141,6 +141,19 @@
       }
     },
     {
+      "includes": ["src/components/NotificationList/NotificationList.tsx"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "useExhaustiveDependencies": {
+              "level": "error",
+              "options": { "reportUnnecessaryDependencies": false }
+            }
+          }
+        }
+      }
+    },
+    {
       "includes": ["src/styles/kinetic.css"],
       "linter": {
         "rules": {

@@ -28,6 +28,17 @@ const checks = [
     dropped: ['motiv-table-menu', 'motiv-check', 'motiv-btn', 'motiv-multi-select'],
   },
   {
+    input: 'test/fixtures/treeshake-notification-list.js',
+    kept: 'motiv-notification-list',
+    dropped: [
+      'motiv-table-menu',
+      'motiv-toast',
+      'motiv-card',
+      'useColumnsMenu',
+      'useAnchoredPopover',
+    ],
+  },
+  {
     input: 'test/fixtures/treeshake-button.js',
     kept: 'motiv-btn',
     dropped: [

@@ -275,6 +275,11 @@ describe('server rendering', () => {
         <K.MagneticButton>Go</K.MagneticButton>
         <K.MorphSubmitButton onAction={noop} />
         <K.BellButton count={3} />
+        <K.NotificationList
+          items={[{ id: 'a', title: 'Saved', time: 'now', href: '/a' }]}
+          onDismiss={noop}
+          onDismissAll={noop}
+        />
         <K.BadgeButton count={120} label="Inbox" />
         <K.Badge tone="success" size="md">
           Live
@@ -343,6 +348,7 @@ describe('server rendering', () => {
     expect(html).toContain('aria-current="step"');
     expect(html).toMatch(/aria-describedby="err [^"]+-hint"/);
     expect(html).toContain('class="motiv-bar"');
+    expect(html).toMatch(/popovertarget="([^"]+)".*?<section id="\1" popover="auto"/i);
     expect(html).toContain(
       '<span class="motiv-status-badge motiv-status-badge--success motiv-status-badge--md">Live</span>',
     );
