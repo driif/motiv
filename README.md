@@ -394,7 +394,8 @@ import { Checkbox, Link, TextField } from '@driif/motiv/drawn';
 `NavItem` renders an `<a>` when given `href` (pass a router's `onClick` alongside), otherwise a
 `<button>`; `active` sets `aria-current="page"`. `MenuButton` (`open`, `onToggle`) and
 `ThemeToggle` (`dark`, `onToggle`) are controlled; `ThemeToggle` never sets `data-theme` itself.
-Icons are app-supplied `ReactNode`s.
+Icons are app-supplied `ReactNode`s. `IconButton` takes `shape="round"` for a circular button in every
+style; the default stays `square`.
 
 ## Matrix style
 

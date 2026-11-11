@@ -4,16 +4,27 @@ import { cx } from '../../utils/cx';
 export interface IconButtonProps extends Omit<ComponentProps<'button'>, 'children'> {
   icon: ReactNode;
   label: string;
+  shape?: 'square' | 'round';
 }
 
-export function IconButton({ icon, label, className, ...props }: IconButtonProps) {
+export function IconButton({
+  icon,
+  label,
+  shape = 'square',
+  className,
+  ...props
+}: IconButtonProps) {
   return (
     <button
       type="button"
       {...props}
       aria-label={label}
       title={label}
-      className={cx('motiv-icon-button', className)}
+      className={cx(
+        'motiv-icon-button',
+        shape === 'round' && 'motiv-icon-button--round',
+        className,
+      )}
     >
       <svg className="motiv-icon-button__ring" viewBox="0 0 52 52" aria-hidden="true">
         <path
