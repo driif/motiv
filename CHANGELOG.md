@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.30.1
+
+### Patch Changes
+
+- d1c1d08: Centre the `Badge` text: the end padding no longer carries the extra gap that letter-spacing adds after the last letter.
+
 ## 0.30.0
 
 ### Minor Changes
