@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.31.0
+
+### Minor Changes
+
+- c708738: New tokens for text steps, line height, control and row height, and a compact density (`data-density="compact"`); components read them.
+
 ## 0.30.1
 
 ### Patch Changes
