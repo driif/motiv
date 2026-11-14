@@ -8,9 +8,14 @@
     --motiv-font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --motiv-font-title: var(--motiv-font-body);
     --motiv-font-size: 1rem;
+    --motiv-line-height: 1.5;
     --motiv-duration: 200ms;
     --motiv-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
     --motiv-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  [data-density="compact"] {
+    --motiv-space: 0.1875rem;
   }
 
   :root,
@@ -89,5 +94,16 @@
     --motiv-shadow-md: 0 4px 14px color-mix(in oklch, var(--motiv-shadow-color) 10%, transparent);
     --motiv-shadow-lg: 0 10px 25px color-mix(in oklch, var(--motiv-shadow-color) 14%, transparent);
     --motiv-focus-ring: 0 0 0 2px var(--motiv-color-bg), 0 0 0 4px var(--motiv-color-primary);
+  }
+
+  /* Re-declared on every motiv element so a scoped --motiv-font-size or --motiv-space
+     rescales the components inside it. Override these base tokens, not the derived ones. */
+  :where(:root, [data-theme], [data-density], [class^="motiv-"], [class*=" motiv-"]) {
+    --motiv-font-size-xs: calc(var(--motiv-font-size) * 0.75);
+    --motiv-font-size-sm: calc(var(--motiv-font-size) * 0.875);
+    --motiv-font-size-lg: calc(var(--motiv-font-size) * 1.25);
+    --motiv-font-size-xl: calc(var(--motiv-font-size) * 1.5);
+    --motiv-control-height: calc(var(--motiv-space) * 8);
+    --motiv-row-height: calc(var(--motiv-space) * 7);
   }
 }

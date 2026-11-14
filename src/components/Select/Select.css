@@ -3,13 +3,14 @@
     --_accent: var(--motiv-select-accent, var(--motiv-color-primary));
     --_border: var(--motiv-select-border-color, var(--motiv-color-border));
 
+    font-size: var(--motiv-font-size);
     display: grid;
     gap: calc(var(--motiv-space) * 2);
     color: var(--motiv-color-text);
   }
 
   .motiv-picker__label {
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     font-weight: 500;
   }
 
@@ -22,11 +23,11 @@
     align-items: center;
     gap: calc(var(--motiv-space) * 2.5);
     width: 100%;
-    min-height: 48px;
+    min-height: calc(var(--motiv-control-height) * 1.5);
     padding: 0 14px 0 16px;
     color: var(--motiv-select-color, var(--motiv-color-text));
     font: inherit;
-    font-size: 1rem;
+    font-size: var(--motiv-font-size);
     text-align: start;
     background: var(--motiv-select-bg, var(--motiv-color-surface));
     border: 1px solid var(--_border);
@@ -69,9 +70,9 @@
 
   .motiv-picker__code {
     flex-shrink: 0;
-    padding: 2px 6px;
+    padding: calc(var(--motiv-space) * 0.5) 6px;
     color: var(--motiv-color-text-muted);
-    font-size: 0.6875rem;
+    font-size: var(--motiv-font-size-xs);
     font-weight: 600;
     letter-spacing: 0.06em;
     border: 1px solid var(--motiv-color-border);
@@ -106,7 +107,7 @@
     box-sizing: border-box;
     max-height: 18rem;
     margin: 0;
-    padding: 6px;
+    padding: calc(var(--motiv-space) * 1.5);
     overflow-y: auto;
     overscroll-behavior: contain;
     list-style: none;
@@ -150,10 +151,10 @@
     display: flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 2.5);
-    min-height: 44px;
+    min-height: calc(var(--motiv-row-height) * 11 / 7);
     padding: 0 12px;
     color: var(--motiv-select-color, var(--motiv-color-text));
-    font-size: 0.9375rem;
+    font-size: var(--motiv-font-size);
     border-radius: calc(var(--motiv-select-radius, var(--motiv-radius)) - 4px);
     cursor: pointer;
     opacity: 0;
@@ -200,7 +201,7 @@
 
   .motiv-picker__hint {
     margin: 0;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-color-text-muted);
   }
 

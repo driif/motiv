@@ -1,12 +1,13 @@
 @layer motiv.components {
   .motiv-glide-nav {
+    font-size: var(--motiv-font-size);
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 2px;
     width: 100%;
     max-width: 280px;
-    padding: 6px;
+    padding: calc(var(--motiv-space) * 1.5);
     color: var(--motiv-color-text);
     background: var(--motiv-nav-bg, var(--motiv-color-surface));
     border: 1px solid var(--motiv-nav-border-color, var(--motiv-color-border));
@@ -16,9 +17,9 @@
   .motiv-glide-nav__hover {
     position: absolute;
     top: 0;
-    right: 6px;
-    left: 6px;
-    height: 44px;
+    right: calc(var(--motiv-space) * 1.5);
+    left: calc(var(--motiv-space) * 1.5);
+    height: max(24px, calc(var(--motiv-space) * 11));
     --_bg-hover: color-mix(in oklch, var(--motiv-nav-bg), var(--motiv-color-primary) 10%);
     background: var(--motiv-nav-bg-hover, var(--_bg-hover, var(--motiv-color-surface-hover)));
     border-radius: var(--motiv-nav-radius, var(--motiv-radius-sm));
@@ -48,10 +49,10 @@
     display: flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 2.5);
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0 calc(var(--motiv-space) * 3);
     font: inherit;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-nav-color, var(--motiv-color-text-muted));
     text-align: left;
     text-decoration: none;
@@ -81,7 +82,7 @@
   .motiv-glide-nav:not([data-placed]) .motiv-glide-nav__item[aria-current="page"]::before {
     position: absolute;
     top: calc(50% - 12px);
-    left: -6px;
+    left: calc(var(--motiv-space) * -1.5);
     width: 3px;
     height: 24px;
     content: "";
@@ -94,7 +95,7 @@
   }
 
   .motiv-glide-nav__count {
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     font-variant-numeric: tabular-nums;
     color: var(--motiv-nav-color, var(--motiv-color-text-muted));
 

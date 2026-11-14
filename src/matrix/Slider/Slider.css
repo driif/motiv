@@ -3,6 +3,7 @@
     --_accent: var(--motiv-slider-accent, var(--motiv-color-primary));
     --_thumb: 12px;
 
+    font-size: var(--motiv-font-size);
     display: grid;
     gap: calc(var(--motiv-space) * 2);
     width: 100%;
@@ -18,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     gap: calc(var(--motiv-space) * 4);
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -65,7 +66,7 @@
     position: relative;
     flex: 1;
     min-width: 0;
-    height: 44px;
+    height: max(24px, calc(var(--motiv-space) * 11));
     margin: 0;
     background: transparent;
     appearance: none;
@@ -108,7 +109,7 @@
 
   .motiv-matrix-slider__marks {
     position: relative;
-    height: 1rem;
+    height: var(--motiv-font-size);
     margin-inline: calc(1ch + var(--motiv-space));
     font-weight: 700;
     color: var(--motiv-color-text-muted);
@@ -117,7 +118,7 @@
     /* The brackets' 1ch above is measured in this font size, so only the labels shrink. */
     & span {
       position: absolute;
-      font-size: 0.75rem;
+      font-size: var(--motiv-font-size-xs);
       font-weight: 400;
       left: calc(var(--_thumb) / 2 + (100% - var(--_thumb)) * var(--_p) / 100);
       translate: -50% 0;

@@ -2,6 +2,7 @@
   .motiv-textarea {
     --_accent: var(--motiv-textarea-accent, var(--motiv-color-primary));
 
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 2);
@@ -11,7 +12,7 @@
 
   .motiv-textarea__label {
     color: var(--motiv-color-text-muted);
-    font-size: 0.8125rem;
+    font-size: var(--motiv-font-size-sm);
     transition: color 0.2s var(--motiv-ease);
 
     .motiv-textarea:focus-within > & {
@@ -51,8 +52,8 @@
     overflow-y: auto;
     color: var(--motiv-textarea-color, var(--motiv-color-text));
     font: inherit;
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: var(--motiv-font-size);
+    line-height: var(--motiv-line-height);
     background: var(--motiv-textarea-bg, var(--motiv-color-surface));
     border: 1px solid var(--motiv-textarea-border-color, var(--motiv-color-border));
     border-radius: var(--motiv-textarea-radius, var(--motiv-radius));
@@ -80,7 +81,7 @@
   .motiv-textarea__hint {
     margin: 0;
     color: var(--motiv-color-text-muted);
-    font-size: 0.8125rem;
+    font-size: var(--motiv-font-size-sm);
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-data-table {
+    font-size: var(--motiv-font-size);
     overflow: auto;
     overscroll-behavior: contain;
   }

@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-ring {
+    font-size: var(--motiv-font-size);
     position: relative;
     display: inline-grid;
     place-items: center;

@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-radial {
+    font-size: var(--motiv-font-size);
     position: relative;
     width: calc(var(--_r) * 2 + 60px);
     height: calc(var(--_r) + 76px);
@@ -37,11 +38,11 @@
   .motiv-radial__item {
     position: absolute;
     bottom: 14px;
-    left: calc(50% - 22px);
+    left: calc(50% - var(--motiv-space) * 5.5);
     display: grid;
     place-items: center;
-    width: 44px;
-    height: 44px;
+    width: max(24px, calc(var(--motiv-space) * 11));
+    height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0;
     color: var(--motiv-menu-color, var(--motiv-color-text));
     background: var(--motiv-menu-bg, var(--motiv-color-surface));
@@ -98,8 +99,8 @@
     position: absolute;
     bottom: calc(100% + 6px);
     left: 50%;
-    padding: 3px 8px;
-    font-size: 0.75rem;
+    padding: calc(var(--motiv-space) * 0.75) 8px;
+    font-size: var(--motiv-font-size-xs);
     white-space: nowrap;
     color: var(--motiv-color-surface);
     background: var(--motiv-color-text);

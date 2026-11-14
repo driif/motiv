@@ -1,7 +1,7 @@
 @layer motiv.components {
   .motiv-matrix-icon-button-group {
     display: inline-flex;
-    padding: 3px;
+    padding: calc(var(--motiv-space) * 0.75);
     border: 1px solid
       var(
         --motiv-icon-button-border-color,
@@ -13,8 +13,8 @@
     position: relative;
     display: inline-grid;
     place-items: center;
-    width: 48px;
-    height: 48px;
+    width: max(24px, calc(var(--motiv-space) * 12));
+    height: max(24px, calc(var(--motiv-space) * 12));
     padding: 0;
     color: var(--motiv-icon-button-color, var(--motiv-color-primary));
     background: var(--motiv-icon-button-bg, transparent);

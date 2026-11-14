@@ -22,6 +22,12 @@ const retheme = `:root {
   --motiv-color-on-primary: #ffffff;
   --motiv-radius: 0.25rem;
 }`;
+
+const scale = `.app-sidebar {
+  --motiv-font-size: 0.875rem;
+}`;
+
+const density = `<aside class="app-sidebar" data-density="compact">…</aside>`;
 ---
 
 <Shell
@@ -80,6 +86,12 @@ const retheme = `:root {
         <h3 class="site-steps__title">Re-theme</h3>
         <p class="site-steps__text">Everything is in <code class="site-inline">@layer motiv.*</code>; your rules win.</p>
         <Code class="site-code" code={retheme} lang="css" theme="github-dark-default" />
+      </li>
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Text scale and density</h3>
+        <p class="site-steps__text">Text steps and control and row heights follow <code class="site-inline">--motiv-font-size</code> and <code class="site-inline">--motiv-space</code>, also in a scoped element. <code class="site-inline">data-density="compact"</code> makes controls and rows denser. Each component sets its own text size, so labels follow the scope instead of the page font; hit areas stay at least 24px.</p>
+        <Code class="site-code" code={scale} lang="css" theme="github-dark-default" />
+        <Code class="site-code" code={density} lang="html" theme="github-dark-default" />
       </li>
     </ol>
   </section>

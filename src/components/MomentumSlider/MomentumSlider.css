@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-momentum {
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 2.5);
@@ -10,13 +11,13 @@
 
   .motiv-momentum__label {
     color: var(--motiv-color-text-muted);
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     font-weight: 600;
   }
 
   .motiv-momentum__track {
     position: relative;
-    padding-top: 44px;
+    padding-top: calc(var(--motiv-space) * 11);
   }
 
   /* Full track width, so a translate percentage is a track percentage; the px term follows the
@@ -42,9 +43,9 @@
   .motiv-momentum__value {
     position: relative;
     display: block;
-    padding: 5px 10px;
+    padding: calc(var(--motiv-space) * 1.25) 10px;
     color: var(--motiv-color-on-primary);
-    font-size: 0.8125rem;
+    font-size: var(--motiv-font-size-sm);
     font-weight: 600;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
@@ -70,7 +71,7 @@
     position: relative;
     height: 16px;
     color: var(--motiv-color-text-muted);
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     font-variant-numeric: tabular-nums;
 
     & span {

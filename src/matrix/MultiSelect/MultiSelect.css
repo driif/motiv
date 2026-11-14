@@ -8,6 +8,7 @@
     --_bg: var(--motiv-select-bg, var(--motiv-color-surface));
     --_hover: var(--motiv-select-bg-hover, var(--motiv-color-primary-subtle));
 
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -19,7 +20,7 @@
 
   .motiv-matrix-multi-select__label {
     flex-basis: 100%;
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -55,9 +56,9 @@
 
   .motiv-matrix-multi-select__trigger {
     width: 100%;
-    min-height: 56px;
+    min-height: calc(var(--motiv-control-height) * 1.75);
     padding: 0 16px;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     font-weight: 600;
     background: var(
       --motiv-select-bg,
@@ -103,9 +104,9 @@
   }
 
   .motiv-matrix-multi-select__chip {
-    min-height: 32px;
+    min-height: max(24px, calc(var(--motiv-space) * 8));
     padding: 0 10px;
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     background: color-mix(in oklch, var(--_accent) 14%, var(--_bg));
 
     &::before {
@@ -125,7 +126,7 @@
   }
 
   .motiv-matrix-multi-select__more {
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--motiv-color-text-muted);
@@ -140,7 +141,7 @@
     flex-direction: column;
     max-height: 320px;
     margin: 0;
-    padding: 0 0 6px;
+    padding: 0 0 calc(var(--motiv-space) * 1.5);
     overflow: hidden;
     color: var(--motiv-select-color, var(--motiv-color-text));
     background: var(--_bg);
@@ -167,10 +168,10 @@
     box-sizing: border-box;
     width: 100%;
     min-width: 0;
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0 16px;
     font: inherit;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     color: inherit;
     caret-color: var(--_accent);
     background: transparent;
@@ -187,7 +188,7 @@
   .motiv-matrix-multi-select__list {
     min-height: 0;
     margin: 0;
-    padding: 6px 0 0;
+    padding: calc(var(--motiv-space) * 1.5) 0 0;
     overflow-y: auto;
     overscroll-behavior: contain;
     list-style: none;
@@ -198,10 +199,10 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    min-height: 44px;
-    padding: 6px 16px;
+    min-height: calc(var(--motiv-row-height) * 11 / 7);
+    padding: calc(var(--motiv-space) * 1.5) 16px;
     overflow-wrap: anywhere;
-    font-size: 0.8125rem;
+    font-size: var(--motiv-font-size-sm);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
@@ -243,7 +244,7 @@
 
   .motiv-matrix-multi-select__hint,
   .motiv-matrix-multi-select__empty {
-    font-size: 0.6875rem;
+    font-size: var(--motiv-font-size-xs);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--motiv-color-text-muted);
@@ -255,7 +256,7 @@
 
   .motiv-matrix-multi-select__empty {
     margin: 0;
-    padding: 12px 16px;
+    padding: calc(var(--motiv-space) * 3) 16px;
   }
 
   @media (hover: hover) {

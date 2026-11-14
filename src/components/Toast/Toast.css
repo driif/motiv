@@ -9,7 +9,7 @@
     color: var(--motiv-toast-color, var(--motiv-color-text));
     font-family: var(--motiv-font-body);
     font-size: var(--motiv-font-size);
-    line-height: 1.5;
+    line-height: var(--motiv-line-height);
   }
 
   .motiv-toast-stack__list {
@@ -89,7 +89,7 @@
   .motiv-toast__description {
     margin-top: var(--motiv-space);
     color: var(--motiv-color-text-muted);
-    font-size: calc(var(--motiv-font-size) * 0.875);
+    font-size: var(--motiv-font-size-sm);
   }
 
   .motiv-toast__dismiss {

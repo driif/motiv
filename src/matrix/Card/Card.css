@@ -8,6 +8,7 @@
     --_corner: var(--motiv-card-border-color, var(--motiv-color-primary));
     --_shadow: none;
 
+    font-size: var(--motiv-font-size);
     position: relative;
     box-sizing: border-box;
     display: flex;
@@ -108,9 +109,9 @@
   .motiv-matrix-card__title {
     margin: 0;
     font-family: var(--motiv-font-title);
-    font-size: 1rem;
+    font-size: var(--motiv-font-size);
     font-weight: 700;
-    line-height: 1.3;
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.3);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--motiv-color-primary);
@@ -118,7 +119,7 @@
 
   .motiv-matrix-card__description {
     margin: var(--motiv-space) 0 0;
-    font-size: 0.8125rem;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-color-text-muted);
   }
 

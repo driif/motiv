@@ -8,10 +8,11 @@
     gap: 10px;
     box-sizing: border-box;
     width: 100%;
-    height: 48px;
+    height: calc(var(--motiv-space) * 12);
     padding: 0 calc(var(--motiv-space) * 2);
     color: var(--motiv-nav-color, var(--motiv-color-text));
     font: inherit;
+    font-size: var(--motiv-font-size);
     text-align: start;
     text-decoration: none;
     background: transparent;
@@ -40,8 +41,8 @@
     display: grid;
     flex-shrink: 0;
     place-items: center;
-    width: 34px;
-    height: 34px;
+    width: calc(var(--motiv-space) * 8.5);
+    height: calc(var(--motiv-space) * 8.5);
     transition: transform 0.4s var(--_spring);
 
     & > :not(.motiv-nav-item__ring) {

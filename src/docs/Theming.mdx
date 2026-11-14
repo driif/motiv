@@ -44,6 +44,7 @@ Base tokens are the only inputs. Override them on `:root` to rebrand every compo
 | `--motiv-font-body` | `system-ui, …, sans-serif` | — |
 | `--motiv-font-title` | `var(--motiv-font-body)` | — |
 | `--motiv-font-size` | `1rem` | — |
+| `--motiv-line-height` | `1.5` | — |
 | `--motiv-duration` | `200ms` | — |
 | `--motiv-ease` | `cubic-bezier(0.2, 0.8, 0.2, 1)` | — |
 | `--motiv-ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` | — |
@@ -62,6 +63,53 @@ token on any other element does **not** re-derive them there: a `--motiv-color-p
 plain `<div>` changes button colors and hover shades inside it (those are derived on the button
 itself), but `--motiv-color-primary-subtle` and `--motiv-focus-ring` keep the root's primary.
 Add `data-theme` to the wrapper, or set the derived tokens too.
+
+## Text scale and density
+
+Components read their text sizes and heights from tokens derived from `--motiv-font-size` and
+`--motiv-space`:
+
+| Token | Value |
+|---|---|
+| `--motiv-font-size-xs` | `calc(var(--motiv-font-size) * 0.75)` |
+| `--motiv-font-size-sm` | `calc(var(--motiv-font-size) * 0.875)` |
+| `--motiv-font-size-lg` | `calc(var(--motiv-font-size) * 1.25)` |
+| `--motiv-font-size-xl` | `calc(var(--motiv-font-size) * 1.5)` |
+| `--motiv-control-height` | `calc(var(--motiv-space) * 8)` |
+| `--motiv-row-height` | `calc(var(--motiv-space) * 7)` |
+
+`--motiv-control-height` is the unit, not every control's height: a component keeps its own
+multiple of it (a medium `Button` is `1.25` of it), so the defaults look as before. Menu and option
+rows use multiples of `--motiv-row-height`.
+
+`data-density="compact"` on any element sets `--motiv-space: 0.1875rem` there, so its controls,
+rows and spacing shrink by a quarter:
+
+```html
+<aside data-density="compact">…</aside>
+```
+
+Unlike the color tokens, these are re-derived on every `motiv-*` element, so a plain scoped base
+token rescales the components inside it, no attribute needed:
+
+```css
+.app-sidebar {
+  --motiv-font-size: 0.875rem;
+}
+```
+
+Every component that shows text sets its own `font-size` from these tokens, so checkbox, radio
+and switch labels follow a scoped `--motiv-font-size` instead of inheriting the page's. Hit areas
+derived from `--motiv-space` never drop below 24px. The `Scale` stories of each style render every
+control family in default, compact, scoped-font and combined frames.
+
+Override `--motiv-font-size` and `--motiv-space`, not the derived steps: a derived token set on a
+non-motiv ancestor is recomputed on each component and has no effect. Menus and popovers render
+next to their trigger, so they follow the same scope.
+
+The kinetic `TextField` (`FloatingField`) is `max(calc(var(--motiv-control-height) * 1.8125), 3rem)`
+high: 58px by default, and never below 3rem, the height that still fits the floated label above the
+value. A long label still wraps and grows the field.
 
 ## Small layouts
 

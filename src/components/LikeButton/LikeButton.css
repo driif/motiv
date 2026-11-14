@@ -4,9 +4,10 @@
     display: inline-flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 2.5);
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0 18px 0 14px;
     font: inherit;
+    font-size: var(--motiv-font-size);
     color: var(--motiv-icon-button-color, var(--motiv-color-text));
     background: var(--motiv-icon-button-bg, var(--motiv-color-surface));
     border: 1px solid var(--motiv-icon-button-border-color, var(--motiv-color-border));
@@ -71,6 +72,6 @@
   }
 
   .motiv-like__count {
-    font-size: 0.9375rem;
+    font-size: var(--motiv-font-size);
   }
 }

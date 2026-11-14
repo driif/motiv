@@ -5,7 +5,7 @@
     overflow: auto;
     color: var(--motiv-table-color, var(--motiv-color-text));
     font-family: var(--motiv-font-body);
-    font-size: calc(var(--motiv-font-size) * 0.875);
+    font-size: var(--motiv-font-size-sm);
     background: var(--motiv-table-bg, var(--motiv-color-surface));
     border: calc(var(--motiv-space) / 4) solid
       var(--motiv-table-border-color, var(--motiv-color-border));
@@ -103,6 +103,7 @@
   }
 
   .motiv-table-menu {
+    font-size: var(--motiv-font-size);
     display: inline-flex;
   }
 

@@ -87,19 +87,19 @@
   }
 
   .motiv-matrix-btn--sm {
-    --_height: 2.75rem;
+    --_height: calc(var(--motiv-control-height) * 1.375);
     --_px: calc(var(--motiv-space) * 4);
-    --_font-size: 0.75rem;
+    --_font-size: var(--motiv-font-size-xs);
   }
   .motiv-matrix-btn--md {
-    --_height: 3rem;
+    --_height: calc(var(--motiv-control-height) * 1.5);
     --_px: calc(var(--motiv-space) * 5);
-    --_font-size: 0.8125rem;
+    --_font-size: var(--motiv-font-size-sm);
   }
   .motiv-matrix-btn--lg {
-    --_height: 3.5rem;
+    --_height: calc(var(--motiv-control-height) * 1.75);
     --_px: calc(var(--motiv-space) * 7);
-    --_font-size: 0.9375rem;
+    --_font-size: var(--motiv-font-size);
   }
 
   .motiv-matrix-btn--secondary {

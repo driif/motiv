@@ -2,7 +2,9 @@
   .motiv-steps {
     --_accent: var(--motiv-progress-accent, var(--motiv-color-primary));
     --_border: var(--motiv-progress-border-color, var(--motiv-color-border));
+    --_dot: calc(var(--motiv-font-size) * 1.875);
 
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 4);
@@ -17,9 +19,9 @@
 
   .motiv-steps__line {
     position: absolute;
-    top: 14px;
-    right: 15px;
-    left: 15px;
+    top: calc(var(--_dot) / 2 - 1px);
+    right: calc(var(--_dot) / 2);
+    left: calc(var(--_dot) / 2);
     height: 1px;
     overflow: hidden;
     background: var(--_border);
@@ -48,7 +50,7 @@
     flex-direction: column;
     align-items: center;
     gap: calc(var(--motiv-space) * 1.5);
-    width: 30px;
+    width: var(--_dot);
   }
 
   /* Edge labels grow inward, so a long label never leaves the track. */
@@ -64,10 +66,10 @@
     position: relative;
     display: grid;
     place-items: center;
-    width: 30px;
-    height: 30px;
+    width: var(--_dot);
+    height: var(--_dot);
     color: var(--motiv-color-text-muted);
-    font-size: 0.8125rem;
+    font-size: var(--motiv-font-size-sm);
     font-weight: 600;
     font-variant-numeric: tabular-nums;
     background: var(--motiv-progress-bg, var(--motiv-color-surface));
@@ -139,7 +141,7 @@
 
   .motiv-steps__label {
     color: var(--motiv-color-text-muted);
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     font-weight: 600;
     white-space: nowrap;
 
@@ -155,7 +157,7 @@
   .motiv-steps__panel {
     grid-area: 1 / 1;
     color: var(--motiv-color-text-muted);
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     text-align: center;
     opacity: 0;
     visibility: hidden;

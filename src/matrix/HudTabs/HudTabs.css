@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-matrix-hudtabs {
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 3);
@@ -11,7 +12,7 @@
     position: relative;
     display: grid;
     grid-template-columns: repeat(var(--_count), minmax(0, 1fr));
-    padding: 4px;
+    padding: var(--motiv-space);
     border: 1px solid
       var(
         --motiv-tabs-border-color,
@@ -21,10 +22,10 @@
 
   .motiv-matrix-hudtabs__target {
     position: absolute;
-    top: 4px;
-    bottom: 4px;
-    left: 4px;
-    width: calc((100% - 8px) / var(--_count));
+    top: var(--motiv-space);
+    bottom: var(--motiv-space);
+    left: var(--motiv-space);
+    width: calc((100% - var(--motiv-space) * 2) / var(--_count));
     background: var(--motiv-color-primary-subtle);
     pointer-events: none;
     transition: transform 0.18s var(--motiv-ease);
@@ -64,11 +65,11 @@
 
   .motiv-matrix-hudtabs__tab {
     position: relative;
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0 6px;
     overflow: hidden;
     font-family: var(--motiv-font-body);
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     letter-spacing: 0.12em;
     text-overflow: ellipsis;
     text-transform: uppercase;
@@ -93,7 +94,7 @@
   }
 
   .motiv-matrix-hudtabs__status {
-    font-size: 0.6875rem;
+    font-size: var(--motiv-font-size-xs);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--motiv-color-text-muted);

@@ -2,6 +2,7 @@
   .motiv-carousel {
     --_step: 24px;
 
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 3);
@@ -62,8 +63,8 @@
   .motiv-carousel__arrow {
     display: grid;
     place-items: center;
-    width: 44px;
-    height: 44px;
+    width: max(24px, calc(var(--motiv-space) * 11));
+    height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0;
     color: var(--motiv-carousel-color, var(--motiv-color-text));
     background: var(--motiv-carousel-bg, var(--motiv-color-surface));
@@ -113,7 +114,7 @@
     display: grid;
     place-items: center;
     width: var(--_step);
-    height: 44px;
+    height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0;
     background: transparent;
     border: 0;

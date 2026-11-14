@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-markdown-editor {
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;

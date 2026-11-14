@@ -2,6 +2,7 @@
   .motiv-progress {
     --_accent: var(--motiv-progress-accent, var(--motiv-color-primary));
 
+    font-size: var(--motiv-font-size);
     display: grid;
     gap: calc(var(--motiv-space) * 2);
     color: var(--motiv-color-text);

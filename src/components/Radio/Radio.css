@@ -1,10 +1,11 @@
 @layer motiv.components {
   .motiv-radio {
+    font-size: var(--motiv-font-size);
     position: relative;
     display: inline-flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 3);
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     color: var(--motiv-radio-color, var(--motiv-color-text));
     cursor: pointer;
 
@@ -118,6 +119,7 @@
   }
 
   .motiv-radio-group {
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -129,7 +131,7 @@
   .motiv-radio-group__legend {
     padding: 0;
     margin-bottom: calc(var(--motiv-space) * 2);
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-color-text-muted);
   }
 

@@ -3,6 +3,7 @@
     --_pen: cubic-bezier(0.6, 0.05, 0.3, 1);
     --_accent: var(--motiv-menu-accent, var(--motiv-color-primary));
 
+    font-size: var(--motiv-font-size);
     position: relative;
     width: 100%;
     max-width: 320px;
@@ -14,9 +15,10 @@
     align-items: center;
     gap: calc(var(--motiv-space) * 2.5);
     width: 100%;
-    min-height: 48px;
+    min-height: calc(var(--motiv-control-height) * 1.5);
     padding: 0 calc(var(--motiv-space) * 3.5);
     font: inherit;
+    font-size: var(--motiv-font-size);
     color: var(--motiv-menu-color, var(--motiv-color-text-muted));
     text-align: left;
     background: var(--motiv-menu-bg, var(--motiv-color-surface));
@@ -52,8 +54,8 @@
   .motiv-sketch-command-menu__kbd {
     padding: 0 6px;
     font-family: "Caveat", "Segoe Print", cursive;
-    font-size: 1.05rem;
-    line-height: 1.4;
+    font-size: calc(var(--motiv-font-size) * 1.05);
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.4);
     color: var(--motiv-color-text-muted);
     border: 1.5px solid currentColor;
     border-radius: 8px 4px 9px 5px / 5px 9px 4px 8px;
@@ -66,7 +68,7 @@
     right: 0;
     left: 0;
     z-index: 20;
-    padding: 8px;
+    padding: calc(var(--motiv-space) * 2);
     visibility: hidden;
     background: var(--motiv-menu-bg, var(--motiv-color-surface));
     border: 2px solid var(--motiv-menu-border-color, var(--motiv-color-text));
@@ -87,9 +89,10 @@
     align-items: center;
     gap: calc(var(--motiv-space) * 2);
     width: 100%;
-    min-height: 44px;
+    min-height: calc(var(--motiv-row-height) * 11 / 7);
     padding: 0 calc(var(--motiv-space) * 2.5);
     font: inherit;
+    font-size: var(--motiv-font-size);
     color: var(--motiv-menu-color, var(--motiv-color-text));
     text-align: left;
     background: transparent;

@@ -3,6 +3,7 @@
     --_pen: cubic-bezier(0.6, 0.05, 0.3, 1);
     --_accent: var(--motiv-chip-accent, var(--motiv-color-primary));
 
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 2);
@@ -19,9 +20,10 @@
     display: inline-flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 1.5);
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0 16px 0 10px;
     font: inherit;
+    font-size: var(--motiv-font-size);
     font-weight: 600;
     color: var(--motiv-chip-color, var(--motiv-color-text));
     background: var(--motiv-chip-bg, var(--motiv-color-surface));
@@ -80,14 +82,14 @@
     display: flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 2);
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     font-family: "Caveat", "Segoe Print", cursive;
-    font-size: 1.2rem;
+    font-size: calc(var(--motiv-font-size) * 1.2);
     color: var(--motiv-color-text-muted);
   }
 
   .motiv-sketch-chips__clear {
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0 calc(var(--motiv-space) * 2);
     font: inherit;
     color: var(--motiv-color-text);

@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-accordion {
+    font-size: var(--motiv-font-size);
     width: 100%;
     overflow: hidden;
     color: var(--motiv-accordion-color, var(--motiv-color-text));
@@ -15,6 +16,7 @@
   .motiv-accordion__heading {
     margin: 0;
     font: inherit;
+    font-size: var(--motiv-font-size);
   }
 
   .motiv-accordion__trigger {
@@ -23,7 +25,7 @@
     justify-content: space-between;
     gap: calc(var(--motiv-space) * 3);
     width: 100%;
-    min-height: 50px;
+    min-height: calc(var(--motiv-space) * 12.5);
     padding: 0 calc(var(--motiv-space) * 3.5);
     font: inherit;
     font-weight: 600;
@@ -64,8 +66,8 @@
   /* Closed panels are hidden outright; only the reveal is animated, never the height. */
   .motiv-accordion__panel {
     padding: 0 calc(var(--motiv-space) * 3.5) calc(var(--motiv-space) * 3.5);
-    font-size: 0.875rem;
-    line-height: 1.5;
+    font-size: var(--motiv-font-size-sm);
+    line-height: var(--motiv-line-height);
     color: var(--motiv-color-text-muted);
     animation: motiv-accordion-in 0.4s var(--motiv-ease-spring);
   }

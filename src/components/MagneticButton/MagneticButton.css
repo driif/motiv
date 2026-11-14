@@ -4,6 +4,7 @@
   .motiv-magnet {
     --_field: 28px;
 
+    font-size: var(--motiv-font-size);
     display: inline-block;
     padding: var(--_field);
     margin: calc(var(--_field) * -1);
@@ -14,9 +15,10 @@
     align-items: center;
     justify-content: center;
     min-width: 178px;
-    min-height: 45px;
-    padding: 12px 18px;
+    min-height: max(24px, calc(var(--motiv-space) * 11.25));
+    padding: calc(var(--motiv-space) * 3) 18px;
     font: inherit;
+    font-size: var(--motiv-font-size);
     color: var(--motiv-button-color, var(--motiv-color-text));
     background: var(
       --motiv-button-bg,

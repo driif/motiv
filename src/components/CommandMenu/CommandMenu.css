@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-command-menu {
+    font-size: var(--motiv-font-size);
     position: relative;
     width: 100%;
     max-width: 320px;
@@ -11,10 +12,10 @@
     align-items: center;
     gap: calc(var(--motiv-space) * 2.5);
     width: 100%;
-    min-height: 46px;
+    min-height: calc(var(--motiv-control-height) * 1.4375);
     padding: 0 calc(var(--motiv-space) * 3);
     font: inherit;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-menu-color, var(--motiv-color-text-muted));
     text-align: left;
     background: var(--motiv-menu-bg, var(--motiv-color-surface));
@@ -44,9 +45,9 @@
   }
 
   .motiv-command-menu__kbd {
-    padding: 2px 6px;
+    padding: calc(var(--motiv-space) * 0.5) 6px;
     font: inherit;
-    font-size: 0.6875rem;
+    font-size: var(--motiv-font-size-xs);
     color: var(--motiv-color-text-muted);
     background: var(--motiv-color-surface-hover);
     border: 1px solid var(--motiv-color-border);
@@ -59,7 +60,7 @@
     right: 0;
     left: 0;
     z-index: 20;
-    padding: 6px;
+    padding: calc(var(--motiv-space) * 1.5);
     visibility: hidden;
     background: var(--motiv-menu-bg, var(--motiv-color-surface));
     border: 1px solid var(--motiv-menu-border-color, var(--motiv-color-border));
@@ -93,10 +94,10 @@
     align-items: center;
     gap: calc(var(--motiv-space) * 2.5);
     width: 100%;
-    min-height: 44px;
+    min-height: calc(var(--motiv-row-height) * 11 / 7);
     padding: 0 calc(var(--motiv-space) * 2.5);
     font: inherit;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-menu-color, var(--motiv-color-text));
     text-align: left;
     background: transparent;

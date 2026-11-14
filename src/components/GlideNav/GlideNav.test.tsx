@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { GlideNav } from './GlideNav';
 
 const items = [
@@ -7,6 +7,20 @@ const items = [
   { id: 'drafts', label: 'Drafts' },
   { id: 'sent', label: 'Sent' },
 ];
+
+let resize = () => {};
+beforeEach(() => {
+  vi.stubGlobal(
+    'ResizeObserver',
+    class {
+      constructor(callback: () => void) {
+        resize = callback;
+      }
+      observe() {}
+      disconnect() {}
+    },
+  );
+});
 
 describe('GlideNav', () => {
   it('is a nav landmark marking the current item', () => {
@@ -49,6 +63,21 @@ describe('GlideNav', () => {
   });
 
   it('marks the nav once the bar is placed', () => {
+    render(<GlideNav items={items} value="inbox" onChange={() => {}} label="Mail" />);
+    expect(screen.getByRole('navigation')).toHaveAttribute('data-placed');
+  });
+
+  it('moves the bar when the rows resize', () => {
+    render(<GlideNav items={items} value="sent" onChange={() => {}} label="Mail" />);
+    const sent = screen.getByRole('button', { name: 'Sent' });
+    const bar = document.querySelector<HTMLElement>('.motiv-glide-nav__bar');
+    Object.defineProperty(sent, 'offsetTop', { configurable: true, value: 66 });
+    resize();
+    expect(bar?.style.transform).toBe('translateY(66px)');
+  });
+
+  it('places the bar where ResizeObserver is missing', () => {
+    vi.stubGlobal('ResizeObserver', undefined);
     render(<GlideNav items={items} value="inbox" onChange={() => {}} label="Mail" />);
     expect(screen.getByRole('navigation')).toHaveAttribute('data-placed');
   });

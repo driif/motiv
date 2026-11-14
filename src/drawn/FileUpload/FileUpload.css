@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-sketch-file-upload {
+    font-size: var(--motiv-font-size);
     display: grid;
     gap: calc(var(--motiv-space) * 4);
     width: 100%;
@@ -48,7 +49,7 @@
   .motiv-sketch-file-upload__details {
     justify-content: space-between;
     font-family: "Caveat", "Segoe Print", cursive;
-    font-size: 1.2rem;
+    font-size: calc(var(--motiv-font-size) * 1.2);
     color: var(--motiv-color-text-muted);
   }
 

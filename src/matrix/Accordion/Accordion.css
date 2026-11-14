@@ -6,6 +6,7 @@
       color-mix(in oklch, var(--motiv-color-primary) 55%, transparent)
     );
 
+    font-size: var(--motiv-font-size);
     width: 100%;
     color: var(--motiv-accordion-color, var(--motiv-color-text));
     font-family: var(--motiv-font-body);
@@ -27,6 +28,7 @@
   .motiv-matrix-accordion__heading {
     margin: 0;
     font: inherit;
+    font-size: var(--motiv-font-size);
   }
 
   .motiv-matrix-accordion__trigger {
@@ -35,10 +37,10 @@
     justify-content: space-between;
     gap: calc(var(--motiv-space) * 3);
     width: 100%;
-    min-height: 48px;
+    min-height: calc(var(--motiv-space) * 12);
     padding: 0 calc(var(--motiv-space) * 4);
     font: inherit;
-    font-size: 0.8125rem;
+    font-size: var(--motiv-font-size-sm);
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -70,8 +72,8 @@
 
   .motiv-matrix-accordion__panel {
     padding: 0 calc(var(--motiv-space) * 4) calc(var(--motiv-space) * 4);
-    font-size: 0.8125rem;
-    line-height: 1.6;
+    font-size: var(--motiv-font-size-sm);
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.6);
     color: var(--motiv-color-text-muted);
 
     &::before {

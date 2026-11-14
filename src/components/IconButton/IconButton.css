@@ -2,13 +2,13 @@
   .motiv-icon-button-group {
     display: inline-flex;
     gap: 9px;
-    padding: 4px;
+    padding: var(--motiv-space);
     border: 1px solid var(--motiv-icon-button-border-color, var(--motiv-color-border));
     border-radius: 14px;
   }
 
   .motiv-icon-button {
-    --_size: 48px;
+    --_size: max(24px, calc(var(--motiv-space) * 12));
     --_icon-size: 24px;
     position: relative;
     display: inline-grid;

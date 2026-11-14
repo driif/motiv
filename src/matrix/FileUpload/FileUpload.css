@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-matrix-file-upload {
+    font-size: var(--motiv-font-size);
     display: grid;
     gap: calc(var(--motiv-space) * 4);
     width: 100%;
@@ -49,7 +50,7 @@
 
   .motiv-matrix-file-upload__details {
     justify-content: space-between;
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--motiv-color-text-muted);
@@ -57,7 +58,7 @@
 
   .motiv-matrix-file-upload__error {
     margin: 0;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-color-danger);
 
     &::before {

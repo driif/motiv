@@ -3,19 +3,20 @@
     --_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     --_accent: var(--motiv-switch-accent, var(--motiv-color-primary));
 
+    font-size: var(--motiv-font-size);
     display: inline-flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 3);
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     color: var(--motiv-switch-color, var(--motiv-color-text));
   }
 
   .motiv-switch__track {
     position: relative;
     flex-shrink: 0;
-    width: 58px;
-    height: 32px;
-    padding: 2px;
+    width: calc(var(--motiv-space) * 14.5);
+    height: max(24px, calc(var(--motiv-space) * 8));
+    padding: calc(var(--motiv-space) * 0.5);
     background: var(--motiv-switch-bg, transparent);
     border: 2px solid var(--motiv-switch-border-color, var(--motiv-color-text));
     border-radius: var(--motiv-switch-radius, 18px 14px 17px 15px / 15px 17px 14px 18px);
@@ -54,8 +55,8 @@
   .motiv-switch__knob {
     position: relative;
     display: block;
-    width: 24px;
-    height: 24px;
+    width: calc(var(--motiv-space) * 6);
+    height: calc(var(--motiv-space) * 6);
     overflow: visible;
     transition:
       translate 0.5s var(--_spring),
@@ -69,7 +70,7 @@
     }
 
     [aria-checked="true"] > & {
-      translate: 26px 0;
+      translate: calc(var(--motiv-space) * 6.5) 0;
       rotate: 200deg;
 
       & path {

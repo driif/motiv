@@ -2,19 +2,20 @@
   .motiv-liquid {
     --_accent: var(--motiv-switch-accent, var(--motiv-color-primary));
 
+    font-size: var(--motiv-font-size);
     display: inline-flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 3);
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     color: var(--motiv-switch-color, var(--motiv-color-text));
   }
 
   .motiv-liquid__track {
     position: relative;
     flex-shrink: 0;
-    width: 66px;
-    height: 34px;
-    padding: 4px;
+    width: calc(var(--motiv-space) * 16.5);
+    height: max(24px, calc(var(--motiv-space) * 8.5));
+    padding: var(--motiv-space);
     background: var(--motiv-switch-bg, var(--motiv-color-surface-hover));
     border: 1px solid var(--motiv-switch-border-color, var(--motiv-color-border));
     border-radius: var(--motiv-switch-radius, 40% 42% 43% 39% / 49% 50% 46% 52%);
@@ -42,12 +43,12 @@
   /* Travel and squash live on separate elements, so the spring and the stretch never fight. */
   .motiv-liquid__traveler {
     display: block;
-    width: 24px;
-    height: 24px;
+    width: calc(var(--motiv-space) * 6);
+    height: calc(var(--motiv-space) * 6);
     transition: translate 0.65s var(--motiv-ease-spring);
 
     [aria-checked="true"] > & {
-      translate: 32px 0;
+      translate: calc(var(--motiv-space) * 8) 0;
     }
   }
 

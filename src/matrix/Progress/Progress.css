@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-matrix-progress {
+    font-size: var(--motiv-font-size);
     display: grid;
     gap: calc(var(--motiv-space) * 2);
     color: var(--motiv-color-text);
@@ -9,7 +10,7 @@
     display: flex;
     justify-content: space-between;
     gap: calc(var(--motiv-space) * 4);
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;

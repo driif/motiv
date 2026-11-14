@@ -49,7 +49,7 @@
   .motiv-file-upload__details {
     justify-content: space-between;
     color: var(--motiv-color-text-muted);
-    font-size: calc(var(--motiv-font-size) * 0.875);
+    font-size: var(--motiv-font-size-sm);
   }
 
   .motiv-file-upload__error {

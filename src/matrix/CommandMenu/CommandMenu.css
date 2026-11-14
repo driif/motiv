@@ -6,6 +6,7 @@
       color-mix(in oklch, var(--motiv-color-primary) 55%, transparent)
     );
 
+    font-size: var(--motiv-font-size);
     position: relative;
     width: 100%;
     max-width: 340px;
@@ -18,10 +19,10 @@
     align-items: center;
     gap: 8px;
     width: 100%;
-    min-height: 48px;
+    min-height: calc(var(--motiv-control-height) * 1.5);
     padding: 0 14px;
     font: inherit;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-menu-color, var(--motiv-color-text-muted));
     text-align: left;
     background: var(
@@ -68,7 +69,7 @@
 
   .motiv-matrix-command-menu__kbd {
     font: inherit;
-    font-size: 0.6875rem;
+    font-size: var(--motiv-font-size-xs);
     letter-spacing: 0.08em;
     color: var(--motiv-color-text-muted);
 
@@ -87,7 +88,7 @@
     right: 0;
     left: 0;
     z-index: 20;
-    padding: 6px 0;
+    padding: calc(var(--motiv-space) * 1.5) 0;
     visibility: hidden;
     /* HUD corner brackets over the panel fill. */
     background:
@@ -112,10 +113,10 @@
     align-items: center;
     gap: 8px;
     width: 100%;
-    min-height: 44px;
+    min-height: calc(var(--motiv-row-height) * 11 / 7);
     padding: 0 14px;
     font: inherit;
-    font-size: 0.8125rem;
+    font-size: var(--motiv-font-size-sm);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--motiv-menu-color, var(--motiv-color-text));
