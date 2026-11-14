@@ -33,6 +33,8 @@ delete, move, stage or commit anything. Do not run tests, builds or the linter.
 
 Return **only** a JSON object in a fenced ```json block:
 
+Inside a JSON string value, write no double quote: use backticks or single quotes.
+
 - `message` — what you are saying to them, 3-8 sentences. They read this verbatim. Address their
   points; do not summarise your own plan again.
 - `plan` — the plan as you now hold it. If they changed your mind, this is different from last turn.

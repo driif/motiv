@@ -50,6 +50,8 @@ doing, say so — silence reads as an oversight.
 
 Return **only** a JSON object in a fenced ```json block:
 
+Inside a JSON string value, write no double quote: use backticks or single quotes.
+
 - `summary` — what you changed, in 3-6 sentences.
 - `files` — array of paths you wrote, relative to the repository root.
 - `gates` — object: the command you ran and its verbatim tail, one entry per gate.
