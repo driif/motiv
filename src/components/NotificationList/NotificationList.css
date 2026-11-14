@@ -17,8 +17,8 @@
     overflow-wrap: anywhere;
     color: var(--motiv-menu-color, var(--motiv-color-text));
     font-family: var(--motiv-font-body);
-    font-size: calc(var(--motiv-font-size) * 0.875);
-    line-height: 1.45;
+    font-size: var(--motiv-font-size-sm);
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.45);
     background: var(--motiv-menu-bg, var(--motiv-color-surface));
     border: 1px solid var(--motiv-menu-border-color, var(--motiv-color-border));
     border-radius: var(--motiv-menu-radius, var(--motiv-radius-md));
@@ -44,7 +44,7 @@
     margin: 0;
     padding: calc(var(--motiv-space) * 1.5) calc(var(--motiv-space) * 2);
     font-family: var(--motiv-font-title);
-    font-size: calc(var(--motiv-font-size) * 0.875);
+    font-size: var(--motiv-font-size-sm);
     font-weight: 600;
 
     &:focus-visible {
@@ -120,7 +120,7 @@
   .motiv-notification-list__time,
   .motiv-notification-list__empty {
     color: var(--motiv-color-text-muted);
-    font-size: calc(var(--motiv-font-size) * 0.75);
+    font-size: var(--motiv-font-size-xs);
   }
 
   .motiv-notification-list__empty {

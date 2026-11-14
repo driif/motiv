@@ -34,6 +34,8 @@ Re-run the gates the change can affect afterwards and fix what they catch:
 
 Return **only** a JSON object in a fenced ```json block:
 
+Inside a JSON string value, write no double quote: use backticks or single quotes.
+
 - `fixed` — array of `{finding, what_changed}`, one per finding you acted on.
 - `rebuttals` — array of `{finding, why_not}`, one per finding you rejected, with the reason.
 - `files` — array of paths you wrote this round.

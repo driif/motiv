@@ -1,10 +1,11 @@
 @layer motiv.components {
-  /* Closed it is a 52px circle; open, the field overlays whatever sits to its right,
+  /* Closed it is a circle; open, the field overlays whatever sits to its right,
      so nothing around it reflows. */
   .motiv-xsearch {
-    --_size: 52px;
+    --_size: max(24px, calc(var(--motiv-space) * 13));
     --_travel: calc(var(--_w) - var(--_size));
 
+    font-size: var(--motiv-font-size);
     position: relative;
     display: inline-block;
     width: var(--_size);
@@ -114,7 +115,7 @@
     height: 100%;
     color: var(--motiv-text-field-color, var(--motiv-color-text));
     font: inherit;
-    font-size: 1rem;
+    font-size: var(--motiv-font-size);
     background: transparent;
     border: 0;
     outline: none;
@@ -131,8 +132,8 @@
   }
 
   .motiv-xsearch__close {
-    width: 44px;
-    height: 44px;
+    width: max(24px, calc(var(--motiv-space) * 11));
+    height: max(24px, calc(var(--motiv-space) * 11));
     margin-right: 4px;
     color: var(--motiv-color-text-muted);
     opacity: 0;
@@ -170,7 +171,7 @@
     left: 0;
     width: var(--_w);
     margin: 0;
-    padding: 6px;
+    padding: calc(var(--motiv-space) * 1.5);
     list-style: none;
     background: var(--motiv-text-field-bg, var(--motiv-color-surface));
     border: 1px solid var(--motiv-text-field-border-color, var(--motiv-color-border));
@@ -202,11 +203,11 @@
     align-items: center;
     gap: calc(var(--motiv-space) * 2.5);
     width: 100%;
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0 12px;
     color: var(--motiv-text-field-color, var(--motiv-color-text));
     font: inherit;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     text-align: left;
     background: transparent;
     border: 0;

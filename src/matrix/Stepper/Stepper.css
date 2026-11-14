@@ -6,6 +6,7 @@
       color-mix(in oklch, var(--motiv-color-primary) 55%, transparent)
     );
 
+    font-size: var(--motiv-font-size);
     display: inline-flex;
     align-items: stretch;
     width: fit-content;
@@ -17,10 +18,11 @@
   }
 
   .motiv-matrix-stepper__button {
-    min-width: 44px;
-    min-height: 44px;
+    min-width: max(24px, calc(var(--motiv-space) * 11));
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0 calc(var(--motiv-space) * 2);
     font: inherit;
+    font-size: var(--motiv-font-size);
     font-weight: 700;
     color: var(--_accent);
     background: transparent;
@@ -42,7 +44,7 @@
     place-items: center;
     min-width: 4ch;
     padding: 0 calc(var(--motiv-space) * 3);
-    font-size: 1.5rem;
+    font-size: var(--motiv-font-size-xl);
     font-weight: 600;
     font-variant-numeric: tabular-nums;
     letter-spacing: 0.08em;

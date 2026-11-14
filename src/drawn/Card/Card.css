@@ -6,6 +6,7 @@
     --_border: var(--motiv-color-text);
     --_shadow: 5px 6px 0 -1px var(--_shadow-color);
 
+    font-size: var(--motiv-font-size);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -71,14 +72,14 @@
   .motiv-card__title {
     margin: 0;
     font-family: "Caveat", "Segoe Print", cursive;
-    font-size: 1.625rem;
+    font-size: calc(var(--motiv-font-size) * 1.625);
     font-weight: 400;
     line-height: 1.1;
   }
 
   .motiv-card__description {
     margin: var(--motiv-space) 0 0;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-color-text-muted);
   }
 

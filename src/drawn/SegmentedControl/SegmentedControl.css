@@ -2,6 +2,7 @@
   .motiv-segmented {
     --_swing: cubic-bezier(0.68, -0.5, 0.27, 1.5);
 
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 2);
@@ -12,7 +13,7 @@
     position: relative;
     display: grid;
     grid-template-columns: repeat(var(--_count), minmax(0, 1fr));
-    padding: 5px;
+    padding: calc(var(--motiv-space) * 1.25);
     background: var(--motiv-segmented-control-bg, var(--motiv-color-surface));
     border: 1.5px solid var(--motiv-segmented-control-border-color, var(--motiv-color-border));
     border-radius: var(--motiv-segmented-control-radius, 14px);
@@ -20,10 +21,10 @@
 
   .motiv-segmented__blob {
     position: absolute;
-    top: 5px;
-    bottom: 5px;
-    left: 5px;
-    width: calc((100% - 10px) / var(--_count));
+    top: calc(var(--motiv-space) * 1.25);
+    bottom: calc(var(--motiv-space) * 1.25);
+    left: calc(var(--motiv-space) * 1.25);
+    width: calc((100% - var(--motiv-space) * 2.5) / var(--_count));
     background: var(--motiv-segmented-control-accent, var(--motiv-color-primary));
     border-radius: 12px 18px 10px 16px / 16px 10px 18px 12px;
     transform: translateX(calc(var(--_index) * 100%));
@@ -46,10 +47,11 @@
   .motiv-segmented__option {
     position: relative;
     z-index: 1;
-    height: 46px;
+    height: max(24px, calc(var(--motiv-space) * 11.5));
     padding: 0 calc(var(--motiv-space) * 2);
     color: var(--motiv-segmented-control-color, var(--motiv-color-text));
     font: inherit;
+    font-size: var(--motiv-font-size);
     font-weight: 600;
     background: transparent;
     border: 0;
@@ -76,8 +78,8 @@
   .motiv-segmented__hint {
     grid-area: 1 / 1;
     font-family: "Caveat", "Segoe Print", cursive;
-    font-size: 1.2rem;
-    line-height: 1.2;
+    font-size: calc(var(--motiv-font-size) * 1.2);
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.2);
     color: var(--motiv-color-text-muted);
     opacity: 0;
     rotate: -3deg;

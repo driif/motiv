@@ -5,9 +5,10 @@
     position: relative;
     display: inline-grid;
     place-items: center;
-    min-height: 44px;
-    padding: 12px 22px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
+    padding: calc(var(--motiv-space) * 3) 22px;
     font: inherit;
+    font-size: var(--motiv-font-size);
     color: var(--motiv-button-color, var(--motiv-color-on-primary));
     white-space: nowrap;
     background: transparent;

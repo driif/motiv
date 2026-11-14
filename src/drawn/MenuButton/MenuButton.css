@@ -1,7 +1,7 @@
 @layer motiv.components {
   .motiv-menu-button {
     --_bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    --_size: 44px;
+    --_size: max(24px, calc(var(--motiv-space) * 11));
     /* Geometry is drawn on a 72px grid and scaled to --_size. */
     --_u: calc(var(--_size) / 72);
 

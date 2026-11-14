@@ -2,6 +2,7 @@
   .motiv-float {
     --_accent: var(--motiv-text-field-accent, var(--motiv-color-primary));
 
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 2);
@@ -15,7 +16,9 @@
     position: relative;
     display: grid;
     grid-template-rows: auto 1fr;
-    min-height: 58px;
+    /* 1.8125 keeps today's 58px; the 3rem floor keeps the floated label and the value
+       readable when a compact density shrinks the control height. */
+    min-height: max(calc(var(--motiv-control-height) * 1.8125), 3rem);
     background: var(--motiv-text-field-bg, var(--motiv-color-surface));
     border: 1px solid var(--motiv-text-field-border-color, var(--motiv-color-border));
     border-radius: var(--motiv-text-field-radius, var(--motiv-radius));
@@ -60,11 +63,12 @@
     grid-column: 1;
     width: 100%;
     min-width: 0;
-    padding: 1px 44px 8px 14px;
+    padding: 1px calc(var(--motiv-space) * 11) calc(var(--motiv-space) * 2)
+      calc(var(--motiv-space) * 3.5);
     color: var(--motiv-text-field-color, var(--motiv-color-text));
     font: inherit;
-    font-size: 1rem;
-    line-height: 1.25;
+    font-size: var(--motiv-font-size);
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.25);
     background: transparent;
     border: 0;
     border-radius: inherit;
@@ -85,11 +89,12 @@
   .motiv-float__label {
     grid-row: 1;
     grid-column: 1;
-    margin-bottom: -10px;
-    padding: 17px 44px 0 14px;
+    margin-bottom: calc(var(--motiv-space) * -2.5);
+    padding: calc(var(--motiv-space) * 4.25) calc(var(--motiv-space) * 11) 0
+      calc(var(--motiv-space) * 3.5);
     color: var(--motiv-color-text-muted);
-    font-size: 1rem;
-    line-height: 1.25;
+    font-size: var(--motiv-font-size);
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.25);
     overflow-wrap: anywhere;
     transition:
       padding 0.4s var(--motiv-ease-spring),
@@ -98,8 +103,8 @@
 
     :is(:focus, :not(:placeholder-shown)) + & {
       margin-bottom: 0;
-      padding-top: 7px;
-      font-size: 0.78rem;
+      padding-top: calc(var(--motiv-space) * 1.75);
+      font-size: var(--motiv-font-size-xs);
     }
 
     :focus + & {
@@ -110,10 +115,10 @@
   /* Anchored to the bottom, so it stays on the value row when a wrapped label grows the box. */
   .motiv-float__ok {
     position: absolute;
-    right: 14px;
-    bottom: 18px;
-    width: 20px;
-    height: 20px;
+    right: calc(var(--motiv-space) * 3.5);
+    bottom: calc(var(--motiv-space) * 4.5);
+    width: calc(var(--motiv-space) * 5);
+    height: calc(var(--motiv-space) * 5);
     color: var(--_accent);
     stroke-width: 2;
     opacity: 0;
@@ -135,7 +140,7 @@
   .motiv-float__hint {
     margin: 0;
     color: var(--motiv-color-text-muted);
-    font-size: 0.8125rem;
+    font-size: var(--motiv-font-size-sm);
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -2,6 +2,7 @@
   .motiv-filter-chips {
     --_slot: 22px;
 
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 3);
@@ -19,10 +20,10 @@
     display: inline-flex;
     align-items: center;
     gap: calc(var(--_slot) - 16px);
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0 15px;
     font: inherit;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-chip-color, var(--motiv-color-text));
     background: var(--motiv-chip-bg, var(--motiv-color-surface));
     border: 1px solid var(--motiv-chip-border-color, var(--motiv-color-border));
@@ -81,13 +82,13 @@
     display: flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 2);
-    min-height: 44px;
-    font-size: 0.875rem;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-color-text-muted);
   }
 
   .motiv-filter-chips__clear {
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0 calc(var(--motiv-space) * 2);
     font: inherit;
     color: var(--motiv-color-text);

@@ -1,10 +1,11 @@
 @layer motiv.components {
   .motiv-check {
+    font-size: var(--motiv-font-size);
     position: relative;
     display: inline-flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 3);
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     color: var(--motiv-checkbox-color, var(--motiv-color-text));
     cursor: pointer;
 

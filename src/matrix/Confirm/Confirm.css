@@ -27,8 +27,8 @@
     border-radius: var(--motiv-confirm-radius, var(--motiv-radius-sm));
     box-shadow: 0 0 48px -16px color-mix(in oklch, var(--motiv-color-primary) 55%, transparent);
     font-family: var(--motiv-font-body);
-    font-size: 0.9375rem;
-    line-height: 1.6;
+    font-size: var(--motiv-font-size);
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.6);
 
     &::backdrop {
       background:
@@ -58,9 +58,9 @@
 
   .motiv-matrix-confirm__title {
     font-family: var(--motiv-font-title);
-    font-size: 1rem;
+    font-size: var(--motiv-font-size);
     font-weight: 700;
-    line-height: 1.3;
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.3);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--motiv-color-primary);
@@ -82,7 +82,7 @@
       max-width: 100%;
       padding-block: calc(var(--motiv-space) * 2);
       white-space: normal;
-      line-height: 1.3;
+      line-height: calc(var(--motiv-line-height) / 1.5 * 1.3);
     }
   }
 }

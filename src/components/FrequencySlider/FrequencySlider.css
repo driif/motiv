@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-freq {
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 3.5);
@@ -16,7 +17,7 @@
 
     & output {
       color: var(--motiv-slider-accent, var(--motiv-color-primary));
-      font-size: 0.875rem;
+      font-size: var(--motiv-font-size-sm);
       font-variant-numeric: tabular-nums;
     }
   }
@@ -25,7 +26,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 40px;
+    height: calc(var(--motiv-space) * 10);
   }
 
   .motiv-freq__bar {

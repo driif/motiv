@@ -35,6 +35,8 @@ noise, and they cost your counterpart a revision round to disprove.
 
 Return **only** a JSON object in a fenced ```json block:
 
+Inside a JSON string value, write no double quote: use backticks or single quotes.
+
 - `verdict` — `accept` if nothing is blocking, `revise` if something is.
 - `findings` — array of `{severity, file, line, what, why, fix}`. Empty array is a valid and good
   answer; do not manufacture one to look thorough.

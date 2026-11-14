@@ -2,6 +2,7 @@
   .motiv-matrix-segmented {
     --_accent: var(--motiv-segmented-control-accent, var(--motiv-color-primary));
 
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 2);
@@ -12,7 +13,7 @@
     position: relative;
     display: grid;
     grid-template-columns: repeat(var(--_count), minmax(0, 1fr));
-    padding: 4px;
+    padding: var(--motiv-space);
     background: var(--motiv-segmented-control-bg, var(--motiv-color-surface));
     border: 1px solid
       var(
@@ -25,10 +26,10 @@
   /* Lock-on box: tinted cell with two corner brackets, stepping to the checked option. */
   .motiv-matrix-segmented__marker {
     position: absolute;
-    top: 4px;
-    bottom: 4px;
-    left: 4px;
-    width: calc((100% - 8px) / var(--_count));
+    top: var(--motiv-space);
+    bottom: var(--motiv-space);
+    left: var(--motiv-space);
+    width: calc((100% - var(--motiv-space) * 2) / var(--_count));
     background: color-mix(in oklch, var(--_accent) 14%, transparent);
     translate: calc(var(--_index) * 100%) 0;
     transition: translate 0.18s var(--motiv-ease);
@@ -61,11 +62,11 @@
   .motiv-matrix-segmented__option {
     position: relative;
     min-width: 0;
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0 6px;
     overflow: hidden;
     font-family: var(--motiv-font-body);
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     letter-spacing: 0.12em;
     text-overflow: ellipsis;
     text-transform: uppercase;
@@ -96,7 +97,7 @@
 
   .motiv-matrix-segmented__hint {
     grid-area: 1 / 1;
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     letter-spacing: 0.08em;
     color: var(--motiv-color-text-muted);
     clip-path: inset(0 100% 0 0);

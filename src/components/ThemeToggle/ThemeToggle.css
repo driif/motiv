@@ -3,8 +3,8 @@
     position: relative;
     display: inline-grid;
     place-items: center;
-    width: 44px;
-    height: 44px;
+    width: max(24px, calc(var(--motiv-space) * 11));
+    height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0;
     color: var(--motiv-theme-toggle-color, var(--motiv-color-text));
     background: var(--motiv-theme-toggle-bg, transparent);

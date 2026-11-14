@@ -3,6 +3,7 @@
     --_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     --_mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
+    font-size: var(--motiv-font-size);
     display: grid;
     gap: calc(var(--motiv-space) * 2);
     color: var(--motiv-color-text);
@@ -22,11 +23,11 @@
     gap: calc(var(--motiv-space) * 3);
     box-sizing: border-box;
     width: 100%;
-    height: 56px;
+    height: calc(var(--motiv-control-height) * 1.75);
     padding: 0 calc(var(--motiv-space) * 4);
     color: var(--motiv-select-color, var(--motiv-color-text));
     font: inherit;
-    font-size: 1.1875rem;
+    font-size: calc(var(--motiv-font-size) * 1.1875);
     font-weight: 600;
     text-align: start;
     background: var(--motiv-select-bg, var(--motiv-color-surface));
@@ -65,12 +66,12 @@
     display: inline-grid;
     place-items: center;
     flex-shrink: 0;
-    width: 30px;
-    height: 22px;
+    width: calc(var(--motiv-font-size) * 1.875);
+    height: calc(var(--motiv-font-size) * 1.375);
     /* Pure secondary is under 4.5:1 on the light surface at this size. */
     color: color-mix(in oklch, var(--motiv-color-secondary), var(--motiv-color-text) 40%);
     font-family: var(--_mono);
-    font-size: 0.6875rem;
+    font-size: var(--motiv-font-size-xs);
     font-weight: 600;
     border: 1px solid currentColor;
     border-radius: 5px;
@@ -100,7 +101,7 @@
     gap: 6px;
     max-height: 18rem;
     margin: 0;
-    padding: 4px 8px 8px 4px;
+    padding: var(--motiv-space) 8px calc(var(--motiv-space) * 2) 4px;
     overflow-y: auto;
     overscroll-behavior: contain;
     list-style: none;
@@ -117,9 +118,9 @@
     display: flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 2.5);
-    height: 42px;
+    height: calc(var(--motiv-row-height) * 1.5);
     padding: 0 14px;
-    font-size: 1.0625rem;
+    font-size: calc(var(--motiv-font-size) * 1.0625);
     color: var(--motiv-select-color, var(--motiv-color-text));
     background: var(--motiv-select-bg, var(--motiv-color-surface));
     border: 1.5px solid var(--motiv-select-border-color, var(--motiv-color-text));
@@ -158,7 +159,7 @@
 
   .motiv-select__hint {
     margin: 0;
-    font-size: 0.9375rem;
+    font-size: var(--motiv-font-size);
     color: var(--motiv-color-text-muted);
   }
 

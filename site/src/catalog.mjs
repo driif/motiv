@@ -56,7 +56,7 @@ export const catalog = {
       symbols: ['Button', 'buttonClassName'],
       demo: 'Button',
       blurb:
-        'Pencil outlines that boil and hatch on hover. Ghost draws a line under the label; links borrow the look.',
+        'Pencil outlines that boil and hatch on hover. Ghost draws a line under the label; links borrow the look. Sizes follow --motiv-control-height.',
     },
     {
       id: 'ink-splatter-button',
@@ -388,7 +388,7 @@ export const catalog = {
       symbols: ['Button', 'buttonClassName'],
       demo: 'Button',
       blurb:
-        'Five variants, three sizes, a loading state, in fine lilac outlines. Links borrow its look.',
+        'Five variants, three sizes, a loading state, in fine lilac outlines. Sizes follow --motiv-control-height, so data-density="compact" shrinks them. Links borrow its look.',
     },
     {
       id: 'magnetic-button',
@@ -621,7 +621,7 @@ export const catalog = {
       symbols: ['FloatingField'],
       demo: 'FloatingField',
       blurb:
-        'A text field whose label lifts on focus and wraps above the value when long; a check pops in once the browser calls the value valid. Also exported as TextField, without the check.',
+        'A text field whose label lifts on focus and wraps above the value when long; a check pops in once the browser calls the value valid. It follows --motiv-control-height but stays at least 3rem high so the floated label fits. Also exported as TextField, without the check.',
     },
     {
       id: 'text-field',
@@ -906,7 +906,7 @@ export const catalog = {
       symbols: ['Button', 'buttonClassName'],
       demo: 'Button',
       blurb:
-        'Five variants, three sizes, a loading state, square and bracketed. Same props as the drawn Button; links borrow the look.',
+        'Five variants, three sizes, a loading state, square and bracketed. Same props as the drawn Button; links borrow the look. Sizes follow --motiv-control-height.',
     },
     {
       id: 'icon-button',

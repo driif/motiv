@@ -4,7 +4,7 @@
     color: var(--motiv-color-text);
     font-family: var(--motiv-font-body);
     font-size: var(--motiv-font-size);
-    line-height: 1.6;
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.6);
     overflow-wrap: anywhere;
 
     & :where(p, ul, ol, blockquote, pre, hr) {
@@ -15,17 +15,17 @@
       margin-block: calc(var(--motiv-space) * 6) calc(var(--motiv-space) * 3);
       font-family: var(--motiv-font-title);
       font-size: var(--motiv-font-size);
-      line-height: 1.3;
+      line-height: calc(var(--motiv-line-height) / 1.5 * 1.3);
     }
 
     & :where(h1) {
       font-size: calc(var(--motiv-font-size) * 2);
     }
     & :where(h2) {
-      font-size: calc(var(--motiv-font-size) * 1.5);
+      font-size: var(--motiv-font-size-xl);
     }
     & :where(h3) {
-      font-size: calc(var(--motiv-font-size) * 1.25);
+      font-size: var(--motiv-font-size-lg);
     }
 
     & > :first-child {

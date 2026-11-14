@@ -6,10 +6,10 @@
     justify-content: center;
     gap: 14px;
     min-width: 200px;
-    min-height: 56px;
+    min-height: calc(var(--motiv-control-height) * 1.75);
     padding: 0 28px;
     font-family: var(--motiv-font-body);
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;

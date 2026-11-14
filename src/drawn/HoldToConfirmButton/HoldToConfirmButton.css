@@ -12,10 +12,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 2.75rem;
+    min-height: calc(var(--motiv-control-height) * 1.375);
     padding: 0 calc(var(--motiv-space) * 6);
     font-family: var(--motiv-font-body);
-    font-size: 0.9375rem;
+    font-size: var(--motiv-font-size);
     font-weight: 600;
     line-height: 1;
     color: var(--motiv-button-color, var(--_ink));

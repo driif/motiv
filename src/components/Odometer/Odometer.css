@@ -2,7 +2,7 @@
   .motiv-odometer {
     display: inline-flex;
     font-variant-numeric: tabular-nums;
-    line-height: 1.2;
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.2);
   }
 
   .motiv-odometer__col {

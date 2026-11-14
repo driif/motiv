@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-stepper {
+    font-size: var(--motiv-font-size);
     display: inline-flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 3);
@@ -9,8 +10,8 @@
   .motiv-stepper__button {
     display: grid;
     place-items: center;
-    width: 44px;
-    height: 44px;
+    width: max(24px, calc(var(--motiv-space) * 11));
+    height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0;
     color: var(--motiv-stepper-color, var(--motiv-color-text));
     background: var(--motiv-stepper-bg, var(--motiv-color-surface));
@@ -40,8 +41,8 @@
   }
 
   .motiv-stepper__value {
-    padding: 2px calc(var(--motiv-space) * 3);
-    font-size: 2rem;
+    padding: calc(var(--motiv-space) * 0.5) calc(var(--motiv-space) * 3);
+    font-size: calc(var(--motiv-font-size) * 2);
     font-weight: 450;
     font-variant-numeric: tabular-nums;
     color: var(--motiv-stepper-color, var(--motiv-color-text));

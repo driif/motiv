@@ -8,9 +8,9 @@
     /* letter-spacing also trails the last letter; take it off the end padding to centre the text */
     padding: calc(var(--motiv-space) * 0.5) calc(var(--motiv-space) * 2);
     padding-inline-end: calc(var(--motiv-space) * 2 - 0.075em);
-    font-size: calc(var(--motiv-font-size) * 0.75);
+    font-size: var(--motiv-font-size-xs);
     font-weight: 700;
-    line-height: 1.4;
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.4);
     letter-spacing: 0.075em;
     white-space: nowrap;
     color: var(--motiv-badge-color, var(--motiv-color-text));

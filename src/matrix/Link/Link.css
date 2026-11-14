@@ -28,7 +28,7 @@
       content: "";
       position: absolute;
       inset: 50% 0 auto;
-      height: max(100%, 44px);
+      height: max(100%, calc(var(--motiv-space) * 11));
       transform: translateY(-50%);
     }
 

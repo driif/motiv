@@ -6,6 +6,7 @@
       color-mix(in oklch, var(--motiv-color-primary) 55%, transparent)
     );
 
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 2);
@@ -15,7 +16,7 @@
   }
 
   .motiv-matrix-term__label {
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -31,10 +32,10 @@
     align-items: center;
     gap: 6px;
     width: 100%;
-    min-height: 56px;
+    min-height: calc(var(--motiv-control-height) * 1.75);
     padding: 0 16px;
     font-family: var(--motiv-font-body);
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     font-weight: 600;
     letter-spacing: 0.12em;
     text-align: left;
@@ -158,7 +159,7 @@
     box-sizing: border-box;
     max-height: 320px;
     margin: 0;
-    padding: 6px 0;
+    padding: calc(var(--motiv-space) * 1.5) 0;
     overflow-y: auto;
     list-style: none;
     color: inherit;
@@ -181,9 +182,9 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    min-height: 44px;
+    min-height: calc(var(--motiv-row-height) * 11 / 7);
     padding: 0 16px;
-    font-size: 0.8125rem;
+    font-size: var(--motiv-font-size-sm);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--motiv-select-color, var(--motiv-color-text));
@@ -206,19 +207,19 @@
   }
 
   .motiv-matrix-term__index {
-    font-size: 0.6875rem;
+    font-size: var(--motiv-font-size-xs);
     color: var(--motiv-color-text-muted);
   }
 
   .motiv-matrix-term__badge {
     margin-left: auto;
-    font-size: 0.6875rem;
+    font-size: var(--motiv-font-size-xs);
     color: var(--_accent);
   }
 
   .motiv-matrix-term__hint {
     margin: 0;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-color-text-muted);
   }
 

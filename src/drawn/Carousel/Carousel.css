@@ -4,6 +4,7 @@
     --_ink: var(--motiv-carousel-border-color, var(--motiv-color-text));
     --_accent: var(--motiv-carousel-accent, var(--motiv-color-primary));
 
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 3);
@@ -52,8 +53,8 @@
   .motiv-sketch-carousel__arrow {
     display: grid;
     place-items: center;
-    width: 44px;
-    height: 44px;
+    width: max(24px, calc(var(--motiv-space) * 11));
+    height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0;
     color: inherit;
     background: transparent;
@@ -96,7 +97,7 @@
     display: grid;
     place-items: center;
     width: 28px;
-    height: 44px;
+    height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0;
     background: transparent;
     border: 0;

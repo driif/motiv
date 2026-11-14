@@ -43,26 +43,34 @@ export function GlideNav({
   // biome-ignore lint/correctness/useExhaustiveDependencies: a changed item count moves the active item.
   useLayoutEffect(() => {
     const bar = barRef.current;
-    if (!bar) return;
-    const nav = bar.parentElement;
-    const el = nav?.querySelectorAll<HTMLElement>('.motiv-glide-nav__item')[activeIndex];
-    if (!el) {
-      bar.style.opacity = '0';
-      return;
-    }
-    bar.style.transform = `translateY(${el.offsetTop + (el.offsetHeight - bar.offsetHeight) / 2}px)`;
-    if (!placed.current) {
-      // The first placement jumps there instead of sliding in from the top.
-      // Shown before the reflow, so the handoff from the CSS bar does not fade.
-      bar.style.transition = 'none';
+    const nav = bar?.parentElement;
+    if (!bar || !nav) return;
+    const place = () => {
+      const el = nav.querySelectorAll<HTMLElement>('.motiv-glide-nav__item')[activeIndex];
+      if (!el) {
+        bar.style.opacity = '0';
+        return;
+      }
+      bar.style.transform = `translateY(${el.offsetTop + (el.offsetHeight - bar.offsetHeight) / 2}px)`;
+      if (!placed.current) {
+        // The first placement jumps there instead of sliding in from the top.
+        // Shown before the reflow, so the handoff from the CSS bar does not fade.
+        bar.style.transition = 'none';
+        bar.style.opacity = '1';
+        void bar.offsetWidth;
+        bar.style.transition = '';
+        placed.current = true;
+        // Retires the CSS bar drawn before hydration; React never writes this attribute.
+        nav.setAttribute('data-placed', '');
+      }
       bar.style.opacity = '1';
-      void bar.offsetWidth;
-      bar.style.transition = '';
-      placed.current = true;
-      // Retires the CSS bar drawn before hydration; React never writes this attribute.
-      nav?.setAttribute('data-placed', '');
-    }
-    bar.style.opacity = '1';
+    };
+    place();
+    if (typeof ResizeObserver === 'undefined') return;
+    // Rows resize with density and font tokens, which moves the active row.
+    const observer = new ResizeObserver(place);
+    observer.observe(nav);
+    return () => observer.disconnect();
   }, [activeIndex, items.length]);
 
   function showHover(event: SyntheticEvent<HTMLElement>) {

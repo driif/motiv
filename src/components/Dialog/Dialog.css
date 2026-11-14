@@ -17,7 +17,7 @@
     box-shadow: var(--motiv-shadow-lg);
     font-family: var(--motiv-font-body);
     font-size: var(--motiv-font-size);
-    line-height: 1.5;
+    line-height: var(--motiv-line-height);
 
     &[open] {
       display: flex;
@@ -57,9 +57,9 @@
     min-width: 0;
     margin: 0;
     font-family: var(--motiv-font-title);
-    font-size: calc(var(--motiv-font-size) * 1.25);
+    font-size: var(--motiv-font-size-lg);
     font-weight: 600;
-    line-height: 1.3;
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.3);
   }
 
   .motiv-dialog__body {

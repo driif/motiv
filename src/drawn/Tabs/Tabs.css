@@ -16,10 +16,11 @@
   }
 
   .motiv-tabs__tab {
-    height: 48px;
+    height: calc(var(--motiv-space) * 12);
     padding: 0 calc(var(--motiv-space) * 3);
     color: var(--motiv-tabs-color, var(--motiv-color-text-muted));
     font: inherit;
+    font-size: var(--motiv-font-size);
     font-weight: 600;
     white-space: nowrap;
     background: transparent;

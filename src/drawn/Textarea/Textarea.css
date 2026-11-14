@@ -4,6 +4,7 @@
     --_hand-font: "Caveat", "Segoe Print", cursive;
     --_accent: var(--motiv-textarea-accent, var(--motiv-color-primary));
 
+    font-size: var(--motiv-font-size);
     display: grid;
     gap: calc(var(--motiv-space) * 1.5);
     width: 100%;
@@ -15,8 +16,8 @@
 
   .motiv-textarea__label {
     font-family: var(--_hand-font);
-    font-size: 1.5em;
-    line-height: 1.2;
+    font-size: var(--motiv-font-size-xl);
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.2);
     color: var(--motiv-color-text-muted);
     transition: color var(--motiv-duration) var(--motiv-ease);
 
@@ -37,7 +38,7 @@
     padding: calc(var(--motiv-space) * 2) 0;
     overflow-y: auto;
     font: inherit;
-    line-height: 1.5;
+    line-height: var(--motiv-line-height);
     color: var(--motiv-textarea-color, var(--motiv-color-text));
     background: var(--motiv-textarea-bg, transparent);
     border: 0;
@@ -86,7 +87,7 @@
 
   .motiv-textarea__hint {
     margin: 0;
-    font-size: 0.875em;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-color-text-muted);
   }
 

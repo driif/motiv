@@ -9,7 +9,7 @@
     color: var(--motiv-toast-color, var(--motiv-color-text));
     font-family: var(--motiv-font-body);
     font-size: var(--motiv-font-size);
-    line-height: 1.5;
+    line-height: var(--motiv-line-height);
   }
 
   /* The padding leaves room for the ink shadows and the tilt inside the scroll box. */
@@ -103,14 +103,14 @@
 
   .motiv-sketch-toast__title {
     font-family: "Caveat", "Segoe Print", cursive;
-    font-size: 1.375rem;
+    font-size: calc(var(--motiv-font-size) * 1.375);
     line-height: 1.15;
   }
 
   .motiv-sketch-toast__description {
     margin-top: var(--motiv-space);
     color: var(--motiv-color-text-muted);
-    font-size: calc(var(--motiv-font-size) * 0.875);
+    font-size: var(--motiv-font-size-sm);
   }
 
   .motiv-sketch-toast__dismiss {

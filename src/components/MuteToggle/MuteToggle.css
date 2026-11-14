@@ -3,9 +3,10 @@
     display: inline-flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 3);
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0 18px 0 14px;
     font: inherit;
+    font-size: var(--motiv-font-size);
     color: var(--motiv-icon-button-color, var(--motiv-color-text));
     background: var(--motiv-icon-button-bg, var(--motiv-color-surface));
     border: 1px solid var(--motiv-icon-button-border-color, var(--motiv-color-border));
@@ -69,7 +70,9 @@
 
   .motiv-mute__roll {
     display: block;
-    height: 20px;
+    --_line: calc(var(--motiv-font-size) * 1.25);
+
+    height: var(--_line);
     overflow: hidden;
   }
 
@@ -79,13 +82,13 @@
     transition: translate 0.5s var(--motiv-ease-spring);
 
     [aria-pressed="true"] & {
-      translate: 0 -20px;
+      translate: 0 calc(var(--_line) * -1);
     }
 
     & > span {
       display: flex;
       align-items: center;
-      height: 20px;
+      height: var(--_line);
       white-space: nowrap;
     }
   }

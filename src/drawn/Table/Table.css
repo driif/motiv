@@ -12,7 +12,7 @@
     overflow: auto;
     color: var(--motiv-table-color, var(--motiv-color-text));
     font-family: var(--motiv-font-body);
-    font-size: calc(var(--motiv-font-size) * 0.875);
+    font-size: var(--motiv-font-size-sm);
     background: var(--motiv-table-bg, var(--motiv-color-surface));
     border: 2px solid var(--motiv-table-border-color, var(--motiv-color-text));
     border-radius: var(--motiv-table-radius, 6px 16px 8px 20px / 18px 6px 14px 8px);
@@ -44,9 +44,9 @@
   .motiv-sketch-table__header {
     position: relative;
     font-family: "Caveat", "Segoe Print", cursive;
-    font-size: 1.25rem;
+    font-size: var(--motiv-font-size-lg);
     font-weight: 400;
-    line-height: 1.2;
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.2);
     background: var(--motiv-table-bg, var(--motiv-color-surface));
     border-bottom: 2px solid var(--motiv-table-border-color, var(--motiv-color-text));
   }
@@ -119,6 +119,7 @@
   }
 
   .motiv-sketch-table-menu {
+    font-size: var(--motiv-font-size);
     display: inline-flex;
   }
 

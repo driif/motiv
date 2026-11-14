@@ -1,5 +1,6 @@
 @layer motiv.components {
   .motiv-segmented {
+    font-size: var(--motiv-font-size);
     display: flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 3);
@@ -10,7 +11,7 @@
     position: relative;
     display: grid;
     grid-template-columns: repeat(var(--_count), minmax(0, 1fr));
-    padding: 4px;
+    padding: var(--motiv-space);
     background: var(--motiv-segmented-control-bg, var(--motiv-color-surface-hover));
     border: 1px solid var(--motiv-segmented-control-border-color, var(--motiv-color-border));
     border-radius: var(--motiv-segmented-control-radius, var(--motiv-radius-sm));
@@ -19,11 +20,11 @@
 
   .motiv-segmented__traveler {
     position: absolute;
-    top: 4px;
-    bottom: 4px;
-    left: 4px;
+    top: var(--motiv-space);
+    bottom: var(--motiv-space);
+    left: var(--motiv-space);
     z-index: -1;
-    width: calc((100% - 8px) / var(--_count));
+    width: calc((100% - var(--motiv-space) * 2) / var(--_count));
     translate: calc(var(--_index) * 100%) 0;
     transition: translate 0.55s var(--motiv-ease-spring);
   }
@@ -46,10 +47,10 @@
 
   .motiv-segmented__option {
     min-width: 0;
-    min-height: 44px;
+    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0 calc(var(--motiv-space) * 2);
     font: inherit;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-segmented-control-color, var(--motiv-color-text-muted));
     background: transparent;
     border: 0;
@@ -74,7 +75,7 @@
 
   .motiv-segmented__hint {
     grid-area: 1 / 1;
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     color: var(--motiv-color-text-muted);
     opacity: 0;
     translate: 0 6px;

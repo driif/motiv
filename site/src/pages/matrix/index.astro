@@ -17,6 +17,12 @@ export function Unseal() {
     </form>
   );
 }`;
+
+const scale = `.app-sidebar {
+  --motiv-font-size: 0.875rem;
+}`;
+
+const density = `<aside class="app-sidebar" data-density="compact">…</aside>`;
 ---
 
 <Shell
@@ -71,6 +77,12 @@ export function Unseal() {
         <h3 class="site-steps__title">Theme</h3>
         <p class="site-steps__text">Your app sets <code class="site-inline">data-theme</code> on <code class="site-inline">&lt;html&gt;</code>.</p>
         <Code class="site-code" code={themeSource} lang="ts" theme="github-dark-default" />
+      </li>
+      <li class="site-steps__item">
+        <h3 class="site-steps__title">Text scale and density</h3>
+        <p class="site-steps__text">Text steps and control and row heights follow <code class="site-inline">--motiv-font-size</code> and <code class="site-inline">--motiv-space</code>, also in a scoped element. <code class="site-inline">data-density="compact"</code> makes controls and rows denser. Each component sets its own text size, so labels follow the scope instead of the page font; hit areas stay at least 24px.</p>
+        <Code class="site-code" code={scale} lang="css" theme="github-dark-default" />
+        <Code class="site-code" code={density} lang="html" theme="github-dark-default" />
       </li>
     </ol>
   </section>

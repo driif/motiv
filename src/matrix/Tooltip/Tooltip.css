@@ -3,6 +3,7 @@
     --_accent: var(--motiv-color-primary);
     --_gap: 12px;
 
+    font-size: var(--motiv-font-size);
     position: relative;
     display: inline-flex;
     vertical-align: middle;
@@ -11,12 +12,12 @@
   .motiv-matrix-tip__trigger {
     display: inline-grid;
     place-items: center;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: calc(var(--motiv-space) * 6);
+    height: calc(var(--motiv-space) * 6);
     padding: 0;
     color: var(--_accent);
     font-family: var(--motiv-font-body);
-    font-size: 0.75rem;
+    font-size: var(--motiv-font-size-xs);
     font-weight: 700;
     line-height: 1;
     background: transparent;
@@ -41,11 +42,11 @@
     z-index: 5;
     width: max-content;
     max-width: 18rem;
-    padding: 8px 14px;
+    padding: calc(var(--motiv-space) * 2) 14px;
     color: var(--motiv-tooltip-color, var(--motiv-color-text));
     font-family: var(--motiv-font-body);
-    font-size: 0.75rem;
-    line-height: 1.5;
+    font-size: var(--motiv-font-size-xs);
+    line-height: var(--motiv-line-height);
     letter-spacing: 0.04em;
     /* Bracket corners top-left and bottom-right over the panel fill. */
     background:

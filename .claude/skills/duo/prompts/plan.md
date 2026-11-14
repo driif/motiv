@@ -26,6 +26,8 @@ without opening the repository is worthless to the exchange that follows.
 
 Return **only** a JSON object in a fenced ```json block:
 
+Inside a JSON string value, write no double quote: use backticks or single quotes.
+
 - `plan` — how you would do it, 4-8 sentences, naming the files you would change.
 - `touches` — array of what the change touches: component names, `tokens`, `exports`, `build`,
   `docs`.

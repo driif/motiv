@@ -26,9 +26,9 @@
   .motiv-action-menu__item {
     display: flex;
     align-items: center;
-    min-height: 2.5rem;
+    min-height: calc(var(--motiv-row-height) * 10 / 7);
     padding: 0 calc(var(--motiv-space) * 2.5);
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     overflow-wrap: anywhere;
     border-radius: var(--motiv-radius-sm);
     cursor: pointer;

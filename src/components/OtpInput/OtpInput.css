@@ -2,6 +2,7 @@
   .motiv-otp {
     --_accent: var(--motiv-text-field-accent, var(--motiv-color-primary));
 
+    font-size: var(--motiv-font-size);
     display: inline-flex;
     flex-direction: column;
     gap: calc(var(--motiv-space) * 2.5);
@@ -15,7 +16,7 @@
   .motiv-otp__label {
     padding: 0;
     color: var(--motiv-color-text-muted);
-    font-size: 0.875rem;
+    font-size: var(--motiv-font-size-sm);
     font-weight: 600;
   }
 
@@ -25,12 +26,12 @@
   }
 
   .motiv-otp__box {
-    width: 44px;
-    height: 56px;
+    width: max(24px, calc(var(--motiv-space) * 11));
+    height: max(24px, calc(var(--motiv-space) * 14));
     padding: 0;
     color: var(--motiv-text-field-color, var(--motiv-color-text));
     font: inherit;
-    font-size: 1.375rem;
+    font-size: calc(var(--motiv-font-size) * 1.375);
     font-weight: 600;
     font-variant-numeric: tabular-nums;
     text-align: center;

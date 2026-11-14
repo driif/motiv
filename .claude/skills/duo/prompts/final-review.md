@@ -37,6 +37,8 @@ Do not re-report findings already fixed in `{{HISTORY}}`. Do not raise style pre
 
 Return **only** a JSON object in a fenced ```json block:
 
+Inside a JSON string value, write no double quote: use backticks or single quotes.
+
 - `ship` — `true` if you would hand this to the user as done.
 - `blocking` — array of `{what, why, where}`. Anything here means `ship` is `false`.
 - `residual` — array of real but non-blocking things the user should know about.

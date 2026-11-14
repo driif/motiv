@@ -28,6 +28,8 @@ claims about the code are true is not what you are deciding; which of the two sh
 
 Return **only** a JSON object in a fenced ```json block:
 
+Inside a JSON string value, write no double quote: use backticks or single quotes.
+
 - `implementer` — `opus` or `sol`.
 - `why` — two or three sentences naming the deciding difference. "Argued better" is not a reason.
 - `plan` — the plan to build, written by you from the transcript. Take the stronger plan as the base

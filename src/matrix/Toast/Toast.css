@@ -8,8 +8,8 @@
     pointer-events: none;
     color: var(--motiv-toast-color, var(--motiv-color-text));
     font-family: var(--motiv-font-body);
-    font-size: 0.875rem;
-    line-height: 1.5;
+    font-size: var(--motiv-font-size-sm);
+    line-height: var(--motiv-line-height);
   }
 
   .motiv-matrix-toast-stack__list {
@@ -108,7 +108,7 @@
   .motiv-matrix-toast__description {
     margin-top: var(--motiv-space);
     color: var(--motiv-color-text-muted);
-    font-size: 0.8125rem;
+    font-size: var(--motiv-font-size-sm);
   }
 
   .motiv-matrix-toast__dismiss {
