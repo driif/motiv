@@ -7,7 +7,8 @@ export default defineConfig({
     exclude: [...configDefaults.exclude, '.claude/worktrees/**'],
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],
-    css: { include: [/tokens\.css/, /Button\/Button\.css/, /Badge\/Badge\.css/] },
+    // Raw CSS is read by the token, contrast and scale guards; vitest blanks excluded CSS.
+    css: { include: [/\.css/] },
     benchmark: { include: ['test/benchmarks/**/*.bench.tsx'] },
   },
 });
