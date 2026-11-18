@@ -38,6 +38,7 @@ export * from './components/Radio';
 export * from './components/SegmentedControl';
 export * from './components/Select';
 export * from './components/SlipCard';
+export * from './components/Splitter';
 export * from './components/SpringCheckbox';
 export * from './components/StepProgress';
 export * from './components/Stepper';

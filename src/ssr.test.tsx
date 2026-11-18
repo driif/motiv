@@ -617,6 +617,20 @@ it('renders Confirm, Toaster, Table and TableColumnsMenu in drawn and matrix wit
   expect(M.dismissToast).toBe(K.dismissToast);
 });
 
+it('renders Splitter without a DOM', () => {
+  const html = renderToStaticMarkup(
+    <K.Splitter label="Sidebar width" value={256} min={200} max={480} onChange={() => {}} />,
+  );
+  expect(html).toContain('role="separator"');
+  expect(html).toContain('tabindex="0"');
+  expect(html).toContain('aria-label="Sidebar width"');
+  expect(html).toContain('aria-orientation="vertical"');
+  expect(html).toContain('aria-valuenow="256"');
+  expect(html).toContain('aria-valuemin="200"');
+  expect(html).toContain('aria-valuemax="480"');
+  expect(html).not.toContain('data-dragging');
+});
+
 it('renders ActionMenu as a closed trigger without a DOM', () => {
   const html = renderToStaticMarkup(
     <ActionMenu label="Export" items={[{ label: 'CSV', onSelect: () => {} }]} />,

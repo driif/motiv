@@ -350,6 +350,16 @@ export const catalog = {
   ],
   kinetic: [
     {
+      id: 'splitter',
+      category: null,
+      group: 'Data & layout',
+      title: 'Splitter',
+      symbols: ['Splitter'],
+      demo: 'Splitter',
+      blurb:
+        'Resize panes with pointer and keyboard, preview continuously and commit on release; Escape cancels a drag. The demo pairs a pixel sidebar that resets on double-click with a nested percentage row split.',
+    },
+    {
       id: 'data-table',
       category: 'Table',
       title: 'DataTable',
