@@ -1,0 +1,63 @@
+@layer motiv.components {
+  .motiv-splitter {
+    --_line: calc(var(--motiv-space) / 4);
+    --_hit: max(calc(var(--motiv-font-size) * 1.5), calc(var(--motiv-space) * 6));
+    --_gutter: calc((var(--_hit) - var(--_line)) / 2);
+    position: relative;
+    flex: 0 0 var(--_line);
+    align-self: stretch;
+    background: var(--motiv-color-border);
+    touch-action: none;
+    user-select: none;
+    transition: background-color var(--motiv-duration) var(--motiv-ease);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
+
+    &[data-dragging] {
+      background: var(--motiv-color-primary);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+  }
+
+  .motiv-splitter--vertical {
+    width: var(--_line);
+    min-height: var(--_hit);
+    margin-inline: var(--_gutter);
+    cursor: col-resize;
+
+    &::before {
+      inset-inline: calc(-1 * var(--_gutter));
+    }
+  }
+
+  .motiv-splitter--horizontal {
+    height: var(--_line);
+    min-width: var(--_hit);
+    margin-block: var(--_gutter);
+    cursor: row-resize;
+
+    &::before {
+      inset-block: calc(-1 * var(--_gutter));
+    }
+  }
+
+  @media (hover: hover) {
+    .motiv-splitter:hover {
+      background: var(--motiv-color-primary);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-splitter {
+      transition: none;
+    }
+  }
+}
