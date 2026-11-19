@@ -17,8 +17,8 @@
 
   .motiv-check__tick {
     position: relative;
-    width: 16px;
-    height: 16px;
+    width: calc(var(--motiv-icon-size) * 2 / 3);
+    height: calc(var(--motiv-icon-size) * 2 / 3);
     color: var(--motiv-color-on-primary);
     stroke-width: 2.6;
     opacity: 0;
@@ -46,8 +46,8 @@
     display: grid;
     flex-shrink: 0;
     place-items: center;
-    width: 24px;
-    height: 24px;
+    width: var(--motiv-icon-size);
+    height: var(--motiv-icon-size);
     border: 1px solid var(--motiv-checkbox-border-color, var(--motiv-color-border));
     border-radius: var(--motiv-checkbox-radius, 7px);
     transition: scale 0.35s var(--motiv-ease-spring);
@@ -65,7 +65,7 @@
     &::after {
       content: "";
       position: absolute;
-      width: 12px;
+      width: calc(var(--motiv-icon-size) / 2);
       height: 2.6px;
       background: var(--motiv-color-on-primary);
       border-radius: 2px;

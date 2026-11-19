@@ -21,8 +21,8 @@
   .motiv-checkbox__box {
     position: relative;
     flex-shrink: 0;
-    width: 26px;
-    height: 26px;
+    width: calc(var(--motiv-icon-size) * 1.3);
+    height: calc(var(--motiv-icon-size) * 1.3);
     border: 2px solid var(--motiv-checkbox-border-color, var(--motiv-color-text));
     border-radius: var(--motiv-checkbox-radius, 6px 3px 7px 4px / 4px 7px 3px 6px);
     transition: transform 0.3s var(--_spring);
@@ -50,10 +50,10 @@
     /* The tick deliberately overshoots the box. */
     & svg {
       position: absolute;
-      top: -12px;
-      left: -2px;
-      width: 36px;
-      height: 36px;
+      top: calc(var(--motiv-icon-size) * -0.6);
+      left: calc(var(--motiv-icon-size) * -0.1);
+      width: calc(var(--motiv-icon-size) * 1.8);
+      height: calc(var(--motiv-icon-size) * 1.8);
       overflow: visible;
     }
 
