@@ -9,6 +9,11 @@
     color: var(--motiv-checkbox-color, var(--motiv-color-text));
     cursor: pointer;
 
+    /* A label for screen readers only takes no room next to the box. */
+    &:has(> .motiv-check__label > .motiv-visually-hidden:only-child) {
+      gap: 0;
+    }
+
     &:has(:disabled) {
       opacity: 0.5;
       cursor: not-allowed;
