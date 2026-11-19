@@ -398,7 +398,7 @@ export const catalog = {
       symbols: ['Button', 'buttonClassName'],
       demo: 'Button',
       blurb:
-        'Five variants, three sizes, a loading state, in fine lilac outlines. Sizes follow --motiv-control-height, so data-density="compact" shrinks them. Links borrow its look.',
+        'Five variants, three sizes, a loading state, in fine lilac outlines. Medium is --motiv-field-height, the height of Select and TextField, and small is --motiv-control-height, so data-density="compact" shrinks them. Links borrow its look.',
     },
     {
       id: 'magnetic-button',
@@ -640,7 +640,7 @@ export const catalog = {
       symbols: ['TextField'],
       demo: 'TextField',
       blurb:
-        'The FloatingField look under the generic name, without the check; a long label wraps above the value. Same props as the drawn and matrix TextField.',
+        'The FloatingField look under the generic name, without the check; a long label wraps above the value. Same props as the drawn and matrix TextField, plus labelPosition="above", which puts the label over a box as high as Select, MultiSelect and a medium Button.',
     },
     {
       id: 'date-picker',

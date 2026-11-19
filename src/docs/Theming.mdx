@@ -76,11 +76,13 @@ Components read their text sizes and heights from tokens derived from `--motiv-f
 | `--motiv-font-size-lg` | `calc(var(--motiv-font-size) * 1.25)` |
 | `--motiv-font-size-xl` | `calc(var(--motiv-font-size) * 1.5)` |
 | `--motiv-control-height` | `calc(var(--motiv-space) * 8)` |
+| `--motiv-field-height` | `calc(var(--motiv-control-height) * 1.25)` |
 | `--motiv-row-height` | `calc(var(--motiv-space) * 7)` |
 
-`--motiv-control-height` is the unit, not every control's height: a component keeps its own
-multiple of it (a medium `Button` is `1.25` of it), so the defaults look as before. Menu and option
-rows use multiples of `--motiv-row-height`.
+`--motiv-control-height` is the unit and the height of small controls. `--motiv-field-height` (40px
+by default) is the one height of a medium `Button`, the `Select` and `MultiSelect` triggers, the
+`SegmentedControl` track and a `TextField` with `labelPosition="above"`, so a row of them lines up.
+Menu and option rows use multiples of `--motiv-row-height`.
 
 `data-density="compact"` on any element sets `--motiv-space: 0.1875rem` there, so its controls,
 rows and spacing shrink by a quarter:

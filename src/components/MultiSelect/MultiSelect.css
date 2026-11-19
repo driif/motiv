@@ -52,9 +52,11 @@
   }
 
   .motiv-multi-select__trigger {
+    box-sizing: border-box;
     width: 100%;
-    min-height: calc(var(--motiv-control-height) * 1.5);
-    padding: calc(var(--motiv-space) * 2) calc(var(--motiv-space) * 4);
+    min-height: var(--motiv-field-height);
+    padding: 0 calc(var(--motiv-space) * 4);
+    font-size: var(--motiv-font-size);
 
     &[aria-expanded="true"] {
       border-color: var(--_accent);

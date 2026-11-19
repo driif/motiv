@@ -22,6 +22,10 @@ export const Filled: Story = { args: { defaultValue: 'Ada Lovelace' } };
 
 export const Disabled: Story = { args: { disabled: true, defaultValue: 'Read only' } };
 
+export const LabelAbove: Story = {
+  args: { labelPosition: 'above', hint: 'We only use it to reply.' },
+};
+
 export const LongLabel: Story = {
   args: { label: longLabel },
   play: ({ canvasElement }) => assertFieldLayout(canvasElement, longValue),

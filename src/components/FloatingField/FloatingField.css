@@ -137,6 +137,22 @@
     }
   }
 
+  .motiv-float__title {
+    font-size: var(--motiv-font-size-sm);
+    font-weight: 500;
+  }
+
+  .motiv-float--above .motiv-float__control {
+    box-sizing: border-box;
+    grid-template-rows: 1fr;
+    min-height: var(--motiv-field-height);
+  }
+
+  .motiv-float--above .motiv-float__input {
+    grid-row: 1;
+    padding: 0 calc(var(--motiv-space) * 3.5);
+  }
+
   .motiv-float__hint {
     margin: 0;
     color: var(--motiv-color-text-muted);

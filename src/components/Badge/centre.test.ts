@@ -2,6 +2,10 @@
 import { expect, it } from 'vitest';
 import css from './Badge.css?raw';
 
+it('centres its text when stretched', () => {
+  expect(css).toMatch(/\.motiv-status-badge \{[^}]*justify-content: center;/);
+});
+
 it('takes the trailing letter-spacing off the end padding in every size', () => {
   const spacing = css.match(/letter-spacing:\s*([^;]+);/)?.[1];
   const rules = [

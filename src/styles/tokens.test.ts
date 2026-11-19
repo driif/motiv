@@ -18,6 +18,7 @@ describe('text scale and density tokens', () => {
       '--motiv-font-size-lg',
       '--motiv-font-size-xl',
       '--motiv-control-height',
+      '--motiv-field-height',
       '--motiv-row-height',
     ]) {
       expect(block, token).toContain(`${token}:`);
