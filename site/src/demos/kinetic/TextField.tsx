@@ -9,6 +9,7 @@ export function TextFieldDemo() {
         type="email"
         hint="We only use it to reply."
       />
+      <TextField label="City" labelPosition="above" />
     </>
   );
 }

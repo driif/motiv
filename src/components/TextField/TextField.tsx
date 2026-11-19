@@ -1,10 +1,16 @@
 import { useId } from 'react';
-import type { TextFieldProps } from '../../drawn/TextField';
+import type { TextFieldProps as BaseTextFieldProps } from '../../drawn/TextField';
 import { cx } from '../../utils/cx';
+
+export interface TextFieldProps extends BaseTextFieldProps {
+  /** `above` puts the label over a field-height box, like Select's label */
+  labelPosition?: 'float' | 'above';
+}
 
 export function TextField({
   label,
   hint,
+  labelPosition = 'float',
   id,
   type = 'text',
   className,
@@ -14,9 +20,16 @@ export function TextField({
   const autoId = useId();
   const inputId = id ?? autoId;
   const hintId = `${inputId}-hint`;
+  const above = labelPosition === 'above';
+  const labelElement = (
+    <label htmlFor={inputId} className={above ? 'motiv-float__title' : 'motiv-float__label'}>
+      {label}
+    </label>
+  );
 
   return (
-    <div className={cx('motiv-float', className)}>
+    <div className={cx('motiv-float', above && 'motiv-float--above', className)}>
+      {above && labelElement}
       <div className="motiv-float__control">
         <input
           {...props}
@@ -26,9 +39,7 @@ export function TextField({
           className="motiv-float__input"
           aria-describedby={cx(describedBy, hint ? hintId : undefined) || undefined}
         />
-        <label htmlFor={inputId} className="motiv-float__label">
-          {label}
-        </label>
+        {!above && labelElement}
       </div>
       {hint && (
         <p id={hintId} className="motiv-float__hint">

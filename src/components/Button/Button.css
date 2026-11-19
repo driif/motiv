@@ -22,7 +22,7 @@
     color: var(--_color);
     background: var(--_bg);
     border: var(--motiv-button-border-width, 1px) solid var(--_border);
-    border-radius: var(--motiv-button-radius, var(--motiv-radius-full));
+    border-radius: var(--motiv-button-radius, var(--motiv-radius));
     cursor: pointer;
     text-decoration: none;
     white-space: nowrap;
@@ -60,7 +60,7 @@
     --_font-size: var(--motiv-font-size-sm);
   }
   .motiv-btn--md {
-    --_height: calc(var(--motiv-control-height) * 1.25);
+    --_height: var(--motiv-field-height);
     --_px: calc(var(--motiv-space) * 5);
     --_font-size: var(--motiv-font-size);
   }

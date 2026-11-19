@@ -1,2 +1,2 @@
-export type { TextFieldProps } from '../../drawn/TextField';
+export type { TextFieldProps } from './TextField';
 export { TextField } from './TextField';

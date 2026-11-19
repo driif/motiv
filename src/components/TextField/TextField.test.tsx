@@ -13,6 +13,17 @@ describe('TextField', () => {
     expect(container.querySelector('.motiv-float__ok')).toBeNull();
   });
 
+  it('puts the label above the box with labelPosition="above"', () => {
+    const { container } = render(<TextField label="Email" labelPosition="above" hint="Hint" />);
+    const input = screen.getByRole('textbox', { name: 'Email' });
+    expect(input).toHaveAccessibleDescription('Hint');
+    expect(container.firstChild).toHaveClass('motiv-float', 'motiv-float--above');
+    expect(container.querySelector('.motiv-float__title')?.nextElementSibling).toHaveClass(
+      'motiv-float__control',
+    );
+    expect(container.querySelector('.motiv-float__label')).toBeNull();
+  });
+
   it('merges a caller aria-describedby with the hint', () => {
     render(<TextField id="mail" label="Email" hint="Hint" aria-describedby="err" />);
     expect(screen.getByRole('textbox')).toHaveAttribute('aria-describedby', 'err mail-hint');

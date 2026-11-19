@@ -5,6 +5,7 @@
 
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     /* letter-spacing also trails the last letter; take it off the end padding to centre the text */
     padding: calc(var(--motiv-space) * 0.5) calc(var(--motiv-space) * 2);
     padding-inline-end: calc(var(--motiv-space) * 2 - 0.075em);

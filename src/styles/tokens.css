@@ -104,6 +104,7 @@
     --motiv-font-size-lg: calc(var(--motiv-font-size) * 1.25);
     --motiv-font-size-xl: calc(var(--motiv-font-size) * 1.5);
     --motiv-control-height: calc(var(--motiv-space) * 8);
+    --motiv-field-height: calc(var(--motiv-control-height) * 1.25);
     --motiv-row-height: calc(var(--motiv-space) * 7);
   }
 }
