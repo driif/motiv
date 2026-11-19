@@ -112,7 +112,7 @@ function renderRow(density?: 'compact') {
   return [
     { box: find('.motiv-float__control'), text: find('.motiv-float__input') },
     { box: find('.motiv-picker__trigger'), text: find('.motiv-picker__trigger') },
-    { box: find('.motiv-multi-select__trigger'), text: find('.motiv-multi-select__trigger') },
+    { box: find('.motiv-multi-select__field'), text: find('.motiv-multi-select') },
     { box: find('.motiv-btn'), text: find('.motiv-btn') },
     { box: find('.motiv-segmented__track'), text: find('.motiv-segmented__option') },
   ];

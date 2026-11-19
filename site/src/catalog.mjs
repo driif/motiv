@@ -300,7 +300,7 @@ export const catalog = {
       symbols: ['MultiSelect'],
       demo: 'MultiSelect',
       blurb:
-        'Search and tick several options on a paper sheet; picks are inked in as chips you can strike out. Same props as the kinetic MultiSelect.',
+        'Search and tick several options on a paper sheet; picks are inked in as chips inside the field, each struck out with its own cross. Same props as the kinetic MultiSelect.',
     },
     {
       id: 'date-picker',
@@ -886,7 +886,7 @@ export const catalog = {
       symbols: ['MultiSelect'],
       demo: 'MultiSelect',
       blurb:
-        'Search labels and hints, select several options, and remove them as chips. The popover escapes clipped containers, stays open while selecting, and closes when focus leaves.',
+        'Search labels and hints, select several options, and remove them from the chips inside the field. The popover escapes clipped containers, stays open while selecting, and closes when focus leaves.',
     },
     {
       id: 'table',
@@ -1178,7 +1178,7 @@ export const catalog = {
       symbols: ['MultiSelect'],
       demo: 'MultiSelect',
       blurb:
-        'A > prompt that opens a search over [ ] and [x] rows; picks show as bracketed chips. Same props as the kinetic MultiSelect.',
+        'A > prompt that opens a search over [ ] and [x] rows; picks show as bracketed chips inside the field. Same props as the kinetic MultiSelect.',
     },
     {
       id: 'date-picker',

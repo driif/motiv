@@ -21,55 +21,74 @@ export function MultiSelect({
   ...props
 }: MultiSelectProps) {
   const id = useId();
-  const { listRef, isOpen, filtered, current, chips, select, remove, trigger, panel, search } =
-    useMultiSelect({ options, value, onChange, disabled });
+  const {
+    listRef,
+    isOpen,
+    filtered,
+    current,
+    chips,
+    select,
+    remove,
+    field,
+    trigger,
+    panel,
+    search,
+  } = useMultiSelect({ options, value, onChange, disabled });
 
   return (
     <div {...props} className={cx('motiv-sketch-multi-select', className)}>
       <span id={`${id}-label`} className="motiv-sketch-multi-select__label">
         {label}
       </span>
-      <button
-        {...trigger}
-        type="button"
-        aria-labelledby={`${id}-label ${id}-summary`}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-        aria-controls={`${id}-list`}
-        disabled={disabled}
-        className="motiv-sketch-multi-select__trigger"
-      >
-        <span
-          id={`${id}-summary`}
-          className={cx(
-            'motiv-sketch-multi-select__summary',
-            !value.length && 'motiv-sketch-multi-select__summary--empty',
-          )}
-        >
-          {value.length ? selectedLabel(value.length) : placeholder}
-        </span>
-        <svg className="motiv-sketch-multi-select__fan" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M5 7h14M5 12h14M5 17h14" />
-        </svg>
-      </button>
-      {chips.map((chip) => (
+      <div {...field} className="motiv-sketch-multi-select__field">
+        {chips.map((chip) => (
+          <span key={chip.value} className="motiv-sketch-multi-select__chip">
+            <span className="motiv-sketch-multi-select__summary">{chip.label}</span>
+            <button
+              type="button"
+              disabled={disabled}
+              className="motiv-sketch-multi-select__remove"
+              aria-label={removeLabel(chip.label)}
+              onClick={() => remove(chip.value)}
+            >
+              <svg
+                className="motiv-sketch-multi-select__cross"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M7 6.5c3.5 3.8 6.8 7.4 10 11M17.5 6.5c-3.8 3.6-7.2 7.2-10.5 11" />
+              </svg>
+            </button>
+          </span>
+        ))}
+        {value.length > 3 && (
+          <span className="motiv-sketch-multi-select__more">{moreLabel(value.length - 3)}</span>
+        )}
         <button
-          key={chip.value}
+          {...trigger}
           type="button"
+          aria-labelledby={`${id}-label ${id}-summary`}
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
+          aria-controls={`${id}-list`}
           disabled={disabled}
-          className="motiv-sketch-multi-select__chip"
-          aria-label={removeLabel(chip.label)}
-          onClick={() => remove(chip.value)}
+          className="motiv-sketch-multi-select__trigger"
         >
-          <span className="motiv-sketch-multi-select__summary">{chip.label}</span>
-          <svg className="motiv-sketch-multi-select__cross" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 6.5c3.5 3.8 6.8 7.4 10 11M17.5 6.5c-3.8 3.6-7.2 7.2-10.5 11" />
+          <span
+            id={`${id}-summary`}
+            className={
+              value.length
+                ? 'motiv-visually-hidden'
+                : 'motiv-sketch-multi-select__summary motiv-sketch-multi-select__summary--empty'
+            }
+          >
+            {value.length ? selectedLabel(value.length) : placeholder}
+          </span>
+          <svg className="motiv-sketch-multi-select__fan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 7h14M5 12h14M5 17h14" />
           </svg>
         </button>
-      ))}
-      {value.length > 3 && (
-        <span className="motiv-sketch-multi-select__more">{moreLabel(value.length - 3)}</span>
-      )}
+      </div>
       <div
         {...panel}
         popover="manual"
