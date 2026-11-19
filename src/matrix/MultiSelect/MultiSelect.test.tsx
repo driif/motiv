@@ -129,14 +129,33 @@ describe('MultiSelect', () => {
     expect(trigger()).toHaveAttribute('aria-expanded', 'true');
   });
 
-  it('renders three sibling remove buttons and the remaining count', () => {
+  it('renders three chips with remove buttons and the remaining count inside the field', () => {
     render(<Controlled value={options.map((option) => option.value)} />);
     expect(screen.getAllByRole('button', { name: /^Remove / })).toHaveLength(3);
     expect(screen.getByText('+2 more')).toBeInTheDocument();
     expect(trigger()).toHaveTextContent('5 selected');
-    fireEvent.click(screen.getByRole('button', { name: 'Remove Write' }));
+    const chip = screen.getByRole('button', { name: 'Remove Write' });
+    expect(trigger().parentElement).toContainElement(chip);
+    expect(trigger()).not.toContainElement(chip);
+    fireEvent.click(chip);
     expect(screen.getByText('+1 more')).toBeInTheDocument();
     expect(trigger()).toHaveFocus();
+  });
+
+  it('opens from a click on the field outside its buttons and keeps chip clicks inert', () => {
+    render(<Controlled value={['read']} />);
+    const field = trigger().parentElement as HTMLElement;
+    expect(trigger()).toHaveTextContent('1 selected');
+    expect(fireEvent.pointerDown(field)).toBe(false);
+    fireEvent.click(field);
+    expect(trigger()).toHaveAttribute('aria-expanded', 'true');
+    fireEvent.click(field);
+    expect(trigger()).toHaveAttribute('aria-expanded', 'false');
+    const remove = screen.getByRole('button', { name: 'Remove Read' });
+    expect(fireEvent.pointerDown(remove)).toBe(true);
+    fireEvent.click(remove);
+    expect(trigger()).toHaveAttribute('aria-expanded', 'false');
+    expect(trigger()).toHaveTextContent('Select…');
   });
 
   it('disables the trigger, chips and form fields and submits repeated hidden inputs', () => {
@@ -195,12 +214,14 @@ describe('MultiSelect', () => {
     const panel = container.querySelector('[popover]') as HTMLDivElement;
     panel.showPopover = vi.fn();
     panel.hidePopover = vi.fn();
-    const rect = vi.spyOn(trigger(), 'getBoundingClientRect').mockReturnValue({
-      top: window.innerHeight - 60,
-      bottom: window.innerHeight - 12,
-      left: 24,
-      width: 240,
-    } as DOMRect);
+    const rect = vi
+      .spyOn(trigger().parentElement as HTMLElement, 'getBoundingClientRect')
+      .mockReturnValue({
+        top: window.innerHeight - 60,
+        bottom: window.innerHeight - 12,
+        left: 24,
+        width: 240,
+      } as DOMRect);
     Object.defineProperty(panel, 'offsetHeight', { value: 200 });
     fireEvent.click(trigger());
     expect(panel.showPopover).toHaveBeenCalledOnce();

@@ -2,6 +2,7 @@ import {
   type ChangeEvent,
   type FocusEvent,
   type KeyboardEvent,
+  type MouseEvent,
   type PointerEvent as ReactPointerEvent,
   useLayoutEffect,
   useRef,
@@ -10,13 +11,14 @@ import {
 import type { MultiSelectProps } from '../components/MultiSelect';
 import { useAnchoredPopover } from './useAnchoredPopover';
 
-/** Searchable multi-select popover: filtering, active option, keyboard, dismissal and chips. */
+/** Searchable multi-select popover: filtering, active option, keyboard, dismissal and chips in the field. */
 export function useMultiSelect({
   options,
   value,
   onChange,
   disabled,
 }: Pick<MultiSelectProps, 'options' | 'value' | 'onChange' | 'disabled'>) {
+  const fieldRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -34,7 +36,7 @@ export function useMultiSelect({
     label: options.find((option) => option.value === item)?.label ?? item,
   }));
 
-  useAnchoredPopover(triggerRef, panelRef, isOpen, 0, filtered.length);
+  useAnchoredPopover(fieldRef, panelRef, isOpen, 0, filtered.length);
 
   useLayoutEffect(() => {
     if (!isOpen) {
@@ -45,7 +47,7 @@ export function useMultiSelect({
     searchRef.current?.focus({ preventScroll: true });
 
     function dismiss(event: PointerEvent) {
-      if (!triggerRef.current?.parentElement?.contains(event.target as Node)) setExpanded(false);
+      if (!fieldRef.current?.parentElement?.contains(event.target as Node)) setExpanded(false);
     }
     function closeOnEscape(event: globalThis.KeyboardEvent) {
       if (event.key !== 'Escape') return;
@@ -87,6 +89,16 @@ export function useMultiSelect({
     remove(item: string) {
       onChange(value.filter((entry) => entry !== item));
       triggerRef.current?.focus({ preventScroll: true });
+    },
+    // The field looks like one input: a press outside its buttons acts on the trigger.
+    field: {
+      ref: fieldRef,
+      onPointerDown: (event: ReactPointerEvent) => {
+        if (!(event.target as Element).closest('button')) event.preventDefault();
+      },
+      onClick: (event: MouseEvent) => {
+        if (!(event.target as Element).closest('button')) triggerRef.current?.click();
+      },
     },
     trigger: {
       ref: triggerRef,

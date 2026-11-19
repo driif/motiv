@@ -26,47 +26,82 @@
     text-transform: uppercase;
   }
 
-  .motiv-matrix-multi-select__trigger,
-  .motiv-matrix-multi-select__chip {
+  /* Looks like one input: prompt, chips, then the trigger filling the rest of the row. */
+  .motiv-matrix-multi-select__field {
+    box-sizing: border-box;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
-    min-width: 0;
-    max-width: 100%;
-    font: inherit;
+    gap: 6px;
+    width: 100%;
+    min-height: calc(var(--motiv-control-height) * 1.75);
+    padding: var(--motiv-space) var(--motiv-space) var(--motiv-space) 16px;
+    font-size: var(--motiv-font-size-sm);
+    font-weight: 600;
     letter-spacing: 0.08em;
-    text-align: start;
     text-transform: uppercase;
-    color: inherit;
+    background: var(
+      --motiv-select-bg,
+      color-mix(in oklch, var(--motiv-color-primary) 7%, var(--motiv-color-surface))
+    );
     border: 1px solid var(--_border);
     border-radius: var(--motiv-select-radius, var(--motiv-radius-sm));
     cursor: pointer;
     transition: border-color 0.15s var(--motiv-ease);
 
-    &:focus-visible {
+    &:has(> .motiv-matrix-multi-select__trigger[aria-expanded="true"]) {
+      border-color: var(--_accent);
+    }
+
+    &:has(> .motiv-matrix-multi-select__trigger:focus-visible) {
       outline: 2px solid var(--motiv-color-primary);
       outline-offset: 3px;
     }
 
-    &:disabled {
+    &:has(> .motiv-matrix-multi-select__trigger:disabled) {
       opacity: 0.5;
       cursor: not-allowed;
     }
   }
 
   .motiv-matrix-multi-select__trigger {
-    width: 100%;
-    min-height: calc(var(--motiv-control-height) * 1.75);
-    padding: 0 16px;
-    font-size: var(--motiv-font-size-sm);
-    font-weight: 600;
-    background: var(
-      --motiv-select-bg,
-      color-mix(in oklch, var(--motiv-color-primary) 7%, var(--motiv-color-surface))
-    );
+    display: flex;
+    flex: 1 0 32px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    min-width: 0;
+    padding: 0 12px 0 0;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    text-align: start;
+    text-transform: inherit;
+    background: none;
+    border: 0;
+    cursor: inherit;
 
-    &[aria-expanded="true"] {
-      border-color: var(--_accent);
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  .motiv-matrix-multi-select__remove {
+    display: inline-flex;
+    padding: 0 2px;
+    color: inherit;
+    font: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 1px;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
     }
   }
 
@@ -98,14 +133,25 @@
     stroke-linecap: square;
     transition: transform 0.3s steps(3);
 
+    margin-inline-start: auto;
+
     [aria-expanded="true"] > & {
       transform: rotate(180deg);
     }
   }
 
   .motiv-matrix-multi-select__chip {
-    min-height: max(24px, calc(var(--motiv-space) * 8));
-    padding: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    /* Leaves room for the prompt, so a long chip does not push it onto a row of its own. */
+    max-width: calc(100% - 24px);
+    min-height: max(24px, calc(var(--motiv-space) * 7));
+    padding: 0 8px;
+    border: 1px solid var(--_border);
+    border-radius: var(--motiv-select-radius, var(--motiv-radius-sm));
+    cursor: default;
     font-size: var(--motiv-font-size-xs);
     background: color-mix(in oklch, var(--_accent) 14%, var(--_bg));
 
@@ -260,9 +306,12 @@
   }
 
   @media (hover: hover) {
-    .motiv-matrix-multi-select__trigger:hover:not(:disabled),
-    .motiv-matrix-multi-select__chip:hover:not(:disabled) {
+    .motiv-matrix-multi-select__field:hover:not(:has(:disabled)) {
       border-color: var(--_accent);
+    }
+
+    .motiv-matrix-multi-select__remove:hover:not(:disabled) {
+      color: var(--_accent);
     }
 
     .motiv-matrix-multi-select__option:hover {
@@ -271,8 +320,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .motiv-matrix-multi-select__trigger,
-    .motiv-matrix-multi-select__chip,
+    .motiv-matrix-multi-select__field,
     .motiv-matrix-multi-select__arrow,
     .motiv-matrix-multi-select__panel {
       transition: none;
