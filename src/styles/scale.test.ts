@@ -9,8 +9,6 @@ const componentCss = import.meta.glob<string>(
 // Literal sizes that do not size text, a control or a row, keyed by file and declaration.
 const allowed: Record<string, string> = {
   'components/Accordion/Accordion.css height: 18px': 'icon',
-  'components/BadgeButton/BadgeButton.css height: 24px': 'icon',
-  'components/BellButton/BellButton.css height: 24px': 'icon',
   'components/Button/Button.css height: 1.15em': 'icon, follows its text in em',
   'components/Button/Button.css height: 1em': 'spinner, follows its text in em',
   'components/Carousel/Carousel.css height: 20px': 'icon',

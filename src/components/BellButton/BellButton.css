@@ -4,8 +4,8 @@
     position: relative;
     display: inline-grid;
     place-items: center;
-    width: max(24px, calc(var(--motiv-space) * 13));
-    height: max(24px, calc(var(--motiv-space) * 13));
+    width: max(24px, var(--motiv-field-height));
+    height: max(24px, var(--motiv-field-height));
     padding: 0;
     color: var(--motiv-icon-button-color, var(--motiv-color-text));
     background: var(--motiv-icon-button-bg, var(--motiv-color-surface));
@@ -44,8 +44,8 @@
 
   .motiv-bell__icon {
     display: grid;
-    width: 24px;
-    height: 24px;
+    width: var(--motiv-icon-size);
+    height: var(--motiv-icon-size);
     transform-origin: 50% 10%;
 
     & > svg {
