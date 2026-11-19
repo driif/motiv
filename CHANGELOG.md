@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.35.1
+
+### Patch Changes
+
+- 65924ea: A checkbox whose label is only for screen readers (`motiv-visually-hidden`) no longer keeps the gap next to the box. In a narrow table cell the gap made the content overflow, and the cell showed an ellipsis next to the box.
+
 ## 0.35.0
 
 ### Minor Changes
