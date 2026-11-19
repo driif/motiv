@@ -8,8 +8,8 @@
   }
 
   .motiv-icon-button {
-    --_size: max(24px, calc(var(--motiv-space) * 12));
-    --_icon-size: 24px;
+    --_size: max(24px, var(--motiv-field-height));
+    --_icon-size: var(--motiv-icon-size);
     position: relative;
     display: inline-grid;
     place-items: center;
@@ -55,8 +55,8 @@
   }
 
   .motiv-icon-button--sm {
-    --_size: calc(var(--motiv-space) * 8);
-    --_icon-size: calc(var(--motiv-space) * 4);
+    --_size: max(24px, var(--motiv-control-height));
+    --_icon-size: var(--motiv-icon-size-sm);
   }
 
   .motiv-icon-button--round {

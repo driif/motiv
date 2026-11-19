@@ -9,6 +9,7 @@
     --motiv-font-title: var(--motiv-font-body);
     --motiv-font-size: 1rem;
     --motiv-line-height: 1.5;
+    --motiv-field-scale: 1.25;
     --motiv-duration: 200ms;
     --motiv-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
     --motiv-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -104,7 +105,9 @@
     --motiv-font-size-lg: calc(var(--motiv-font-size) * 1.25);
     --motiv-font-size-xl: calc(var(--motiv-font-size) * 1.5);
     --motiv-control-height: calc(var(--motiv-space) * 8);
-    --motiv-field-height: calc(var(--motiv-control-height) * 1.25);
+    --motiv-field-height: calc(var(--motiv-control-height) * var(--motiv-field-scale));
+    --motiv-icon-size: calc(var(--motiv-space) * 5);
+    --motiv-icon-size-sm: calc(var(--motiv-space) * 4);
     --motiv-row-height: calc(var(--motiv-space) * 7);
   }
 }

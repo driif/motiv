@@ -76,13 +76,22 @@ Components read their text sizes and heights from tokens derived from `--motiv-f
 | `--motiv-font-size-lg` | `calc(var(--motiv-font-size) * 1.25)` |
 | `--motiv-font-size-xl` | `calc(var(--motiv-font-size) * 1.5)` |
 | `--motiv-control-height` | `calc(var(--motiv-space) * 8)` |
-| `--motiv-field-height` | `calc(var(--motiv-control-height) * 1.25)` |
+| `--motiv-field-height` | `calc(var(--motiv-control-height) * var(--motiv-field-scale))` |
+| `--motiv-icon-size` | `calc(var(--motiv-space) * 5)` |
+| `--motiv-icon-size-sm` | `calc(var(--motiv-space) * 4)` |
 | `--motiv-row-height` | `calc(var(--motiv-space) * 7)` |
 
 `--motiv-control-height` is the unit and the height of small controls. `--motiv-field-height` (40px
 by default) is the one height of a medium `Button`, the `Select` and `MultiSelect` triggers, the
 `SegmentedControl` track and a `TextField` with `labelPosition="above"`, so a row of them lines up.
 Menu and option rows use multiples of `--motiv-row-height`.
+
+`--motiv-field-scale` (base token, `1.25`) sets the field height as a multiple of the control height.
+Set it to `1` on `:root` to make fields, medium buttons and icon buttons as high as a small button.
+
+`--motiv-icon-size` (20px) is the icon in an `IconButton`, `BellButton` and `BadgeButton`, whose
+boxes are `--motiv-field-height` high. A small `IconButton` uses `--motiv-icon-size-sm` (16px) in a
+`--motiv-control-height` box.
 
 `data-density="compact"` on any element sets `--motiv-space: 0.1875rem` there, so its controls,
 rows and spacing shrink by a quarter:
@@ -105,7 +114,7 @@ and switch labels follow a scoped `--motiv-font-size` instead of inheriting the 
 derived from `--motiv-space` never drop below 24px. The `Scale` stories of each style render every
 control family in default, compact, scoped-font and combined frames.
 
-Override `--motiv-font-size` and `--motiv-space`, not the derived steps: a derived token set on a
+Override `--motiv-font-size`, `--motiv-space` and `--motiv-field-scale`, not the derived steps: a derived token set on a
 non-motiv ancestor is recomputed on each component and has no effect. Menus and popovers render
 next to their trigger, so they follow the same scope.
 
