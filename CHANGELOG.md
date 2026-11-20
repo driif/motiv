@@ -1,5 +1,15 @@
 # @driif/motiv
 
+## 0.36.0
+
+### Minor Changes
+
+- 313a9c9: TableColumnsMenu takes a `size` for its trigger button, so it matches the small buttons of a toolbar.
+
+### Patch Changes
+
+- 313a9c9: StepProgress labels no longer run into each other in a narrow track: under 24rem only the current step shows its name, the others stay for screen readers.
+
 ## 0.35.1
 
 ### Patch Changes
