@@ -35,6 +35,29 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = { render: () => <Tabs /> };
 
+function FillTabs() {
+  const [value, setValue] = useState('secrets');
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '16rem' }}>
+      <HudTabs
+        label="Vault"
+        tabs={tabs}
+        value={value}
+        onChange={setValue}
+        panels={{
+          ...panels,
+          audit: Array.from({ length: 30 }, (_, i) => `Event ${i + 1}`).map((line) => (
+            <p key={line}>{line}</p>
+          )),
+        }}
+        fill
+      />
+    </div>
+  );
+}
+
+export const Fill: Story = { render: () => <FillTabs /> };
+
 export const Themes: Story = {
   render: () => <ThemePair>{() => <Tabs />}</ThemePair>,
 };

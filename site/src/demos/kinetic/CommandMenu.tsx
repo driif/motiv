@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 export function CommandMenuDemo() {
   const [last, setLast] = useState('nothing yet');
+  const [open, setOpen] = useState(false);
   const commands = [
     { id: 'new', label: 'New project', shortcut: 'N', onSelect: () => setLast('New project') },
     {
@@ -23,8 +24,10 @@ export function CommandMenuDemo() {
         minHeight: '15rem',
       }}
     >
-      <CommandMenu commands={commands} hotkey />
-      <span>Last command: {last}</span>
+      <CommandMenu commands={commands} hotkey open={open} onOpenChange={setOpen} />
+      <span>
+        Menu {open ? 'open' : 'closed'} · last command: {last}
+      </span>
     </div>
   );
 }

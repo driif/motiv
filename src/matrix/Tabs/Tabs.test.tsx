@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { useState } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { Tabs } from './Tabs';
 
@@ -34,5 +35,31 @@ describe('Tabs', () => {
     );
     expect(container.firstChild).toHaveClass('motiv-matrix-hudtabs', 'x');
     expect(container.firstChild).toHaveAttribute('id', 't');
+  });
+
+  it('fills its parent with the fill modifier, keeping arrow navigation', () => {
+    function Fill() {
+      const [value, setValue] = useState('a');
+      return (
+        <Tabs
+          label="Sections"
+          items={items}
+          value={value}
+          onChange={setValue}
+          fill
+          data-testid="t"
+        />
+      );
+    }
+    render(<Fill />);
+    expect(screen.getByTestId('t')).toHaveClass('motiv-matrix-hudtabs--fill');
+    const tab = screen.getByRole('tab', { name: 'Alpha' });
+    tab.focus();
+    fireEvent.keyDown(tab, { key: 'ArrowRight' });
+    expect(screen.getByRole('tab', { name: 'Beta' })).toHaveFocus();
+    expect(screen.getByRole('tabpanel', { name: 'Beta' })).toBeVisible();
+    expect(screen.getAllByRole('tabpanel', { hidden: true }).filter((p) => !p.hidden)).toHaveLength(
+      1,
+    );
   });
 });

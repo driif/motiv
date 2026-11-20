@@ -28,6 +28,27 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
+function FillDemo() {
+  const [value, setValue] = useState('overview');
+  const tall = items.map((item) =>
+    item.value === 'activity'
+      ? {
+          ...item,
+          panel: Array.from({ length: 30 }, (_, i) => `Event ${i + 1}`).map((line) => (
+            <p key={line}>{line}</p>
+          )),
+        }
+      : item,
+  );
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '16rem' }}>
+      <Tabs label="Sections" items={tall} value={value} onChange={setValue} fill />
+    </div>
+  );
+}
+
+export const Fill: Story = { render: () => <FillDemo /> };
+
 export const Themes: Story = {
   render: () => <ThemePair>{() => <Demo />}</ThemePair>,
 };

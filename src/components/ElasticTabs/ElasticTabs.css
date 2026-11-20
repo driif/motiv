@@ -91,6 +91,27 @@
     }
   }
 
+  .motiv-elastic-tabs--fill {
+    flex: 1;
+    min-height: 0;
+    height: 100%;
+
+    & .motiv-elastic-tabs__list {
+      flex: none;
+    }
+
+    & .motiv-elastic-tabs__panels {
+      flex: 1;
+      min-height: 0;
+      grid-template-rows: minmax(0, 1fr);
+    }
+
+    & .motiv-elastic-tabs__panel {
+      min-height: 0;
+      overflow: auto;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .motiv-elastic-tabs__indicator,
     .motiv-elastic-tabs__panel,

@@ -17,6 +17,8 @@ export interface HudTabsProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   showStatus?: boolean;
   targetLabel?: string;
   lockedLabel?: string;
+  /** Grow to fill a sized flex or grid parent; the active panel scrolls. */
+  fill?: boolean;
 }
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -30,6 +32,7 @@ export function HudTabs({
   showStatus = true,
   targetLabel = 'TARGET',
   lockedLabel = 'LOCKED',
+  fill = false,
   className,
   ...props
 }: HudTabsProps) {
@@ -64,7 +67,10 @@ export function HudTabs({
   }
 
   return (
-    <div {...props} className={cx('motiv-matrix-hudtabs', className)}>
+    <div
+      {...props}
+      className={cx('motiv-matrix-hudtabs', fill && 'motiv-matrix-hudtabs--fill', className)}
+    >
       <div
         role="tablist"
         aria-label={label}

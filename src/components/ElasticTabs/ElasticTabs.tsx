@@ -24,6 +24,8 @@ export interface ElasticTabsProps extends Omit<ComponentProps<'div'>, 'onChange'
   onChange: (value: string) => void;
   label: string;
   panels?: Record<string, ReactNode>;
+  /** Grow to fill a sized flex or grid parent; the active panel scrolls. */
+  fill?: boolean;
 }
 
 export function ElasticTabs({
@@ -32,6 +34,7 @@ export function ElasticTabs({
   onChange,
   label,
   panels,
+  fill = false,
   className,
   ...props
 }: ElasticTabsProps) {
@@ -78,7 +81,10 @@ export function ElasticTabs({
   }
 
   return (
-    <div {...props} className={cx('motiv-elastic-tabs', className)}>
+    <div
+      {...props}
+      className={cx('motiv-elastic-tabs', fill && 'motiv-elastic-tabs--fill', className)}
+    >
       <div
         role="tablist"
         aria-label={label}
@@ -114,6 +120,7 @@ export function ElasticTabs({
               id={`${id}-panel-${i}`}
               aria-labelledby={`${id}-tab-${i}`}
               tabIndex={i === index ? 0 : -1}
+              inert={fill && i !== index}
               data-position={i === index ? 'current' : i < index ? 'before' : 'after'}
               className="motiv-elastic-tabs__panel"
             >

@@ -161,7 +161,8 @@ export const catalog = {
       title: 'Tabs',
       symbols: ['Tabs'],
       demo: 'Tabs',
-      blurb: 'Panels behind labels, with arrow-key navigation.',
+      blurb:
+        'Panels behind labels, with arrow-key navigation. With fill it stretches to a sized parent and scrolls the open panel.',
     },
     {
       id: 'chips',
@@ -188,7 +189,7 @@ export const catalog = {
       symbols: ['CommandMenu'],
       demo: 'CommandMenu',
       blurb:
-        'A launcher that tips open a paper sheet of commands, each with an arrow inked in on focus. Arrow keys move, Escape closes, ⌘K / Ctrl K if you ask for it.',
+        'A launcher that tips open a paper sheet of commands, each with an arrow inked in on focus. Arrow keys move, Escape closes, ⌘K / Ctrl K if you ask for it. Pass open and onOpenChange to control it; every controlled opening focuses the first command.',
     },
     {
       id: 'link',
@@ -569,7 +570,7 @@ export const catalog = {
       symbols: ['ElasticTabs'],
       demo: 'ElasticTabs',
       blurb:
-        'Tabs with an underline that stretches toward its next tab. Panels slide in from the side you moved toward.',
+        'Tabs with an underline that stretches toward its next tab. Panels slide in from the side you moved toward. With fill it stretches to a sized parent and scrolls the open panel.',
     },
     {
       id: 'tabs',
@@ -577,7 +578,8 @@ export const catalog = {
       title: 'Tabs',
       symbols: ['Tabs'],
       demo: 'Tabs',
-      blurb: 'ElasticTabs with the drawn Tabs props: each item carries its own panel.',
+      blurb:
+        'ElasticTabs with the drawn Tabs props: each item carries its own panel. With fill it stretches to a sized parent.',
     },
     {
       id: 'filter-chips',
@@ -622,7 +624,7 @@ export const catalog = {
       symbols: ['CommandMenu'],
       demo: 'CommandMenu',
       blurb:
-        'A launcher that unfolds into commands. Arrow keys move through them, Escape closes, and ⌘K / Ctrl K works if you ask for it.',
+        'A launcher that unfolds into commands. Arrow keys move through them, Escape closes, and ⌘K / Ctrl K works if you ask for it. Pass open and onOpenChange to control it; every controlled opening focuses the first command.',
     },
     {
       id: 'floating-field',
@@ -1055,7 +1057,7 @@ export const catalog = {
       symbols: ['HudTabs'],
       demo: 'HudTabs',
       blurb:
-        'A tablist whose bracketed target slides to the selected tab, with a target readout underneath.',
+        'A tablist whose bracketed target slides to the selected tab, with a target readout underneath. With fill it stretches to a sized parent and scrolls the open panel.',
     },
     {
       id: 'tabs',
@@ -1063,7 +1065,8 @@ export const catalog = {
       title: 'Tabs',
       symbols: ['Tabs'],
       demo: 'Tabs',
-      blurb: 'HudTabs with the drawn Tabs props: each item carries its own panel.',
+      blurb:
+        'HudTabs with the drawn Tabs props: each item carries its own panel. With fill it stretches to a sized parent.',
     },
     {
       id: 'segmented-control',
@@ -1099,7 +1102,7 @@ export const catalog = {
       symbols: ['CommandMenu'],
       demo: 'CommandMenu',
       blurb:
-        'A > search_ prompt that opens a HUD list of commands with a ▸ on the active one. Arrow keys move, Escape closes, ⌘K / Ctrl K if you ask for it.',
+        'A > search_ prompt that opens a HUD list of commands with a ▸ on the active one. Arrow keys move, Escape closes, ⌘K / Ctrl K if you ask for it. Pass open and onOpenChange to control it; every controlled opening focuses the first command.',
     },
     {
       id: 'chevron-nav',

@@ -59,4 +59,41 @@ describe('ElasticTabs', () => {
     fireEvent.keyDown(overview, { key: 'End' });
     expect(settings).toHaveAttribute('aria-selected', 'true');
   });
+
+  it('fills its parent and makes inactive panels inert, keeping arrow navigation', () => {
+    function Fill() {
+      const [value, setValue] = useState('overview');
+      return (
+        <ElasticTabs
+          label="Project"
+          tabs={tabs}
+          value={value}
+          onChange={setValue}
+          panels={panels}
+          fill
+          data-testid="t"
+        />
+      );
+    }
+    render(<Fill />);
+    expect(screen.getByTestId('t')).toHaveClass('motiv-elastic-tabs--fill');
+    const panelOf = (name: string) =>
+      document.getElementById(
+        screen.getByRole('tab', { name }).getAttribute('aria-controls') ?? '',
+      );
+    expect(panelOf('Overview')).not.toHaveAttribute('inert');
+    expect(panelOf('Activity')).toHaveAttribute('inert');
+    const overview = screen.getByRole('tab', { name: 'Overview' });
+    overview.focus();
+    fireEvent.keyDown(overview, { key: 'ArrowRight' });
+    expect(screen.getByRole('tab', { name: 'Activity' })).toHaveFocus();
+    expect(panelOf('Activity')).not.toHaveAttribute('inert');
+    expect(panelOf('Overview')).toHaveAttribute('inert');
+  });
+
+  it('keeps the default markup without fill', () => {
+    render(<Controlled />);
+    expect(document.querySelector('.motiv-elastic-tabs--fill')).toBeNull();
+    expect(document.querySelector('[inert]')).toBeNull();
+  });
 });

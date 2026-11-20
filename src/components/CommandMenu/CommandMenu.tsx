@@ -16,6 +16,12 @@ export interface CommandMenuProps extends ComponentProps<'div'> {
   /** Open with ⌘K / Ctrl+K from anywhere on the page. */
   hotkey?: boolean;
   menuLabel?: string;
+  /**
+   * Controlled open state; pair with `onOpenChange`. Every controlled opening focuses the first
+   * command; uncontrolled pointer opens leave focus on the launcher.
+   */
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export function CommandMenu({
@@ -23,6 +29,8 @@ export function CommandMenu({
   placeholder = 'Search or jump to…',
   hotkey = false,
   menuLabel = 'Commands',
+  open: openProp,
+  onOpenChange,
   className,
   onKeyDown: onKeyDownProp,
   onBlur: onBlurProp,
@@ -34,11 +42,17 @@ export function CommandMenu({
     launcherRef,
     menuRef,
     menuId,
-    close,
+    select,
     onKeyDown,
     onBlur,
     onLauncherClick,
-  } = useCommandMenu({ hotkey, onKeyDown: onKeyDownProp, onBlur: onBlurProp });
+  } = useCommandMenu({
+    hotkey,
+    open: openProp,
+    onOpenChange,
+    onKeyDown: onKeyDownProp,
+    onBlur: onBlurProp,
+  });
 
   return (
     <div
@@ -79,10 +93,7 @@ export function CommandMenu({
             tabIndex={-1}
             className="motiv-command-menu__item"
             style={{ '--_i': i } as CSSProperties}
-            onClick={() => {
-              close();
-              command.onSelect();
-            }}
+            onClick={() => select(command)}
           >
             <Icon>
               <path d="M5 12h14M13 6l6 6-6 6" />
