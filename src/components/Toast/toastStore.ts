@@ -4,6 +4,11 @@ export interface ToastOptions {
   tone?: 'success' | 'error' | 'info';
   /** Milliseconds on screen; errors default to Infinity, other tones to 5000. */
   duration?: number;
+  /**
+   * A button that dismisses the toast and then calls `onClick` once, e.g. for undo. The callback
+   * owns the work; the library shows no progress or error for it.
+   */
+  action?: { label: string; onClick: () => void | Promise<void> };
 }
 
 export interface ToastEntry extends ToastOptions {
@@ -54,6 +59,14 @@ export function dismissToast(id: string): void {
       ? queue.map((item) => (item.id === id ? { ...item, dismissed: true } : item))
       : queue.filter((item) => item.id !== id),
   );
+}
+
+/** Dismisses the toast, then runs its action at most once across clicks, hosts and timers. */
+export function runToastAction(id: string): void {
+  const entry = queue.find((item) => item.id === id);
+  if (!entry?.action || entry.dismissed) return;
+  dismissToast(id);
+  Promise.resolve(entry.action.onClick()).catch((error) => reportError(error));
 }
 
 /** Drops a dismissed toast once its exit has finished. */

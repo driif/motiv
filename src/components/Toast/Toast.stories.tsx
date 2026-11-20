@@ -3,8 +3,16 @@ import { type CSSProperties, useEffect, useRef } from 'react';
 import { Button } from '../Button';
 import { dismissToast, Toaster, type ToasterProps, type ToastOptions, toast } from './Toast';
 
-function Example({ options, ...args }: ToasterProps & { options?: ToastOptions }) {
+function Example({
+  options,
+  ...args
+}: ToasterProps & {
+  options?: ToastOptions | ((notify: (options: ToastOptions) => void) => ToastOptions);
+}) {
   const ids = useRef<string[]>([]);
+  const notify = (entry: ToastOptions) => {
+    ids.current.push(toast(entry));
+  };
   useEffect(() => {
     const current = ids.current;
     return () => {
@@ -22,7 +30,7 @@ function Example({ options, ...args }: ToasterProps & { options?: ToastOptions }
       }}
     >
       {(options
-        ? [options]
+        ? [typeof options === 'function' ? options(notify) : options]
         : ([
             { tone: 'success', title: 'Changes saved', description: 'Your project is up to date.' },
             {
@@ -33,7 +41,7 @@ function Example({ options, ...args }: ToasterProps & { options?: ToastOptions }
             { tone: 'info', title: 'Sync started', description: 'You can keep working.' },
           ] satisfies ToastOptions[])
       ).map((entry) => (
-        <Button key={entry.title} onClick={() => ids.current.push(toast(entry))}>
+        <Button key={entry.title} onClick={() => notify(entry)}>
           Show {entry.tone ?? 'info'}
         </Button>
       ))}
@@ -69,6 +77,21 @@ export const PersistentError: Story = {
 };
 export const Info: Story = {
   render: (args) => <Example {...args} options={{ title: 'Sync started' }} />,
+};
+export const WithAction: Story = {
+  render: (args) => (
+    <Example
+      {...args}
+      options={(notify) => ({
+        title: 'Item removed',
+        description: 'The draft was moved to the trash.',
+        action: {
+          label: 'Undo',
+          onClick: () => notify({ tone: 'success', title: 'Item restored' }),
+        },
+      })}
+    />
+  ),
 };
 export const LongContent: Story = {
   render: (args) => (
