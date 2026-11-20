@@ -840,7 +840,7 @@ export const catalog = {
       symbols: ['StepProgress'],
       demo: 'StepProgress',
       blurb:
-        'Where a wizard is up to. Finished steps get a check, the current one pulses; your own Back and Next drive it.',
+        'Where a wizard is up to. Finished steps get a check, the current one pulses; your own Back and Next drive it. In a narrow track only the current step shows its name.',
     },
     {
       id: 'drill-stack',
@@ -895,7 +895,7 @@ export const catalog = {
       symbols: ['Table', 'TableColumnsMenu'],
       demo: 'Table',
       blurb:
-        'A native table whose columns resize by dragging a header edge or with the arrow keys; Enter or a double-click resets. Widths arrive once per change, ready to save. TableColumnsMenu picks the columns to hide; pass the rest to Table.',
+        'A native table whose columns resize by dragging a header edge or with the arrow keys; Enter or a double-click resets. Widths arrive once per change, ready to save. TableColumnsMenu picks the columns to hide; pass the rest to Table. Its size matches the toolbar buttons beside it.',
     },
   ],
   matrix: [

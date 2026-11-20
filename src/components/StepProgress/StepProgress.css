@@ -11,6 +11,7 @@
     width: 100%;
     max-width: 420px;
     color: var(--motiv-color-text);
+    container-type: inline-size;
   }
 
   .motiv-steps__track {
@@ -147,6 +148,18 @@
 
     [data-state="current"] & {
       color: var(--motiv-color-text);
+    }
+  }
+
+  /* Labels do not wrap; in a narrow track only the current step shows its name, the rest stay for screen readers. */
+  @container (width < 24rem) {
+    .motiv-steps__step:not([data-state="current"]) .motiv-steps__label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
   }
 

@@ -296,6 +296,11 @@ describe('TableColumnsMenu', () => {
     );
   });
 
+  it('sizes the trigger button', () => {
+    renderMenu({ size: 'sm' });
+    expect(screen.getByRole('button', { name: 'Columns' })).toHaveClass('motiv-btn--sm');
+  });
+
   it('reports the hidden ids when a column is toggled', () => {
     const onHiddenColumnsChange = vi.fn();
     renderMenu({ hiddenColumns: ['city'], onHiddenColumnsChange });
