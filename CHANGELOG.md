@@ -1,5 +1,12 @@
 # @driif/motiv
 
+## 0.38.0
+
+### Minor Changes
+
+- 1d2c2a9: CommandMenu accepts `open` and `onOpenChange` to be controlled (every controlled opening focuses the first command), ignores a ⌘K another handler already prevented, and no longer moves focus into a menu that did not open or pulls focus back from a command that moved it elsewhere.
+- 1d2c2a9: Tabs, ElasticTabs and HudTabs take `fill` to stretch to a sized flex or grid parent, keeping the tabs fixed and scrolling the open panel.
+
 ## 0.37.0
 
 ### Minor Changes
