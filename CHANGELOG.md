@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.37.0
+
+### Minor Changes
+
+- cac5ce9: Toasts accept an optional `action` (label and callback), e.g. `{ label: 'Undo', onClick }`, that dismisses the toast and calls back once; exiting toasts are inert, so they no longer take focus or clicks.
+
 ## 0.36.0
 
 ### Minor Changes
