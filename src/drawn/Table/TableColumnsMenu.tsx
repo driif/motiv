@@ -9,6 +9,7 @@ export function TableColumnsMenu({
   hiddenColumns,
   onHiddenColumnsChange,
   label = 'Columns',
+  size,
   className,
   ...props
 }: TableColumnsMenuProps) {
@@ -20,7 +21,7 @@ export function TableColumnsMenu({
 
   return (
     <div {...props} className={cx('motiv-sketch-table-menu', className)}>
-      <Button {...triggerProps} variant="outline">
+      <Button {...triggerProps} variant="outline" size={size}>
         {label}
       </Button>
       <fieldset {...panelProps} aria-label={label} className="motiv-sketch-table-menu__panel">

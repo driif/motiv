@@ -51,3 +51,20 @@ export const Completed: Story = { args: { completed: true, completedText: 'Order
 export const Themes: Story = {
   render: (args) => <ThemePair>{() => <StepProgress {...args} />}</ThemePair>,
 };
+
+export const Narrow: Story = {
+  args: {
+    steps: [
+      { id: 'upload', label: 'Upload the file' },
+      { id: 'map', label: 'Map the columns' },
+      { id: 'check', label: 'Check the rows' },
+      { id: 'import', label: 'Import' },
+    ],
+    current: 1,
+  },
+  render: (args) => (
+    <div style={{ width: 300 }}>
+      <StepProgress {...args} />
+    </div>
+  ),
+};
