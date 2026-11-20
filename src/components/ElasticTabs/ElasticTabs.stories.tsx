@@ -42,6 +42,29 @@ export const Default: Story = {};
 
 export const TabsOnly: Story = { render: () => <Demo withPanels={false} /> };
 
+function FillDemo() {
+  const [value, setValue] = useState('overview');
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '16rem', maxWidth: '24rem' }}>
+      <ElasticTabs
+        label="Project"
+        tabs={tabs}
+        value={value}
+        onChange={setValue}
+        panels={{
+          ...panels,
+          activity: Array.from({ length: 30 }, (_, i) => `Event ${i + 1}`).map((line) => (
+            <p key={line}>{line}</p>
+          )),
+        }}
+        fill
+      />
+    </div>
+  );
+}
+
+export const Fill: Story = { render: () => <FillDemo /> };
+
 export const Themes: Story = {
   render: () => <ThemePair>{() => <Demo />}</ThemePair>,
 };

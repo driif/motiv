@@ -72,6 +72,24 @@
     }
   }
 
+  .motiv-tabs--fill {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+
+    & .motiv-tabs__list {
+      flex: none;
+    }
+
+    & .motiv-tabs__panel {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .motiv-tabs__tab,
     .motiv-tabs__ink {

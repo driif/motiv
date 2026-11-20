@@ -51,4 +51,23 @@ describe('Tabs', () => {
     expect(tea).toHaveFocus();
     expect(screen.getByRole('tabpanel')).toHaveTextContent('Hot leaves');
   });
+
+  it('fills its parent with the fill modifier, keeping arrow navigation', () => {
+    function Fill() {
+      const [value, setValue] = useState('tea');
+      return (
+        <Tabs label="Drinks" items={items} value={value} onChange={setValue} fill data-testid="t" />
+      );
+    }
+    render(<Fill />);
+    expect(screen.getByTestId('t')).toHaveClass('motiv-tabs--fill');
+    const tab = screen.getByRole('tab', { name: 'Tea' });
+    tab.focus();
+    fireEvent.keyDown(tab, { key: 'ArrowRight' });
+    expect(screen.getByRole('tab', { name: 'Coffee' })).toHaveFocus();
+    expect(screen.getByRole('tabpanel', { name: 'Coffee' })).toBeVisible();
+    expect(screen.getAllByRole('tabpanel', { hidden: true }).filter((p) => !p.hidden)).toHaveLength(
+      1,
+    );
+  });
 });

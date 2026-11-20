@@ -149,7 +149,7 @@
   "utils/useChips.js": 450,
   "utils/useColumnResize.js": 1150,
   "utils/useColumnsMenu.js": 1150,
-  "utils/useCommandMenu.js": 1150,
+  "utils/useCommandMenu.js": 1300,
   "utils/useConfirm.js": 800,
   "utils/useDatePicker.js": 750,
   "utils/useDisclosure.js": 400,

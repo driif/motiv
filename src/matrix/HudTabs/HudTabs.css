@@ -105,6 +105,23 @@
     outline-offset: 2px;
   }
 
+  .motiv-matrix-hudtabs--fill {
+    flex: 1;
+    min-height: 0;
+    height: 100%;
+
+    & .motiv-matrix-hudtabs__list,
+    & .motiv-matrix-hudtabs__status {
+      flex: none;
+    }
+
+    & .motiv-matrix-hudtabs__panel {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .motiv-matrix-hudtabs__target {
       transition: none;

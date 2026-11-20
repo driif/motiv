@@ -7,6 +7,8 @@ export function CommandMenu({
   placeholder = 'Search or jump to…',
   hotkey = false,
   menuLabel = 'Commands',
+  open: openProp,
+  onOpenChange,
   className,
   onKeyDown: onKeyDownProp,
   onBlur: onBlurProp,
@@ -18,11 +20,17 @@ export function CommandMenu({
     launcherRef,
     menuRef,
     menuId,
-    close,
+    select,
     onKeyDown,
     onBlur,
     onLauncherClick,
-  } = useCommandMenu({ hotkey, onKeyDown: onKeyDownProp, onBlur: onBlurProp });
+  } = useCommandMenu({
+    hotkey,
+    open: openProp,
+    onOpenChange,
+    onKeyDown: onKeyDownProp,
+    onBlur: onBlurProp,
+  });
 
   return (
     <div
@@ -62,10 +70,7 @@ export function CommandMenu({
             role="menuitem"
             tabIndex={-1}
             className="motiv-sketch-command-menu__item"
-            onClick={() => {
-              close();
-              command.onSelect();
-            }}
+            onClick={() => select(command)}
           >
             <svg
               className="motiv-sketch-command-menu__arrow"

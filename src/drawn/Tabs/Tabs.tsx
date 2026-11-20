@@ -14,9 +14,19 @@ export interface TabsProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   value: string;
   onChange: (value: string) => void;
   label: string;
+  /** Grow to fill a sized flex or grid parent; the active panel scrolls. */
+  fill?: boolean;
 }
 
-export function Tabs({ items, value, onChange, label, className, ...props }: TabsProps) {
+export function Tabs({
+  items,
+  value,
+  onChange,
+  label,
+  fill = false,
+  className,
+  ...props
+}: TabsProps) {
   const id = useId();
   const index = items.findIndex((item) => item.value === value);
   const inkRef = useRef<HTMLSpanElement>(null);
@@ -62,7 +72,7 @@ export function Tabs({ items, value, onChange, label, className, ...props }: Tab
   }
 
   return (
-    <div className={cx('motiv-tabs', className)} {...props}>
+    <div className={cx('motiv-tabs', fill && 'motiv-tabs--fill', className)} {...props}>
       <div
         role="tablist"
         aria-label={label}

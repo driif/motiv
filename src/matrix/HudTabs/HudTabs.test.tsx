@@ -77,4 +77,31 @@ describe('HudTabs', () => {
     );
     expect(screen.getByText('ZIEL 03 / 03 · SSH FIXIERT')).toBeInTheDocument();
   });
+
+  it('fills its parent with the fill modifier, keeping arrow navigation', () => {
+    function Fill() {
+      const [value, setValue] = useState('kv');
+      return (
+        <HudTabs
+          label="Engines"
+          tabs={tabs}
+          panels={{ kv: 'Key/value', pki: 'Certificates', ssh: 'Keys' }}
+          value={value}
+          onChange={setValue}
+          fill
+          data-testid="t"
+        />
+      );
+    }
+    render(<Fill />);
+    expect(screen.getByTestId('t')).toHaveClass('motiv-matrix-hudtabs--fill');
+    const tab = screen.getByRole('tab', { name: 'KV' });
+    tab.focus();
+    fireEvent.keyDown(tab, { key: 'ArrowRight' });
+    expect(screen.getByRole('tab', { name: 'PKI' })).toHaveFocus();
+    expect(screen.getByRole('tabpanel', { name: 'PKI' })).toBeVisible();
+    expect(screen.getAllByRole('tabpanel', { hidden: true }).filter((p) => !p.hidden)).toHaveLength(
+      1,
+    );
+  });
 });
