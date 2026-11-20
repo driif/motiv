@@ -1,9 +1,10 @@
-import { type RefObject, useEffect, useRef } from 'react';
+import { type RefObject, useEffect, useLayoutEffect, useRef } from 'react';
 import { dismissToast, removeToast, type ToastEntry } from '../components/Toast/toastStore';
 
 /**
  * Runs one toast's timer while not paused and, once dismissed, hands keyboard focus to the next
- * toast (or back out of the stack) and removes it after its exit transition. Returns the li ref.
+ * toast's dismiss button (or back out of the stack), makes it inert and removes it after its exit
+ * transition. Returns the li ref.
  */
 export function useToastItem(
   { id, dismissed, duration }: ToastEntry,
@@ -23,7 +24,7 @@ export function useToastItem(
     };
   }, [id, dismissed, paused]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const node = element.current;
     if (!dismissed || !node) return;
     const focused = node.ownerDocument.activeElement;
@@ -34,11 +35,12 @@ export function useToastItem(
         const next = [...siblings.slice(index + 1), ...siblings.slice(0, index)].find(
           (sibling) => !sibling.hasAttribute('data-exiting'),
         );
-        const target = next?.querySelector('button') ?? returnFocus.current;
+        const target = next?.querySelector<HTMLElement>(':scope > button') ?? returnFocus.current;
         if (target?.isConnected) target.focus();
       }
       if (node.contains(node.ownerDocument.activeElement)) focused.blur();
     }
+    node.inert = true;
     // A timeout also completes exits when reduced motion or absent CSS produces no transitionend.
     const duration = window.getComputedStyle(node).transitionDuration;
     const milliseconds = (Number.parseFloat(duration) || 0) * (duration.endsWith('ms') ? 1 : 1000);

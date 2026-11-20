@@ -23,6 +23,22 @@ export function ToastDemo() {
       >
         Persistent error
       </Button>
+      <Button
+        variant="ghost"
+        onClick={() =>
+          toast({
+            title: 'Item removed',
+            action: {
+              label: 'Undo',
+              onClick: () => {
+                toast({ tone: 'success', title: 'Item restored' });
+              },
+            },
+          })
+        }
+      >
+        Remove item
+      </Button>
       <Toaster />
     </div>
   );

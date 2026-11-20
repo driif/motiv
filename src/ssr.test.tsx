@@ -97,7 +97,11 @@ it('renders Table and TableColumnsMenu with widths and a closed popover without 
 describe('server rendering', () => {
   it('keeps Toaster empty and toast calls inert without a DOM', () => {
     const before = renderToStaticMarkup(<K.Toaster />);
-    const id = K.toast({ tone: 'error', title: 'Request-specific error' });
+    const id = K.toast({
+      tone: 'error',
+      title: 'Request-specific error',
+      action: { label: 'Undo', onClick: () => {} },
+    });
     K.dismissToast(id);
     const after = renderToStaticMarkup(<K.Toaster />);
     expect(after).toBe(before);
@@ -106,6 +110,7 @@ describe('server rendering', () => {
     expect(after).toContain('aria-label="Notifications"');
     expect(after).not.toContain('<li');
     expect(after).not.toContain('Request-specific error');
+    expect(after).not.toContain('Undo');
   });
 
   it.each([false, true])('renders Dialog without opening a non-modal dialog (open=%s)', (open) => {

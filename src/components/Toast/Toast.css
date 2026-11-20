@@ -92,6 +92,28 @@
     font-size: var(--motiv-font-size-sm);
   }
 
+  .motiv-toast__action {
+    margin: calc(var(--motiv-space) * 2) 0 0 calc(var(--motiv-space) * -2);
+    padding: var(--motiv-space) calc(var(--motiv-space) * 2);
+    border: 0;
+    border-radius: var(--motiv-radius-sm);
+    color: var(--motiv-color-primary);
+    background: transparent;
+    font: inherit;
+    font-weight: 600;
+    text-align: start;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    &:active {
+      background: color-mix(in oklch, var(--motiv-color-primary) 18%, transparent);
+    }
+  }
+
   .motiv-toast__dismiss {
     display: grid;
     place-items: center;
@@ -121,6 +143,10 @@
   }
 
   @media (hover: hover) {
+    .motiv-toast__action:hover:not(:active) {
+      background: color-mix(in oklch, var(--motiv-color-primary) 10%, transparent);
+    }
+
     .motiv-toast__dismiss:hover:not(:active) {
       background: color-mix(in oklch, var(--motiv-color-text) 10%, transparent);
     }

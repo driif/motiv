@@ -45,6 +45,25 @@ export function ToastDemo() {
         >
           Persistent error
         </Button>
+        <Button
+          variant="outline"
+          onClick={() =>
+            setLatest(
+              toast({
+                title: 'Item removed',
+                description: 'The draft was moved to the trash.',
+                action: {
+                  label: 'Undo',
+                  onClick: () => {
+                    setLatest(toast({ tone: 'success', title: 'Item restored' }));
+                  },
+                },
+              }),
+            )
+          }
+        >
+          Remove item
+        </Button>
         <Button variant="ghost" disabled={!latest} onClick={() => dismissToast(latest)}>
           Dismiss latest
         </Button>

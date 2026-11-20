@@ -113,6 +113,31 @@
     font-size: var(--motiv-font-size-sm);
   }
 
+  .motiv-sketch-toast__action {
+    margin: var(--motiv-space) 0 0 calc(var(--motiv-space) * -2);
+    padding: 0 calc(var(--motiv-space) * 2);
+    border: 0;
+    border-radius: 12px 6px 14px 8px / 8px 14px 6px 12px;
+    color: inherit;
+    background: transparent;
+    font-family: "Caveat", "Segoe Print", cursive;
+    font-size: calc(var(--motiv-font-size) * 1.25);
+    line-height: 1.4;
+    text-align: start;
+    text-decoration: underline wavy var(--motiv-color-primary);
+    text-underline-offset: calc(var(--motiv-space) * 0.75);
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+
+    &:active {
+      background: color-mix(in oklch, currentColor 16%, transparent);
+    }
+  }
+
   .motiv-sketch-toast__dismiss {
     display: grid;
     place-items: center;
@@ -146,6 +171,7 @@
   }
 
   @media (hover: hover) {
+    .motiv-sketch-toast__action:hover:not(:active),
     .motiv-sketch-toast__dismiss:hover:not(:active) {
       background: repeating-linear-gradient(
         -45deg,

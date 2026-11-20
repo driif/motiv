@@ -515,7 +515,7 @@ export const catalog = {
       symbols: ['Toaster', 'toast', 'dismissToast'],
       demo: 'Toast',
       blurb:
-        'Success, error and info notifications from any callback: mount one Toaster, show up to three in a scrollable stack, and pause timers on mouse hover or focus. Keyboard dismissal keeps focus in the stack; touch dismissal resumes timers immediately. Errors stay until dismissed.',
+        'Success, error and info notifications from any callback: mount one Toaster, show up to three in a scrollable stack, and pause timers on mouse hover or focus. An optional action (label and callback, e.g. Undo) dismisses the toast and calls back once; the app owns the work it starts. Keyboard dismissal keeps focus in the stack; touch dismissal resumes timers immediately. Errors stay until dismissed.',
     },
     {
       id: 'radial-menu',

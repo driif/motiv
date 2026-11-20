@@ -1,7 +1,9 @@
 import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { createRef, StrictMode } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { toast as rootToast } from '../..';
+import { Toaster as OtherToaster } from '../../components/Toast';
 import { dismissToast, Toaster, type ToastOptions, toast } from '.';
 
 let ids: string[];
@@ -18,6 +20,22 @@ function notify(options: ToastOptions) {
 function advance(milliseconds: number) {
   act(() => vi.advanceTimersByTime(milliseconds));
   act(() => vi.advanceTimersByTime(0));
+}
+
+function keyboardUser() {
+  // Testing Library's async wrapper only flushes fake timers through a global `jest`.
+  vi.stubGlobal('jest', vi);
+  return userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+}
+
+// jsdom treats keyboard-generated clicks as pointer input for :focus-visible.
+function focusVisible(buttons: HTMLElement[]) {
+  for (const button of buttons) {
+    const matches = button.matches.bind(button);
+    vi.spyOn(button, 'matches').mockImplementation(
+      (selector) => selector === ':focus-visible' || matches(selector),
+    );
+  }
 }
 
 function stack() {
@@ -547,5 +565,189 @@ describe('Toaster', () => {
       'motiv-sketch-toast--success',
     );
     expect(screen.getByRole('status')).toHaveTextContent('From kinetic');
+  });
+
+  describe('action', () => {
+    function undo(onClick: () => void | Promise<void> = vi.fn()) {
+      return { label: 'Undo', onClick };
+    }
+
+    it('dismisses the toast and runs the callback once on click', () => {
+      render(<Toaster />);
+      const onClick = vi.fn();
+      notify({ title: 'Item removed', action: undo(onClick) });
+      notify({ title: 'Plain' });
+      expect(stack().getAllByRole('button')).toHaveLength(3);
+      const button = stack().getByRole('button', { name: 'Undo' });
+      expect(button).toHaveAttribute('type', 'button');
+      expect(button).toHaveClass('motiv-sketch-toast__action');
+      fireEvent.click(button);
+      fireEvent.click(button);
+      expect(onClick).toHaveBeenCalledOnce();
+      const item = stack().getByText('Item removed').closest('li') as HTMLLIElement;
+      expect(item).toHaveAttribute('data-exiting');
+      expect(item.inert).toBe(true);
+      expect(stack().getByText('Plain').closest('li')?.inert).toBeFalsy();
+      advance(0);
+      expect(stack().queryByText('Item removed')).not.toBeInTheDocument();
+    });
+
+    it.each(['{Enter}', ' '])('activates once from the keyboard with %s', async (key) => {
+      const user = keyboardUser();
+      render(
+        <>
+          <button type="button">Save</button>
+          <Toaster />
+        </>,
+      );
+      screen.getByRole('button', { name: 'Save' }).focus();
+      const first = vi.fn();
+      notify({ title: 'First', action: undo(first) });
+      notify({ title: 'Second', action: undo() });
+      focusVisible(stack().getAllByRole('button', { name: 'Undo' }));
+      const item = stack().getByText('First').closest('li') as HTMLLIElement;
+      const dismiss = stack().getAllByRole('button', { name: 'Dismiss' });
+      await user.tab();
+      expect(stack().getAllByRole('button', { name: 'Undo' })[0]).toHaveFocus();
+      advance(10000);
+      expect(item).toBeInTheDocument();
+      await user.keyboard(key);
+      expect(first).toHaveBeenCalledOnce();
+      expect(item).toHaveAttribute('data-exiting');
+      expect(item.inert).toBe(true);
+      expect(dismiss[1]).toHaveFocus();
+      await user.keyboard(key);
+      expect(first).toHaveBeenCalledOnce();
+      advance(0);
+      expect(item).not.toBeInTheDocument();
+    });
+
+    it.each(['{Enter}', ' '])(
+      'returns focus outside the stack after %s on the only toast',
+      async (key) => {
+        const user = keyboardUser();
+        render(
+          <>
+            <button type="button">Save</button>
+            <Toaster />
+          </>,
+        );
+        const outside = screen.getByRole('button', { name: 'Save' });
+        outside.focus();
+        notify({ title: 'Only', action: undo() });
+        focusVisible(stack().getAllByRole('button', { name: 'Undo' }));
+        await user.tab();
+        expect(stack().getByRole('button', { name: 'Undo' })).toHaveFocus();
+        await user.keyboard(key);
+        expect(outside).toHaveFocus();
+      },
+    );
+
+    it('runs once across hosts of different styles and on reentrant activation', () => {
+      let first: HTMLElement | undefined;
+      const onClick = vi.fn(() => first?.click());
+      render(
+        <>
+          <Toaster />
+          <OtherToaster />
+        </>,
+      );
+      notify({ title: 'Item removed', action: undo(onClick) });
+      const buttons = screen.getAllByRole('button', { name: 'Undo' });
+      expect(buttons).toHaveLength(2);
+      first = buttons[0];
+      fireEvent.click(buttons[0]);
+      fireEvent.click(buttons[1]);
+      expect(onClick).toHaveBeenCalledOnce();
+    });
+
+    it('reports a rejected callback without an unhandled rejection', async () => {
+      const reportError = vi.fn();
+      vi.stubGlobal('reportError', reportError);
+      render(<Toaster />);
+      const error = new Error('Restore failed');
+      notify({ title: 'Item removed', action: undo(() => Promise.reject(error)) });
+      fireEvent.click(stack().getByRole('button', { name: 'Undo' }));
+      await act(async () => {});
+      expect(reportError).toHaveBeenCalledWith(error);
+    });
+
+    it('publishes a toast fired synchronously from the callback', () => {
+      render(<Toaster />);
+      notify({
+        title: 'Item removed',
+        action: undo(() => {
+          ids.push(toast({ title: 'Item restored' }));
+        }),
+      });
+      fireEvent.click(stack().getByRole('button', { name: 'Undo' }));
+      advance(0);
+      expect(stack().queryByText('Item removed')).not.toBeInTheDocument();
+      expect(stack().getByText('Item restored')).toBeInTheDocument();
+    });
+
+    it.each(['hover', 'focus'])('pauses the timer while the action has %s', (kind) => {
+      render(
+        <>
+          <button type="button">Outside</button>
+          <Toaster />
+        </>,
+      );
+      notify({ title: 'Item removed', duration: 5000, action: undo() });
+      advance(2000);
+      const button = stack().getByRole('button', { name: 'Undo' });
+      if (kind === 'hover') fireEvent.pointerEnter(button, { pointerType: 'mouse' });
+      else act(() => button.focus());
+      advance(10000);
+      expect(stack().getByText('Item removed')).toBeInTheDocument();
+      if (kind === 'hover') fireEvent.pointerLeave(button, { pointerType: 'mouse' });
+      else act(() => screen.getByRole('button', { name: 'Outside' }).focus());
+      advance(2999);
+      expect(stack().getByText('Item removed')).toBeInTheDocument();
+      advance(1);
+      expect(stack().queryByText('Item removed')).not.toBeInTheDocument();
+    });
+
+    it('moves keyboard focus to the next dismiss button, then back outside', async () => {
+      const user = keyboardUser();
+      render(
+        <>
+          <button type="button">Save</button>
+          <Toaster />
+        </>,
+      );
+      const outside = screen.getByRole('button', { name: 'Save' });
+      outside.focus();
+      notify({ title: 'First', action: undo() });
+      notify({ title: 'Second', action: undo() });
+      const actions = stack().getAllByRole('button', { name: 'Undo' });
+      const dismiss = stack().getAllByRole('button', { name: 'Dismiss' });
+      focusVisible(actions);
+      await user.tab();
+      await user.keyboard('{Enter}');
+      expect(dismiss[1]).toHaveFocus();
+      advance(0);
+      await user.tab({ shift: true });
+      expect(actions[1]).toHaveFocus();
+      await user.keyboard('{Enter}');
+      expect(outside).toHaveFocus();
+    });
+
+    it('keeps focus the callback moved itself', () => {
+      render(
+        <>
+          <button type="button">History</button>
+          <Toaster />
+        </>,
+      );
+      const history = screen.getByRole('button', { name: 'History' });
+      notify({ title: 'First', action: undo(() => history.focus()) });
+      notify({ title: 'Second' });
+      const button = stack().getByRole('button', { name: 'Undo' });
+      vi.spyOn(button, 'matches').mockReturnValue(true);
+      act(() => button.focus());
+      fireEvent.click(button);
+      expect(history).toHaveFocus();
+    });
   });
 });

@@ -1,6 +1,6 @@
 import type { RefObject } from 'react';
 import type { ToasterProps } from '../../components/Toast';
-import { dismissToast, type ToastEntry } from '../../components/Toast/toastStore';
+import { dismissToast, runToastAction, type ToastEntry } from '../../components/Toast/toastStore';
 import { cx } from '../../utils/cx';
 import { ToastLiveRegions } from '../../utils/ToastLiveRegions';
 import { useToaster } from '../../utils/useToaster';
@@ -39,6 +39,16 @@ function ToastItem({
         <div className="motiv-sketch-toast__title">{item.title}</div>
         {item.description && (
           <div className="motiv-sketch-toast__description">{item.description}</div>
+        )}
+        {item.action && (
+          <button
+            className="motiv-sketch-toast__action"
+            type="button"
+            tabIndex={item.dismissed ? -1 : undefined}
+            onClick={() => runToastAction(item.id)}
+          >
+            {item.action.label}
+          </button>
         )}
       </div>
       <button

@@ -3,7 +3,7 @@ import { cx } from '../../utils/cx';
 import { ToastLiveRegions } from '../../utils/ToastLiveRegions';
 import { useToaster } from '../../utils/useToaster';
 import { useToastItem } from '../../utils/useToastItem';
-import { dismissToast, type ToastEntry } from './toastStore';
+import { dismissToast, runToastAction, type ToastEntry } from './toastStore';
 
 export { dismissToast, type ToastOptions, toast } from './toastStore';
 
@@ -48,6 +48,16 @@ function ToastItem({
       <div className="motiv-toast__content">
         <div className="motiv-toast__title">{item.title}</div>
         {item.description && <div className="motiv-toast__description">{item.description}</div>}
+        {item.action && (
+          <button
+            className="motiv-toast__action"
+            type="button"
+            tabIndex={item.dismissed ? -1 : undefined}
+            onClick={() => runToastAction(item.id)}
+          >
+            {item.action.label}
+          </button>
+        )}
       </div>
       <button
         className="motiv-toast__dismiss"
