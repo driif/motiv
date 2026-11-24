@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { createRef } from 'react';
+import { createRef, useState } from 'react';
 import { describe, expect, it, vi } from 'vitest';
+import { IconButton } from '../IconButton';
 import { ActionMenu, type ActionMenuItem } from './ActionMenu';
 
 function setup(items: ActionMenuItem[] = exports(), props = {}) {
@@ -13,7 +14,7 @@ function setup(items: ActionMenuItem[] = exports(), props = {}) {
   return screen.getByRole('button', { name: 'Export' });
 }
 
-function exports(): ActionMenuItem[] {
+function exports(): (ActionMenuItem & { onSelect: () => void })[] {
   return [
     { label: 'CSV', onSelect: vi.fn() },
     { label: 'XLSX', onSelect: vi.fn(), disabled: true },
@@ -143,5 +144,70 @@ describe('ActionMenu', () => {
     expect(trigger).toHaveClass('motiv-btn', 'motiv-btn--outline', 'motiv-btn--sm', 'extra');
     expect(trigger).toHaveAttribute('aria-describedby', 'hint');
     expect(trigger).toHaveAttribute('type', 'button');
+  });
+  it('uses a custom trigger that names the menu', () => {
+    render(<ActionMenu items={exports()} trigger={<IconButton icon="…" label="Row actions" />} />);
+    const trigger = screen.getByRole('button', { name: 'Row actions' });
+    expect(trigger).toHaveClass('motiv-icon-button');
+    pointerDown(trigger);
+    expect(screen.getByRole('menu', { name: 'Row actions' })).toBeInTheDocument();
+  });
+
+  it('opens and closes under control', () => {
+    const onOpenChange = vi.fn();
+    const { rerender } = render(<ActionMenu items={exports()} open onOpenChange={onOpenChange} />);
+    expect(screen.getByRole('menu')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('menuitem', { name: 'CSV' }));
+    expect(onOpenChange).toHaveBeenCalledWith(false);
+    rerender(<ActionMenu items={exports()} open={false} onOpenChange={onOpenChange} />);
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+  });
+
+  it('opens a submenu with ArrowRight', async () => {
+    const onSelect = vi.fn();
+    const trigger = setup([{ label: 'Move to', submenu: [{ label: 'Archive', onSelect }] }]);
+    fireEvent.keyDown(trigger, { key: 'ArrowDown' });
+    const sub = screen.getByRole('menuitem', { name: 'Move to' });
+    await waitFor(() => expect(sub).toHaveFocus());
+    expect(sub).toHaveAttribute('aria-haspopup', 'menu');
+    fireEvent.keyDown(sub, { key: 'ArrowRight' });
+    const archive = await screen.findByRole('menuitem', { name: 'Archive' });
+    fireEvent.click(archive);
+    expect(onSelect).toHaveBeenCalledTimes(1);
+  });
+
+  it('lets onCloseAutoFocus move focus away from the trigger', async () => {
+    const trigger = setup(exports(), {
+      onCloseAutoFocus: (event: Event) => {
+        event.preventDefault();
+        screen.getByText('Outside').focus();
+      },
+    });
+    fireEvent.keyDown(trigger, { key: 'ArrowDown' });
+    const csv = screen.getByRole('menuitem', { name: 'CSV' });
+    await waitFor(() => expect(csv).toHaveFocus());
+    fireEvent.keyDown(csv, { key: 'Escape' });
+    await waitFor(() => expect(screen.getByText('Outside')).toHaveFocus());
+  });
+
+  it('keeps the focus that an item moved', async () => {
+    function Rename() {
+      const [editing, setEditing] = useState(false);
+      return (
+        <>
+          <ActionMenu label="Row" items={[{ label: 'Rename', onSelect: () => setEditing(true) }]} />
+          {/* biome-ignore lint/a11y/noAutofocus: the field that a Rename item shows takes focus. */}
+          {editing && <input aria-label="Name" autoFocus />}
+        </>
+      );
+    }
+    render(<Rename />);
+    fireEvent.keyDown(screen.getByRole('button', { name: 'Row' }), { key: 'ArrowDown' });
+    const rename = screen.getByRole('menuitem', { name: 'Rename' });
+    await waitFor(() => expect(rename).toHaveFocus());
+    fireEvent.click(rename);
+    const input = screen.getByRole('textbox', { name: 'Name' });
+    await act(() => new Promise((resolve) => setTimeout(resolve, 10)));
+    expect(input).toHaveFocus();
   });
 });

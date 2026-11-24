@@ -47,6 +47,25 @@ export const Default: Story = {
   ),
 };
 
+export const NarrowWithActions: Story = {
+  render: () => (
+    <Card style={{ width: 290 }}>
+      <CardHeader
+        title="Keychain"
+        description="Logins that the cage adds to requests."
+        actions={
+          <>
+            <Button variant="outline" size="sm">
+              Import
+            </Button>
+            <Button size="sm">Add login</Button>
+          </>
+        }
+      />
+    </Card>
+  ),
+};
+
 export const PageTitle: Story = {
   render: () => (
     <Card>

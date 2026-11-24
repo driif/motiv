@@ -36,7 +36,8 @@
     outline: none;
     user-select: none;
 
-    &[data-highlighted] {
+    &[data-highlighted],
+    &[data-state="open"] {
       --_bg-hover: color-mix(in oklch, var(--motiv-menu-bg), var(--motiv-color-primary) 10%);
       background: var(--motiv-menu-bg-hover, var(--_bg-hover, var(--motiv-color-surface-hover)));
     }
@@ -66,6 +67,14 @@
       width: 100%;
       height: 100%;
     }
+  }
+
+  .motiv-action-menu__chevron {
+    flex: none;
+    width: var(--motiv-icon-size-sm);
+    height: var(--motiv-icon-size-sm);
+    margin-inline-start: auto;
+    color: var(--motiv-color-text-muted);
   }
 
   .motiv-action-menu__text {
