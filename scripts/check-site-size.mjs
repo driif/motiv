@@ -4,13 +4,13 @@ import { pages as componentPages, styles } from '../site/src/catalog.mjs';
 // Bytes, about 15% above the sizes measured when the budget was set; raise them on purpose.
 const pages = {
   'index.html': 23_000,
-  'kinetic/index.html': 54_000,
+  'kinetic/index.html': 56_000,
   'drawn/index.html': 82_000,
   'matrix/index.html': 83_000,
 };
 // Every generated component page, /<style>/<slug>/; the largest measured 42_123 (kinetic progress).
 const componentPage = 48_500;
-const totalCss = 430_000;
+const totalCss = 440_000;
 const largestJs = 245_000;
 
 const dist = new URL('../site/dist/', import.meta.url);

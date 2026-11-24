@@ -51,6 +51,13 @@ describe('IconButtonGroup', () => {
     expect(group).toContainElement(screen.getByRole('button', { name: 'Edit' }));
   });
 
+  it('makes a small group with size sm', () => {
+    render(<IconButtonGroup label="Tools" size="sm" />);
+    const group = screen.getByRole('group', { name: 'Tools' });
+    expect(group).toHaveClass('motiv-icon-button-group--sm');
+    expect(group).not.toHaveAttribute('size');
+  });
+
   it('adds the round modifier only for shape round', () => {
     const { rerender } = render(<IconButton icon="✎" label="Edit" shape="round" />);
     const button = screen.getByRole('button');

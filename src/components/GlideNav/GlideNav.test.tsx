@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { renderToString } from 'react-dom/server';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { GlideNav } from './GlideNav';
 
@@ -80,5 +81,25 @@ describe('GlideNav', () => {
     vi.stubGlobal('ResizeObserver', undefined);
     render(<GlideNav items={items} value="inbox" onChange={() => {}} label="Mail" />);
     expect(screen.getByRole('navigation')).toHaveAttribute('data-placed');
+  });
+
+  it('passes item attributes and needs no onChange for a link-only nav', () => {
+    const links = [
+      { id: 'a', label: 'A', href: '/a', attributes: { 'data-astro-prefetch': 'hover' } },
+      { id: 'b', label: 'B', href: '/b' },
+    ];
+    render(<GlideNav items={links} value="a" label="Docs" />);
+    const a = screen.getByRole('link', { name: 'A' });
+    expect(a).toHaveAttribute('data-astro-prefetch', 'hover');
+    expect(a).toHaveClass('motiv-glide-nav__item');
+    expect(fireEvent.click(screen.getByRole('link', { name: 'B' }))).toBe(true);
+  });
+
+  it('renders static markup that marks the current link without hydration', () => {
+    const html = renderToString(
+      <GlideNav items={[{ id: 'a', label: 'A', href: '/a' }]} value="a" label="Docs" />,
+    );
+    expect(html).toContain('aria-current="page"');
+    expect(html).not.toContain('data-placed');
   });
 });

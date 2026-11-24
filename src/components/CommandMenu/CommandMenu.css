@@ -137,6 +137,32 @@
     }
   }
 
+  .motiv-command-menu--sm > .motiv-command-menu__launcher {
+    gap: calc(var(--motiv-space) * 2);
+    min-height: var(--motiv-control-height);
+    padding: 0 calc(var(--motiv-space) * 2);
+
+    & > svg {
+      width: var(--motiv-icon-size-sm);
+      height: var(--motiv-icon-size-sm);
+    }
+  }
+
+  .motiv-command-menu__item[aria-disabled="true"] {
+    color: var(--motiv-color-text-muted);
+    cursor: not-allowed;
+
+    &:is(:hover, :focus-visible) > svg {
+      color: var(--motiv-color-text-muted);
+      translate: 0;
+    }
+  }
+
+  .motiv-command-menu__reason {
+    font-size: var(--motiv-font-size-xs);
+    color: var(--motiv-color-text-muted);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .motiv-command-menu__menu,
     [data-open="true"] > .motiv-command-menu__menu,

@@ -189,7 +189,7 @@ export const catalog = {
       symbols: ['CommandMenu'],
       demo: 'CommandMenu',
       blurb:
-        'A launcher that tips open a paper sheet of commands, each with an arrow inked in on focus. Arrow keys move, Escape closes, ⌘K / Ctrl K if you ask for it. Pass open and onOpenChange to control it; every controlled opening focuses the first command.',
+        'A launcher that tips open a paper sheet of commands, each with an arrow inked in on focus. Arrow keys move, Escape closes, ⌘K / Ctrl K if you ask for it. Pass open and onOpenChange to control it; every controlled opening focuses the first command. A disabled command stays visible with its disabledReason but does not run; size="sm" makes a compact launcher.',
     },
     {
       id: 'link',
@@ -433,6 +433,17 @@ export const catalog = {
         'A button that opens a short list of actions. Arrow keys, typeahead and Escape work; disabled items are skipped. Import it from @driif/motiv/action-menu.',
     },
     {
+      id: 'split-button',
+      category: null,
+      group: 'Actions',
+      title: 'SplitButton',
+      entry: '@driif/motiv/action-menu',
+      symbols: ['SplitButton'],
+      demo: 'SplitButton',
+      blurb:
+        'A main action with a chevron that opens the alternatives: the ActionMenu list, with its keys. Import it from @driif/motiv/action-menu.',
+    },
+    {
       id: 'bell-button',
       category: null,
       group: 'Actions',
@@ -535,7 +546,7 @@ export const catalog = {
       symbols: ['IconButton', 'IconButtonGroup'],
       demo: 'IconButton',
       blurb:
-        'A toolbar of line icons; hover blooms a soft lilac fill and tips the icon up. Each has a label for screen readers. size="sm" gives a 32px button for table and list rows.',
+        'A toolbar of line icons; hover blooms a soft lilac fill and tips the icon up. Each has a label for screen readers. size="sm" gives a 32px button for table and list rows; IconButtonGroup size="sm" makes a whole toolbar small.',
     },
     {
       id: 'menu-button',
@@ -552,7 +563,7 @@ export const catalog = {
       symbols: ['ThemeToggle'],
       demo: 'ThemeToggle',
       blurb:
-        'Sun and moon roll past each other in a half turn. It reports clicks; your app sets data-theme.',
+        'Sun and moon roll past each other in a half turn. It reports clicks; your app sets data-theme. Leave out dark and it follows data-theme on the root, with the icon picked by CSS before hydration, so a server-rendered page needs no pre-paint script.',
     },
     {
       id: 'segmented-control',
@@ -624,7 +635,7 @@ export const catalog = {
       symbols: ['CommandMenu'],
       demo: 'CommandMenu',
       blurb:
-        'A launcher that unfolds into commands. Arrow keys move through them, Escape closes, and ⌘K / Ctrl K works if you ask for it. Pass open and onOpenChange to control it; every controlled opening focuses the first command.',
+        'A launcher that unfolds into commands. Arrow keys move through them, Escape closes, and ⌘K / Ctrl K works if you ask for it. Pass open and onOpenChange to control it; every controlled opening focuses the first command. A disabled command stays visible with its disabledReason but does not run; size="sm" makes a compact launcher.',
     },
     {
       id: 'floating-field',
@@ -642,7 +653,7 @@ export const catalog = {
       symbols: ['TextField'],
       demo: 'TextField',
       blurb:
-        'The FloatingField look under the generic name, without the check; a long label wraps above the value. Same props as the drawn and matrix TextField, plus labelPosition="above", which puts the label over a box as high as Select, MultiSelect and a medium Button.',
+        'The FloatingField look under the generic name, without the check; a long label wraps above the value. Same props as the drawn and matrix TextField, plus labelPosition="above", which puts the label over a box as high as Select, MultiSelect and a medium Button, and labelPosition="hidden", a row-high box for inline edit with the label for screen readers only. type="color" shows the swatch in the field.',
     },
     {
       id: 'date-picker',
@@ -816,7 +827,7 @@ export const catalog = {
       symbols: ['GlideNav'],
       demo: 'GlideNav',
       blurb:
-        'Sidebar navigation where a soft highlight follows the pointer and the active bar springs to your choice. Items with href render as links. Also exported as Nav.',
+        'Sidebar navigation where a soft highlight follows the pointer and the active bar springs to your choice. Items with href render as links and need no onChange; attributes sets extra attributes such as data-astro-prefetch on an item. Rendered without hydration (an Astro component with no client directive) it is a static nav that ships no JS: the active bar and hover are CSS. Also exported as Nav.',
     },
     {
       id: 'nav',
@@ -1102,7 +1113,7 @@ export const catalog = {
       symbols: ['CommandMenu'],
       demo: 'CommandMenu',
       blurb:
-        'A > search_ prompt that opens a HUD list of commands with a ▸ on the active one. Arrow keys move, Escape closes, ⌘K / Ctrl K if you ask for it. Pass open and onOpenChange to control it; every controlled opening focuses the first command.',
+        'A > search_ prompt that opens a HUD list of commands with a ▸ on the active one. Arrow keys move, Escape closes, ⌘K / Ctrl K if you ask for it. Pass open and onOpenChange to control it; every controlled opening focuses the first command. A disabled command stays visible with its disabledReason but does not run; size="sm" makes a compact launcher.',
     },
     {
       id: 'chevron-nav',

@@ -9,10 +9,11 @@ export function Nav({ items, onChange, className, ...props }: NavProps) {
       className={cx('motiv-matrix-nav', className)}
       sections={[
         {
-          items: items.map(({ id, label, icon, count, href }) => ({
+          items: items.map(({ id, label, icon, count, href, attributes }) => ({
             id,
             icon,
             href,
+            attributes,
             label: (
               <>
                 <span className="motiv-matrix-nav__text">{label}</span>
@@ -27,7 +28,7 @@ export function Nav({ items, onChange, className, ...props }: NavProps) {
           })),
         },
       ]}
-      onChange={(id, event) => onChange(id, event)}
+      onChange={(id, event) => onChange?.(id, event)}
     />
   );
 }

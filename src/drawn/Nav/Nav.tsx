@@ -10,6 +10,7 @@ export function Nav({ items, value, onChange, label, className, ...props }: NavP
         {items.map((item) => (
           <li key={item.id}>
             <NavItem
+              {...item.attributes}
               icon={item.icon}
               label={
                 <>
@@ -24,7 +25,7 @@ export function Nav({ items, value, onChange, label, className, ...props }: NavP
               }
               active={item.id === value}
               {...(item.href !== undefined ? { href: item.href } : {})}
-              onClick={(event: MouseEvent<HTMLElement>) => onChange(item.id, event)}
+              onClick={(event: MouseEvent<HTMLElement>) => onChange?.(item.id, event)}
             />
           </li>
         ))}

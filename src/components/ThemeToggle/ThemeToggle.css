@@ -36,18 +36,39 @@
       scale 0.6s var(--motiv-ease-spring);
   }
 
-  .motiv-theme-toggle[aria-pressed="true"] .motiv-theme-toggle__sun {
+  /* With no aria-pressed yet (server render, before hydration) the root data-theme picks the icon. */
+  .motiv-theme-toggle[aria-pressed="true"] .motiv-theme-toggle__sun,
+  :root[data-theme="dark"] .motiv-theme-toggle:not([aria-pressed]) .motiv-theme-toggle__sun {
     opacity: 0;
     translate: -40% 0;
     rotate: -180deg;
     scale: 0.5;
   }
 
-  .motiv-theme-toggle[aria-pressed="false"] .motiv-theme-toggle__moon {
+  .motiv-theme-toggle[aria-pressed="false"] .motiv-theme-toggle__moon,
+  :root:not([data-theme="dark"]) .motiv-theme-toggle:not([aria-pressed]) .motiv-theme-toggle__moon {
     opacity: 0;
     translate: 40% 0;
     rotate: 180deg;
     scale: 0.5;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .motiv-theme-toggle:not([aria-pressed]) {
+      & .motiv-theme-toggle__sun {
+        opacity: 0;
+        translate: -40% 0;
+        rotate: -180deg;
+        scale: 0.5;
+      }
+
+      & .motiv-theme-toggle__moon {
+        opacity: 1;
+        translate: none;
+        rotate: none;
+        scale: 1;
+      }
+    }
   }
 
   .motiv-theme-toggle:hover:not(:disabled) {

@@ -84,6 +84,26 @@
     }
   }
 
+  /* The native swatch fills the value row with the field's corners instead of a bevelled box. */
+  .motiv-float__input[type="color"] {
+    height: calc(var(--motiv-space) * 8);
+    cursor: pointer;
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    &::-webkit-color-swatch {
+      border: 0;
+      border-radius: var(--motiv-radius-sm);
+    }
+
+    &::-moz-color-swatch {
+      border: 0;
+      border-radius: var(--motiv-radius-sm);
+    }
+  }
+
   /* At rest the label is pushed onto the empty value row with padding, not translate, so the
      whole box stays clickable; a negative margin keeps the row from growing. */
   .motiv-float__label {
@@ -151,6 +171,16 @@
   .motiv-float--above .motiv-float__input {
     grid-row: 1;
     padding: 0 calc(var(--motiv-space) * 3.5);
+  }
+
+  .motiv-float--hidden .motiv-float__control {
+    grid-template-rows: 1fr;
+    min-height: var(--motiv-row-height);
+  }
+
+  .motiv-float--hidden .motiv-float__input {
+    grid-row: 1;
+    padding: 0 calc(var(--motiv-space) * 1.5);
   }
 
   .motiv-float__hint {

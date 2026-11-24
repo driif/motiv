@@ -1,0 +1,22 @@
+@layer motiv.components {
+  .motiv-split-button {
+    display: inline-flex;
+    gap: 1px;
+  }
+
+  .motiv-split-button__main {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  .motiv-split-button__toggle {
+    padding-inline: calc(var(--motiv-space) * 2);
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+
+    & svg {
+      width: var(--motiv-icon-size-sm);
+      height: var(--motiv-icon-size-sm);
+    }
+  }
+}

@@ -26,6 +26,12 @@ export const LabelAbove: Story = {
   args: { labelPosition: 'above', hint: 'We only use it to reply.' },
 };
 
+export const LabelHidden: Story = {
+  args: { labelPosition: 'hidden', defaultValue: 'Rename me' },
+};
+
+export const Color: Story = { args: { type: 'color', label: 'Accent', defaultValue: '#3b82f6' } };
+
 export const LongLabel: Story = {
   args: { label: longLabel },
   play: ({ canvasElement }) => assertFieldLayout(canvasElement, longValue),

@@ -139,6 +139,23 @@
     }
   }
 
+  .motiv-sketch-command-menu--sm > .motiv-sketch-command-menu__launcher {
+    gap: calc(var(--motiv-space) * 2);
+    min-height: var(--motiv-control-height);
+    padding: 0 calc(var(--motiv-space) * 2);
+    font-size: var(--motiv-font-size-sm);
+  }
+
+  .motiv-sketch-command-menu__item[aria-disabled="true"] {
+    color: var(--motiv-color-text-muted);
+    cursor: not-allowed;
+  }
+
+  .motiv-sketch-command-menu__reason {
+    font-size: var(--motiv-font-size-xs);
+    color: var(--motiv-color-text-muted);
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     .motiv-sketch-command-menu__menu {
       transition:
