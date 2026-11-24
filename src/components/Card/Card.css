@@ -73,11 +73,18 @@
     }
   }
 
+  /* In a narrow card the actions wrap below the heading. */
   .motiv-card__header {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between;
-    gap: calc(var(--motiv-space) * 4);
+    gap: calc(var(--motiv-space) * 2) calc(var(--motiv-space) * 4);
+  }
+
+  .motiv-card__heading {
+    flex: 1 1 calc(var(--motiv-space) * 40);
+    min-width: 0;
   }
 
   .motiv-card__title {
@@ -96,7 +103,7 @@
 
   .motiv-card__actions {
     display: flex;
-    flex-shrink: 0;
+    flex-wrap: wrap;
     gap: calc(var(--motiv-space) * 2);
   }
 

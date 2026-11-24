@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { CSSProperties } from 'react';
+import { IconButton } from '../IconButton';
 import { ActionMenu } from './ActionMenu';
 
 const noop = () => {};
@@ -33,6 +34,23 @@ export const Loading: Story = { args: { loading: true } };
 export const Disabled: Story = { args: { disabled: true } };
 
 export const Empty: Story = { args: { items: [] } };
+
+export const IconTriggerAndSubmenu: Story = {
+  args: {
+    trigger: <IconButton size="sm" icon="⋯" label="Actions for report.pdf" />,
+    items: [
+      { label: 'Rename', onSelect: noop },
+      {
+        label: 'Move to',
+        submenu: [
+          { label: 'Archive', onSelect: noop },
+          { label: 'Shared', onSelect: noop },
+        ],
+      },
+      { label: 'Delete', onSelect: noop, disabled: true, disabledReason: 'The file is locked.' },
+    ],
+  },
+};
 
 export const LongLabel: Story = {
   args: {

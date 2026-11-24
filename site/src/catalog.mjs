@@ -431,7 +431,7 @@ export const catalog = {
       symbols: ['ActionMenu'],
       demo: 'ActionMenu',
       blurb:
-        'A button that opens a short list of actions. Arrow keys, typeahead and Escape work; disabled items are skipped. Import it from @driif/motiv/action-menu.',
+        'A button that opens a short list of actions. Arrow keys, typeahead and Escape work; disabled items are skipped. An item can open a submenu; `trigger` swaps in an IconButton, and `open` controls it from a context menu. Import it from @driif/motiv/action-menu.',
     },
     {
       id: 'split-button',
