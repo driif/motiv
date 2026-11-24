@@ -223,7 +223,8 @@ export const catalog = {
       title: 'IconButton & IconButtonGroup',
       symbols: ['IconButton', 'IconButtonGroup'],
       demo: 'IconButton',
-      blurb: 'A toolbar of sketched icons, each with a label for screen readers.',
+      blurb:
+        'A toolbar of sketched icons, each with a label for screen readers. Size xs matches the list row height.',
     },
     {
       id: 'menu-button',
@@ -441,7 +442,7 @@ export const catalog = {
       symbols: ['SplitButton'],
       demo: 'SplitButton',
       blurb:
-        'A main action with a chevron that opens the alternatives: the ActionMenu list, with its keys. Import it from @driif/motiv/action-menu.',
+        'A main action with a chevron that opens the alternatives: the ActionMenu list, with its keys, item icons and disabled reasons. Import it from @driif/motiv/action-menu.',
     },
     {
       id: 'bell-button',

@@ -4,7 +4,8 @@ import { cx } from '../../utils/cx';
 export interface IconButtonProps extends Omit<ComponentProps<'button'>, 'children'> {
   icon: ReactNode;
   label: string;
-  size?: 'sm' | 'md';
+  /** `xs` matches `--motiv-row-height`, so a list row keeps its height. */
+  size?: 'xs' | 'sm' | 'md';
   shape?: 'square' | 'round';
 }
 
@@ -24,7 +25,7 @@ export function IconButton({
       title={label}
       className={cx(
         'motiv-icon-button',
-        size === 'sm' && 'motiv-icon-button--sm',
+        size !== 'md' && `motiv-icon-button--${size}`,
         shape === 'round' && 'motiv-icon-button--round',
         className,
       )}

@@ -59,6 +59,12 @@
     --_icon-size: var(--motiv-icon-size-sm);
   }
 
+  .motiv-icon-button--xs {
+    --_size: max(20px, var(--motiv-row-height));
+    --_icon-size: var(--motiv-icon-size-sm);
+    border-radius: var(--motiv-icon-button-radius, var(--motiv-radius-sm));
+  }
+
   .motiv-icon-button-group--sm {
     gap: 5px;
     padding: calc(var(--motiv-space) * 0.5);
