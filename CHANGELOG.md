@@ -1,5 +1,17 @@
 # @driif/motiv
 
+## 0.39.0
+
+### Minor Changes
+
+- 51d631b: `CommandMenu` takes `size="sm"` for a compact, control-height launcher.
+- 51d631b: A `CommandMenu` command takes `disabled` and `disabledReason`: it stays visible and focusable with `aria-disabled` and its reason in muted text, but does not run.
+- 51d631b: A `GlideNav` item takes `attributes` (e.g. `{ "data-astro-prefetch": "" }`), `onChange` is optional for link-only navs, and without hydration the nav works as static markup with a CSS hover.
+- 51d631b: `IconButtonGroup` takes `size="sm"`, which makes every IconButton in it small and tightens the frame.
+- 51d631b: Add `SplitButton` to `@driif/motiv/action-menu`: a main button plus a chevron that opens a keyboard-ready menu of alternatives.
+- 51d631b: `TextField` takes `labelPosition="hidden"`: a row-high box for inline edit, with the label for screen readers only. `type="color"` now shows a clean swatch in the field.
+- 51d631b: The `ThemeToggle` `dark` prop is optional: without it the toggle follows `data-theme` on the root element, and CSS picks the icon before hydration, so a server-rendered page needs no pre-paint script.
+
 ## 0.38.0
 
 ### Minor Changes
