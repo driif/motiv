@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.40.0
+
+### Minor Changes
+
+- dba3139: IconButton takes `size="xs"` to match the list row height; ActionMenu and SplitButton items take `icon` and `disabledReason`.
+
 ## 0.39.0
 
 ### Minor Changes
