@@ -64,9 +64,9 @@ export const SmallInGroup: Story = {
   render: () => (
     <ThemePair>
       {() => (
-        <IconButtonGroup label="Tools">
-          <IconButton size="sm" icon={edit} label="Edit" />
-          <IconButton size="sm" icon={<Icon d="M12 5v14M5 12h14" />} label="Add" />
+        <IconButtonGroup label="Tools" size="sm">
+          <IconButton icon={edit} label="Edit" />
+          <IconButton icon={<Icon d="M12 5v14M5 12h14" />} label="Add" />
         </IconButtonGroup>
       )}
     </ThemePair>

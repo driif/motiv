@@ -38,15 +38,21 @@ export function IconButton({
 
 export interface IconButtonGroupProps extends ComponentProps<'div'> {
   label: string;
+  /** `sm` makes every IconButton in the group small and tightens the frame. */
+  size?: 'sm' | 'md';
 }
 
-export function IconButtonGroup({ label, className, ...props }: IconButtonGroupProps) {
+export function IconButtonGroup({ label, size = 'md', className, ...props }: IconButtonGroupProps) {
   return (
     <div
       {...props}
       role="group"
       aria-label={label}
-      className={cx('motiv-icon-button-group', className)}
+      className={cx(
+        'motiv-icon-button-group',
+        size === 'sm' && 'motiv-icon-button-group--sm',
+        className,
+      )}
     />
   );
 }

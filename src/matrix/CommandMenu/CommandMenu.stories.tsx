@@ -29,6 +29,23 @@ export const Default: Story = {};
 
 export const WithHotkey: Story = { args: { hotkey: true } };
 
+export const Compact: Story = { args: { size: 'sm', placeholder: 'Actions' } };
+
+export const DisabledCommand: Story = {
+  args: {
+    commands: [
+      ...commands,
+      {
+        id: 'deploy',
+        label: 'Deploy',
+        onSelect: () => {},
+        disabled: true,
+        disabledReason: 'No access',
+      },
+    ],
+  },
+};
+
 function ControlledDemo() {
   const [open, setOpen] = useState(false);
   return (

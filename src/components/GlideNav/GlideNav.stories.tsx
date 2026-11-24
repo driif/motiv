@@ -73,3 +73,14 @@ export const FlatInSidebar: Story = {
     </aside>
   ),
 };
+
+/** Link items need no `onChange`; attributes such as `data-astro-prefetch` go on each item. */
+export const LinksOnly: Story = {
+  render: () => (
+    <GlideNav
+      items={links.map((link) => ({ ...link, attributes: { 'data-astro-prefetch': '' } }))}
+      value="drafts"
+      label="Mail"
+    />
+  ),
+};

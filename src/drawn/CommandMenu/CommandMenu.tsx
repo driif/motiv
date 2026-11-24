@@ -9,6 +9,7 @@ export function CommandMenu({
   menuLabel = 'Commands',
   open: openProp,
   onOpenChange,
+  size = 'md',
   className,
   onKeyDown: onKeyDownProp,
   onBlur: onBlurProp,
@@ -35,7 +36,11 @@ export function CommandMenu({
   return (
     <div
       {...props}
-      className={cx('motiv-sketch-command-menu', className)}
+      className={cx(
+        'motiv-sketch-command-menu',
+        size === 'sm' && 'motiv-sketch-command-menu--sm',
+        className,
+      )}
       data-open={open}
       onKeyDown={onKeyDown}
       onBlur={onBlur}
@@ -63,13 +68,17 @@ export function CommandMenu({
         aria-label={menuLabel}
         className="motiv-sketch-command-menu__menu"
       >
-        {commands.map((command) => (
+        {commands.map((command, i) => (
           <button
             key={command.id}
             type="button"
             role="menuitem"
             tabIndex={-1}
             className="motiv-sketch-command-menu__item"
+            aria-disabled={command.disabled || undefined}
+            aria-describedby={
+              command.disabled && command.disabledReason ? `${menuId}-${i}` : undefined
+            }
             onClick={() => select(command)}
           >
             <svg
@@ -83,6 +92,11 @@ export function CommandMenu({
               />
             </svg>
             <span className="motiv-sketch-command-menu__label">{command.label}</span>
+            {command.disabled && command.disabledReason && (
+              <span id={`${menuId}-${i}`} className="motiv-sketch-command-menu__reason">
+                {command.disabledReason}
+              </span>
+            )}
             {command.shortcut && (
               <kbd className="motiv-sketch-command-menu__kbd">{command.shortcut}</kbd>
             )}

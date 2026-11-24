@@ -8,6 +8,10 @@ export interface CommandMenuItem {
   label: string;
   shortcut?: string;
   onSelect: () => void;
+  /** Shown and focusable, but not selectable. */
+  disabled?: boolean;
+  /** Muted text next to a disabled command, e.g. why it is unavailable. */
+  disabledReason?: string;
 }
 
 export interface CommandMenuProps extends ComponentProps<'div'> {
@@ -22,6 +26,8 @@ export interface CommandMenuProps extends ComponentProps<'div'> {
    */
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  /** `sm` makes the launcher control-height, for toolbars and dense layouts. */
+  size?: 'sm' | 'md';
 }
 
 export function CommandMenu({
@@ -31,6 +37,7 @@ export function CommandMenu({
   menuLabel = 'Commands',
   open: openProp,
   onOpenChange,
+  size = 'md',
   className,
   onKeyDown: onKeyDownProp,
   onBlur: onBlurProp,
@@ -57,7 +64,7 @@ export function CommandMenu({
   return (
     <div
       {...props}
-      className={cx('motiv-command-menu', className)}
+      className={cx('motiv-command-menu', size === 'sm' && 'motiv-command-menu--sm', className)}
       data-open={open}
       onKeyDown={onKeyDown}
       onBlur={onBlur}
@@ -93,12 +100,21 @@ export function CommandMenu({
             tabIndex={-1}
             className="motiv-command-menu__item"
             style={{ '--_i': i } as CSSProperties}
+            aria-disabled={command.disabled || undefined}
+            aria-describedby={
+              command.disabled && command.disabledReason ? `${menuId}-${i}` : undefined
+            }
             onClick={() => select(command)}
           >
             <Icon>
               <path d="M5 12h14M13 6l6 6-6 6" />
             </Icon>
             <span className="motiv-command-menu__label">{command.label}</span>
+            {command.disabled && command.disabledReason && (
+              <span id={`${menuId}-${i}`} className="motiv-command-menu__reason">
+                {command.disabledReason}
+              </span>
+            )}
             {command.shortcut && <kbd className="motiv-command-menu__kbd">{command.shortcut}</kbd>}
           </button>
         ))}

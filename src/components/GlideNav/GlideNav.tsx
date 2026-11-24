@@ -15,12 +15,15 @@ export interface GlideNavItem {
   icon?: ReactNode;
   count?: ReactNode;
   href?: string;
+  /** Extra attributes on the item element, e.g. `{ 'data-astro-prefetch': '' }`. */
+  attributes?: Record<`data-${string}`, string>;
 }
 
 export interface GlideNavProps extends Omit<ComponentProps<'nav'>, 'onChange'> {
   items: GlideNavItem[];
   value: string;
-  onChange: (id: string, event?: MouseEvent<HTMLElement>) => void;
+  /** Called on every item click. Optional when every item has an `href`. */
+  onChange?: (id: string, event?: MouseEvent<HTMLElement>) => void;
   /** Accessible name of the nav landmark. */
   label: string;
 }
@@ -104,11 +107,12 @@ export function GlideNav({
       <span ref={barRef} className="motiv-glide-nav__bar" aria-hidden="true" />
       {items.map((item) => {
         const common = {
+          ...item.attributes,
           className: 'motiv-glide-nav__item',
           'aria-current': item.id === value ? ('page' as const) : undefined,
           onPointerEnter: showHover,
           onFocus: showHover,
-          onClick: (event: MouseEvent<HTMLElement>) => onChange(item.id, event),
+          onClick: (event: MouseEvent<HTMLElement>) => onChange?.(item.id, event),
         };
         const content = (
           <>

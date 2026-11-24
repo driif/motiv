@@ -90,6 +90,12 @@
     border-radius: 0 3px 3px 0;
   }
 
+  /* Without hydration (static markup) the hover highlight sits on the row itself. */
+  .motiv-glide-nav:not([data-placed]) .motiv-glide-nav__item:hover {
+    --_bg-hover: color-mix(in oklch, var(--motiv-nav-bg), var(--motiv-color-primary) 10%);
+    background: var(--motiv-nav-bg-hover, var(--_bg-hover, var(--motiv-color-surface-hover)));
+  }
+
   .motiv-glide-nav__label {
     flex: 1;
   }

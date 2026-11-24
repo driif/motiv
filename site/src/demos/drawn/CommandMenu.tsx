@@ -13,6 +13,13 @@ export function CommandMenuDemo() {
       onSelect: () => setLast('Invite people'),
     },
     { id: 'settings', label: 'Settings', onSelect: () => setLast('Settings') },
+    {
+      id: 'billing',
+      label: 'Billing',
+      onSelect: () => setLast('Billing'),
+      disabled: true,
+      disabledReason: 'Owners only',
+    },
   ];
   return (
     <div

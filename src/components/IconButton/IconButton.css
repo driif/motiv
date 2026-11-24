@@ -59,6 +59,23 @@
     --_icon-size: var(--motiv-icon-size-sm);
   }
 
+  .motiv-icon-button-group--sm {
+    gap: 5px;
+    padding: calc(var(--motiv-space) * 0.5);
+    border-radius: var(--motiv-radius);
+
+    & > .motiv-icon-button {
+      --_size: max(24px, var(--motiv-control-height));
+      --_icon-size: var(--motiv-icon-size-sm);
+    }
+
+    & > .motiv-icon-button + .motiv-icon-button::before {
+      top: 8px;
+      bottom: 8px;
+      left: -3px;
+    }
+  }
+
   .motiv-icon-button--round {
     border-radius: 50%;
   }

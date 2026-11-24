@@ -24,6 +24,13 @@ describe('TextField', () => {
     expect(container.querySelector('.motiv-float__label')).toBeNull();
   });
 
+  it('keeps the label for screen readers only with labelPosition="hidden"', () => {
+    const { container } = render(<TextField label="Name" labelPosition="hidden" />);
+    expect(screen.getByRole('textbox', { name: 'Name' })).toBeInTheDocument();
+    expect(container.firstChild).toHaveClass('motiv-float', 'motiv-float--hidden');
+    expect(container.querySelector('label')).toHaveClass('motiv-visually-hidden');
+  });
+
   it('merges a caller aria-describedby with the hint', () => {
     render(<TextField id="mail" label="Email" hint="Hint" aria-describedby="err" />);
     expect(screen.getByRole('textbox')).toHaveAttribute('aria-describedby', 'err mail-hint');

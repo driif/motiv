@@ -7,6 +7,8 @@ export interface ChevronNavItem {
   icon?: ReactNode;
   expandable?: boolean;
   href?: string;
+  /** Extra attributes on the item element, e.g. `{ 'data-astro-prefetch': '' }`. */
+  attributes?: Record<`data-${string}`, string>;
 }
 
 export interface ChevronNavSection {
@@ -38,6 +40,7 @@ export function ChevronNav({
           <ul className="motiv-matrix-chevnav__list">
             {section.items.map((item) => {
               const common = {
+                ...item.attributes,
                 className: cx(
                   'motiv-matrix-chevnav__item',
                   item.id === value && 'motiv-matrix-chevnav__item--active',

@@ -140,7 +140,8 @@ export function useCommandMenu({
     launcherRef,
     menuRef,
     menuId,
-    select: (command: { onSelect: () => void }) => {
+    select: (command: { onSelect: () => void; disabled?: boolean }) => {
+      if (command.disabled) return;
       selecting.current = true;
       try {
         requestOpen(false);

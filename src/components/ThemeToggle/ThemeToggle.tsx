@@ -1,12 +1,37 @@
-import type { ComponentProps } from 'react';
+import { type ComponentProps, useSyncExternalStore } from 'react';
 import { cx } from '../../utils/cx';
 import { Icon } from '../../utils/Icon';
 
 export interface ThemeToggleProps extends Omit<ComponentProps<'button'>, 'children' | 'onClick'> {
-  dark: boolean;
+  /**
+   * Omit to follow `data-theme` on the root element: CSS picks the icon before hydration, so a
+   * server-rendered page needs no pre-paint script.
+   */
+  dark?: boolean;
   onToggle: () => void;
   label?: string;
 }
+
+const darkQuery = '(prefers-color-scheme: dark)';
+
+function subscribe(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, { attributeFilter: ['data-theme'] });
+  const media = matchMedia(darkQuery);
+  media.addEventListener('change', onChange);
+  return () => {
+    observer.disconnect();
+    media.removeEventListener('change', onChange);
+  };
+}
+
+function rootIsDark() {
+  const theme = document.documentElement.dataset.theme;
+  return theme ? theme === 'dark' : matchMedia(darkQuery).matches;
+}
+
+const subscribeNone = () => () => {};
+const noSnapshot = () => undefined;
 
 export function ThemeToggle({
   dark,
@@ -15,12 +40,18 @@ export function ThemeToggle({
   className,
   ...props
 }: ThemeToggleProps) {
+  const follow = dark === undefined;
+  const rootDark = useSyncExternalStore(
+    follow ? subscribe : subscribeNone,
+    follow ? rootIsDark : noSnapshot,
+    noSnapshot,
+  );
   return (
     <button
       type="button"
       {...props}
       aria-label={label}
-      aria-pressed={dark}
+      aria-pressed={dark ?? rootDark}
       className={cx('motiv-theme-toggle', className)}
       onClick={onToggle}
     >

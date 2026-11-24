@@ -10,6 +10,8 @@ export function TextFieldDemo() {
         hint="We only use it to reply."
       />
       <TextField label="City" labelPosition="above" />
+      <TextField label="Project name" labelPosition="hidden" defaultValue="Inline rename" />
+      <TextField label="Accent" type="color" defaultValue="#756383" />
     </>
   );
 }

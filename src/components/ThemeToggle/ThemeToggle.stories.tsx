@@ -25,3 +25,15 @@ export const Dark: Story = { render: () => <Demo initial /> };
 export const Themes: Story = {
   render: () => <ThemePair>{(theme) => <Demo initial={theme === 'dark'} />}</ThemePair>,
 };
+
+/** No `dark` prop: the toggle follows `data-theme` on the root element. */
+export const FollowsRootTheme: Story = {
+  render: () => (
+    <ThemeToggle
+      onToggle={() => {
+        const root = document.documentElement;
+        root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      }}
+    />
+  ),
+};

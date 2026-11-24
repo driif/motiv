@@ -298,4 +298,38 @@ describe('CommandMenu open state', () => {
     act(() => outside.focus());
     expect(onOpenChange.mock.calls).toEqual([[false], [false], [false]]);
   });
+
+  it('shows a disabled command with its reason but does not run it', () => {
+    const onSelect = vi.fn();
+    render(
+      <CommandMenu
+        commands={[
+          {
+            id: 'a',
+            label: 'Run agent',
+            onSelect,
+            disabled: true,
+            disabledReason: 'Not installed',
+          },
+          { id: 'b', label: 'Settings', onSelect: vi.fn() },
+        ]}
+      />,
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Search or jump to…' }));
+    const [item, next] = screen.getAllByRole('menuitem');
+    expect(item).toHaveAttribute('aria-disabled', 'true');
+    expect(item).toHaveAccessibleDescription('Not installed');
+    expect(next).not.toHaveAttribute('aria-disabled');
+    fireEvent.click(item);
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(screen.getByRole('button', { name: 'Search or jump to…' })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    );
+  });
+
+  it('has a compact launcher size', () => {
+    const { container } = render(<CommandMenu commands={[]} size="sm" />);
+    expect(container.firstChild).toHaveClass('motiv-matrix-command-menu--sm');
+  });
 });
