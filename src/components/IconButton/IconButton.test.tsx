@@ -37,6 +37,11 @@ describe('IconButton', () => {
     rerender(<IconButton icon="✎" label="Edit" />);
     expect(button).not.toHaveClass('motiv-icon-button--sm');
   });
+
+  it('adds the xs modifier for the row-height size', () => {
+    render(<IconButton icon="✎" label="Edit" size="xs" />);
+    expect(screen.getByRole('button')).toHaveClass('motiv-icon-button--xs');
+  });
 });
 
 describe('IconButtonGroup', () => {

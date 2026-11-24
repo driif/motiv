@@ -1,7 +1,7 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { cx } from '../../utils/cx';
 import { Icon } from '../../utils/Icon';
-import type { ActionMenuItem } from '../ActionMenu/ActionMenu';
+import { type ActionMenuItem, ActionMenuItems } from '../ActionMenu/ActionMenu';
 import { Button, type ButtonProps } from '../Button/Button';
 
 export interface SplitButtonProps extends ButtonProps {
@@ -46,16 +46,7 @@ export function SplitButton({
           </Button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content className="motiv-action-menu__content" align="end" sideOffset={6}>
-          {items.map((item) => (
-            <DropdownMenu.Item
-              key={item.label}
-              className="motiv-action-menu__item"
-              disabled={item.disabled}
-              onSelect={item.onSelect}
-            >
-              {item.label}
-            </DropdownMenu.Item>
-          ))}
+          <ActionMenuItems items={items} />
         </DropdownMenu.Content>
       </DropdownMenu.Root>
     </div>

@@ -61,4 +61,25 @@ describe('SplitButton', () => {
     render(<SplitButton items={[]} menuLabel="Other editors" />);
     expect(screen.getByRole('button', { name: 'Other editors' })).toBeDisabled();
   });
+
+  it('shows item icons and the reason of a disabled item', () => {
+    render(
+      <SplitButton
+        items={[
+          { label: 'Split right', onSelect: vi.fn(), icon: <svg data-testid="icon" /> },
+          { label: 'Split down', onSelect: vi.fn(), disabled: true, disabledReason: 'No room' },
+          { label: 'New tab', onSelect: vi.fn(), disabledReason: 'Hidden while enabled' },
+        ]}
+      >
+        New terminal
+      </SplitButton>,
+    );
+    fireEvent.keyDown(screen.getByRole('button', { name: 'More options' }), { key: 'ArrowDown' });
+    const right = screen.getByRole('menuitem', { name: 'Split right' });
+    expect(right).toContainElement(screen.getByTestId('icon'));
+    expect(screen.getByRole('menuitem', { name: 'Split down' })).toHaveAccessibleDescription(
+      'No room',
+    );
+    expect(screen.queryByText('Hidden while enabled')).not.toBeInTheDocument();
+  });
 });

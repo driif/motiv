@@ -35,11 +35,13 @@ export const Default: Story = {};
 
 export const Small: Story = { args: { size: 'sm' } };
 
+export const RowHeight: Story = { args: { size: 'xs' } };
+
 export const InRow: Story = {
   render: () => (
     <table>
       <tbody>
-        {(['sm', 'md'] as const).map((size) => (
+        {(['xs', 'sm', 'md'] as const).map((size) => (
           <tr key={size}>
             <td>Quarterly report ({size})</td>
             <td>

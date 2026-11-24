@@ -37,3 +37,25 @@ export const Default: Story = {};
 export const Outline: Story = { args: { variant: 'outline', size: 'sm' } };
 
 export const Disabled: Story = { args: { disabled: true } };
+
+const square = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.65} aria-hidden="true">
+    <rect x="4" y="4" width="16" height="16" rx="2" />
+  </svg>
+);
+
+export const WithIcons: Story = {
+  args: {
+    items: [
+      { label: 'Split right', onSelect: noop, icon: square },
+      {
+        label: 'Split down',
+        onSelect: noop,
+        icon: square,
+        disabled: true,
+        disabledReason: 'The pane is too small',
+      },
+      { label: 'New tab', onSelect: noop, icon: square },
+    ],
+  },
+};
