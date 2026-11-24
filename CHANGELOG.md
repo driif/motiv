@@ -1,5 +1,11 @@
 # @driif/motiv
 
+## 0.41.0
+
+### Minor Changes
+
+- 6a5bc0d: ActionMenu takes a custom `trigger` (for example an IconButton), controlled `open`/`onOpenChange`, `onCloseAutoFocus` and items with a `submenu`. The menu is no longer modal, so focus that an item moves into a field stays there. CardHeader actions wrap below the heading in a narrow card.
+
 ## 0.40.0
 
 ### Minor Changes
