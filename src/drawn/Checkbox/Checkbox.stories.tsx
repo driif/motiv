@@ -17,6 +17,14 @@ export const Default: Story = {};
 
 export const Checked: Story = { args: { defaultChecked: true } };
 
+export const Mixed: Story = {
+  args: {
+    ref: (input: HTMLInputElement | null) => {
+      if (input) input.indeterminate = true;
+    },
+  },
+};
+
 export const Disabled: Story = { args: { disabled: true, defaultChecked: true } };
 
 export const Themes: Story = {
@@ -26,6 +34,7 @@ export const Themes: Story = {
         <>
           <Checkbox {...args} />
           <Checkbox label="Already checked" defaultChecked />
+          <Checkbox {...args} {...Mixed.args} />
         </>
       )}
     </ThemePair>
