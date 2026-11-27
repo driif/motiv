@@ -1,6 +1,11 @@
 import { defaultRangeExtractor, useVirtualizer } from '@tanstack/react-virtual';
 import { type CSSProperties, type Key, useCallback, useRef, useState } from 'react';
-import { TableHead, type TableProps } from '../../components/Table/Table';
+import {
+  type TableClassNames,
+  TableHead,
+  type TableProps,
+  tableClassNames,
+} from '../../components/Table/Table';
 import { cx } from '../../utils/cx';
 import { useColumnResize } from '../../utils/useColumnResize';
 
@@ -9,7 +14,13 @@ export type DataTableProps<Row> = TableProps<Row> & {
   estimateRowHeight?: number;
 };
 
-export function DataTable<Row>({
+export function DataTable<Row>(props: DataTableProps<Row>) {
+  return <DataTableBase {...props} classNames={tableClassNames} />;
+}
+
+/** The virtualised body behind every style's DataTable. */
+export function DataTableBase<Row>({
+  classNames,
   caption,
   columns,
   rows,
@@ -23,7 +34,7 @@ export function DataTable<Row>({
   style,
   onKeyDown,
   ...props
-}: DataTableProps<Row>) {
+}: DataTableProps<Row> & { classNames: TableClassNames }) {
   const { widthOf, separatorProps } = useColumnResize({
     columnWidths,
     onColumnWidthsChange,
@@ -84,15 +95,16 @@ export function DataTable<Row>({
         else return;
         event.preventDefault();
       }}
-      className={cx('motiv-table', 'motiv-data-table', className)}
+      className={cx(classNames.root, 'motiv-data-table', className)}
     >
       <table
-        className="motiv-table__table"
+        className={classNames.table}
         aria-rowcount={rows.length + 1}
         style={{ width: columns.reduce((sum, column) => sum + widthOf(column), 0) }}
       >
         <caption className="motiv-visually-hidden">{caption}</caption>
         <TableHead
+          classNames={classNames}
           columns={columns}
           widthOf={widthOf}
           separatorProps={separatorProps}
@@ -119,10 +131,10 @@ export function DataTable<Row>({
                 ref={virtualizer.measureElement}
                 data-index={item.index}
                 aria-rowindex={item.index + 2}
-                className="motiv-table__row"
+                className={classNames.row}
               >
                 {columns.map((column) => (
-                  <td key={column.id} className="motiv-table__cell">
+                  <td key={column.id} className={classNames.cell}>
                     {column.cell(rows[item.index])}
                   </td>
                 ))}
