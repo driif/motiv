@@ -1,8 +1,10 @@
 import { type ComponentProps, type ReactNode, useId } from 'react';
 import { cx } from '../../utils/cx';
+import { useRootDark } from '../../utils/useRootDark';
 
 export interface OrbitalThemeToggleProps extends Omit<ComponentProps<'div'>, 'children'> {
-  dark: boolean;
+  /** Omit to follow `data-theme` on the root element, as `ThemeToggle` does. */
+  dark?: boolean;
   onToggle: () => void;
   label?: string;
   figure?: ReactNode;
@@ -26,11 +28,12 @@ export function OrbitalThemeToggle({
   className,
   ...props
 }: OrbitalThemeToggleProps) {
+  const resolved = useRootDark(dark);
   const filterId = `motiv-ink-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`;
   return (
     <div
       {...props}
-      className={cx('motiv-orbital-toggle', dark && 'motiv-orbital-toggle--dark', className)}
+      className={cx('motiv-orbital-toggle', resolved && 'motiv-orbital-toggle--dark', className)}
     >
       <svg className="motiv-orbital-toggle__defs" aria-hidden="true" focusable="false">
         <defs>
@@ -70,7 +73,7 @@ export function OrbitalThemeToggle({
       <button
         type="button"
         className="motiv-orbital-toggle__button"
-        aria-pressed={dark}
+        aria-pressed={resolved}
         aria-label={label}
         onClick={onToggle}
       >

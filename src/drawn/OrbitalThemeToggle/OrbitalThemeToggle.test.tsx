@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { renderToString } from 'react-dom/server';
 import { describe, expect, it, vi } from 'vitest';
 import { OrbitalThemeToggle } from './OrbitalThemeToggle';
 
@@ -72,5 +73,30 @@ describe('OrbitalThemeToggle', () => {
       expect(id).toMatch(/^motiv-ink-[a-zA-Z0-9_-]+$/);
       expect(washes[i].style.filter).toBe(`url("#${id}")`);
     });
+  });
+
+  it('follows the root data-theme when dark is omitted', async () => {
+    vi.stubGlobal('matchMedia', () => ({
+      matches: false,
+      addEventListener() {},
+      removeEventListener() {},
+    }));
+    const root = document.documentElement;
+    root.dataset.theme = 'dark';
+    const html = renderToString(<OrbitalThemeToggle onToggle={vi.fn()} />);
+    expect(html).not.toContain('aria-pressed');
+    expect(html).not.toContain('motiv-orbital-toggle--dark');
+    const { container, unmount } = render(<OrbitalThemeToggle onToggle={vi.fn()} />);
+    const button = screen.getByRole('button', { name: 'Dark mode' });
+    expect(button).toHaveAttribute('aria-pressed', 'true');
+    expect(container.firstElementChild).toHaveClass('motiv-orbital-toggle--dark');
+    await act(async () => {
+      root.dataset.theme = 'light';
+    });
+    expect(button).toHaveAttribute('aria-pressed', 'false');
+    expect(container.firstElementChild).not.toHaveClass('motiv-orbital-toggle--dark');
+    unmount();
+    delete root.dataset.theme;
+    vi.unstubAllGlobals();
   });
 });

@@ -1,11 +1,7 @@
-import type { ComponentProps, CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
+import type { ThemeToggleProps } from '../../components/ThemeToggle';
 import { cx } from '../../utils/cx';
-
-export interface ThemeToggleProps extends Omit<ComponentProps<'button'>, 'children' | 'onClick'> {
-  dark: boolean;
-  onToggle: () => void;
-  label?: string;
-}
+import { useRootDark } from '../../utils/useRootDark';
 
 const RAYS = [0, 1, 2, 3, 4, 5, 6, 7];
 
@@ -21,7 +17,7 @@ export function ThemeToggle({
       type="button"
       {...props}
       aria-label={label}
-      aria-pressed={dark}
+      aria-pressed={useRootDark(dark)}
       className={cx('motiv-theme-toggle', className)}
       onClick={onToggle}
     >

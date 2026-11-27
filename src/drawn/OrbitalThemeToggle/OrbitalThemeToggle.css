@@ -196,6 +196,51 @@
     }
   }
 
+  /* With no aria-pressed yet (server render, before hydration) the root theme picks the state. */
+  :root[data-theme="dark"]
+  .motiv-orbital-toggle:not(:has(> .motiv-orbital-toggle__button[aria-pressed])) {
+    & .motiv-orbital-toggle__orbits {
+      color: color-mix(in oklch, var(--motiv-color-text) 30%, transparent);
+    }
+
+    & .motiv-orbital-toggle__wash {
+      opacity: 0.3;
+    }
+
+    & .motiv-orbital-toggle__sun {
+      opacity: 0;
+      transform: rotate(180deg) scale(0.3);
+    }
+
+    & .motiv-orbital-toggle__moon {
+      opacity: 1;
+      transform: rotate(0) scale(1);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme])
+      .motiv-orbital-toggle:not(:has(> .motiv-orbital-toggle__button[aria-pressed])) {
+      & .motiv-orbital-toggle__orbits {
+        color: color-mix(in oklch, var(--motiv-color-text) 30%, transparent);
+      }
+
+      & .motiv-orbital-toggle__wash {
+        opacity: 0.3;
+      }
+
+      & .motiv-orbital-toggle__sun {
+        opacity: 0;
+        transform: rotate(180deg) scale(0.3);
+      }
+
+      & .motiv-orbital-toggle__moon {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+      }
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .motiv-orbital-toggle__wash,
     .motiv-orbital-toggle__button,
