@@ -87,12 +87,12 @@
   }
 
   .motiv-matrix-btn--sm {
-    --_height: calc(var(--motiv-control-height) * 1.375);
+    --_height: var(--motiv-control-height);
     --_px: calc(var(--motiv-space) * 4);
     --_font-size: var(--motiv-font-size-xs);
   }
   .motiv-matrix-btn--md {
-    --_height: calc(var(--motiv-control-height) * 1.5);
+    --_height: var(--motiv-field-height);
     --_px: calc(var(--motiv-space) * 5);
     --_font-size: var(--motiv-font-size-sm);
   }

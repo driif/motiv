@@ -28,11 +28,12 @@
 
   .motiv-matrix-term__trigger {
     position: relative;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     gap: 6px;
     width: 100%;
-    min-height: calc(var(--motiv-control-height) * 1.75);
+    min-height: var(--motiv-field-height);
     padding: 0 16px;
     font-family: var(--motiv-font-body);
     font-size: var(--motiv-font-size-sm);
