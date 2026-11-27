@@ -23,6 +23,12 @@ export const Filled: Story = { args: { defaultValue: 'Ada Lovelace' } };
 
 export const Disabled: Story = { args: { disabled: true, defaultValue: 'Read only' } };
 
+export const LabelHidden: Story = {
+  args: { labelPosition: 'hidden', defaultValue: 'Rename me' },
+};
+
+export const Color: Story = { args: { type: 'color', label: 'Accent', defaultValue: '#3b82f6' } };
+
 export const Themes: Story = {
   render: (args) => (
     <ThemePair>

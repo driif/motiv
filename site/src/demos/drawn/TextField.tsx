@@ -9,6 +9,8 @@ export function TextFieldDemo() {
         type="email"
         hint="We only use it to reply."
       />
+      <TextField label="City" labelPosition="above" />
+      <TextField label="Accent" type="color" defaultValue="#3b82f6" />
     </>
   );
 }
