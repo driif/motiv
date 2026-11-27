@@ -73,7 +73,6 @@ const allowed: Record<string, string> = {
   'drawn/CommandMenu/CommandMenu.css height: 22px': 'icon',
   'drawn/HoldToConfirmButton/HoldToConfirmButton.css height: 1.15em':
     'icon, follows its text in em',
-  'drawn/IconButton/IconButton.css height: 26px': 'icon',
   'drawn/IconButton/IconButton.css height: calc(100% + 4px)': 'decorative ring',
   'drawn/InkSplatterButton/InkSplatterButton.css height: 1.15em': 'icon, follows its text in em',
   'drawn/Link/Link.css height: 1.25em': 'icon, follows its text in em',
@@ -119,8 +118,6 @@ const allowed: Record<string, string> = {
   'matrix/GlitchThemeToggle/GlitchThemeToggle.css height: 40px': 'illustration',
   'matrix/GlitchThemeToggle/GlitchThemeToggle.css height: 76px': 'illustration',
   'matrix/HudTabs/HudTabs.css height: 8px': 'marker',
-  'matrix/IconButton/IconButton.css height: 24px': 'icon',
-  'matrix/IconButton/IconButton.css height: 8px': 'marker',
   'matrix/Link/Link.css height: 1.1em': 'icon, follows its text in em',
   'matrix/MultiSelect/MultiSelect.css height: 18px': 'caret',
   'matrix/Progress/Progress.css height: 12px': 'track',
