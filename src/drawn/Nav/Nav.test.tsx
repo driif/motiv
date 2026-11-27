@@ -48,4 +48,19 @@ describe('Nav', () => {
     fireEvent.click(help);
     expect(onChange).toHaveBeenCalledWith('help', expect.objectContaining({ type: 'click' }));
   });
+
+  it('works as a link-only nav without onChange and forwards item attributes', () => {
+    render(
+      <Nav
+        label="Mail"
+        value="help"
+        items={[
+          { id: 'help', label: 'Help', href: '/help', attributes: { 'data-astro-prefetch': '' } },
+        ]}
+      />,
+    );
+    const help = screen.getByRole('link', { name: 'Help' });
+    expect(help).toHaveAttribute('data-astro-prefetch', '');
+    fireEvent.click(help);
+  });
 });

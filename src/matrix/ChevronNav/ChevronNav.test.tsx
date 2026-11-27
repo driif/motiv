@@ -50,4 +50,28 @@ describe('ChevronNav', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Policies' }));
     expect(onChange).toHaveBeenLastCalledWith('policies', expect.anything());
   });
+
+  it('works as a link-only nav without onChange and forwards item attributes', () => {
+    render(
+      <ChevronNav
+        label="Main"
+        value="docs"
+        sections={[
+          {
+            items: [
+              {
+                id: 'docs',
+                label: 'Docs',
+                href: '/docs',
+                attributes: { 'data-astro-prefetch': '' },
+              },
+            ],
+          },
+        ]}
+      />,
+    );
+    const docs = screen.getByRole('link', { name: 'Docs' });
+    expect(docs).toHaveAttribute('data-astro-prefetch', '');
+    fireEvent.click(docs);
+  });
 });
