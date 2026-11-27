@@ -18,22 +18,34 @@ export type ActionMenuItem = {
     }
 );
 
-export type ActionMenuPrefix = 'motiv' | 'motiv-sketch' | 'motiv-matrix';
+/** Literal class names per style, so bundlers and the tree-shake check can see them. */
+export type ActionMenuClassNames = Record<
+  'content' | 'item' | 'icon' | 'text' | 'reason' | 'chevron',
+  string
+>;
+
+export const actionMenuClassNames: ActionMenuClassNames = {
+  content: 'motiv-action-menu__content',
+  item: 'motiv-action-menu__item',
+  icon: 'motiv-action-menu__icon',
+  text: 'motiv-action-menu__text',
+  reason: 'motiv-action-menu__reason',
+  chevron: 'motiv-action-menu__chevron',
+};
 
 // Internal: the menu rows, shared by ActionMenu and SplitButton of every style.
 export function ActionMenuItems({
   items,
-  prefix,
+  classNames,
 }: {
   items: ActionMenuItem[];
-  prefix: ActionMenuPrefix;
+  classNames: ActionMenuClassNames;
 }) {
   const id = useId();
-  const block = `${prefix}-action-menu`;
   return items.map((item, index) => {
     const reason = item.disabled && item.disabledReason;
     const rowProps = {
-      className: `${block}__item`,
+      className: classNames.item,
       disabled: item.disabled,
       textValue: item.label,
       'aria-describedby': reason ? `${id}-${index}` : undefined,
@@ -41,15 +53,15 @@ export function ActionMenuItems({
     const content = (
       <>
         {item.icon && (
-          <span className={`${block}__icon`} aria-hidden="true">
+          <span className={classNames.icon} aria-hidden="true">
             {item.icon}
           </span>
         )}
-        <span className={`${block}__text`}>
+        <span className={classNames.text}>
           <span>{item.label}</span>
           {reason && (
             // Hidden from the item name; aria-describedby still reads it.
-            <span id={`${id}-${index}`} className={`${block}__reason`} aria-hidden="true">
+            <span id={`${id}-${index}`} className={classNames.reason} aria-hidden="true">
               {reason}
             </span>
           )}
@@ -66,12 +78,12 @@ export function ActionMenuItems({
       <DropdownMenu.Sub key={index}>
         <DropdownMenu.SubTrigger {...rowProps}>
           {content}
-          <Icon className={`${block}__chevron`}>
+          <Icon className={classNames.chevron}>
             <path d="M9 6l6 6-6 6" />
           </Icon>
         </DropdownMenu.SubTrigger>
-        <DropdownMenu.SubContent className={`${block}__content`} sideOffset={6}>
-          <ActionMenuItems items={item.submenu} prefix={prefix} />
+        <DropdownMenu.SubContent className={classNames.content} sideOffset={6}>
+          <ActionMenuItems items={item.submenu} classNames={classNames} />
         </DropdownMenu.SubContent>
       </DropdownMenu.Sub>
     );
@@ -94,13 +106,13 @@ export interface ActionMenuProps extends Omit<ButtonProps, 'children'> {
 }
 
 export function ActionMenu(props: ActionMenuProps) {
-  return <ActionMenuBase {...props} Button={Button} prefix="motiv" />;
+  return <ActionMenuBase {...props} Button={Button} classNames={actionMenuClassNames} />;
 }
 
-// Internal: ActionMenu over a style's Button and class prefix.
+// Internal: ActionMenu over a style's Button and class names.
 export function ActionMenuBase({
   Button,
-  prefix,
+  classNames,
   label = 'Actions',
   items = [],
   trigger,
@@ -111,7 +123,7 @@ export function ActionMenuBase({
   loading,
   id,
   ...buttonProps
-}: ActionMenuProps & { Button: ComponentType<ButtonProps>; prefix: ActionMenuPrefix }) {
+}: ActionMenuProps & { Button: ComponentType<ButtonProps>; classNames: ActionMenuClassNames }) {
   const fallbackId = useId();
   const triggerId = id ?? fallbackId;
   const inert = disabled || loading || items.length === 0;
@@ -135,7 +147,7 @@ export function ActionMenuBase({
         )}
       </DropdownMenu.Trigger>
       <DropdownMenu.Content
-        className={`${prefix}-action-menu__content`}
+        className={classNames.content}
         aria-labelledby={triggerId}
         align="start"
         sideOffset={6}
@@ -146,7 +158,7 @@ export function ActionMenuBase({
           else onCloseAutoFocus?.(event);
         }}
       >
-        <ActionMenuItems items={items} prefix={prefix} />
+        <ActionMenuItems items={items} classNames={classNames} />
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   );

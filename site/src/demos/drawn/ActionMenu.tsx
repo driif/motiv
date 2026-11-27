@@ -26,7 +26,7 @@ export function ActionMenuDemo() {
         />
         <ActionMenu label="Export" variant="outline" loading />
         <ActionMenu
-          trigger={<IconButton icon={more} label="Actions for report.pdf" />}
+          trigger={<IconButton size="sm" icon={more} label="Actions for report.pdf" />}
           items={[
             { label: 'Rename', onSelect: () => setLast('Rename') },
             {

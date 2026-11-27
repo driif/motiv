@@ -8,6 +8,63 @@ const checks = [
     droppedModules: /node_modules\/(?:micromark[^/]*|hast-util-[^/]+|parse5|@tanstack)\//,
   },
   {
+    input: 'dist/drawn/index.js',
+    kept: 'motiv-btn',
+    dropped: ['motiv-markdown', 'motiv-data-table', 'motiv-sketch-action-menu', '@radix-ui'],
+    droppedModules: /node_modules\/(?:micromark[^/]*|hast-util-[^/]+|parse5|@tanstack)\//,
+  },
+  {
+    input: 'dist/matrix/index.js',
+    kept: 'motiv-matrix-btn',
+    dropped: ['motiv-markdown', 'motiv-data-table', 'motiv-matrix-action-menu', '@radix-ui'],
+    droppedModules: /node_modules\/(?:micromark[^/]*|hast-util-[^/]+|parse5|@tanstack)\//,
+  },
+  {
+    input: 'test/fixtures/treeshake-drawn-action-menu.js',
+    kept: 'motiv-sketch-action-menu__item',
+    dropped: ['motiv-action-menu__', 'motiv-matrix-action-menu', 'motiv-sketch-split-button'],
+  },
+  {
+    input: 'test/fixtures/treeshake-matrix-action-menu.js',
+    kept: 'motiv-matrix-action-menu__item',
+    dropped: ['motiv-action-menu__', 'motiv-sketch-action-menu', 'motiv-matrix-split-button'],
+  },
+  {
+    input: 'test/fixtures/treeshake-drawn-data-table.js',
+    kept: 'motiv-sketch-table__row',
+    dropped: ['motiv-table__', 'motiv-matrix-table', 'motiv-markdown'],
+  },
+  {
+    input: 'test/fixtures/treeshake-matrix-data-table.js',
+    kept: 'motiv-matrix-table__row',
+    dropped: ['motiv-table__', 'motiv-sketch-table', 'motiv-markdown'],
+  },
+  {
+    input: 'test/fixtures/treeshake-drawn-markdown.js',
+    kept: 'motiv-markdown',
+    dropped: ['motiv-markdown-editor', 'motiv-textarea', 'fitHeight', 'useState'],
+  },
+  {
+    input: 'test/fixtures/treeshake-matrix-markdown.js',
+    kept: 'motiv-markdown',
+    dropped: ['motiv-markdown-editor', 'motiv-matrix-textarea', 'fitHeight', 'useState'],
+  },
+  {
+    input: 'test/fixtures/treeshake-drawn-badge.js',
+    kept: 'motiv-sketch-badge',
+    dropped: ['motiv-badge', 'motiv-btn', 'motiv-sketch-dialog', 'useDialog'],
+  },
+  {
+    input: 'test/fixtures/treeshake-matrix-notification-list.js',
+    kept: 'motiv-matrix-notification-list',
+    dropped: [
+      'motiv-notification-list',
+      'motiv-matrix-table',
+      'motiv-matrix-toast',
+      'useColumnsMenu',
+    ],
+  },
+  {
     input: 'test/fixtures/treeshake-data-table.js',
     kept: 'motiv-data-table',
     dropped: ['motiv-markdown', 'motiv-btn'],

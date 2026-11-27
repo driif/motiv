@@ -8,8 +8,18 @@ const entries = {
     '@driif/motiv/markdown': '../dist/markdown/index.js',
     '@driif/motiv/data-table': '../dist/data-table/index.js',
   },
-  drawn: { '@driif/motiv/drawn': '../dist/drawn/index.js' },
-  matrix: { '@driif/motiv/matrix': '../dist/matrix/index.js' },
+  drawn: {
+    '@driif/motiv/drawn': '../dist/drawn/index.js',
+    '@driif/motiv/drawn/action-menu': '../dist/drawn/action-menu/index.js',
+    '@driif/motiv/drawn/markdown': '../dist/drawn/markdown/index.js',
+    '@driif/motiv/drawn/data-table': '../dist/drawn/data-table/index.js',
+  },
+  matrix: {
+    '@driif/motiv/matrix': '../dist/matrix/index.js',
+    '@driif/motiv/matrix/action-menu': '../dist/matrix/action-menu/index.js',
+    '@driif/motiv/matrix/markdown': '../dist/matrix/markdown/index.js',
+    '@driif/motiv/matrix/data-table': '../dist/matrix/data-table/index.js',
+  },
 };
 
 const problems = [];

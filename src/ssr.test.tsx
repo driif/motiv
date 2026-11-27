@@ -29,10 +29,25 @@ import {
   ThemeToggle,
   Tooltip,
 } from './drawn';
+import {
+  ActionMenu as DrawnActionMenu,
+  SplitButton as DrawnSplitButton,
+} from './drawn/action-menu';
+import { DataTable as DrawnDataTable } from './drawn/data-table';
+import { Markdown as DrawnMarkdown, MarkdownEditor as DrawnMarkdownEditor } from './drawn/markdown';
 import * as K from './index';
 import { Button, Card, CardBody, CardHeader } from './index';
 import { Markdown, MarkdownEditor } from './markdown';
 import * as M from './matrix';
+import {
+  ActionMenu as MatrixActionMenu,
+  SplitButton as MatrixSplitButton,
+} from './matrix/action-menu';
+import { DataTable as MatrixDataTable } from './matrix/data-table';
+import {
+  Markdown as MatrixMarkdown,
+  MarkdownEditor as MatrixMarkdownEditor,
+} from './matrix/markdown';
 
 it('renders Markdown and its editor without a DOM', () => {
   const html = renderToString(
@@ -644,4 +659,106 @@ it('renders ActionMenu as a closed trigger without a DOM', () => {
   expect(html).toContain('aria-expanded="false"');
   expect(html).toContain('<span class="motiv-btn__label">Export</span>');
   expect(html).not.toContain('CSV');
+});
+
+describe('drawn and matrix parity components', () => {
+  const noop = () => {};
+
+  it.each([
+    ['drawn', D, 'motiv-sketch'],
+    ['matrix', M, 'motiv-matrix'],
+  ] as const)(
+    'renders %s Badge, Dialog, Splitter and NotificationList without a DOM',
+    (_, S, prefix) => {
+      const html = renderToStaticMarkup(
+        <>
+          <S.Badge tone="success">Live</S.Badge>
+          <S.Dialog open title="Edit question" onClose={noop}>
+            <p>Body</p>
+          </S.Dialog>
+          <S.Splitter label="Sidebar width" value={256} min={200} max={480} onChange={noop} />
+          <S.NotificationList
+            items={[{ id: 'a', title: 'T', time: 'now' }]}
+            onDismiss={noop}
+            onDismissAll={noop}
+          />
+        </>,
+      );
+      expect(html).toContain(`class="${prefix}-badge ${prefix}-badge--success"`);
+      expect(html).toContain(`class="${prefix}-dialog"`);
+      expect(html).not.toContain(' open=');
+      expect(html).toMatch(/aria-labelledby="([^"]+)".*?<h2 id="\1"/);
+      expect(html).toContain(`${prefix}-splitter--vertical`);
+      expect(html).toContain('aria-valuenow="256"');
+      expect(html).toContain(`${prefix}-bell`);
+      expect(html).toMatch(/popovertarget=/i);
+      expect(html).toMatch(/<section[^>]*popover="auto"/);
+    },
+  );
+
+  it('renders the drawn and matrix theme toggles without dark before hydration', () => {
+    const html = renderToStaticMarkup(
+      <>
+        <D.ThemeToggle onToggle={noop} />
+        <D.OrbitalThemeToggle onToggle={noop} />
+        <M.GlitchThemeToggle onToggle={noop} />
+      </>,
+    );
+    expect(html).not.toContain('aria-pressed');
+    expect(html).not.toContain('motiv-orbital-toggle--dark');
+    expect(html).not.toContain('motiv-matrix-glitch--dark');
+  });
+
+  it.each([
+    ['drawn', DrawnActionMenu, DrawnSplitButton, 'motiv-sketch'],
+    ['matrix', MatrixActionMenu, MatrixSplitButton, 'motiv-matrix'],
+  ] as const)(
+    'renders %s ActionMenu and SplitButton closed without a DOM',
+    (_, Menu, Split, prefix) => {
+      const items = [{ label: 'CSV', onSelect: noop }];
+      const html = renderToStaticMarkup(
+        <>
+          <Menu label="Export" items={items} />
+          <Split onClick={noop} items={items}>
+            Save
+          </Split>
+        </>,
+      );
+      expect(html.match(/aria-haspopup="menu"/g)).toHaveLength(2);
+      expect(html).toContain(`${prefix}-split-button`);
+      expect(html).not.toContain('CSV');
+    },
+  );
+
+  it.each([
+    ['drawn', DrawnMarkdown, DrawnMarkdownEditor],
+    ['matrix', MatrixMarkdown, MatrixMarkdownEditor],
+  ] as const)('renders %s Markdown and MarkdownEditor without a DOM', (_, Md, Editor) => {
+    const html = renderToString(
+      <>
+        <Md>{'# Safe\n\n<script>alert(1)</script>'}</Md>
+        <Editor defaultValue="**Draft**" />
+      </>,
+    );
+    expect(html).toContain('<h1>Safe</h1>');
+    expect(html).not.toContain('<script>');
+    expect(html).toContain('<strong>Draft</strong>');
+    expect(html).toContain('<textarea');
+  });
+
+  it.each([
+    ['drawn', DrawnDataTable, 'motiv-sketch-table'],
+    ['matrix', MatrixDataTable, 'motiv-matrix-table'],
+  ] as const)('renders %s DataTable without a DOM', (_, Table, block) => {
+    const html = renderToStaticMarkup(
+      <Table
+        caption="Rows"
+        rows={[{ id: 1, name: 'A' }]}
+        getRowKey={(row) => row.id}
+        columns={[{ id: 'name', label: 'Name', cell: (row) => row.name }]}
+      />,
+    );
+    expect(html).toContain(block);
+    expect(html).toContain('motiv-data-table');
+  });
 });

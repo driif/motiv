@@ -84,6 +84,7 @@ Components read their text sizes and heights from tokens derived from `--motiv-f
 `--motiv-control-height` is the unit and the height of small controls. `--motiv-field-height` (40px
 by default) is the one height of a medium `Button`, the `Select` and `MultiSelect` triggers, the
 `SegmentedControl` track and a `TextField` with `labelPosition="above"`, so a row of them lines up.
+This holds in all three styles.
 Menu and option rows use multiples of `--motiv-row-height`.
 
 `--motiv-field-scale` (base token, `1.25`) sets the field height as a multiple of the control height.
@@ -91,7 +92,8 @@ Set it to `1` on `:root` to make fields, medium buttons and icon buttons as high
 
 `--motiv-icon-size` (20px) is the icon in an `IconButton`, `BellButton` and `BadgeButton`, whose
 boxes are `--motiv-field-height` high. A small `IconButton` uses `--motiv-icon-size-sm` (16px) in a
-`--motiv-control-height` box.
+`--motiv-control-height` box, an extra-small one the same icon in a `--motiv-row-height` box. Drawn
+and matrix `IconButton` size the same way.
 
 `data-density="compact"` on any element sets `--motiv-space: 0.1875rem` there, so its controls,
 rows and spacing shrink by a quarter:
@@ -391,12 +393,12 @@ style's `TextField`, so they read `--motiv-button-*` and `--motiv-text-field-*`.
 
 ### Dialog
 
-Read by the kinetic `Dialog`. Its surface uses the base tokens and its close button is the kinetic
-`IconButton`.
+Read by `Dialog` in all three styles. Its surface uses the base tokens and its close button is the
+style's `IconButton`. In matrix the override replaces only the backdrop tint; the scanlines stay.
 
 | Token | Kinetic | Drawn | Matrix |
 |---|---|---|---|
-| `--motiv-dialog-backdrop` | ✓ | — | — |
+| `--motiv-dialog-backdrop` | ✓ | ✓ | ✓ |
 
 ### Toast
 
@@ -425,14 +427,14 @@ checkboxes are the style's `Button` and `Checkbox` and read their tokens.
 
 ### Badge
 
-Read by the kinetic `Badge`. Drawn and matrix ship no badge.
+Read by `Badge` in all three styles.
 
 | Token | Kinetic | Drawn | Matrix |
 |---|---|---|---|
-| `--motiv-badge-bg` | ✓ | — | — |
-| `--motiv-badge-color` | ✓ | — | — |
-| `--motiv-badge-border-color` | ✓ | — | — |
-| `--motiv-badge-radius` | ✓ | — | — |
+| `--motiv-badge-bg` | ✓ | ✓ | ✓ |
+| `--motiv-badge-color` | ✓ | ✓ | ✓ |
+| `--motiv-badge-border-color` | ✓ | ✓ | ✓ |
+| `--motiv-badge-radius` | ✓ | ✓ | ✓ |
 
 ### Link
 
@@ -529,10 +531,12 @@ Read by `FilterChips` (`Chips`) · drawn `Chips` · matrix `Chips`.
 
 ### Menu
 
-Read by `CommandMenu`, `RadialMenu`, `ActionMenu`, the panel of `NotificationList` · drawn
-`CommandMenu` · matrix `CommandMenu`. `NotificationList`'s bell, dismiss and Dismiss all buttons
-are `BellButton`, `IconButton` and `Button` and read their tokens; its tone edges stay
-`--motiv-color-primary`, `-success`, `-warning` and `-danger`.
+Read by `CommandMenu`, `RadialMenu`, `ActionMenu` and `SplitButton` menus, the panel of
+`NotificationList` · drawn and matrix `CommandMenu`, `ActionMenu` and `SplitButton` menus, and the
+panel of `NotificationList`. Kinetic `NotificationList`'s bell, dismiss and Dismiss all buttons are
+`BellButton`, `IconButton` and `Button` and read their tokens; drawn and matrix draw their own bell,
+which reads the `--motiv-icon-button-*` tokens, and use the style's `IconButton` and `Button`. Its
+tone edges stay `--motiv-color-primary`, `-success`, `-warning` and `-danger`.
 
 | Token | Kinetic | Drawn | Matrix |
 |---|---|---|---|

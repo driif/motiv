@@ -65,7 +65,10 @@ function renderTable(props: Partial<DataTableProps<Row>> = {}) {
 const bodyRows = () => [...document.querySelectorAll('tbody tr[aria-rowindex]')];
 const spacers = () => [...document.querySelectorAll<HTMLElement>('tbody tr[aria-hidden="true"]')];
 const spacerTotal = () =>
-  spacers().reduce((sum, row) => sum + Number.parseFloat(row.querySelector('td')!.style.height), 0);
+  spacers().reduce(
+    (sum, row) => sum + Number.parseFloat(row.querySelector('td')?.style.height ?? ''),
+    0,
+  );
 const region = () => screen.getByRole('region', { name: 'Records' });
 const rowText = (index: number) => new RegExp(`^${index}Record ${index}$`);
 

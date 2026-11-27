@@ -40,7 +40,7 @@ export const Empty: Story = { args: { items: [] } };
 
 export const IconTriggerAndSubmenu: Story = {
   args: {
-    trigger: <IconButton icon="⋯" label="Actions for report.pdf" />,
+    trigger: <IconButton size="sm" icon="⋯" label="Actions for report.pdf" />,
     items: [
       { label: 'Rename', onSelect: noop },
       {
