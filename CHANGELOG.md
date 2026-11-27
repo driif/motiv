@@ -1,5 +1,29 @@
 # @driif/motiv
 
+## 0.42.0
+
+### Minor Changes
+
+- 9e3c4c2: Add `ActionMenu` and `SplitButton` in the drawn and matrix looks, imported from `@driif/motiv/drawn/action-menu` and `@driif/motiv/matrix/action-menu`, with the same props as the kinetic ones.
+- 9e3c4c2: Drawn and matrix now export `Badge` with the kinetic props: a pencil-outlined handwritten tag in drawn, an uppercase terminal tag in matrix.
+- 9e3c4c2: Add `DataTable` to the drawn and matrix styles at `@driif/motiv/drawn/data-table` and `@driif/motiv/matrix/data-table`; the matrix `TableColumnsMenu` now applies `size` to its trigger button.
+- 9e3c4c2: Add `Dialog` to `@driif/motiv/drawn` (pencil paper sheet) and `@driif/motiv/matrix` (HUD panel), with the same props and dismissal behaviour as the kinetic `Dialog`.
+- 9e3c4c2: Drawn and matrix: the medium Button, Select, MultiSelect and SegmentedControl are now as high as TextField (`--motiv-field-height`) and the matrix small Button as high as `--motiv-control-height`, so a row of fields lines up and `--motiv-field-scale` and compact density reach them.
+- 9e3c4c2: Drawn and matrix `IconButton` take `size` (`xs`, `sm`, `md`) and `IconButtonGroup` takes `size="sm"`, like kinetic; their default button now matches `--motiv-field-height` (40px instead of 48px) and the icon follows `--motiv-icon-size`.
+- 9e3c4c2: Add `Markdown` and `MarkdownEditor` to the drawn and matrix styles via `@driif/motiv/drawn/markdown` and `@driif/motiv/matrix/markdown`, with hand-drawn and phosphor-terminal prose styles.
+- 9e3c4c2: Add drawn and matrix `NotificationList`: a style-matched bell that opens the notifications panel, with the same props as the kinetic one.
+- 9e3c4c2: Matrix `ChevronNav` no longer requires `onChange`, so a link-only nav needs no handler; drawn Toast, Confirm and Stepper line-heights and the Toast action size now follow the text-scale tokens.
+- 9e3c4c2: Add `Splitter` to the drawn and matrix styles: a pencil-stroke and a phosphor-trace pane divider with the same props as the default `Splitter`.
+- 9e3c4c2: Drawn and matrix `TextField` take `labelPosition` (`float`, `above`, `hidden`) like kinetic, show a clean `type="color"` swatch, and the matrix box is as high as `--motiv-field-height`.
+- 9e3c4c2: Drawn `ThemeToggle` and `OrbitalThemeToggle` and matrix `GlitchThemeToggle` (`ThemeToggle`) take an optional `dark`: leave it out and they follow `data-theme` on the root element, with the state picked by CSS before hydration.
+
+### Patch Changes
+
+- 9e3c4c2: Drawn checkboxes, field lines, icon buttons, chips, links and nav items no longer leave a stray ink dot while their stroke is hidden, and the drawn MarkdownEditor preview label is hand-lettered like the editor label.
+- 9e3c4c2: Drawn and matrix CardHeader actions wrap below the heading in a narrow card; the drawn card title line height follows `--motiv-line-height`.
+- 9e3c4c2: Drawn and matrix Checkbox show a mixed mark for indeterminate inputs and put `style` on the label like the kinetic Checkbox.
+- 9e3c4c2: Textarea and MarkdownEditor no longer collapse to zero height when rendered inside a closed Dialog or other hidden container; they fit their content once shown.
+
 ## 0.41.0
 
 ### Minor Changes
