@@ -1,0 +1,48 @@
+---
+import { buttonClassName, Card, CardBody, CardFooter, CardHeader } from '@driif/motiv';
+import { styles } from '../../../catalog.mjs';
+import { examples } from '../../../examples.mjs';
+import Shell from '../../../layouts/Shell.astro';
+
+export function getStaticPaths() {
+  return styles.map((style) => ({ params: { style } }));
+}
+
+const { style } = Astro.params as { style: (typeof styles)[number] };
+---
+
+<Shell
+  current={style}
+  example=""
+  title={`Examples · ${style} · motiv`}
+  description={`Example apps built with the ${style} style of @driif/motiv.`}
+>
+  <header class="site-doc">
+    <p class="site-kicker">{style}</p>
+    <h1 class="site-doc__title">Examples</h1>
+    <p class="site-view__blurb site-example__blurb">
+      Three small apps built only from {style} components, the same three in every style. Open
+      one, use it, read its code.
+    </p>
+  </header>
+  <ul class="site-gallery__grid site-examples">
+    {
+      examples.map((example) => (
+        <Card as="li" className="site-examples__card">
+          <CardHeader titleAs="h2" title={example.title} description={example.blurb} />
+          <CardBody>
+            <p class="site-examples__uses">{example.components.join(' · ')}</p>
+          </CardBody>
+          <CardFooter>
+            <a
+              class:list={[buttonClassName({ variant: 'outline', size: 'sm' }), 'site-examples__link']}
+              href={`/${style}/examples/${example.id}/`}
+            >
+              Open {example.title}
+            </a>
+          </CardFooter>
+        </Card>
+      ))
+    }
+  </ul>
+</Shell>

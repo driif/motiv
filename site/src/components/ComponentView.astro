@@ -1,5 +1,6 @@
 ---
 import { Code } from 'astro:components';
+import { dropDefaultColor } from '../shiki.mjs';
 
 interface Props {
   style: 'drawn' | 'matrix' | 'kinetic';
@@ -50,20 +51,7 @@ const source = sources[`../demos/${style}/${section.demo}.tsx`];
         code={source}
         lang="tsx"
         theme="github-dark-default"
-        transformers={[{
-          span(node) {
-            const color = node.properties.style;
-            const parentStyle = this.pre.properties.style;
-            if (
-              typeof color === 'string' &&
-              color.startsWith('color:') &&
-              typeof parentStyle === 'string' &&
-              parentStyle.toLowerCase().split(';').includes(color.toLowerCase())
-            ) {
-              delete node.properties.style;
-            }
-          },
-        }]}
+        transformers={[dropDefaultColor]}
       />
     </div>
   </div>

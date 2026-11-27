@@ -1,0 +1,71 @@
+---
+import { Code } from 'astro:components';
+import { styles } from '../../../catalog.mjs';
+import { examples, usedPages } from '../../../examples.mjs';
+import Shell from '../../../layouts/Shell.astro';
+import { dropDefaultColor } from '../../../shiki.mjs';
+
+export function getStaticPaths() {
+  return styles.flatMap((style) =>
+    examples.map((example) => ({ params: { style, id: example.id }, props: { example } })),
+  );
+}
+
+const { style } = Astro.params as { style: (typeof styles)[number]; id: string };
+const { example } = Astro.props;
+const { id, title } = example;
+
+const sources = import.meta.glob<string>('../../../examples/*/*.tsx', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+const source = sources[`../../../examples/${style}/${title}.tsx`] ?? '';
+const uses = usedPages(style, source);
+---
+
+<Shell
+  current={style}
+  example={id}
+  title={`${title} example · ${style} · motiv`}
+  description={example.blurb}
+>
+  <header class="site-doc">
+    <p class="site-kicker"><a class="site-doc__link" href={`/${style}/examples/`}>Examples</a></p>
+    <h1 class="site-doc__title">{title}</h1>
+    <p class="site-view__blurb site-example__blurb">{example.blurb}</p>
+    {
+      uses.length > 0 && (
+        <p class="site-example__uses">
+          <span class="site-example__label">Uses</span>
+          {uses.map((page) => (
+            <a class="site-gallery__link" href={`/${style}/${page.slug}/`}>
+              {page.title}
+            </a>
+          ))}
+        </p>
+      )
+    }
+  </header>
+  <section class="site-view site-example" aria-label={`${title} example app`}>
+    <div class="site-view__panel">
+      <div class="site-view__bar">
+        <div class="site-tabs" role="tablist" aria-label={`${title} view`}>
+          <button class="site-tabs__tab" type="button" role="tab" id={`${id}-tab-preview`} aria-controls={`${id}-preview`} aria-selected="true">Preview</button>
+          <button class="site-tabs__tab" type="button" role="tab" id={`${id}-tab-code`} aria-controls={`${id}-code`} aria-selected="false" tabindex="-1">Code</button>
+        </div>
+        <button class="site-copy" type="button" data-copy={`${id}-code`} aria-live="polite">Copy code</button>
+      </div>
+      <div class="site-view__stage" role="tabpanel" id={`${id}-preview`} aria-labelledby={`${id}-tab-preview`}>
+        <iframe
+          class="site-preview site-example__frame"
+          src={`/preview/${style}/examples/${id}/`}
+          title={`${title} example preview`}
+        />
+      </div>
+      <div class="site-view__code site-example__code" role="tabpanel" id={`${id}-code`} aria-labelledby={`${id}-tab-code`} hidden>
+        <Code class="site-code" code={source} lang="tsx" theme="github-dark-default" transformers={[dropDefaultColor]} />
+      </div>
+    </div>
+  </section>
+</Shell>
