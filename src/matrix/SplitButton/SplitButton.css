@@ -22,6 +22,11 @@
     border-start-start-radius: 0;
     border-end-start-radius: 0;
 
+    /* Outranks the Button's hover/focus border-color, which would hide the divider. */
+    &:is(:hover, :focus-visible):not(:disabled) {
+      border-inline-start-color: color-mix(in oklch, var(--_text) 60%, transparent);
+    }
+
     &::before {
       display: none;
     }
