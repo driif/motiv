@@ -1,0 +1,45 @@
+@layer motiv.components {
+  .motiv-sketch-badge {
+    --_mix: 18%;
+    --_border: var(--_tone);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--motiv-space) * 0.25) calc(var(--motiv-space) * 2.5);
+    font-family: "Caveat", "Segoe Print", cursive;
+    font-size: calc(var(--motiv-font-size) * 1.05);
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.2);
+    white-space: nowrap;
+    color: var(--motiv-badge-color, var(--motiv-color-text));
+    background: var(
+      --motiv-badge-bg,
+      color-mix(in oklch, var(--_tone) var(--_mix), var(--motiv-color-surface))
+    );
+    border: 1.5px solid var(--motiv-badge-border-color, var(--_border));
+    border-radius: var(--motiv-badge-radius, 16px 8px 18px 7px / 8px 16px 7px 18px);
+  }
+
+  .motiv-sketch-badge--neutral {
+    --_tone: var(--motiv-color-secondary);
+    --_mix: 10%;
+    --_border: color-mix(in oklch, var(--motiv-color-text) 35%, transparent);
+  }
+
+  .motiv-sketch-badge--success {
+    --_tone: var(--motiv-color-success);
+  }
+
+  .motiv-sketch-badge--warning {
+    --_tone: var(--motiv-color-warning);
+  }
+
+  .motiv-sketch-badge--danger {
+    --_tone: var(--motiv-color-danger);
+  }
+
+  .motiv-sketch-badge--md {
+    padding: calc(var(--motiv-space) * 0.5) calc(var(--motiv-space) * 3.5);
+    font-size: calc(var(--motiv-font-size) * 1.3);
+  }
+}

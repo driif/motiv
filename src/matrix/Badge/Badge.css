@@ -1,0 +1,50 @@
+@layer motiv.components {
+  .motiv-matrix-badge {
+    --_mix: 14%;
+    --_border: color-mix(in oklch, var(--_tone) 60%, transparent);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* letter-spacing also trails the last letter; take it off the end padding to centre the text */
+    padding: calc(var(--motiv-space) * 0.5) calc(var(--motiv-space) * 2);
+    padding-inline-end: calc(var(--motiv-space) * 2 - 0.12em);
+    font-family: var(--motiv-font-body);
+    font-size: var(--motiv-font-size-xs);
+    font-weight: 600;
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.4);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--motiv-badge-color, var(--motiv-color-text));
+    background: var(
+      --motiv-badge-bg,
+      color-mix(in oklch, var(--_tone) var(--_mix), var(--motiv-color-surface))
+    );
+    border: 1px solid var(--motiv-badge-border-color, var(--_border));
+    border-radius: var(--motiv-badge-radius, var(--motiv-radius));
+  }
+
+  .motiv-matrix-badge--neutral {
+    --_tone: var(--motiv-color-secondary);
+    --_mix: 8%;
+  }
+
+  .motiv-matrix-badge--success {
+    --_tone: var(--motiv-color-success);
+  }
+
+  .motiv-matrix-badge--warning {
+    --_tone: var(--motiv-color-warning);
+  }
+
+  .motiv-matrix-badge--danger {
+    --_tone: var(--motiv-color-danger);
+  }
+
+  .motiv-matrix-badge--md {
+    padding: var(--motiv-space) calc(var(--motiv-space) * 3);
+    padding-inline-end: calc(var(--motiv-space) * 3 - 0.12em);
+    font-size: var(--motiv-font-size-sm);
+  }
+}
