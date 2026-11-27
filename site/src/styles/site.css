@@ -256,6 +256,11 @@
 }
 
 @media (max-width: 42rem) {
+  /* The style switch wraps to a second row. */
+  .site-body {
+    --site-top-height: 7.1rem;
+  }
+
   .site-top {
     flex-wrap: wrap;
     padding-bottom: 0.75rem;
