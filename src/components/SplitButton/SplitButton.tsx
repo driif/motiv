@@ -1,7 +1,12 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import type { ComponentType } from 'react';
 import { cx } from '../../utils/cx';
 import { Icon } from '../../utils/Icon';
-import { type ActionMenuItem, ActionMenuItems } from '../ActionMenu/ActionMenu';
+import {
+  type ActionMenuItem,
+  ActionMenuItems,
+  type ActionMenuPrefix,
+} from '../ActionMenu/ActionMenu';
 import { Button, type ButtonProps } from '../Button/Button';
 
 export interface SplitButtonProps extends ButtonProps {
@@ -11,7 +16,14 @@ export interface SplitButtonProps extends ButtonProps {
   menuLabel?: string;
 }
 
-export function SplitButton({
+export function SplitButton(props: SplitButtonProps) {
+  return <SplitButtonBase {...props} Button={Button} prefix="motiv" />;
+}
+
+// Internal: SplitButton over a style's Button and class prefix.
+export function SplitButtonBase({
+  Button,
+  prefix,
   items,
   menuLabel = 'More options',
   variant,
@@ -20,16 +32,16 @@ export function SplitButton({
   className,
   style,
   ...props
-}: SplitButtonProps) {
+}: SplitButtonProps & { Button: ComponentType<ButtonProps>; prefix: ActionMenuPrefix }) {
   const menuDisabled = disabled || items.length === 0;
   return (
-    <div className={cx('motiv-split-button', className)} style={style}>
+    <div className={cx(`${prefix}-split-button`, className)} style={style}>
       <Button
         {...props}
         variant={variant}
         size={size}
         disabled={disabled}
-        className="motiv-split-button__main"
+        className={`${prefix}-split-button__main`}
       />
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild disabled={menuDisabled}>
@@ -38,15 +50,19 @@ export function SplitButton({
             size={size}
             disabled={menuDisabled}
             aria-label={menuLabel}
-            className="motiv-split-button__toggle"
+            className={`${prefix}-split-button__toggle`}
           >
             <Icon>
               <path d="M6 9l6 6 6-6" />
             </Icon>
           </Button>
         </DropdownMenu.Trigger>
-        <DropdownMenu.Content className="motiv-action-menu__content" align="end" sideOffset={6}>
-          <ActionMenuItems items={items} />
+        <DropdownMenu.Content
+          className={`${prefix}-action-menu__content`}
+          align="end"
+          sideOffset={6}
+        >
+          <ActionMenuItems items={items} prefix={prefix} />
         </DropdownMenu.Content>
       </DropdownMenu.Root>
     </div>

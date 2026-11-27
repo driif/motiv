@@ -1,5 +1,5 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { type ReactElement, type ReactNode, useId } from 'react';
+import { type ComponentType, type ReactElement, type ReactNode, useId } from 'react';
 import { Icon } from '../../utils/Icon';
 import { Button, type ButtonProps } from '../Button/Button';
 
@@ -18,13 +18,22 @@ export type ActionMenuItem = {
     }
 );
 
-// Internal: the menu rows, shared by ActionMenu and SplitButton.
-export function ActionMenuItems({ items }: { items: ActionMenuItem[] }) {
+export type ActionMenuPrefix = 'motiv' | 'motiv-sketch' | 'motiv-matrix';
+
+// Internal: the menu rows, shared by ActionMenu and SplitButton of every style.
+export function ActionMenuItems({
+  items,
+  prefix,
+}: {
+  items: ActionMenuItem[];
+  prefix: ActionMenuPrefix;
+}) {
   const id = useId();
+  const block = `${prefix}-action-menu`;
   return items.map((item, index) => {
     const reason = item.disabled && item.disabledReason;
     const rowProps = {
-      className: 'motiv-action-menu__item',
+      className: `${block}__item`,
       disabled: item.disabled,
       textValue: item.label,
       'aria-describedby': reason ? `${id}-${index}` : undefined,
@@ -32,15 +41,15 @@ export function ActionMenuItems({ items }: { items: ActionMenuItem[] }) {
     const content = (
       <>
         {item.icon && (
-          <span className="motiv-action-menu__icon" aria-hidden="true">
+          <span className={`${block}__icon`} aria-hidden="true">
             {item.icon}
           </span>
         )}
-        <span className="motiv-action-menu__text">
+        <span className={`${block}__text`}>
           <span>{item.label}</span>
           {reason && (
             // Hidden from the item name; aria-describedby still reads it.
-            <span id={`${id}-${index}`} className="motiv-action-menu__reason" aria-hidden="true">
+            <span id={`${id}-${index}`} className={`${block}__reason`} aria-hidden="true">
               {reason}
             </span>
           )}
@@ -57,12 +66,12 @@ export function ActionMenuItems({ items }: { items: ActionMenuItem[] }) {
       <DropdownMenu.Sub key={index}>
         <DropdownMenu.SubTrigger {...rowProps}>
           {content}
-          <Icon className="motiv-action-menu__chevron">
+          <Icon className={`${block}__chevron`}>
             <path d="M9 6l6 6-6 6" />
           </Icon>
         </DropdownMenu.SubTrigger>
-        <DropdownMenu.SubContent className="motiv-action-menu__content" sideOffset={6}>
-          <ActionMenuItems items={item.submenu} />
+        <DropdownMenu.SubContent className={`${block}__content`} sideOffset={6}>
+          <ActionMenuItems items={item.submenu} prefix={prefix} />
         </DropdownMenu.SubContent>
       </DropdownMenu.Sub>
     );
@@ -84,7 +93,14 @@ export interface ActionMenuProps extends Omit<ButtonProps, 'children'> {
   onCloseAutoFocus?: (event: Event) => void;
 }
 
-export function ActionMenu({
+export function ActionMenu(props: ActionMenuProps) {
+  return <ActionMenuBase {...props} Button={Button} prefix="motiv" />;
+}
+
+// Internal: ActionMenu over a style's Button and class prefix.
+export function ActionMenuBase({
+  Button,
+  prefix,
   label = 'Actions',
   items = [],
   trigger,
@@ -95,7 +111,7 @@ export function ActionMenu({
   loading,
   id,
   ...buttonProps
-}: ActionMenuProps) {
+}: ActionMenuProps & { Button: ComponentType<ButtonProps>; prefix: ActionMenuPrefix }) {
   const fallbackId = useId();
   const triggerId = id ?? fallbackId;
   const inert = disabled || loading || items.length === 0;
@@ -119,7 +135,7 @@ export function ActionMenu({
         )}
       </DropdownMenu.Trigger>
       <DropdownMenu.Content
-        className="motiv-action-menu__content"
+        className={`${prefix}-action-menu__content`}
         aria-labelledby={triggerId}
         align="start"
         sideOffset={6}
@@ -130,7 +146,7 @@ export function ActionMenu({
           else onCloseAutoFocus?.(event);
         }}
       >
-        <ActionMenuItems items={items} />
+        <ActionMenuItems items={items} prefix={prefix} />
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   );
