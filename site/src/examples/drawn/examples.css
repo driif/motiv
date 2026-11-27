@@ -98,8 +98,12 @@
 }
 
 @media (max-width: 47.99rem) {
+  .ex-drawn__bar {
+    gap: 0.5rem;
+  }
+
   .ex-drawn__brand {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   .ex-dash {

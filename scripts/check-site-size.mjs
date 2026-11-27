@@ -4,15 +4,18 @@ import { examples } from '../site/src/examples.mjs';
 
 // Bytes, about 15% above the sizes measured when the budget was set; raise them on purpose.
 const pages = {
+  // Raised from 23_000 for the home page's example apps section (measured 24_689).
   'index.html': 28_500,
   'kinetic/index.html': 56_000,
   'drawn/index.html': 82_000,
   'matrix/index.html': 83_000,
 };
-// Every generated component page, /<style>/<slug>/; the largest measured 49_259 (kinetic table).
+// Every generated component page, /<style>/<slug>/; the largest measured 49_259 (kinetic table),
+// raised from 48_500 for the sidebar's Examples group.
 const componentPage = 52_000;
-// Example app pages, /<style>/examples/<id>/, carry a whole app's highlighted source.
-const examplePage = 160_000;
+// Example app pages, /<style>/examples/<id>/, carry a whole app's highlighted source; the largest
+// measured 90_818 (kinetic dashboard).
+const examplePage = 105_000;
 const totalCss = 550_000;
 const largestJs = 245_000;
 

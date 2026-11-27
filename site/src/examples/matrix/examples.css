@@ -121,6 +121,10 @@
     display: none;
   }
 
+  .mx-dash > .mx-bar {
+    gap: 0.25rem;
+  }
+
   .mx-dash__search {
     order: 1;
     width: 100%;
