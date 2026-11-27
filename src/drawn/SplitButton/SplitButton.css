@@ -1,0 +1,33 @@
+@layer motiv.components {
+  .motiv-sketch-split-button {
+    display: inline-flex;
+  }
+
+  /* Child selectors outrank the Button's own --_shape whatever the stylesheet order. */
+  .motiv-sketch-split-button > .motiv-sketch-split-button__main {
+    --_shape: 18px 0 0 6px / 7px 0 0 20px;
+
+    &::after {
+      border-radius: var(--_shape);
+    }
+  }
+
+  /* Flat inline-start edge: the main half's pencil line is the divider. */
+  .motiv-sketch-split-button > .motiv-sketch-split-button__toggle {
+    --_shape: 0 7px 20px 0 / 0 16px 6px 0;
+
+    padding-inline: calc(var(--motiv-space) * 2.5);
+
+    &::before,
+    &::after {
+      border-inline-start: 0;
+      border-radius: var(--_shape);
+    }
+
+    & svg {
+      width: var(--motiv-icon-size-sm);
+      height: var(--motiv-icon-size-sm);
+      stroke-width: 2.4;
+    }
+  }
+}
