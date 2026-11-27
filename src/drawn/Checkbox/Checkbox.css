@@ -68,8 +68,9 @@
       stroke-width: 3;
       stroke-linecap: round;
       stroke-linejoin: round;
-      stroke-dasharray: 1;
-      stroke-dashoffset: 1;
+      /* Hidden, the dash sits wholly off the path, so no round cap leaves an ink dot. */
+      stroke-dasharray: 1 1.1;
+      stroke-dashoffset: 1.05;
       transition: stroke-dashoffset 0.45s var(--_pen);
     }
   }
@@ -90,7 +91,7 @@
     }
 
     & .motiv-checkbox__tick {
-      stroke-dashoffset: 1;
+      stroke-dashoffset: 1.05;
     }
 
     & .motiv-checkbox__dash {

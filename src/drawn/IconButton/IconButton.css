@@ -113,8 +113,9 @@
       stroke: var(--motiv-icon-button-border-color, var(--motiv-color-secondary));
       stroke-width: var(--_ring);
       stroke-linecap: round;
-      stroke-dasharray: 1;
-      stroke-dashoffset: 1;
+      /* Hidden, the dash sits wholly off the path, so no round cap leaves an ink dot. */
+      stroke-dasharray: 1 1.1;
+      stroke-dashoffset: 1.05;
       transition: stroke-dashoffset 0.55s var(--_pen);
     }
   }

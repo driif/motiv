@@ -1,4 +1,9 @@
 @layer motiv.components {
+  /* The preview label borrows .motiv-textarea__label outside .motiv-textarea: give it the hand. */
+  .motiv-markdown-editor__preview {
+    --_hand-font: "Caveat", "Segoe Print", cursive;
+  }
+
   /* Loaded after the shared MarkdownEditor.css: the preview is a paper slip like the drawn Table. */
   .motiv-markdown-editor__preview > .motiv-markdown {
     padding: calc(var(--motiv-space) * 4);
