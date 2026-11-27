@@ -23,7 +23,8 @@
     display: flex;
     align-items: center;
     gap: calc(var(--motiv-space) * 2);
-    min-height: calc(var(--motiv-control-height) * 1.5);
+    box-sizing: border-box;
+    min-height: var(--motiv-field-height);
     padding: 0 calc(var(--motiv-space) * 3);
     background: var(--motiv-text-field-bg, var(--motiv-color-surface));
     border: 1px solid var(--motiv-text-field-border-color, var(--motiv-color-border));
@@ -42,8 +43,8 @@
 
   .motiv-matrix-text-field__input {
     flex: 1;
+    align-self: stretch;
     min-width: 0;
-    min-height: max(24px, calc(var(--motiv-space) * 11));
     padding: 0;
     font: inherit;
     color: var(--motiv-text-field-color, var(--motiv-color-text));
@@ -55,6 +56,32 @@
     &:disabled {
       cursor: not-allowed;
     }
+  }
+
+  /* A square swatch inside the control instead of the native bevelled box. */
+  .motiv-matrix-text-field__input[type="color"] {
+    align-self: center;
+    height: calc(var(--motiv-space) * 6);
+    cursor: pointer;
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    &::-webkit-color-swatch {
+      border: 1px solid var(--motiv-color-border);
+      border-radius: 0;
+    }
+
+    &::-moz-color-swatch {
+      border: 1px solid var(--motiv-color-border);
+      border-radius: 0;
+    }
+  }
+
+  .motiv-matrix-text-field--hidden .motiv-matrix-text-field__control {
+    min-height: var(--motiv-row-height);
+    padding: 0 calc(var(--motiv-space) * 1.5);
   }
 
   .motiv-matrix-text-field__hint {

@@ -1,14 +1,8 @@
 import { useId } from 'react';
-import type { TextFieldProps as BaseTextFieldProps } from '../../drawn/TextField';
+import type { TextFieldProps } from '../../drawn/TextField';
 import { cx } from '../../utils/cx';
 
-export interface TextFieldProps extends BaseTextFieldProps {
-  /**
-   * `above` puts the label over a field-height box, like Select's label. `hidden` keeps the
-   * label for screen readers only and makes a row-height box, e.g. for inline edit.
-   */
-  labelPosition?: 'float' | 'above' | 'hidden';
-}
+export type { TextFieldProps };
 
 export function TextField({
   label,
