@@ -46,7 +46,7 @@
     font-family: "Caveat", "Segoe Print", cursive;
     font-size: calc(var(--motiv-font-size) * 1.875);
     font-weight: 400;
-    line-height: 1.1;
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.1);
   }
 
   /* The actions sit under a dashed pencil rule. */

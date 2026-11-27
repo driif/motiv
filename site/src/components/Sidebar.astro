@@ -1,12 +1,14 @@
 ---
 import { groups, pages } from '../catalog.mjs';
+import { examples } from '../examples.mjs';
 
 interface Props {
   style: 'drawn' | 'matrix' | 'kinetic';
   slug?: string;
+  example?: string;
 }
 
-const { style, slug } = Astro.props;
+const { style, slug, example } = Astro.props;
 const list = pages(style);
 const searchText = (page: ReturnType<typeof pages>[number]) =>
   [
@@ -34,6 +36,29 @@ const searchText = (page: ReturnType<typeof pages>[number]) =>
     <kbd class="site-search__key" aria-hidden="true">⌘K</kbd>
   </div>
   <p class="site-search__status" id="site-search-status" role="status"></p>
+  <div class="site-nav__group">
+    <h2 class="site-nav__title">
+      <a class="site-nav__heading" href={`/${style}/examples/`} aria-current={example === '' ? 'page' : undefined}>Examples</a>
+    </h2>
+    <ul class="site-nav__list">
+      {
+        examples.map((app) => (
+          <li
+            class="site-nav__item"
+            data-search={['example', app.title, app.blurb].join(' ').toLowerCase()}
+          >
+            <a
+              class="site-nav__link"
+              href={`/${style}/examples/${app.id}/`}
+              aria-current={app.id === example ? 'page' : undefined}
+            >
+              {app.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
   {
     groups.map(({ name }) => {
       const items = list.filter((page) => page.group === name);

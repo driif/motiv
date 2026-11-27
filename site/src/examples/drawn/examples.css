@@ -1,0 +1,327 @@
+/* Layout for the drawn example apps; components keep their own styles. */
+.ex-drawn {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  min-height: 40rem;
+  padding: clamp(0.75rem, 3vw, 1.75rem);
+  border: 1px solid var(--motiv-color-border);
+  border-radius: var(--motiv-radius-lg);
+  background: var(--motiv-color-bg);
+}
+
+.ex-drawn__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ex-drawn__brand {
+  margin-right: auto;
+  font-family: "Caveat", "Segoe Print", cursive;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.ex-drawn__main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+/* Dashboard */
+.ex-dash {
+  grid-template-columns: 12rem minmax(0, 1fr);
+  grid-template-areas:
+    "bar bar"
+    "nav main";
+  align-content: start;
+}
+
+.ex-dash .ex-drawn__bar {
+  grid-area: bar;
+}
+
+.ex-dash .ex-drawn__nav {
+  grid-area: nav;
+  align-self: start;
+}
+
+.ex-dash .ex-drawn__main {
+  grid-area: main;
+}
+
+.ex-dash__search {
+  width: min(100%, 16rem);
+}
+
+.ex-dash__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 1rem;
+}
+
+.ex-dash__figure {
+  margin: 0;
+  font-family: "Caveat", "Segoe Print", cursive;
+  font-size: 2.75rem;
+  line-height: 1;
+}
+
+.ex-dash__tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.ex-dash__pages {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  color: var(--motiv-color-text-muted);
+  font-size: var(--motiv-font-size-sm);
+}
+
+@media (min-width: 48rem) {
+  .ex-drawn__menu {
+    display: none;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .ex-drawn__bar {
+    gap: 0.5rem;
+  }
+
+  .ex-drawn__brand {
+    font-size: 1.5rem;
+  }
+
+  .ex-dash {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "bar"
+      "nav"
+      "main";
+  }
+
+  .ex-dash[data-menu="false"] .ex-drawn__nav {
+    display: none;
+  }
+
+  .ex-dash__search {
+    order: 1;
+    width: 100%;
+  }
+}
+
+/* Settings */
+.ex-settings {
+  align-content: start;
+  max-width: 48rem;
+  margin-inline: auto;
+  margin-bottom: 4rem;
+}
+
+.ex-settings__panel {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 30rem;
+  padding-top: 1.25rem;
+}
+
+.ex-settings__group {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.ex-settings__group legend {
+  margin-bottom: 0.5rem;
+  padding: 0;
+  font-weight: 600;
+}
+
+.ex-settings__nested {
+  display: grid;
+  gap: 0.5rem;
+  padding-left: 1.75rem;
+}
+
+.ex-settings__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.ex-settings__danger {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding: 1rem;
+  border: 1px dashed var(--motiv-color-danger);
+  border-radius: var(--motiv-radius-md);
+}
+
+.ex-settings__danger p {
+  margin: 0.25rem 0 0;
+  color: var(--motiv-color-text-muted);
+  font-size: var(--motiv-font-size-sm);
+}
+
+/* Inbox */
+.ex-inbox {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.ex-inbox__split {
+  display: flex;
+  min-width: 0;
+  min-height: 32rem;
+  border: 1px solid var(--motiv-color-border);
+  border-radius: var(--motiv-radius-md);
+  background: var(--motiv-color-surface);
+}
+
+.ex-inbox__list {
+  flex: 0 0 var(--ex-list);
+  margin: 0;
+  padding: 0.5rem;
+  overflow: auto;
+  list-style: none;
+}
+
+.ex-inbox__item {
+  display: flex;
+  align-items: start;
+  gap: 0.25rem;
+  border-radius: var(--motiv-radius-sm);
+}
+
+.ex-inbox__item[data-active="true"] {
+  background: color-mix(in oklch, var(--motiv-color-primary) 12%, transparent);
+}
+
+.ex-inbox__open {
+  display: grid;
+  flex: 1;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.125rem 0.5rem;
+  min-width: 0;
+  padding: 0.625rem 0.5rem 0.625rem 0.75rem;
+  border: 0;
+  border-radius: var(--motiv-radius-sm);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ex-inbox__open:focus-visible {
+  outline: 2px solid var(--motiv-color-primary);
+  outline-offset: -2px;
+}
+
+.ex-inbox__from {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.ex-inbox__subject {
+  grid-column: 1 / -1;
+  overflow: hidden;
+  color: var(--motiv-color-text-muted);
+  font-size: var(--motiv-font-size-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ex-inbox__time {
+  grid-row: 1;
+  grid-column: 2;
+  color: var(--motiv-color-text-muted);
+  font-size: var(--motiv-font-size-xs);
+}
+
+.ex-inbox__item .motiv-icon-button,
+.ex-inbox__item > button:last-child {
+  margin-top: 0.375rem;
+}
+
+.ex-inbox__empty {
+  padding: 1rem;
+  color: var(--motiv-color-text-muted);
+}
+
+.ex-inbox__reader {
+  display: grid;
+  flex: 1;
+  align-content: start;
+  gap: 1rem;
+  min-width: 0;
+  padding: 1.25rem 1.5rem;
+  overflow: auto;
+}
+
+.ex-inbox__reader-head h2 {
+  margin: 0;
+  font-size: var(--motiv-font-size-xl);
+}
+
+.ex-inbox__reader-head p {
+  margin: 0.25rem 0 0;
+  color: var(--motiv-color-text-muted);
+  font-size: var(--motiv-font-size-sm);
+}
+
+.ex-inbox__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.ex-inbox__row--end {
+  justify-content: flex-end;
+}
+
+.ex-inbox__compose {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (max-width: 47.99rem) {
+  .ex-inbox__split {
+    flex-direction: column;
+  }
+
+  .ex-inbox__list {
+    flex-basis: auto;
+    border-bottom: 1px solid var(--motiv-color-border);
+  }
+
+  .ex-inbox__splitter {
+    display: none;
+  }
+
+  .ex-inbox__reader {
+    padding: 1rem;
+  }
+}

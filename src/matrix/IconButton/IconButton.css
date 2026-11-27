@@ -10,11 +10,14 @@
   }
 
   .motiv-matrix-icon-button {
+    --_size: max(24px, var(--motiv-field-height));
+    --_icon-size: var(--motiv-icon-size);
+    --_bracket: 8px;
     position: relative;
     display: inline-grid;
     place-items: center;
-    width: max(24px, calc(var(--motiv-space) * 12));
-    height: max(24px, calc(var(--motiv-space) * 12));
+    width: var(--_size);
+    height: var(--_size);
     padding: 0;
     color: var(--motiv-icon-button-color, var(--motiv-color-primary));
     background: var(--motiv-icon-button-bg, transparent);
@@ -27,8 +30,8 @@
     &::after {
       content: "";
       position: absolute;
-      width: 8px;
-      height: 8px;
+      width: var(--_bracket);
+      height: var(--_bracket);
       border: 2px solid currentColor;
       opacity: 0;
       transition:
@@ -77,6 +80,33 @@
     }
   }
 
+  /* Smaller brackets sit closer to the edge so the corners still frame the icon. */
+  .motiv-matrix-icon-button--sm {
+    --_size: max(24px, var(--motiv-control-height));
+    --_icon-size: var(--motiv-icon-size-sm);
+    --_bracket: 6px;
+    --_corner: 4px;
+  }
+
+  .motiv-matrix-icon-button--xs {
+    --_size: max(20px, var(--motiv-row-height));
+    --_icon-size: var(--motiv-icon-size-sm);
+    --_bracket: 5px;
+    --_corner: 3px;
+  }
+
+  /* --_corner inherits from the group, so a round child still resets it to 0. */
+  .motiv-matrix-icon-button-group--sm {
+    --_corner: 4px;
+    padding: calc(var(--motiv-space) * 0.5);
+
+    & > .motiv-matrix-icon-button {
+      --_size: max(24px, var(--motiv-control-height));
+      --_icon-size: var(--motiv-icon-size-sm);
+      --_bracket: 6px;
+    }
+  }
+
   /* Dotted divider between neighbours. */
   .motiv-matrix-icon-button-group > .motiv-matrix-icon-button + .motiv-matrix-icon-button {
     border-left: 1px dashed
@@ -88,8 +118,8 @@
 
   .motiv-matrix-icon-button__icon {
     display: inline-grid;
-    width: 24px;
-    height: 24px;
+    width: var(--_icon-size);
+    height: var(--_icon-size);
 
     & > svg {
       width: 100%;

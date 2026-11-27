@@ -20,18 +20,26 @@ under its own name, and ² marks a style's extra component in that category. Dra
 `Nav` is the list built from it. Kinetic `Switch`, `Slider`, `Nav` and `Checkbox` are the same components as
 `LiquidSwitch`, `MomentumSlider`, `GlideNav` and `SpringCheckbox`, and matrix `ThemeToggle` and
 `MenuButton` are `GlitchThemeToggle` and `SignalBurger`, under the generic name. Kinetic
-`TextField` has the `FloatingField` look without its validity check, and kinetic `TextField` and
-`Progress` take the drawn props. Kinetic and matrix `Tabs`
+`TextField` has the `FloatingField` look without its validity check; kinetic, drawn and matrix
+`TextField` all take the drawn props, including `labelPosition`, and kinetic `Progress` takes the
+drawn props. Kinetic and matrix `Tabs`
 wrap `ElasticTabs` and `HudTabs` with the drawn `Tabs` props; matrix `Nav` wraps `ChevronNav` with
 the `GlideNav` props. Kinetic and matrix `Select` and `Tooltip` take the drawn props; matrix `Select`
 wraps `TerminalSelect`, whose field shows an option's `code`, falling back to its `label`, as its own
 look. Drawn and matrix `Accordion`, `Stepper` and `Carousel` take the kinetic props. Kinetic `Chips`
 is `FilterChips` under the generic name; drawn and matrix `Chips`, `OtpInput`, `CommandMenu`,
 `MultiSelect`, `DatePicker`, `FileUpload`, `Confirm`, `Toaster`, `Table` and `TableColumnsMenu` and
-matrix `SegmentedControl` take the kinetic props, and kinetic `Link` takes the drawn props. Drawn and
-matrix also export the kinetic `putFile` helper, and the kinetic `toast` and `dismissToast`: all
+matrix `SegmentedControl` take the kinetic props, and kinetic `Link` takes the drawn props. Drawn
+and matrix `IconButton`, `ThemeToggle`, `Checkbox`, `Badge`, `Dialog`, `NotificationList` and
+`Splitter` take the kinetic props too (`dark` on `ThemeToggle` is optional and follows the root
+`data-theme`). Drawn and matrix also export the kinetic `putFile` helper, and the kinetic `toast` and `dismissToast`: all
 three entries share one queue, so a toast fired from any entry shows in whichever `Toaster` is
 mounted.
+
+Heavy components sit behind subpaths in every style, with the kinetic props: `ActionMenu` and
+`SplitButton` from `/action-menu`, `DataTable` from `/data-table`, and `Markdown` and
+`MarkdownEditor` from `/markdown`. Kinetic imports them from `@driif/motiv/action-menu` and so on,
+drawn from `@driif/motiv/drawn/action-menu`, matrix from `@driif/motiv/matrix/action-menu`.
 
 | Category | Kinetic | Drawn | Matrix |
 |---|---|---|---|
@@ -64,11 +72,21 @@ mounted.
 | FileUpload | `FileUpload` | `FileUpload` | `FileUpload` |
 | Confirm | `Confirm` | `Confirm` | `Confirm` |
 | Toast | `Toaster`, `toast`, `dismissToast` | `Toaster`, `toast`, `dismissToast` | `Toaster`, `toast`, `dismissToast` |
-| Table | `Table`, `TableColumnsMenu` | `Table`, `TableColumnsMenu` | `Table`, `TableColumnsMenu` |
+| Table | `Table`, `TableColumnsMenu`, `DataTable` ³ | `Table`, `TableColumnsMenu`, `DataTable` ³ | `Table`, `TableColumnsMenu`, `DataTable` ³ |
+| Badge | `Badge` | `Badge` | `Badge` |
+| Dialog | `Dialog` | `Dialog` | `Dialog` |
+| NotificationList | `NotificationList` | `NotificationList` | `NotificationList` |
+| Splitter | `Splitter` | `Splitter` | `Splitter` |
+| ActionMenu | `ActionMenu` ³ | `ActionMenu` ³ | `ActionMenu` ³ |
+| SplitButton | `SplitButton` ³ | `SplitButton` ³ | `SplitButton` ³ |
+| Markdown | `Markdown` ³ | `Markdown` ³ | `Markdown` ³ |
+| MarkdownEditor | `MarkdownEditor` ³ | `MarkdownEditor` ³ | `MarkdownEditor` ³ |
+
+³ from the style's subpath: `/action-menu`, `/data-table` or `/markdown`.
 
 Style-specific, outside the categories: kinetic `MagneticButton`, `MorphSubmitButton`,
-`LikeButton`, `BellButton`, `MuteToggle`, `Badge`, `BadgeButton`, `CopyField`,
-`ExpandingSearch`, `RadialMenu`, `Odometer`, `SlipCard`, `Dialog`; drawn `InkSplatterButton`, `HoldToConfirmButton`,
+`LikeButton`, `BellButton`, `MuteToggle`, `BadgeButton`, `CopyField`,
+`ExpandingSearch`, `RadialMenu`, `Odometer`, `SlipCard`; drawn `InkSplatterButton`, `HoldToConfirmButton`,
 `OrbitalThemeToggle`, `NavItem`; matrix `ScanButton`, `DecodeSecretField`.
 
 ## Status

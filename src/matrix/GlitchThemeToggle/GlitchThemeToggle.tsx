@@ -1,13 +1,10 @@
-import { type ComponentProps, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import type { ThemeToggleProps } from '../../components/ThemeToggle';
 import { cx } from '../../utils/cx';
 import { playOnce } from '../../utils/motion';
+import { useRootDark } from '../../utils/useRootDark';
 
-export interface GlitchThemeToggleProps
-  extends Omit<ComponentProps<'button'>, 'children' | 'onClick'> {
-  dark: boolean;
-  onToggle: () => void;
-  label?: string;
-}
+export type GlitchThemeToggleProps = ThemeToggleProps;
 
 const JITTER: Keyframe[] = [
   { transform: 'translate(0, 0)' },
@@ -49,24 +46,27 @@ export function GlitchThemeToggle({
   const iconRef = useRef<HTMLSpanElement>(null);
   const redRef = useRef<HTMLSpanElement>(null);
   const cyanRef = useRef<HTMLSpanElement>(null);
-  const prev = useRef(dark);
+  const resolved = useRootDark(dark);
+  const prev = useRef(resolved);
 
   useEffect(() => {
-    if (prev.current === dark) return;
-    prev.current = dark;
+    if (prev.current === resolved) return;
+    const hydrating = prev.current === undefined;
+    prev.current = resolved;
+    if (hydrating) return;
     const timing = { duration: 550, easing: 'steps(5)' };
     playOnce(iconRef.current, JITTER, timing);
     playOnce(redRef.current, split(-3), timing);
     playOnce(cyanRef.current, split(3), timing);
-  }, [dark]);
+  }, [resolved]);
 
   return (
     <button
       type="button"
       {...props}
       aria-label={label}
-      aria-pressed={dark}
-      className={cx('motiv-matrix-glitch', dark && 'motiv-matrix-glitch--dark', className)}
+      aria-pressed={resolved}
+      className={cx('motiv-matrix-glitch', resolved && 'motiv-matrix-glitch--dark', className)}
       onClick={onToggle}
     >
       <span className="motiv-matrix-glitch__icon" aria-hidden="true">

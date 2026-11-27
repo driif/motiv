@@ -26,6 +26,22 @@ describe('IconButton', () => {
     expect(button).toHaveAttribute('type', 'submit');
     expect(ref.current).toBe(button);
   });
+
+  it('adds the sm modifier only for size sm and keeps size off the DOM', () => {
+    const { rerender } = render(<IconButton icon="✎" label="Edit" size="sm" />);
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass('motiv-icon-button--sm');
+    expect(button).not.toHaveAttribute('size');
+    rerender(<IconButton icon="✎" label="Edit" size="md" />);
+    expect(button).not.toHaveClass('motiv-icon-button--sm');
+    rerender(<IconButton icon="✎" label="Edit" />);
+    expect(button).not.toHaveClass('motiv-icon-button--sm');
+  });
+
+  it('adds the xs modifier for the row-height size', () => {
+    render(<IconButton icon="✎" label="Edit" size="xs" />);
+    expect(screen.getByRole('button')).toHaveClass('motiv-icon-button--xs');
+  });
 });
 
 describe('IconButtonGroup', () => {
@@ -38,6 +54,13 @@ describe('IconButtonGroup', () => {
     const group = screen.getByRole('group', { name: 'Tools' });
     expect(group).toHaveClass('motiv-icon-button-group', 'x');
     expect(group).toContainElement(screen.getByRole('button', { name: 'Edit' }));
+  });
+
+  it('makes a small group with size sm', () => {
+    render(<IconButtonGroup label="Tools" size="sm" />);
+    const group = screen.getByRole('group', { name: 'Tools' });
+    expect(group).toHaveClass('motiv-icon-button-group--sm');
+    expect(group).not.toHaveAttribute('size');
   });
 
   it('adds the round modifier only for shape round', () => {

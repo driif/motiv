@@ -1,0 +1,61 @@
+@layer motiv.components {
+  /* Loaded after the shared Markdown.css: '#' heading markers, '>' quote gutter, phosphor glow. */
+  .motiv-markdown {
+    --_accent: var(--motiv-color-primary);
+
+    & :where(h1, h2, h3, h4, h5, h6) {
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    & :where(h1, h2, h3, h4, h5, h6)::before {
+      color: var(--_accent);
+    }
+    & :where(h1)::before {
+      content: "# " / "";
+    }
+    & :where(h2)::before {
+      content: "## " / "";
+    }
+    & :where(h3)::before {
+      content: "### " / "";
+    }
+    & :where(h4)::before {
+      content: "#### " / "";
+    }
+    & :where(h5)::before {
+      content: "##### " / "";
+    }
+    & :where(h6)::before {
+      content: "###### " / "";
+    }
+
+    & :where(a) {
+      text-decoration-line: underline;
+      text-shadow: 0 0 8px color-mix(in oklch, var(--_accent) 45%, transparent);
+    }
+
+    & :where(blockquote) {
+      border-inline-start: 1px solid color-mix(in oklch, var(--_accent) 55%, transparent);
+    }
+
+    & :where(blockquote > p)::before {
+      content: "> " / "";
+      color: var(--_accent);
+    }
+
+    & :where(code, pre) {
+      border-radius: 0;
+    }
+
+    & :where(pre) {
+      border: 1px solid color-mix(in oklch, var(--_accent) 40%, transparent);
+      box-shadow: inset 0 0 calc(var(--motiv-space) * 3)
+        color-mix(in oklch, var(--_accent) 15%, transparent);
+    }
+
+    & :where(hr) {
+      border-block-start: 1px dashed color-mix(in oklch, var(--_accent) 55%, transparent);
+    }
+  }
+}

@@ -174,6 +174,7 @@
 .site-view__anchor:focus-visible,
 .site-doc__link:focus-visible,
 .site-nav__link:focus-visible,
+.site-nav__heading:focus-visible,
 .site-gallery__link:focus-visible,
 .site-tabs__tab:focus-visible,
 .site-copy:focus-visible,
@@ -255,6 +256,11 @@
 }
 
 @media (max-width: 42rem) {
+  /* The style switch wraps to a second row. */
+  .site-body {
+    --site-top-height: 7.1rem;
+  }
+
   .site-top {
     flex-wrap: wrap;
     padding-bottom: 0.75rem;
@@ -530,6 +536,18 @@
   text-transform: uppercase;
 }
 
+.site-nav__heading {
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--motiv-radius-sm);
+}
+
+.site-nav__heading:hover,
+.site-nav__heading[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 [data-style="drawn"] .site-nav__title,
 [data-style="matrix"] .site-nav__title {
   color: var(--motiv-color-primary);
@@ -769,6 +787,77 @@
 .site-gallery__link:hover {
   color: var(--motiv-color-primary);
   border-color: var(--motiv-color-primary);
+}
+
+/* Example apps */
+
+/* An app needs more room than a component demo. */
+.site-page--docs .site-main:has(.site-example) {
+  max-width: 90rem;
+}
+
+.site-example__blurb {
+  margin: 1rem 0 0;
+}
+
+.site-example__uses {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.25rem 0 0;
+}
+
+.site-example__label {
+  margin-right: 0.25rem;
+  color: var(--motiv-color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Reserved, so menus and dialogs opened inside a short app still fit in the frame. */
+/* Capped to the viewport so a modal dialog, centred on the frame, stays on screen. */
+.site-example__frame {
+  --site-example-max: calc(100dvh - var(--site-top-height) - 2rem);
+  min-height: min(40rem, var(--site-example-max));
+  max-height: var(--site-example-max);
+  scroll-margin: calc(var(--site-top-height) + 1rem) 0 1rem;
+}
+
+.site-example__code .site-code {
+  max-height: 48rem;
+}
+
+.site-examples {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+}
+
+.site-doc + .site-examples {
+  margin-top: 2rem;
+}
+
+.site-examples__card {
+  position: relative;
+}
+
+.site-examples__card:has(.site-examples__link:hover) {
+  border-color: var(--motiv-color-primary);
+}
+
+/* The whole card is the link's hit area. */
+.site-examples__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.site-examples__uses {
+  margin: 0;
+  color: var(--motiv-color-text-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
 }
 
 /* Style chooser */

@@ -35,6 +35,17 @@
 @import "../matrix/Confirm/Confirm.css";
 @import "../matrix/Toast/Toast.css";
 @import "../matrix/Table/Table.css";
+@import "../data-table/DataTable/DataTable.css";
+@import "../matrix/ActionMenu/ActionMenu.css";
+@import "../matrix/SplitButton/SplitButton.css";
+@import "../matrix/Badge/Badge.css";
+@import "../matrix/Dialog/Dialog.css";
+@import "../matrix/NotificationList/NotificationList.css";
+@import "../matrix/Splitter/Splitter.css";
+@import "../markdown/Markdown/Markdown.css";
+@import "../matrix/markdown/Markdown/Markdown.css";
+@import "../markdown/MarkdownEditor/MarkdownEditor.css";
+@import "../matrix/markdown/MarkdownEditor/MarkdownEditor.css";
 
 @layer motiv.tokens {
   /* tokens.css carries the kinetic palette; matrix is a monospace phosphor terminal. */

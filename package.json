@@ -39,6 +39,30 @@
       "types": "./dist/data-table/index.d.ts",
       "default": "./dist/data-table/index.js"
     },
+    "./drawn/action-menu": {
+      "types": "./dist/drawn/action-menu/index.d.ts",
+      "default": "./dist/drawn/action-menu/index.js"
+    },
+    "./drawn/markdown": {
+      "types": "./dist/drawn/markdown/index.d.ts",
+      "default": "./dist/drawn/markdown/index.js"
+    },
+    "./drawn/data-table": {
+      "types": "./dist/drawn/data-table/index.d.ts",
+      "default": "./dist/drawn/data-table/index.js"
+    },
+    "./matrix/action-menu": {
+      "types": "./dist/matrix/action-menu/index.d.ts",
+      "default": "./dist/matrix/action-menu/index.js"
+    },
+    "./matrix/markdown": {
+      "types": "./dist/matrix/markdown/index.d.ts",
+      "default": "./dist/matrix/markdown/index.js"
+    },
+    "./matrix/data-table": {
+      "types": "./dist/matrix/data-table/index.d.ts",
+      "default": "./dist/matrix/data-table/index.js"
+    },
     "./styles.css": "./dist/styles.css",
     "./tokens.css": "./dist/tokens.css",
     "./base.css": "./dist/base.css",

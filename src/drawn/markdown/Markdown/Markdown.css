@@ -1,0 +1,37 @@
+@layer motiv.components {
+  /* Loaded after the shared Markdown.css: hand-lettered headings and pencil rules on top. */
+  .motiv-markdown {
+    --_hand-font: "Caveat", "Segoe Print", cursive;
+    --_rule: color-mix(in oklch, var(--motiv-color-text) 35%, transparent);
+
+    & :where(h1, h2, h3, h4, h5, h6) {
+      font-family: var(--_hand-font);
+      font-weight: 400;
+    }
+
+    & :where(a) {
+      text-decoration-line: underline;
+      text-decoration-style: wavy;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.25em;
+    }
+
+    & :where(blockquote) {
+      border-inline-start: 2px solid var(--_rule);
+    }
+
+    & :where(code, pre) {
+      background: transparent;
+      border: 1.5px dashed var(--_rule);
+      border-radius: 6px 12px 8px 14px / 12px 6px 14px 8px;
+    }
+
+    & :where(pre) > code {
+      border: 0;
+    }
+
+    & :where(hr) {
+      border-block-start: 1.5px dashed var(--_rule);
+    }
+  }
+}

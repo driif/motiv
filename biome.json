@@ -25,7 +25,9 @@
       "includes": ["src/markdown/Markdown/Markdown.tsx"],
       "linter": {
         "rules": {
-          "security": { "noDangerouslySetInnerHtml": "off" }
+          "security": {
+            "noDangerouslySetInnerHtml": "off"
+          }
         }
       }
     },
@@ -83,7 +85,6 @@
         "src/matrix/IconButton/IconButton.tsx",
         "src/components/SegmentedControl/SegmentedControl.tsx",
         "src/components/FilterChips/FilterChips.tsx",
-        "src/components/Splitter/Splitter.tsx",
         "src/components/Carousel/Carousel.tsx",
         "src/drawn/Carousel/Carousel.tsx",
         "src/matrix/Carousel/Carousel.tsx",
@@ -122,34 +123,11 @@
       }
     },
     {
-      "includes": ["src/components/Dialog/Dialog.tsx"],
-      "linter": {
-        "rules": {
-          "a11y": {
-            "useKeyWithClickEvents": "off"
-          }
-        }
-      }
-    },
-    {
       "includes": ["src/components/ActionMenu/ActionMenu.tsx"],
       "linter": {
         "rules": {
           "suspicious": {
             "noArrayIndexKey": "off"
-          }
-        }
-      }
-    },
-    {
-      "includes": ["src/components/NotificationList/NotificationList.tsx"],
-      "linter": {
-        "rules": {
-          "correctness": {
-            "useExhaustiveDependencies": {
-              "level": "error",
-              "options": { "reportUnnecessaryDependencies": false }
-            }
           }
         }
       }

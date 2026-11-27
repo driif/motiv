@@ -28,7 +28,7 @@ export function Nav({ items, onChange, className, ...props }: NavProps) {
           })),
         },
       ]}
-      onChange={(id, event) => onChange?.(id, event)}
+      onChange={onChange}
     />
   );
 }

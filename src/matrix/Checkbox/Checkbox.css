@@ -38,6 +38,14 @@
     }
   }
 
+  .motiv-matrix-checkbox__input:indeterminate + .motiv-matrix-checkbox__box {
+    color: var(--motiv-checkbox-accent, var(--motiv-color-primary));
+
+    &::before {
+      content: "[-]";
+    }
+  }
+
   .motiv-matrix-checkbox__input:focus-visible + .motiv-matrix-checkbox__box {
     outline: 2px solid var(--motiv-color-primary);
     outline-offset: 3px;

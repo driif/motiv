@@ -68,8 +68,9 @@
       stroke-width: 3;
       stroke-linecap: round;
       stroke-linejoin: round;
-      stroke-dasharray: 1;
-      stroke-dashoffset: 1;
+      /* Hidden, the dash sits wholly off the path, so no round cap leaves an ink dot. */
+      stroke-dasharray: 1 1.1;
+      stroke-dashoffset: 1.05;
       transition: stroke-dashoffset 0.45s var(--_pen);
     }
   }
@@ -79,7 +80,21 @@
       transform: scale(1);
     }
 
-    & path {
+    & .motiv-checkbox__tick {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .motiv-checkbox__input:indeterminate + .motiv-checkbox__box {
+    &::before {
+      transform: scale(1);
+    }
+
+    & .motiv-checkbox__tick {
+      stroke-dashoffset: 1.05;
+    }
+
+    & .motiv-checkbox__dash {
       stroke-dashoffset: 0;
     }
   }
@@ -90,6 +105,12 @@
 
   .motiv-checkbox:hover:not(:has(:disabled)) .motiv-checkbox__box {
     transform: rotate(-5deg);
+  }
+
+  @media (forced-colors: active) {
+    .motiv-checkbox__box path {
+      stroke: CanvasText;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

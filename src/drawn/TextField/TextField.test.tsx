@@ -17,6 +17,23 @@ describe('TextField', () => {
     expect(screen.getByRole('textbox')).toHaveAccessibleDescription('We never share it.');
   });
 
+  it('puts the label above the box with labelPosition="above"', () => {
+    const { container } = render(<TextField label="Email" labelPosition="above" hint="Hint" />);
+    expect(screen.getByRole('textbox', { name: 'Email' })).toHaveAccessibleDescription('Hint');
+    expect(container.firstChild).toHaveClass('motiv-text-field', 'motiv-text-field--above');
+    expect(container.querySelector('.motiv-text-field__title')?.nextElementSibling).toHaveClass(
+      'motiv-text-field__control',
+    );
+    expect(container.querySelector('.motiv-text-field__label')).toBeNull();
+  });
+
+  it('keeps the label for screen readers only with labelPosition="hidden"', () => {
+    const { container } = render(<TextField label="Name" labelPosition="hidden" />);
+    expect(screen.getByRole('textbox', { name: 'Name' })).toBeInTheDocument();
+    expect(container.firstChild).toHaveClass('motiv-text-field--hidden');
+    expect(container.querySelector('label')).toHaveClass('motiv-visually-hidden');
+  });
+
   it('keeps a caller id and aria-describedby', () => {
     render(
       <>

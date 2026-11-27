@@ -26,10 +26,13 @@ describe('Checkbox', () => {
     expect(screen.getByRole('checkbox')).toBeDisabled();
   });
 
-  it('puts className on the label and ref on the input', () => {
+  it('puts className and style on the label and ref on the input', () => {
     const ref = createRef<HTMLInputElement>();
-    const { container } = render(<Checkbox ref={ref} label="A" className="extra" name="a" />);
+    const { container } = render(
+      <Checkbox ref={ref} label="A" className="extra" style={{ margin: 4 }} name="a" />,
+    );
     expect(container.firstChild).toHaveClass('motiv-matrix-checkbox', 'extra');
+    expect(container.firstChild).toHaveStyle({ margin: '4px' });
     expect(ref.current).toBe(screen.getByRole('checkbox'));
     expect(ref.current).toHaveAttribute('name', 'a');
   });

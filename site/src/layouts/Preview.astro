@@ -325,6 +325,12 @@ const css = { kinetic: kineticCss, matrix: matrixCss, drawn: drawnCss }[style];
         }
       });
 
+      addEventListener('focusin', (event) => {
+        if ((event.target as Element).closest('dialog[open]')) {
+          parent.postMessage({ type: 'motiv-preview-dialog' }, location.origin);
+        }
+      });
+
       const reportHeight = () => {
         parent.postMessage(
           { type: 'motiv-preview-height', height: Math.ceil(document.body.getBoundingClientRect().height) },

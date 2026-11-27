@@ -21,6 +21,24 @@ export type TableProps<Row> = Omit<ComponentProps<'div'>, 'children'> & {
   resizeLabel?: (label: string) => string;
 };
 
+/** Literal class names per style, so bundlers and the tree-shake check can see them. */
+export type TableClassNames = Record<
+  'root' | 'table' | 'head' | 'header' | 'label' | 'resize' | 'resizeDragging' | 'row' | 'cell',
+  string
+>;
+
+export const tableClassNames: TableClassNames = {
+  root: 'motiv-table',
+  table: 'motiv-table__table',
+  head: 'motiv-table__head',
+  header: 'motiv-table__header',
+  label: 'motiv-table__label',
+  resize: 'motiv-table__resize',
+  resizeDragging: 'motiv-table__resize--dragging',
+  row: 'motiv-table__row',
+  cell: 'motiv-table__cell',
+};
+
 export function Table<Row>({
   caption,
   columns,
@@ -44,19 +62,24 @@ export function Table<Row>({
       aria-label={caption}
       tabIndex={0}
       {...props}
-      className={cx('motiv-table', className)}
+      className={cx(tableClassNames.root, className)}
     >
       <table
-        className="motiv-table__table"
+        className={tableClassNames.table}
         style={{ width: columns.reduce((sum, column) => sum + widthOf(column), 0) }}
       >
         <caption className="motiv-visually-hidden">{caption}</caption>
-        <TableHead columns={columns} widthOf={widthOf} separatorProps={separatorProps} />
+        <TableHead
+          classNames={tableClassNames}
+          columns={columns}
+          widthOf={widthOf}
+          separatorProps={separatorProps}
+        />
         <tbody>
           {rows.map((row) => (
-            <tr key={getRowKey(row)} className="motiv-table__row">
+            <tr key={getRowKey(row)} className={tableClassNames.row}>
               {columns.map((column) => (
-                <td key={column.id} className="motiv-table__cell">
+                <td key={column.id} className={tableClassNames.cell}>
                   {column.cell(row)}
                 </td>
               ))}
@@ -70,13 +93,15 @@ export function Table<Row>({
 
 type Resize = ReturnType<typeof useColumnResize>;
 
-/** Column widths and the header row, shared with `DataTable`. */
+/** Column widths and the header row, shared by every style's Table and DataTable. */
 export function TableHead<Row>({
+  classNames,
   columns,
   widthOf,
   separatorProps,
   rowIndex,
 }: {
+  classNames: TableClassNames;
   columns: TableColumn<Row>[];
   widthOf: Resize['widthOf'];
   separatorProps: Resize['separatorProps'];
@@ -90,7 +115,7 @@ export function TableHead<Row>({
           <col key={column.id} style={{ width: widthOf(column) }} />
         ))}
       </colgroup>
-      <thead className="motiv-table__head">
+      <thead className={classNames.head}>
         <tr aria-rowindex={rowIndex}>
           {columns.map((column, index) => {
             const separator = separatorProps(column);
@@ -100,17 +125,14 @@ export function TableHead<Row>({
                 key={column.id}
                 scope="col"
                 aria-labelledby={`${labelId}-${index}`}
-                className="motiv-table__header"
+                className={classNames.header}
               >
-                <span id={`${labelId}-${index}`} className="motiv-table__label">
+                <span id={`${labelId}-${index}`} className={classNames.label}>
                   {column.header ?? column.label}
                 </span>
                 <div
                   {...separator.props}
-                  className={cx(
-                    'motiv-table__resize',
-                    separator.dragging && 'motiv-table__resize--dragging',
-                  )}
+                  className={cx(classNames.resize, separator.dragging && classNames.resizeDragging)}
                 />
               </th>
             );

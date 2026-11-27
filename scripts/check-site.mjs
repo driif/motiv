@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { catalog, categories, groups, pages } from '../site/src/catalog.mjs';
+import { examples, usedPages } from '../site/src/examples.mjs';
 
 const entries = {
   kinetic: {
@@ -8,8 +9,18 @@ const entries = {
     '@driif/motiv/markdown': '../dist/markdown/index.js',
     '@driif/motiv/data-table': '../dist/data-table/index.js',
   },
-  drawn: { '@driif/motiv/drawn': '../dist/drawn/index.js' },
-  matrix: { '@driif/motiv/matrix': '../dist/matrix/index.js' },
+  drawn: {
+    '@driif/motiv/drawn': '../dist/drawn/index.js',
+    '@driif/motiv/drawn/action-menu': '../dist/drawn/action-menu/index.js',
+    '@driif/motiv/drawn/markdown': '../dist/drawn/markdown/index.js',
+    '@driif/motiv/drawn/data-table': '../dist/drawn/data-table/index.js',
+  },
+  matrix: {
+    '@driif/motiv/matrix': '../dist/matrix/index.js',
+    '@driif/motiv/matrix/action-menu': '../dist/matrix/action-menu/index.js',
+    '@driif/motiv/matrix/markdown': '../dist/matrix/markdown/index.js',
+    '@driif/motiv/matrix/data-table': '../dist/matrix/data-table/index.js',
+  },
 };
 
 const problems = [];
@@ -80,6 +91,42 @@ for (const [style, styleEntries] of Object.entries(entries)) {
     // Each style overrides :root tokens and shares class names, so demos render in iframes.
     if (!existsSync(new URL(`../site/src/pages/preview/${style}/${id}.astro`, import.meta.url))) {
       problems.push(`${style}: preview site/src/pages/preview/${style}/${id}.astro is missing`);
+    }
+  }
+}
+
+// Example apps: the same three in every style, each using at least its listed category pages.
+for (const { id, title, components } of examples) {
+  for (const name of components) {
+    if (!categories.some((category) => category.name === name)) {
+      problems.push(`example ${id} lists unknown category ${name}`);
+    }
+  }
+  for (const style of Object.keys(entries)) {
+    if (pages(style).some((page) => page.slug === 'examples')) {
+      problems.push(`${style}: a component page takes the examples slug`);
+    }
+    const file = new URL(`../site/src/examples/${style}/${title}.tsx`, import.meta.url);
+    if (
+      !existsSync(
+        new URL(`../site/src/pages/preview/${style}/examples/${id}.astro`, import.meta.url),
+      )
+    ) {
+      problems.push(
+        `${style}: preview site/src/pages/preview/${style}/examples/${id}.astro is missing`,
+      );
+    }
+    if (!existsSync(file)) {
+      problems.push(`${style}: example site/src/examples/${style}/${title}.tsx is missing`);
+      continue;
+    }
+    const source = String(readFileSync(file));
+    if (!new RegExp(`export function ${title}\\b`).test(source)) {
+      problems.push(`${style}: example ${title}.tsx does not export function ${title}`);
+    }
+    const used = usedPages(style, source).map((page) => page.title);
+    for (const name of components) {
+      if (!used.includes(name)) problems.push(`${style}: example ${title} does not use ${name}`);
     }
   }
 }

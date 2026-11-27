@@ -13,13 +13,15 @@ interface Props {
   current?: 'drawn' | 'matrix' | 'kinetic';
   // The component page shown; the style switch then points at the same page in each style.
   slug?: string;
+  // The example app shown, '' for the examples list; the style switch keeps it too.
+  example?: string;
 }
 
-const { title, description, current, slug } = Astro.props;
+const { title, description, current, slug, example } = Astro.props;
 // Style overview pages used to list every component; old #section links (also same-page ones
 // from the showcase) land on the component page now.
 const moved =
-  current && !slug
+  current && !slug && example === undefined
     ? Object.fromEntries(
         pages(current).flatMap((page) =>
           page.sections.map((section) => [section.id, `/${current}/${page.slug}/`]),
@@ -29,7 +31,11 @@ const moved =
 const switchLinks = styles.map((style) => ({
   style,
   href:
-    slug && pages(style).some((page) => page.slug === slug) ? `/${style}/${slug}/` : `/${style}/`,
+    example !== undefined
+      ? `/${style}/examples/${example && `${example}/`}`
+      : slug && pages(style).some((page) => page.slug === slug)
+        ? `/${style}/${slug}/`
+        : `/${style}/`,
 }));
 ---
 
@@ -99,7 +105,7 @@ const switchLinks = styles.map((style) => ({
       <ThemeToggleDemo client:idle />
     </header>
     <div class:list={['site-page', current && 'site-page--docs']} data-style={current}>
-      {current && <Sidebar style={current} slug={slug} />}
+      {current && <Sidebar style={current} slug={slug} example={example} />}
       <main class="site-main">
         <slot />
       </main>
@@ -126,7 +132,7 @@ const switchLinks = styles.map((style) => ({
       };
       menu?.addEventListener('click', () => setMenu(menu.getAttribute('aria-expanded') !== 'true'));
 
-      // Search filters the sidebar; ⌘K / Ctrl+K focuses it, Enter opens the first match.
+      // Search filters the sidebar; ⌘K / Ctrl+K focuses it, Enter opens the best match.
       const search = document.querySelector<HTMLInputElement>('#site-search');
       const status = document.querySelector('#site-search-status');
       const items = [...document.querySelectorAll<HTMLElement>('.site-nav__item')];
@@ -147,7 +153,10 @@ const switchLinks = styles.map((style) => ({
       });
       search?.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
-          items.find((item) => !item.hidden)?.querySelector('a')?.click();
+          // Prefer a page titled like the query over one that only mentions it.
+          const links = items.filter((item) => !item.hidden).map((item) => item.querySelector('a'));
+          const query = search.value.trim().toLowerCase();
+          (links.find((link) => link?.firstChild?.textContent?.trim().toLowerCase() === query) ?? links[0])?.click();
         } else if (event.key === 'Escape' && search.value) {
           search.value = '';
           search.dispatchEvent(new Event('input'));
@@ -226,10 +235,17 @@ const switchLinks = styles.map((style) => ({
       addEventListener('message', (event) => {
         if (event.origin !== location.origin) return;
         if (event.data?.type === 'motiv-preview-search') return openSearch();
+        const frame = [...frames].find((frame) => frame.contentWindow === event.source);
+        if (event.data?.type === 'motiv-preview-dialog') return frame?.scrollIntoView({ block: 'nearest' });
         if (event.data?.type !== 'motiv-preview-height') return;
         if (!Number.isFinite(event.data.height) || event.data.height <= 0) return;
-        for (const frame of frames) {
-          if (frame.contentWindow === event.source) frame.style.height = `${event.data.height}px`;
+        if (frame) frame.style.height = `${event.data.height}px`;
+      });
+
+      // A theme toggle inside a preview frame writes the stored theme; follow it here.
+      addEventListener('storage', (event) => {
+        if (event.key === 'motiv-site-theme' && (event.newValue === 'dark' || event.newValue === 'light')) {
+          document.documentElement.dataset.theme = event.newValue;
         }
       });
     </script>

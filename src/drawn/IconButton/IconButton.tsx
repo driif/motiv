@@ -1,15 +1,10 @@
-import type { ComponentProps, ReactNode } from 'react';
+import type { IconButtonGroupProps, IconButtonProps } from '../../components/IconButton';
 import { cx } from '../../utils/cx';
-
-export interface IconButtonProps extends Omit<ComponentProps<'button'>, 'children'> {
-  icon: ReactNode;
-  label: string;
-  shape?: 'square' | 'round';
-}
 
 export function IconButton({
   icon,
   label,
+  size = 'md',
   shape = 'square',
   className,
   ...props
@@ -22,6 +17,7 @@ export function IconButton({
       title={label}
       className={cx(
         'motiv-icon-button',
+        size !== 'md' && `motiv-icon-button--${size}`,
         shape === 'round' && 'motiv-icon-button--round',
         className,
       )}
@@ -39,17 +35,17 @@ export function IconButton({
   );
 }
 
-export interface IconButtonGroupProps extends ComponentProps<'div'> {
-  label: string;
-}
-
-export function IconButtonGroup({ label, className, ...props }: IconButtonGroupProps) {
+export function IconButtonGroup({ label, size = 'md', className, ...props }: IconButtonGroupProps) {
   return (
     <div
       {...props}
       role="group"
       aria-label={label}
-      className={cx('motiv-icon-button-group', className)}
+      className={cx(
+        'motiv-icon-button-group',
+        size === 'sm' && 'motiv-icon-button-group--sm',
+        className,
+      )}
     />
   );
 }

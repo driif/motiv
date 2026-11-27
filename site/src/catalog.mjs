@@ -17,11 +17,14 @@ export const categories = [
   { name: 'IconButton', group: 'Actions' },
   { name: 'Link', group: 'Actions' },
   { name: 'ThemeToggle', group: 'Actions', keywords: 'dark mode light' },
+  { name: 'ActionMenu', group: 'Actions', keywords: 'dropdown menu' },
+  { name: 'SplitButton', group: 'Actions', keywords: 'dropdown menu' },
   { name: 'TextField', group: 'Forms', keywords: 'input' },
   { name: 'Textarea', group: 'Forms', keywords: 'multiline' },
   { name: 'DatePicker', group: 'Forms', keywords: 'calendar time' },
   { name: 'OtpInput', group: 'Forms', keywords: 'code pin 2fa' },
   { name: 'FileUpload', group: 'Forms', keywords: 'attachment drop' },
+  { name: 'MarkdownEditor', group: 'Forms', keywords: 'rich text preview' },
   { name: 'Select', group: 'Selection', keywords: 'dropdown combobox' },
   { name: 'MultiSelect', group: 'Selection', keywords: 'dropdown tags' },
   { name: 'Checkbox', group: 'Selection' },
@@ -36,13 +39,18 @@ export const categories = [
   { name: 'Stepper', group: 'Navigation', keywords: 'wizard steps' },
   { name: 'CommandMenu', group: 'Navigation', keywords: 'palette shortcut' },
   { name: 'Toast', group: 'Feedback', keywords: 'notification snackbar alert' },
-  { name: 'Confirm', group: 'Feedback', keywords: 'dialog modal delete' },
+  { name: 'Confirm', group: 'Feedback', keywords: 'delete' },
+  { name: 'Dialog', group: 'Feedback', keywords: 'modal popup' },
+  { name: 'NotificationList', group: 'Feedback', keywords: 'bell inbox alerts' },
+  { name: 'Badge', group: 'Feedback', keywords: 'status tag label pill' },
   { name: 'Progress', group: 'Feedback', keywords: 'loading bar' },
   { name: 'Tooltip', group: 'Feedback', keywords: 'hint popover' },
   { name: 'Table', group: 'Data & layout', keywords: 'grid columns' },
   { name: 'Card', group: 'Data & layout', keywords: 'panel' },
   { name: 'Accordion', group: 'Data & layout', keywords: 'collapse disclosure' },
   { name: 'Carousel', group: 'Data & layout', keywords: 'slides' },
+  { name: 'Splitter', group: 'Data & layout', keywords: 'resize pane divider' },
+  { name: 'Markdown', group: 'Data & layout', keywords: 'prose commonmark' },
 ];
 
 // Every runtime export of a style's entry must be claimed by exactly one section;
@@ -56,7 +64,7 @@ export const catalog = {
       symbols: ['Button', 'buttonClassName'],
       demo: 'Button',
       blurb:
-        'Pencil outlines that boil and hatch on hover. Ghost draws a line under the label; links borrow the look. Sizes follow --motiv-control-height.',
+        'Pencil outlines that boil and hatch on hover. Ghost draws a line under the label; links borrow the look. Medium is --motiv-field-height, the height of Select and TextField, and small is --motiv-control-height, so data-density="compact" shrinks them.',
     },
     {
       id: 'ink-splatter-button',
@@ -85,7 +93,7 @@ export const catalog = {
       symbols: ['Card', 'CardHeader', 'CardBody', 'CardFooter'],
       demo: 'Card',
       blurb:
-        'A hand-cut sheet with a heading, words and actions. Use titleAs for the right heading level, including h1.',
+        'A hand-cut sheet with a heading, words and actions. Use titleAs for the right heading level, including h1. Header actions wrap under the heading in a narrow card.',
     },
     {
       id: 'text-field',
@@ -94,7 +102,7 @@ export const catalog = {
       symbols: ['TextField'],
       demo: 'TextField',
       blurb:
-        'A pencil line to write on. Focus draws it in ink, the label floats, the hint stays put. A long label wraps above the value.',
+        'A pencil line to write on. Focus draws it in ink, the label floats, the hint stays put. A long label wraps above the value. labelPosition="above" puts the label over a box as high as Select and a medium Button; "hidden" keeps it for screen readers in a row-height box. type="color" shows a pencil-outlined swatch.',
     },
     {
       id: 'textarea',
@@ -111,7 +119,7 @@ export const catalog = {
       title: 'Checkbox',
       symbols: ['Checkbox'],
       demo: 'Checkbox',
-      blurb: 'A native checkbox, ticked by hand.',
+      blurb: 'A native checkbox, ticked by hand; an indeterminate input shows a pencil dash.',
     },
     {
       id: 'switch',
@@ -215,7 +223,7 @@ export const catalog = {
       symbols: ['Nav'],
       demo: 'Nav',
       blurb:
-        'A sidebar list of NavItem buttons; the current one is circled in ink. Same props as GlideNav.',
+        'A sidebar list of NavItem buttons; the current one is circled in ink. Same props as GlideNav. Items with href render as links and need no onChange; attributes adds e.g. data-astro-prefetch.',
     },
     {
       id: 'icon-button',
@@ -224,7 +232,7 @@ export const catalog = {
       symbols: ['IconButton', 'IconButtonGroup'],
       demo: 'IconButton',
       blurb:
-        'A toolbar of sketched icons, each with a label for screen readers. Size xs matches the list row height.',
+        'A toolbar of sketched icons, each with a label for screen readers. Size sm is a control-height button and xs matches the list row height; size="sm" on IconButtonGroup makes every button small; shape="round" makes it circular.',
     },
     {
       id: 'menu-button',
@@ -257,7 +265,8 @@ export const catalog = {
       title: 'ThemeToggle',
       symbols: ['ThemeToggle'],
       demo: 'ThemeToggle',
-      blurb: 'A compact sun and moon. It reports clicks; your app sets data-theme.',
+      blurb:
+        'A compact sun and moon. It reports clicks; your app sets data-theme. Leave out dark and it follows data-theme on the root, with the state picked by CSS before hydration, so a server-rendered page needs no pre-paint script.',
     },
     {
       id: 'orbital-theme-toggle',
@@ -266,7 +275,8 @@ export const catalog = {
       title: 'OrbitalThemeToggle',
       symbols: ['OrbitalThemeToggle'],
       demo: 'OrbitalThemeToggle',
-      blurb: 'The theme switch as a small illustration, for a hero or a settings page.',
+      blurb:
+        'The theme switch as a small illustration, for a hero or a settings page. Leave out dark and it follows data-theme on the root, picked by CSS before hydration.',
     },
     {
       id: 'accordion',
@@ -347,14 +357,99 @@ export const catalog = {
       symbols: ['Table', 'TableColumnsMenu'],
       demo: 'Table',
       blurb:
-        'A ruled sheet with a handwritten header; drag a pencil edge or use the arrow keys to resize. TableColumnsMenu ticks columns on a paper slip. Same props as the kinetic Table.',
+        'A ruled sheet with a handwritten header; drag a pencil edge or use the arrow keys to resize. TableColumnsMenu ticks columns on a paper slip; its size sets its trigger button. Same props as the kinetic Table.',
+    },
+    {
+      id: 'badge',
+      category: 'Badge',
+      title: 'Badge',
+      symbols: ['Badge'],
+      demo: 'Badge',
+      blurb:
+        'Status tag in handwriting with a wobbly pencil outline. Tone neutral, success, warning or danger; size sm or md.',
+    },
+    {
+      id: 'dialog',
+      category: 'Dialog',
+      title: 'Dialog',
+      symbols: ['Dialog'],
+      demo: 'Dialog',
+      blurb:
+        'Modal for free content on a pencil-drawn paper sheet. Escape, the close button or a backdrop click call onClose, and focus returns to the opener.',
+    },
+    {
+      id: 'notification-list',
+      category: 'NotificationList',
+      title: 'NotificationList',
+      symbols: ['NotificationList'],
+      demo: 'NotificationList',
+      blurb:
+        'A pencil-drawn bell with an ink-circled count opens a paper sheet of notifications. Dismiss one or all, and focus moves to the next one.',
+    },
+    {
+      id: 'splitter',
+      category: 'Splitter',
+      title: 'Splitter',
+      symbols: ['Splitter'],
+      demo: 'Splitter',
+      blurb:
+        'A pencil-stroke divider for resizing panes with pointer and keyboard. It previews while you drag, commits on release, and Escape cancels. The demo pairs a pixel sidebar that resets on double-click with a nested percentage row split.',
+    },
+    {
+      id: 'action-menu',
+      category: 'ActionMenu',
+      title: 'ActionMenu',
+      entry: '@driif/motiv/drawn/action-menu',
+      symbols: ['ActionMenu'],
+      demo: 'ActionMenu',
+      blurb:
+        'A pencil button that opens a paper-slip menu of actions, with icons, disabled reasons, submenus, a custom trigger and controlled open. Import it from @driif/motiv/drawn/action-menu.',
+    },
+    {
+      id: 'split-button',
+      category: 'SplitButton',
+      title: 'SplitButton',
+      entry: '@driif/motiv/drawn/action-menu',
+      symbols: ['SplitButton'],
+      demo: 'SplitButton',
+      blurb:
+        'A main pencil button with a chevron half that opens alternatives; the halves share one hand-drawn outline. Import it from @driif/motiv/drawn/action-menu.',
+    },
+    {
+      id: 'data-table',
+      category: 'Table',
+      title: 'DataTable',
+      entry: '@driif/motiv/drawn/data-table',
+      symbols: ['DataTable'],
+      demo: 'DataTable',
+      blurb:
+        'The ruled-sheet Table for long lists: it mounts only the rows in view and keeps a focused row. Same columns as Table; import from @driif/motiv/drawn/data-table.',
+    },
+    {
+      id: 'markdown',
+      category: 'Markdown',
+      title: 'Markdown',
+      entry: '@driif/motiv/drawn/markdown',
+      symbols: ['Markdown'],
+      demo: 'Markdown',
+      blurb:
+        'Safe CommonMark prose with hand-lettered headings, wavy ink links and pencil-ruled quotes and code. Import from @driif/motiv/drawn/markdown.',
+    },
+    {
+      id: 'markdown-editor',
+      category: 'MarkdownEditor',
+      title: 'MarkdownEditor',
+      entry: '@driif/motiv/drawn/markdown',
+      symbols: ['MarkdownEditor'],
+      demo: 'MarkdownEditor',
+      blurb:
+        'A drawn Textarea with a live Markdown preview on a paper slip; follows form reset. Import from @driif/motiv/drawn/markdown.',
     },
   ],
   kinetic: [
     {
       id: 'splitter',
-      category: null,
-      group: 'Data & layout',
+      category: 'Splitter',
       title: 'Splitter',
       symbols: ['Splitter'],
       demo: 'Splitter',
@@ -373,8 +468,7 @@ export const catalog = {
     },
     {
       id: 'markdown',
-      category: null,
-      group: 'Data & layout',
+      category: 'Markdown',
       title: 'Markdown',
       entry: '@driif/motiv/markdown',
       symbols: ['Markdown'],
@@ -384,8 +478,7 @@ export const catalog = {
     },
     {
       id: 'markdown-editor',
-      category: null,
-      group: 'Forms',
+      category: 'MarkdownEditor',
       title: 'MarkdownEditor',
       entry: '@driif/motiv/markdown',
       symbols: ['MarkdownEditor'],
@@ -424,8 +517,7 @@ export const catalog = {
     },
     {
       id: 'action-menu',
-      category: null,
-      group: 'Actions',
+      category: 'ActionMenu',
       title: 'ActionMenu',
       entry: '@driif/motiv/action-menu',
       symbols: ['ActionMenu'],
@@ -435,8 +527,7 @@ export const catalog = {
     },
     {
       id: 'split-button',
-      category: null,
-      group: 'Actions',
+      category: 'SplitButton',
       title: 'SplitButton',
       entry: '@driif/motiv/action-menu',
       symbols: ['SplitButton'],
@@ -455,8 +546,7 @@ export const catalog = {
     },
     {
       id: 'notification-list',
-      category: null,
-      group: 'Actions',
+      category: 'NotificationList',
       title: 'NotificationList',
       symbols: ['NotificationList'],
       demo: 'NotificationList',
@@ -475,8 +565,7 @@ export const catalog = {
     },
     {
       id: 'badge',
-      category: null,
-      group: 'Feedback',
+      category: 'Badge',
       title: 'Badge',
       symbols: ['Badge'],
       demo: 'Badge',
@@ -513,8 +602,7 @@ export const catalog = {
     },
     {
       id: 'dialog',
-      category: null,
-      group: 'Feedback',
+      category: 'Dialog',
       title: 'Dialog',
       symbols: ['Dialog'],
       demo: 'Dialog',
@@ -547,7 +635,7 @@ export const catalog = {
       symbols: ['IconButton', 'IconButtonGroup'],
       demo: 'IconButton',
       blurb:
-        'A toolbar of line icons; hover blooms a soft lilac fill and tips the icon up. Each has a label for screen readers. size="sm" gives a 32px button for table and list rows; IconButtonGroup size="sm" makes a whole toolbar small.',
+        'A toolbar of line icons; hover blooms a soft lilac fill and tips the icon up. Each has a label for screen readers. size="sm" gives a 32px button for table and list rows; IconButtonGroup size="sm" makes a whole toolbar small; shape="round" makes it circular.',
     },
     {
       id: 'menu-button',
@@ -930,7 +1018,7 @@ export const catalog = {
       symbols: ['Button', 'buttonClassName'],
       demo: 'Button',
       blurb:
-        'Five variants, three sizes, a loading state, square and bracketed. Same props as the drawn Button; links borrow the look. Sizes follow --motiv-control-height.',
+        'Five variants, three sizes, a loading state, square and bracketed. Same props as the drawn Button; links borrow the look. Medium is --motiv-field-height, the height of Select and TextField, and small is --motiv-control-height, so data-density="compact" shrinks them.',
     },
     {
       id: 'icon-button',
@@ -939,7 +1027,7 @@ export const catalog = {
       symbols: ['IconButton', 'IconButtonGroup'],
       demo: 'IconButton',
       blurb:
-        'Icon-only buttons named by their label. Brackets lock onto the one under the pointer.',
+        'Icon-only buttons named by their label. Brackets lock onto the one under the pointer. Size sm and xs (row height) shrink the box and its corner brackets; size="sm" on IconButtonGroup makes a compact group; shape="round" makes it circular.',
     },
     {
       id: 'glitch-theme-toggle',
@@ -948,7 +1036,7 @@ export const catalog = {
       symbols: ['GlitchThemeToggle'],
       demo: 'GlitchThemeToggle',
       blurb:
-        'Reports clicks, your app owns the theme. The icon swaps through an RGB-split glitch; reduced motion swaps it plainly. Also exported as ThemeToggle.',
+        'Reports clicks, your app owns the theme. The icon swaps through an RGB-split glitch; reduced motion swaps it plainly. Leave out dark and it follows data-theme on the root, with the icon picked by CSS before hydration and no glitch on load. Also exported as ThemeToggle.',
     },
     {
       id: 'theme-toggle',
@@ -984,7 +1072,7 @@ export const catalog = {
       symbols: ['Card', 'CardHeader', 'CardBody', 'CardFooter'],
       demo: 'Card',
       blurb:
-        'A bracketed panel with a heading, words and actions. Use titleAs for the right heading level, including h1.',
+        'A bracketed panel with a heading, words and actions. Use titleAs for the right heading level, including h1. Header actions wrap under the heading in a narrow card.',
     },
     {
       id: 'text-field',
@@ -992,7 +1080,8 @@ export const catalog = {
       title: 'TextField',
       symbols: ['TextField'],
       demo: 'TextField',
-      blurb: 'A labelled input behind a > prompt, with a hint that stays put.',
+      blurb:
+        'A labelled input behind a > prompt, with a hint that stays put. The box is as high as --motiv-field-height. labelPosition="hidden" keeps the label for screen readers in a row-height box; the label always sits above, so float and above look the same. type="color" shows a square swatch.',
     },
     {
       id: 'textarea',
@@ -1035,7 +1124,7 @@ export const catalog = {
       title: 'Checkbox',
       symbols: ['Checkbox'],
       demo: 'Checkbox',
-      blurb: 'A native checkbox, drawn as [ ] and [x].',
+      blurb: 'A native checkbox, drawn as [ ] and [x]; an indeterminate input shows [-].',
     },
     {
       id: 'switch',
@@ -1123,7 +1212,7 @@ export const catalog = {
       symbols: ['ChevronNav'],
       demo: 'ChevronNav',
       blurb:
-        'Sidebar navigation in sections. The current item is outlined; items that open a subtree carry a chevron.',
+        'Sidebar navigation in sections. The current item is outlined; items that open a subtree carry a chevron. onChange is optional, so href items can be plain links.',
     },
     {
       id: 'nav',
@@ -1131,7 +1220,8 @@ export const catalog = {
       title: 'Nav',
       symbols: ['Nav'],
       demo: 'Nav',
-      blurb: 'ChevronNav as one flat list with the GlideNav props; counts follow the label.',
+      blurb:
+        'ChevronNav as one flat list with the GlideNav props; counts follow the label. Items with href render as links and need no onChange; attributes adds e.g. data-astro-prefetch.',
     },
     {
       id: 'progress',
@@ -1238,7 +1328,93 @@ export const catalog = {
       symbols: ['Table', 'TableColumnsMenu'],
       demo: 'Table',
       blurb:
-        'A terminal readout with an uppercase phosphor header and resizable columns; TableColumnsMenu toggles them with [x] boxes. Same props as the kinetic Table.',
+        'A terminal readout with an uppercase phosphor header and resizable columns; TableColumnsMenu toggles them with [x] boxes and its size sets its trigger button. Same props as the kinetic Table.',
+    },
+    {
+      id: 'badge',
+      category: 'Badge',
+      title: 'Badge',
+      symbols: ['Badge'],
+      demo: 'Badge',
+      blurb:
+        'Uppercase terminal status tag with a square tone border. Tone neutral, success, warning or danger; size sm or md.',
+    },
+    {
+      id: 'dialog',
+      category: 'Dialog',
+      title: 'Dialog',
+      symbols: ['Dialog'],
+      demo: 'Dialog',
+      blurb:
+        'Modal for free content in a bracketed HUD panel over a scanline backdrop. Escape, the close button or a backdrop click call onClose, and focus returns to the opener.',
+    },
+    {
+      id: 'notification-list',
+      category: 'NotificationList',
+      title: 'NotificationList',
+      symbols: ['NotificationList'],
+      demo: 'NotificationList',
+      blurb:
+        'A bracketed terminal bell with a blinking [03] count opens a terminal window of notifications. Dismiss one or all, and focus moves to the next one.',
+    },
+    {
+      id: 'splitter',
+      category: 'Splitter',
+      title: 'Splitter',
+      symbols: ['Splitter'],
+      demo: 'Splitter',
+      blurb:
+        'A dashed phosphor trace for resizing panes with pointer and keyboard. It goes solid on hover and glows while dragged; it previews while you drag, commits on release, and Escape cancels.',
+    },
+    {
+      id: 'action-menu',
+      category: 'ActionMenu',
+      title: 'ActionMenu',
+      entry: '@driif/motiv/matrix/action-menu',
+      symbols: ['ActionMenu'],
+      demo: 'ActionMenu',
+      blurb:
+        'A terminal button that opens a phosphor menu of actions, with a caret on the highlighted row, icons, disabled reasons, submenus, a custom trigger and controlled open. Import it from @driif/motiv/matrix/action-menu.',
+    },
+    {
+      id: 'split-button',
+      category: 'SplitButton',
+      title: 'SplitButton',
+      entry: '@driif/motiv/matrix/action-menu',
+      symbols: ['SplitButton'],
+      demo: 'SplitButton',
+      blurb:
+        'A bracketed main button with a chevron segment behind a dashed divider that opens alternatives. Import it from @driif/motiv/matrix/action-menu.',
+    },
+    {
+      id: 'data-table',
+      category: 'Table',
+      title: 'DataTable',
+      entry: '@driif/motiv/matrix/data-table',
+      symbols: ['DataTable'],
+      demo: 'DataTable',
+      blurb:
+        'The terminal-grid Table for long lists: it mounts only the rows in view and keeps a focused row. Same columns as Table; import from @driif/motiv/matrix/data-table.',
+    },
+    {
+      id: 'markdown',
+      category: 'Markdown',
+      title: 'Markdown',
+      entry: '@driif/motiv/matrix/markdown',
+      symbols: ['Markdown'],
+      demo: 'Markdown',
+      blurb:
+        'Safe CommonMark prose as a terminal readout: # heading markers, a > quote gutter and glowing links. Import from @driif/motiv/matrix/markdown.',
+    },
+    {
+      id: 'markdown-editor',
+      category: 'MarkdownEditor',
+      title: 'MarkdownEditor',
+      entry: '@driif/motiv/matrix/markdown',
+      symbols: ['MarkdownEditor'],
+      demo: 'MarkdownEditor',
+      blurb:
+        'A terminal Textarea with a live Markdown preview in a phosphor box; follows form reset. Import from @driif/motiv/matrix/markdown.',
     },
   ],
 };

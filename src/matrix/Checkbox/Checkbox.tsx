@@ -1,9 +1,9 @@
 import type { CheckboxProps } from '../../drawn/Checkbox';
 import { cx } from '../../utils/cx';
 
-export function Checkbox({ label, className, ...props }: CheckboxProps) {
+export function Checkbox({ label, className, style, ...props }: CheckboxProps) {
   return (
-    <label className={cx('motiv-matrix-checkbox', className)}>
+    <label className={cx('motiv-matrix-checkbox', className)} style={style}>
       <input
         {...props}
         type="checkbox"

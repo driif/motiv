@@ -1,0 +1,39 @@
+@layer motiv.components {
+  .motiv-matrix-split-button {
+    display: inline-flex;
+  }
+
+  /* Child selectors outrank the Button's own rules whatever the stylesheet order. */
+  .motiv-matrix-split-button > .motiv-matrix-split-button__main {
+    border-inline-end: 0;
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+
+    /* The inner corner brackets would cross the divider; the outer two frame both halves. */
+    &::after {
+      display: none;
+    }
+  }
+
+  .motiv-matrix-split-button > .motiv-matrix-split-button__toggle {
+    padding-inline: calc(var(--motiv-space) * 2.5);
+    /* --_text contrasts with the fill on solid variants, where --_border equals --_bg. */
+    border-inline-start: 1px dashed color-mix(in oklch, var(--_text) 60%, transparent);
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+
+    /* Outranks the Button's hover/focus border-color, which would hide the divider. */
+    &:is(:hover, :focus-visible):not(:disabled) {
+      border-inline-start-color: color-mix(in oklch, var(--_text) 60%, transparent);
+    }
+
+    &::before {
+      display: none;
+    }
+
+    & svg {
+      width: var(--motiv-icon-size-sm);
+      height: var(--motiv-icon-size-sm);
+    }
+  }
+}

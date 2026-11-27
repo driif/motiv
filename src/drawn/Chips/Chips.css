@@ -68,8 +68,9 @@
       stroke-width: 2.6;
       stroke-linecap: round;
       stroke-linejoin: round;
-      stroke-dasharray: 1;
-      stroke-dashoffset: 1;
+      /* Hidden, the dash sits wholly off the path, so no round cap leaves an ink dot. */
+      stroke-dasharray: 1 1.1;
+      stroke-dashoffset: 1.05;
       transition: stroke-dashoffset 0.4s var(--_pen);
     }
 

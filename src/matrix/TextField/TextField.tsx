@@ -2,9 +2,11 @@ import { useId } from 'react';
 import type { TextFieldProps } from '../../drawn/TextField';
 import { cx } from '../../utils/cx';
 
+/** The label always sits above the box, so `labelPosition="float"` renders like `"above"`. */
 export function TextField({
   label,
   hint,
+  labelPosition = 'float',
   id,
   type = 'text',
   className,
@@ -15,8 +17,19 @@ export function TextField({
   const inputId = id ?? generatedId;
   const hintId = `${inputId}-hint`;
   return (
-    <div className={cx('motiv-matrix-text-field', className)}>
-      <label htmlFor={inputId} className="motiv-matrix-text-field__label">
+    <div
+      className={cx(
+        'motiv-matrix-text-field',
+        labelPosition !== 'float' && `motiv-matrix-text-field--${labelPosition}`,
+        className,
+      )}
+    >
+      <label
+        htmlFor={inputId}
+        className={
+          labelPosition === 'hidden' ? 'motiv-visually-hidden' : 'motiv-matrix-text-field__label'
+        }
+      >
         {label}
       </label>
       <div className="motiv-matrix-text-field__control">

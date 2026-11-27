@@ -38,6 +38,26 @@
     outline: none;
   }
 
+  /* A pencil-outlined swatch on the value line instead of the native bevelled box. */
+  .motiv-text-field__input[type="color"] {
+    height: calc(var(--motiv-space) * 12);
+    cursor: pointer;
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    &::-webkit-color-swatch {
+      border: 1.5px solid var(--motiv-color-text);
+      border-radius: 6px 3px 7px 4px / 4px 7px 3px 6px;
+    }
+
+    &::-moz-color-swatch {
+      border: 1.5px solid var(--motiv-color-text);
+      border-radius: 6px 3px 7px 4px / 4px 7px 3px 6px;
+    }
+  }
+
   /* At rest the label is moved down one line box onto the value line. */
   .motiv-text-field__label {
     grid-row: 1;
@@ -76,14 +96,36 @@
       stroke: var(--_accent);
       stroke-width: 3.5;
       stroke-linecap: round;
-      stroke-dasharray: 1;
-      stroke-dashoffset: 1;
+      /* Hidden, the dash sits wholly off the path, so no round cap leaves an ink dot. */
+      stroke-dasharray: 1 1.1;
+      stroke-dashoffset: 1.05;
       transition: stroke-dashoffset 0.8s var(--_pen);
     }
   }
 
   .motiv-text-field__input:focus ~ .motiv-text-field__line path {
     stroke-dashoffset: 0;
+  }
+
+  .motiv-text-field__title {
+    font-weight: 600;
+  }
+
+  .motiv-text-field:is(.motiv-text-field--above, .motiv-text-field--hidden)
+    .motiv-text-field__control {
+    padding-top: 0;
+  }
+
+  .motiv-text-field--above .motiv-text-field__input {
+    grid-row: 1;
+    min-height: var(--motiv-field-height);
+    padding-block: 0;
+  }
+
+  .motiv-text-field--hidden .motiv-text-field__input {
+    grid-row: 1;
+    min-height: var(--motiv-row-height);
+    padding-block: 0;
   }
 
   .motiv-text-field__hint {

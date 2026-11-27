@@ -423,6 +423,21 @@ import { Checkbox, Link, TextField } from '@driif/motiv/drawn';
 Icons are app-supplied `ReactNode`s. `IconButton` takes `shape="round"` for a circular button in every
 style; the default stays `square`.
 
+## Style subpaths
+
+Drawn and matrix also ship `Badge`, `Dialog`, `NotificationList` and `Splitter` from their main
+entry, and the heavy components from their own subpaths, with the kinetic props and styles already
+in `drawn.css` and `matrix.css`:
+
+```tsx
+import { ActionMenu, SplitButton } from '@driif/motiv/drawn/action-menu';
+import { DataTable } from '@driif/motiv/drawn/data-table';
+import { Markdown, MarkdownEditor } from '@driif/motiv/drawn/markdown';
+```
+
+Matrix uses `@driif/motiv/matrix/action-menu`, `/matrix/data-table` and `/matrix/markdown`. The
+main `drawn` and `matrix` entries never load Radix, TanStack Virtual or the Markdown parser.
+
 ## Matrix style
 
 `@driif/motiv/matrix` is a monospace, phosphor-green terminal style: `GlitchThemeToggle`,
