@@ -17,7 +17,8 @@
 
   .motiv-matrix-split-button > .motiv-matrix-split-button__toggle {
     padding-inline: calc(var(--motiv-space) * 2.5);
-    border-inline-start: 1px dashed color-mix(in oklch, var(--_border) 45%, transparent);
+    /* --_text contrasts with the fill on solid variants, where --_border equals --_bg. */
+    border-inline-start: 1px dashed color-mix(in oklch, var(--_text) 60%, transparent);
     border-start-start-radius: 0;
     border-end-start-radius: 0;
 
