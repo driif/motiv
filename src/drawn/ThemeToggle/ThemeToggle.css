@@ -92,6 +92,43 @@
     }
   }
 
+  /* With no aria-pressed yet (server render, before hydration) the root theme picks the state. */
+  :root[data-theme="dark"] .motiv-theme-toggle:not([aria-pressed]) {
+    & .motiv-theme-toggle__ray {
+      opacity: 0;
+      transform: rotate(var(--_a)) translateY(-14px) scaleY(0);
+    }
+
+    & .motiv-theme-toggle__orb {
+      background-color: transparent;
+      box-shadow: inset 12px -10px 0 0 currentColor;
+      transform: rotate(-15deg) scale(1);
+    }
+
+    & .motiv-theme-toggle__star {
+      transform: scale(1);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .motiv-theme-toggle:not([aria-pressed]) {
+      & .motiv-theme-toggle__ray {
+        opacity: 0;
+        transform: rotate(var(--_a)) translateY(-14px) scaleY(0);
+      }
+
+      & .motiv-theme-toggle__orb {
+        background-color: transparent;
+        box-shadow: inset 12px -10px 0 0 currentColor;
+        transform: rotate(-15deg) scale(1);
+      }
+
+      & .motiv-theme-toggle__star {
+        transform: scale(1);
+      }
+    }
+  }
+
   .motiv-theme-toggle[aria-pressed="false"]:hover:not(:disabled) .motiv-theme-toggle__ray {
     transform: rotate(var(--_a)) translateY(-32px) scaleY(1);
   }

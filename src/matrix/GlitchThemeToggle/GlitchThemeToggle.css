@@ -103,6 +103,29 @@
     opacity: 1;
   }
 
+  /* With no aria-pressed yet (server render, before hydration) the root theme picks the icon. */
+  :root[data-theme="dark"] .motiv-matrix-glitch:not([aria-pressed]) {
+    & .motiv-matrix-glitch__sun {
+      opacity: 0;
+    }
+
+    & .motiv-matrix-glitch__moon {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .motiv-matrix-glitch:not([aria-pressed]) {
+      & .motiv-matrix-glitch__sun {
+        opacity: 0;
+      }
+
+      & .motiv-matrix-glitch__moon {
+        opacity: 1;
+      }
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .motiv-matrix-glitch::before,
     .motiv-matrix-glitch::after {
