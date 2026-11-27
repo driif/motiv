@@ -1,0 +1,9 @@
+@layer motiv.components {
+  /* Loaded after the shared MarkdownEditor.css: the preview sits in the matrix Textarea's box. */
+  .motiv-markdown-editor__preview > .motiv-markdown {
+    padding: calc(var(--motiv-space) * 3);
+    background: var(--motiv-textarea-bg, var(--motiv-color-surface));
+    border: 1px solid var(--motiv-textarea-border-color, var(--motiv-color-border));
+    border-radius: var(--motiv-textarea-radius, var(--motiv-radius-sm));
+  }
+}
