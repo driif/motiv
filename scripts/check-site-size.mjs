@@ -1,15 +1,18 @@
 import { readdirSync, statSync } from 'node:fs';
 import { pages as componentPages, styles } from '../site/src/catalog.mjs';
+import { examples } from '../site/src/examples.mjs';
 
 // Bytes, about 15% above the sizes measured when the budget was set; raise them on purpose.
 const pages = {
-  'index.html': 23_000,
+  'index.html': 28_500,
   'kinetic/index.html': 56_000,
   'drawn/index.html': 82_000,
   'matrix/index.html': 83_000,
 };
-// Every generated component page, /<style>/<slug>/; the largest measured 42_123 (kinetic progress).
-const componentPage = 48_500;
+// Every generated component page, /<style>/<slug>/; the largest measured 49_259 (kinetic table).
+const componentPage = 52_000;
+// Example app pages, /<style>/examples/<id>/, carry a whole app's highlighted source.
+const examplePage = 160_000;
 const totalCss = 550_000;
 const largestJs = 245_000;
 
@@ -29,6 +32,11 @@ for (const style of styles) {
   for (const { slug } of componentPages(style)) {
     const path = `${style}/${slug}/index.html`;
     check(path, size(path), componentPage);
+  }
+  check(`${style}/examples/index.html`, size(`${style}/examples/index.html`), componentPage);
+  for (const { id } of examples) {
+    const path = `${style}/examples/${id}/index.html`;
+    check(path, size(path), examplePage);
   }
 }
 const cssBytes = assets

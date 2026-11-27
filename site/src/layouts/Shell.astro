@@ -13,13 +13,15 @@ interface Props {
   current?: 'drawn' | 'matrix' | 'kinetic';
   // The component page shown; the style switch then points at the same page in each style.
   slug?: string;
+  // The example app shown, '' for the examples list; the style switch keeps it too.
+  example?: string;
 }
 
-const { title, description, current, slug } = Astro.props;
+const { title, description, current, slug, example } = Astro.props;
 // Style overview pages used to list every component; old #section links (also same-page ones
 // from the showcase) land on the component page now.
 const moved =
-  current && !slug
+  current && !slug && example === undefined
     ? Object.fromEntries(
         pages(current).flatMap((page) =>
           page.sections.map((section) => [section.id, `/${current}/${page.slug}/`]),
@@ -29,7 +31,11 @@ const moved =
 const switchLinks = styles.map((style) => ({
   style,
   href:
-    slug && pages(style).some((page) => page.slug === slug) ? `/${style}/${slug}/` : `/${style}/`,
+    example !== undefined
+      ? `/${style}/examples/${example && `${example}/`}`
+      : slug && pages(style).some((page) => page.slug === slug)
+        ? `/${style}/${slug}/`
+        : `/${style}/`,
 }));
 ---
 
@@ -99,7 +105,7 @@ const switchLinks = styles.map((style) => ({
       <ThemeToggleDemo client:idle />
     </header>
     <div class:list={['site-page', current && 'site-page--docs']} data-style={current}>
-      {current && <Sidebar style={current} slug={slug} />}
+      {current && <Sidebar style={current} slug={slug} example={example} />}
       <main class="site-main">
         <slot />
       </main>

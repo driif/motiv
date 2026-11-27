@@ -1,6 +1,7 @@
 ---
 import { buttonClassName, Card, CardBody, CardFooter, CardHeader } from '@driif/motiv';
 import { catalog, groups, pages, styles } from '../catalog.mjs';
+import { examples } from '../examples.mjs';
 import Shell from '../layouts/Shell.astro';
 
 const pitches = {
@@ -27,6 +28,34 @@ const stylesOf = (slug: string) =>
       Plain CSS, server-render safe, no provider. Pick what you are building, open a component,
       copy its code.
     </p>
+  </section>
+
+  <section class="site-gallery" aria-labelledby="examples">
+    <h2 class="site-kicker" id="examples">Example apps</h2>
+    <ul class="site-gallery__grid site-examples">
+      {
+        examples.map((example) => (
+          <Card as="li" className="site-examples__card">
+            <CardHeader titleAs="h3" title={example.title} description={example.blurb} />
+            <CardBody>
+              <p class="site-examples__uses">{example.components.join(' · ')}</p>
+            </CardBody>
+            <CardFooter>
+              <a
+                class:list={[
+                  buttonClassName({ variant: 'outline', size: 'sm' }),
+                  'site-examples__link',
+                ]}
+                href={`/kinetic/examples/${example.id}/`}
+                data-example={example.id}
+              >
+                Open {example.title}
+              </a>
+            </CardFooter>
+          </Card>
+        ))
+      }
+    </ul>
   </section>
 
   <section class="site-gallery" aria-labelledby="by-use-case">
@@ -87,6 +116,11 @@ const stylesOf = (slug: string) =>
       for (const link of document.querySelectorAll<HTMLAnchorElement>('.site-gallery__link')) {
         if (link.dataset.styles?.split(' ').includes(style)) {
           link.href = `/${style}/${link.dataset.slug}/`;
+        }
+      }
+      if (['kinetic', 'drawn', 'matrix'].includes(style)) {
+        for (const link of document.querySelectorAll<HTMLAnchorElement>('.site-examples__link')) {
+          link.href = `/${style}/examples/${link.dataset.example}/`;
         }
       }
     }
