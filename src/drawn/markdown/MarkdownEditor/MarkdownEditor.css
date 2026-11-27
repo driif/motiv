@@ -1,0 +1,8 @@
+@layer motiv.components {
+  /* Loaded after the shared MarkdownEditor.css: the preview is a paper slip like the drawn Table. */
+  .motiv-markdown-editor__preview > .motiv-markdown {
+    padding: calc(var(--motiv-space) * 4);
+    border: 2px solid var(--motiv-textarea-border-color, var(--motiv-color-text));
+    border-radius: 6px 16px 8px 20px / 18px 6px 14px 8px;
+  }
+}
