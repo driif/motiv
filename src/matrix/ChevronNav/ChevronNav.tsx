@@ -19,7 +19,7 @@ export interface ChevronNavSection {
 export interface ChevronNavProps extends Omit<ComponentProps<'nav'>, 'onChange'> {
   sections: ChevronNavSection[];
   value: string;
-  onChange: (id: string, event: MouseEvent<HTMLElement>) => void;
+  onChange?: (id: string, event: MouseEvent<HTMLElement>) => void;
   label: string;
 }
 
@@ -46,7 +46,7 @@ export function ChevronNav({
                   item.id === value && 'motiv-matrix-chevnav__item--active',
                 ),
                 'aria-current': item.id === value ? ('page' as const) : undefined,
-                onClick: (event: MouseEvent<HTMLElement>) => onChange(item.id, event),
+                onClick: (event: MouseEvent<HTMLElement>) => onChange?.(item.id, event),
               };
               const content = (
                 <>

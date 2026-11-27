@@ -57,7 +57,7 @@
     font-family: var(--_hand-font);
     font-size: calc(var(--motiv-font-size) * 2.25);
     font-variant-numeric: tabular-nums;
-    line-height: 1.1;
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.1);
     text-align: center;
     border-bottom: 2px solid var(--_ink);
     border-radius: var(--motiv-stepper-radius, 0 0 40% 60% / 0 0 6px 4px);

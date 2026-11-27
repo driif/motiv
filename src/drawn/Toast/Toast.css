@@ -104,7 +104,7 @@
   .motiv-sketch-toast__title {
     font-family: "Caveat", "Segoe Print", cursive;
     font-size: calc(var(--motiv-font-size) * 1.375);
-    line-height: 1.15;
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.15);
   }
 
   .motiv-sketch-toast__description {
@@ -121,8 +121,8 @@
     color: inherit;
     background: transparent;
     font-family: "Caveat", "Segoe Print", cursive;
-    font-size: calc(var(--motiv-font-size) * 1.25);
-    line-height: 1.4;
+    font-size: var(--motiv-font-size-lg);
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.4);
     text-align: start;
     text-decoration: underline wavy var(--motiv-color-primary);
     text-underline-offset: calc(var(--motiv-space) * 0.75);
