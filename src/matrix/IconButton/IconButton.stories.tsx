@@ -35,7 +35,23 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
+export const Small: Story = { args: { size: 'sm' } };
+
+export const RowHeight: Story = { args: { size: 'xs' } };
+
 export const Round: Story = { args: { shape: 'round' } };
+
+export const RoundSmall: Story = { args: { shape: 'round', size: 'sm' } };
+
+export const SmallInGroup: Story = {
+  render: () => (
+    <IconButtonGroup label="Row actions" size="sm">
+      <IconButton icon={edit} label="Edit row" />
+      <IconButton icon={<Icon d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13" />} label="Delete row" />
+      <IconButton shape="round" icon={<Icon d="M12 5v14M5 12h14" />} label="Add row" />
+    </IconButtonGroup>
+  ),
+};
 
 export const InGroup: Story = { render: () => <Group /> };
 

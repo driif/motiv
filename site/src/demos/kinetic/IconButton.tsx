@@ -37,6 +37,7 @@ export function IconButtonDemo() {
         <IconButton icon={<Icon d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13" />} label="Delete row" />
       </IconButtonGroup>
       <IconButton size="xs" icon={<Icon d="M12 5v14M5 12h14" />} label="Add row" />
+      <IconButton shape="round" icon={<Icon d="M6 6l12 12M18 6L6 18" />} label="Close" />
     </>
   );
 }

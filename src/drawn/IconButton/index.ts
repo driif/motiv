@@ -1,2 +1,2 @@
-export type { IconButtonGroupProps, IconButtonProps } from './IconButton';
+export type { IconButtonGroupProps, IconButtonProps } from '../../components/IconButton';
 export { IconButton, IconButtonGroup } from './IconButton';
