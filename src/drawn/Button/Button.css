@@ -97,7 +97,7 @@
     --_font-size: var(--motiv-font-size-sm);
   }
   .motiv-btn--md {
-    --_height: calc(var(--motiv-control-height) * 1.375);
+    --_height: var(--motiv-field-height);
     --_px: calc(var(--motiv-space) * 6);
     --_font-size: var(--motiv-font-size);
   }

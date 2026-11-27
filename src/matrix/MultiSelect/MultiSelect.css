@@ -34,7 +34,7 @@
     align-items: center;
     gap: 6px;
     width: 100%;
-    min-height: calc(var(--motiv-control-height) * 1.75);
+    min-height: var(--motiv-field-height);
     padding: var(--motiv-space) var(--motiv-space) var(--motiv-space) 16px;
     font-size: var(--motiv-font-size-sm);
     font-weight: 600;
@@ -141,13 +141,14 @@
   }
 
   .motiv-matrix-multi-select__chip {
+    box-sizing: border-box;
     display: inline-flex;
     align-items: center;
     gap: 6px;
     min-width: 0;
     /* Leaves room for the prompt, so a long chip does not push it onto a row of its own. */
     max-width: calc(100% - 24px);
-    min-height: max(24px, calc(var(--motiv-space) * 7));
+    min-height: calc(var(--motiv-field-height) - var(--motiv-space) * 3);
     padding: 0 8px;
     border: 1px solid var(--_border);
     border-radius: var(--motiv-select-radius, var(--motiv-radius-sm));

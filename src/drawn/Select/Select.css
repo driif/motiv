@@ -23,12 +23,13 @@
     gap: calc(var(--motiv-space) * 3);
     box-sizing: border-box;
     width: 100%;
-    height: calc(var(--motiv-control-height) * 1.75);
+    min-height: var(--motiv-field-height);
     padding: 0 calc(var(--motiv-space) * 4);
     color: var(--motiv-select-color, var(--motiv-color-text));
     font: inherit;
     font-size: calc(var(--motiv-font-size) * 1.1875);
     font-weight: 600;
+    line-height: calc(var(--motiv-line-height) / 1.5 * 1.2);
     text-align: start;
     background: var(--motiv-select-bg, var(--motiv-color-surface));
     border: 2px solid var(--motiv-select-border-color, var(--motiv-color-text));
