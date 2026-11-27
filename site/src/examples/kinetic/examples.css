@@ -195,11 +195,6 @@
   gap: calc(var(--motiv-space) * 5);
 }
 
-/* Textarea fits its height before the dialog is shown and measures 0; keep the editor usable. */
-.ex-compose textarea {
-  min-height: 8rem;
-}
-
 .ex-form__actions {
   display: flex;
   justify-content: end;

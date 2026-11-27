@@ -165,7 +165,7 @@
   "utils/Icon.js": 300,
   "utils/ToastLiveRegions.js": 500,
   "utils/cx.js": 150,
-  "utils/fitHeight.js": 200,
+  "utils/fitHeight.js": 500,
   "utils/mergeRefs.js": 200,
   "utils/motion.js": 550,
   "utils/useAnchoredPopover.js": 850,

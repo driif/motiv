@@ -307,11 +307,6 @@
   gap: 1rem;
 }
 
-/* Textarea fits its height on mount, which reads 0 inside the still-closed dialog. */
-.ex-inbox__compose .motiv-textarea__input {
-  min-height: calc(6lh + var(--motiv-space) * 4);
-}
-
 @media (max-width: 47.99rem) {
   .ex-inbox__split {
     flex-direction: column;

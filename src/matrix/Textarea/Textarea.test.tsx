@@ -62,4 +62,25 @@ describe('Textarea', () => {
     rerender(<Textarea label="Message" value="x" onChange={() => {}} />);
     expect(textarea.style.height).toBe('24px');
   });
+
+  it('fits once shown after rendering hidden, e.g. in a closed dialog', () => {
+    let show = (_entries: { isIntersecting: boolean }[]) => {};
+    vi.stubGlobal(
+      'IntersectionObserver',
+      class {
+        constructor(callback: typeof show) {
+          show = callback;
+        }
+        observe() {}
+        disconnect() {}
+      },
+    );
+    render(<Textarea label="Message" defaultValue="Hi" />);
+    const textarea = screen.getByRole('textbox');
+    expect(textarea.style.height).toBe('');
+    contentHeight(textarea, 60);
+    show([{ isIntersecting: true }]);
+    expect(textarea.style.height).toBe('60px');
+    vi.unstubAllGlobals();
+  });
 });

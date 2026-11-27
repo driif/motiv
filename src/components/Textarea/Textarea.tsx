@@ -1,6 +1,6 @@
-import { type ComponentProps, type CSSProperties, useId, useLayoutEffect, useRef } from 'react';
+import { type ComponentProps, type CSSProperties, useId } from 'react';
 import { cx } from '../../utils/cx';
-import { fitHeight } from '../../utils/fitHeight';
+import { fitHeight, useFitHeight } from '../../utils/fitHeight';
 
 export interface TextareaProps extends ComponentProps<'textarea'> {
   label: string;
@@ -24,13 +24,7 @@ export function Textarea({
   const autoId = useId();
   const inputId = id ?? autoId;
   const hintId = `${inputId}-hint`;
-  const control = useRef<HTMLDivElement>(null);
-
-  // Each render: a controlled value can change without an input event, e.g. cleared after send.
-  useLayoutEffect(() => {
-    const textarea = control.current?.querySelector('textarea');
-    if (textarea) fitHeight(textarea);
-  });
+  const control = useFitHeight();
 
   return (
     <div
