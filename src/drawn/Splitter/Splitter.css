@@ -1,0 +1,70 @@
+@layer motiv.components {
+  /* A pencil stroke with uneven pressure; it inks to primary on hover and while dragged. */
+  .motiv-sketch-splitter {
+    --_line: 2px;
+    --_hit: max(calc(var(--motiv-font-size) * 1.5), calc(var(--motiv-space) * 6));
+    --_gutter: calc((var(--_hit) - var(--_line)) / 2);
+    --_ink: color-mix(in oklch, var(--motiv-color-text) 45%, transparent);
+    position: relative;
+    flex: 0 0 var(--_line);
+    align-self: stretch;
+    border-radius: var(--_line);
+    background: linear-gradient(
+      var(--_dir),
+      color-mix(in oklch, var(--_ink) 60%, transparent),
+      var(--_ink) 18%,
+      color-mix(in oklch, var(--_ink) 75%, transparent) 55%,
+      var(--_ink) 82%,
+      color-mix(in oklch, var(--_ink) 50%, transparent)
+    );
+    touch-action: none;
+    user-select: none;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
+
+    &[data-dragging] {
+      --_ink: var(--motiv-color-primary);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--motiv-focus-ring);
+    }
+  }
+
+  .motiv-sketch-splitter--vertical {
+    --_dir: to bottom;
+    width: var(--_line);
+    min-height: var(--_hit);
+    margin-inline: var(--_gutter);
+    cursor: col-resize;
+    rotate: 0.3deg;
+
+    &::before {
+      inset-inline: calc(-1 * var(--_gutter));
+    }
+  }
+
+  .motiv-sketch-splitter--horizontal {
+    --_dir: to right;
+    height: var(--_line);
+    min-width: var(--_hit);
+    margin-block: var(--_gutter);
+    cursor: row-resize;
+    rotate: -0.3deg;
+
+    &::before {
+      inset-block: calc(-1 * var(--_gutter));
+    }
+  }
+
+  @media (hover: hover) {
+    .motiv-sketch-splitter:hover {
+      --_ink: var(--motiv-color-primary);
+    }
+  }
+}

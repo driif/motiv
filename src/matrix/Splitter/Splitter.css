@@ -1,0 +1,71 @@
+@layer motiv.components {
+  /* A dashed phosphor trace that locks solid and glows on hover and while dragged. */
+  .motiv-matrix-splitter {
+    --_line: 1px;
+    --_hit: max(calc(var(--motiv-font-size) * 1.5), calc(var(--motiv-space) * 6));
+    --_gutter: calc((var(--_hit) - var(--_line)) / 2);
+    position: relative;
+    flex: 0 0 var(--_line);
+    align-self: stretch;
+    background: repeating-linear-gradient(
+      var(--_dir),
+      color-mix(in oklch, var(--motiv-color-primary) 45%, transparent) 0 var(--motiv-space),
+      transparent 0 calc(var(--motiv-space) * 2)
+    );
+    touch-action: none;
+    user-select: none;
+    transition: box-shadow var(--motiv-duration) steps(2);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
+
+    &[data-dragging] {
+      background: var(--motiv-color-primary);
+      box-shadow: 0 0 8px var(--motiv-color-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--motiv-color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  .motiv-matrix-splitter--vertical {
+    --_dir: to bottom;
+    width: var(--_line);
+    min-height: var(--_hit);
+    margin-inline: var(--_gutter);
+    cursor: col-resize;
+
+    &::before {
+      inset-inline: calc(-1 * var(--_gutter));
+    }
+  }
+
+  .motiv-matrix-splitter--horizontal {
+    --_dir: to right;
+    height: var(--_line);
+    min-width: var(--_hit);
+    margin-block: var(--_gutter);
+    cursor: row-resize;
+
+    &::before {
+      inset-block: calc(-1 * var(--_gutter));
+    }
+  }
+
+  @media (hover: hover) {
+    .motiv-matrix-splitter:hover {
+      background: var(--motiv-color-primary);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motiv-matrix-splitter {
+      transition: none;
+    }
+  }
+}
