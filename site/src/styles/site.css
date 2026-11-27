@@ -813,8 +813,12 @@
 }
 
 /* Reserved, so menus and dialogs opened inside a short app still fit in the frame. */
+/* Capped to the viewport so a modal dialog, centred on the frame, stays on screen. */
 .site-example__frame {
-  min-height: 40rem;
+  --site-example-max: calc(100dvh - var(--site-top-height) - 2rem);
+  min-height: min(40rem, var(--site-example-max));
+  max-height: var(--site-example-max);
+  scroll-margin: calc(var(--site-top-height) + 1rem) 0 1rem;
 }
 
 .site-example__code .site-code {

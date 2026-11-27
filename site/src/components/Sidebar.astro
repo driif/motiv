@@ -45,7 +45,7 @@ const searchText = (page: ReturnType<typeof pages>[number]) =>
         examples.map((app) => (
           <li
             class="site-nav__item"
-            data-search={['example', app.title, app.blurb, ...app.components].join(' ').toLowerCase()}
+            data-search={['example', app.title, app.blurb].join(' ').toLowerCase()}
           >
             <a
               class="site-nav__link"

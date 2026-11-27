@@ -228,7 +228,8 @@ export function Inbox() {
                 />
               )}
               <p className="ex-muted">
-                Sent from the team workspace · <Link href="#settings">Notification settings</Link>
+                Sent from the team workspace ·{' '}
+                <Link href="/kinetic/examples/settings/">Notification settings</Link>
               </p>
             </>
           ) : (

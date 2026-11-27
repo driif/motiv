@@ -220,7 +220,7 @@ export function Inbox() {
                 >
                   Thank
                 </InkSplatterButton>
-                <Link href="#settings">Mail settings</Link>
+                <Link href="/drawn/examples/settings/">Mail settings</Link>
               </div>
             </>
           ) : (

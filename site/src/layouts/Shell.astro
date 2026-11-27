@@ -232,10 +232,17 @@ const switchLinks = styles.map((style) => ({
       addEventListener('message', (event) => {
         if (event.origin !== location.origin) return;
         if (event.data?.type === 'motiv-preview-search') return openSearch();
+        const frame = [...frames].find((frame) => frame.contentWindow === event.source);
+        if (event.data?.type === 'motiv-preview-dialog') return frame?.scrollIntoView({ block: 'nearest' });
         if (event.data?.type !== 'motiv-preview-height') return;
         if (!Number.isFinite(event.data.height) || event.data.height <= 0) return;
-        for (const frame of frames) {
-          if (frame.contentWindow === event.source) frame.style.height = `${event.data.height}px`;
+        if (frame) frame.style.height = `${event.data.height}px`;
+      });
+
+      // A theme toggle inside a preview frame writes the stored theme; follow it here.
+      addEventListener('storage', (event) => {
+        if (event.key === 'motiv-site-theme' && (event.newValue === 'dark' || event.newValue === 'light')) {
+          document.documentElement.dataset.theme = event.newValue;
         }
       });
     </script>
